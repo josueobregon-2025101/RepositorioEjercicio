@@ -9,7 +9,7 @@ use DBpracticasEstudiantes_in5cm;
 create table Login(
 	id_login int auto_increment not null,
     correo_login varchar(50) not null,
-    usuario_login varchar(30) not null,
+    usuario_login varchar(30) not null unique,
     contrasena_login varchar(20) not null,
     roles varchar(45) not null,
     primary key (id_login)
@@ -155,4 +155,356 @@ Create table Contrato(
     primary key (id_contrato)
 );
 -- ////////////////////////----Procedimientos Almacenados----///////////////////////
+
+-- ////////////////////////----Login----///////////////////////
+
+delimiter $$
+	create procedure sp_ValidarLogin(in p_correoLogin varchar(50), 
+									 in p_usuario varchar(30), 
+                                     in p_contrasena varchar(20), 
+                                     in p_roles varchar(45))
+	begin
+	  select idLogin, correoLogin, usuario, contrasena, roles
+	  from Login
+	  where correoLogin = p_correoLogin 
+		and usuario = p_usuario 
+        and contrasena = p_contrasena 
+        and roles = p_roles
+	  limit 1;
+	end $$
+delimiter ;
  
+-- ////////////////////////----empresa----///////////////////////
+ 
+-- Listar Empresa --
+delimiter $$
+ 
+create procedure sp_ListarEmpresa()
+begin
+	select *
+    from Empresa
+    order by id_empresa;
+end $$
+ 
+delimiter ;
+
+-- Agregar Empresa --
+ 
+delimiter $$
+create procedure sp_AgregarEmpresa(
+    in p_nombreEmpresa varchar(45),
+    in p_tipoEmpresa varchar(45),
+    in p_tamanoEmpresa varchar(20),
+    in p_telefonoEmpresa varchar(15),
+    in p_correoEmpresa varchar(50),
+    in p_direccionEmpresa varchar(45),
+    in p_horarioEmpresa varchar(45),
+    in p_descripcion text,
+    in p_idLogin int
+)
+ 
+begin
+    insert into Empresa(nombre_empresa, tipo_empresa, tamano_empresa, telefono_empresa, correo_empresa, direccion_empresa, horario_empresa, descripcion, id_login)
+    values(p_nombreEmpresa, p_tipoEmpresa, p_tamanoEmpresa, p_telefonoEmpresa, p_correoEmpresa, p_direccionEmpresa, p_horarioEmpresa, p_descripcion, p_idLogin);
+end$$
+ 
+delimiter ;
+ 
+-- Actualizar Empresa --
+ 
+delimiter $$
+create procedure sp_ActualizarEmpresa(
+    in p_idEmpresa int,
+    in p_nombreEmpresa varchar(45),
+    in p_tipoEmpresa varchar(45),
+    in p_tamanoEmpresa varchar(20),
+    in p_telefonoEmpresa varchar(15),
+    in p_correoEmpresa varchar(50),
+    in p_direccionEmpresa varchar(45),
+    in p_horarioEmpresa varchar(45),
+    in p_descripcion text,
+    in p_idLogin int
+)
+begin
+ 
+    update Empresa
+    set nombre_empresa    = p_nombreEmpresa,
+        tipo_empresa      = p_tipoEmpresa,
+        tamano_empresa    = p_tamanoEmpresa,
+        telefono_empresa  = p_telefonoEmpresa,
+        correo_empresa    = p_correoEmpresa,
+        direccion_empresa = p_direccionEmpresa,
+        horario_empresa   = p_horarioEmpresa,
+        descripcion      = p_descripcion,
+        id_login          = p_idLogin
+    where id_empresa = p_idEmpresa;
+end$$
+ 
+delimiter ;
+ 
+-- Eliminar Empresa --
+ 
+delimiter $$
+ 
+create procedure sp_EliminarEmpresa(in p_idEmpresa int)
+begin
+    delete from Empresa where id_empresa = p_idEmpresa;
+end$$
+ 
+delimiter ;
+ 
+-- Buscar Empresa por ID--
+ 
+delimiter $$
+ 
+create procedure sp_BuscarEmpresaPorId(in p_idEmpresa int)
+begin
+    select * from Empresa where id_empresa = p_idEmpresa;
+end$$
+ 
+delimiter ;
+ 
+ 
+ -- ////////////////////////----Administradores----///////////////////////
+-- Agregar Administrador --
+ 
+delimiter $$
+ 
+create procedure sp_ListarAdministradores()
+begin
+    select * from Administradores order by id_administradores;
+end$$
+ 
+delimiter ;
+
+-- Agregar Administrador --
+delimiter $$
+ 
+create procedure sp_AgregarAdministrador(
+    in p_nombre varchar(45),
+    in p_apellido varchar(45),
+    in p_estado varchar(45),
+    in p_idLogin int
+)
+ 
+begin
+    insert into Administradores(nombre_administradores, apellido_administradores, estado_administradores, id_login)
+    values(p_nombre, p_apellido, p_estado, p_idLogin);
+end$$
+ 
+delimiter ;
+ 
+-- Actualizar Administrador --
+ 
+delimiter $$
+ 
+create procedure sp_ActualizarAdministrador(
+    in p_idAdministradores int,
+    in p_nombre varchar(45),
+    in p_apellido varchar(45),
+    in p_estado varchar(45),
+    in p_idLogin int
+)
+ 
+begin
+    update Administradores
+    set nombre_administradores   = p_nombre,
+        apellido_administradores = p_apellido,
+        estado_administradores   = p_estado,
+        id_login  = p_idLogin
+    where id_administradores = p_idAdministradores;
+end$$
+ 
+delimiter ;
+ 
+-- Eliminar Administrador --
+ 
+delimiter $$
+ 
+create procedure sp_EliminarAdministrador(in p_idAdministradores int)
+begin
+    delete from Administradores where id_administradores = p_idAdministradores;
+end$$
+ 
+delimiter ;
+ 
+-- Buscar Administrador por ID
+ 
+delimiter $$
+ 
+create procedure sp_BuscarAdministradorPorId(in p_idAdministradores int)
+begin
+    select * from Administradores where id_administradores = p_idAdministradores;
+end$$
+ 
+delimiter ;
+
+-- /////////////////////////// ----Documentos--------//////////////////////////
+ 
+-- Listar Documentos --
+delimiter $$
+ 
+create procedure sp_ListarDocumentos()
+begin
+	select *
+    from Documentos
+    order by id_documento;
+end $$
+ 
+delimiter ;
+ 
+-- Agregar Documento --
+ 
+delimiter $$
+create procedure sp_AgregarDocumentos(
+    in d_id_estudiante int,
+    in d_id_empresa int,
+    in d_tipoDoc enum("Carta de Solicitud de Práctica","Carta de Presentación de la Institución",
+		"Curriculum Vitae (CV)","Fotocopia de DPI o CUI","Constancia de Estudios","Pensum de la Carrera",
+		"Certificación de Notas","Constancia de Seguro Estudiantil","Fotografías tamaño cédula",
+		"Informe Final de Práctica"),
+    in d_nombreArchivo varchar(50),
+    in d_urlArchivo varchar(2048),
+    in d_fechaSubida datetime
+)
+ 
+begin
+    insert into Documentos(id_estudiante, id_empresa, tipoDoc, nombreArchivo, urlArchivo,fechaSubida)
+    values(d_id_estudiante, d_id_empresa, d_tipoDoc, d_nombreArchivo, d_urlArchivo, d_fechaSubida);
+end$$
+ 
+delimiter ;
+ 
+-- Actualizar Documentos --
+ 
+delimiter $$
+create procedure sp_ActualizarDocumentos(
+    in d_id_documento int,
+    in d_id_estudiante int,
+    in d_id_empresa int,
+    in d_tipoDoc enum("Carta de Solicitud de Práctica","Carta de Presentación de la Institución",
+		"Curriculum Vitae (CV)","Fotocopia de DPI o CUI","Constancia de Estudios","Pensum de la Carrera",
+		"Certificación de Notas","Constancia de Seguro Estudiantil","Fotografías tamaño cédula",
+		"Informe Final de Práctica"),
+    in d_nombreArchivo varchar(50),
+    in d_urlArchivo varchar(2048),
+    in d_fechaSubida datetime
+)
+begin
+ 
+    update Documentos
+    set id_estudiante    = d_id_estudiante,
+        id_empresa      = d_id_empresa,
+        tipoDoc    = d_tipoDoc,
+        nombreArchivo  = d_nombreArchivo,
+        urlArchivo    = d_urlArchivo,
+        fechaSubida = d_fechaSubida
+    where id_documento = d_id_documento;
+end$$
+ 
+delimiter ;
+ 
+-- Eliminar Documentos --
+ 
+delimiter $$
+ 
+create procedure sp_EliminarDocumentos(in d_id_documento int)
+begin
+    delete from Documentos where id_documento = d_id_documento;
+end$$
+ 
+delimiter ;
+ 
+-- Buscar Documento por ID--
+ 
+delimiter $$
+ 
+create procedure sp_BuscarDocumentoPorId(in d_id_documento int)
+begin
+    select * from Documentos where id_documento = d_id_documento;
+end$$
+ 
+delimiter ;
+ 
+  -- /////////////////////////// ----Contrato--------//////////////////////////
+-- Listar Contrato --
+delimiter $$
+ 
+create procedure sp_ListarContrato()
+begin
+	select *
+    from Contrato
+    order by id_contrato;
+end $$
+ 
+delimiter ;
+ 
+-- Agregar Contrato --
+ 
+delimiter $$
+create procedure sp_AgregarContrato(
+    in c_id_postulacion int,
+    in c_id_empresa int,
+    in c_id_estudiante int,
+    in c_id_documento int,
+    in c_fechaInicio date,
+    in c_fechaFin date,
+    in c_objetivos varchar(80)
+)
+ 
+begin
+    insert into Contrato(id_postulacion , id_empresa, id_estudiante, id_documento, fechaInicio,fechaFin,objetivos)
+    values(c_id_postulacion, c_id_empresa, c_id_estudiante, c_id_documento, c_fechaInicio , c_fechaFin,c_objetivos);
+end$$
+ 
+delimiter ;
+ 
+-- Actualizar Contrato --
+ 
+delimiter $$
+create procedure sp_ActualizarContrato(
+    in c_id_contrato int,
+    in c_id_postulacion int,
+    in c_id_empresa int,
+    in c_id_estudiante int,
+    in c_id_documento int,
+    in c_fechaInicio date,
+    in c_fechaFin date,
+    in c_objetivos varchar(80)
+)
+begin
+ 
+    update Contrato
+    set id_postulacion    = c_id_postulacion,
+        id_empresa      = c_id_empresa,
+        id_estudiante    = c_id_estudiante,
+        id_documento  = c_id_documento,
+        fechaInicio    = c_fechaInicio,
+        fechaFin = c_fechaFin,
+        objetivos = c_objetivos
+    where id_contrato = c_id_contrato;
+end$$
+ 
+delimiter ;
+ 
+-- Eliminar Contrato --
+ 
+delimiter $$
+ 
+create procedure sp_EliminarContrato(in c_id_contrato int)
+begin
+    delete from Contrato where id_contrato = c_id_contrato;
+end$$
+ 
+delimiter ;
+ 
+-- Buscar Contrato por ID--
+ 
+delimiter $$
+ 
+create procedure sp_BuscarContratoPorId(in c_id_contrato int)
+begin
+    select * from Contrato where id_contrato = c_id_contrato;
+end$$
+ 
+delimiter ; 
