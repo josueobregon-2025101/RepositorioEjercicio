@@ -2,10 +2,6 @@ drop database if exists DBpracticasEstudiantes_in5cm;
 create database DBpracticasEstudiantes_in5cm;
 use DBpracticasEstudiantes_in5cm;
 
-drop database if exists DBpracticasEstudiantes_in5cm;
-create database DBpracticasEstudiantes_in5cm;
-use DBpracticasEstudiantes_in5cm;
-
 create table Login(
 	id_login int auto_increment not null,
     correo_login varchar(50) not null,
@@ -164,11 +160,11 @@ delimiter $$
                                      in p_contrasena varchar(20), 
                                      in p_roles varchar(45))
 	begin
-	  select idLogin, correoLogin, usuario, contrasena, roles
+	  select id_login, correo_login, usuario_login, contrasena_login, roles
 	  from Login
-	  where correoLogin = p_correoLogin 
-		and usuario = p_usuario 
-        and contrasena = p_contrasena 
+	  where correo_login = p_correoLogin 
+		and usuario_login = p_usuario 
+        and contrasena_login = p_contrasena 
         and roles = p_roles
 	  limit 1;
 	end $$
@@ -488,8 +484,8 @@ begin
         carrera = p_carrera,
         correo = p_correo,
         nombreinstitucion = p_nombreinstitucion,
-        p_tutortel = p_tutortel,
-        p_edad = p_edad
+        tutortel = p_tutortel,
+        edad = p_edad
     where id_estudiante = p_id_estudiante;
 
     select row_count() as filas_afectadas;
