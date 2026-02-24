@@ -45,7 +45,7 @@ public class EstudiantesController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEmpleado(@PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
+    public ResponseEntity<?> deletedEmpleado(@PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
         try {
             estudiantesService.deleteEstudiantes(id);
             return ResponseEntity.ok("Estudiante eliminado exitosamente");
