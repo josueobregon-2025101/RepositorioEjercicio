@@ -13,16 +13,16 @@ public class Login {
     private Integer idLogin;
 
     @Column(name = "correo_login")
-    private Integer correoLogin;
+    private String correoLogin;
 
     @Column(name = "usuario_login")
-    private Integer usuarioLogin;
+    private String usuarioLogin;
 
     @Column(name = "contrasena_login")
-    private Integer contrasenaLogin;
+    private String contrasenaLogin;
 
     @Column(name = "roles")
-    private Integer roles;
+    private String roles;
 
     public Integer getIdLogin() {
         return idLogin;
@@ -32,35 +32,35 @@ public class Login {
         this.idLogin = idLogin;
     }
 
-    public Integer getCorreoLogin() {
+    public String getCorreoLogin() {
         return correoLogin;
     }
 
-    public void setCorreoLogin(Integer correoLogin) {
+    public void setCorreoLogin(String correoLogin) {
         this.correoLogin = correoLogin;
     }
 
-    public Integer getUsuarioLogin() {
+    public String getUsuarioLogin() {
         return usuarioLogin;
     }
 
-    public void setUsuarioLogin(Integer usuarioLogin) {
+    public void setUsuarioLogin(String usuarioLogin) {
         this.usuarioLogin = usuarioLogin;
     }
 
-    public Integer getContrasenaLogin() {
+    public String getContrasenaLogin() {
         return contrasenaLogin;
     }
 
-    public void setContrasenaLogin(Integer contrasenaLogin) {
+    public void setContrasenaLogin(String contrasenaLogin) {
         this.contrasenaLogin = contrasenaLogin;
     }
 
-    public Integer getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(Integer roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 }
