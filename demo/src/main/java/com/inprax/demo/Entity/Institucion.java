@@ -33,10 +33,7 @@ public class Institucion {
     @Column(name = "numero_telefono")
     private String telefono;
 
-
-
 // GETTERS  AND SETTERS
-
 
     public Integer getId() {
         return id;
