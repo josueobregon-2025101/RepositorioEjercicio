@@ -19,7 +19,7 @@ public class Login {
     private Integer usuarioLogin;
 
     @Column(name = "contrasena_login")
-    private Integer contraseñaLogin;
+    private Integer contrasenaLogin;
 
     @Column(name = "roles")
     private Integer roles;
@@ -48,12 +48,12 @@ public class Login {
         this.usuarioLogin = usuarioLogin;
     }
 
-    public Integer getContraseñaLogin() {
-        return contraseñaLogin;
+    public Integer getContrasenaLogin() {
+        return contrasenaLogin;
     }
 
-    public void setContraseñaLogin(Integer contraseñaLogin) {
-        this.contraseñaLogin = contraseñaLogin;
+    public void setContrasenaLogin(Integer contrasenaLogin) {
+        this.contrasenaLogin = contrasenaLogin;
     }
 
     public Integer getRoles() {
