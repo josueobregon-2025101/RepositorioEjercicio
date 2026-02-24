@@ -991,3 +991,133 @@ begin
 end$$
  
 delimiter ; 
+
+-- ================================
+-- PRUEBAS CREATE / INSERT
+-- DBpracticasEstudiantes_in5cm
+-- ================================
+
+-- 1️⃣ LOGIN (no tiene CREATE, se usa directamente en dependencias)
+-- ⚠️ No existe sp_AgregarLogin en tu script, por eso se asume id_login = 1
+
+INSERT INTO Login(correo_login, usuario_login, contrasena_login, roles)
+VALUES ('admin@test.com','admin','1234','ADMIN');
+
+
+-- 2️⃣ EMPRESA
+CALL sp_AgregarEmpresa(
+    'Empresa Demo',
+    'Tecnologia',
+    'Mediana',
+    '55511111',
+    'empresa@demo.com',
+    'Zona 1',
+    '8am - 5pm',
+    'Empresa de prueba',
+    1
+);
+
+
+-- 3️⃣ ADMINISTRADORES
+CALL sp_AgregarAdministrador(
+    'Carlos',
+    'Ramirez',
+    'Activo',
+    1
+);
+
+
+-- 4️⃣ INSTITUCIONES
+CALL sp_instituciones_create(
+    'Instituto Central',
+    'instituto@test.com',
+    'Zona 5',
+    '55522222'
+);
+
+
+-- 5️⃣ ESTUDIANTES
+CALL sp_Estudiantes_create(
+    1,
+    1,
+    'Juan',
+    'Perez',
+    55533333,
+    '6to',
+    'Informatica',
+    'juan@test.com',
+    'Instituto Central',
+    55544444,
+    17
+);
+
+
+-- 6️⃣ REPRESENTANTE DE LA EMPRESA
+CALL sp_RepresentanteEmpresa_create(
+    1,
+    'Luis',
+    'Gomez',
+    'Supervisor',
+    55566666,
+    '101',
+    'Activo',
+    CURDATE(),
+    'luis@empresa.com'
+);
+
+
+-- 7️⃣ REPRESENTANTE DE LA INSTITUCIÓN
+CALL sp_representantesInstitucion_create(
+    'Maria',
+    'Lopez',
+    '55577777',
+    'maria@instituto.com',
+    1,
+    1
+);
+
+
+-- 8️⃣ PRACTICAS
+CALL sp_insertar_practica(
+    1,
+    'Practica Profesional',
+    NOW(),
+    'Presencial',
+    'Informatica',
+    '2025',
+    'Disponible',
+    NOW()
+);
+
+
+-- 9️⃣ POSTULACIONES
+CALL sp_insertar_postulacion(
+    1,
+    'Postulación Práctica',
+    'Postulación del estudiante a la práctica',
+    '2025-02-01',
+    'Pendiente'
+);
+
+
+-- 🔟 DOCUMENTOS
+CALL sp_AgregarDocumentos(
+    1,
+    1,
+    'Curriculum Vitae (CV)',
+    'cv_juan.pdf',
+    'https://servidor.com/cv_juan.pdf',
+    "2026-01-01"
+);
+
+
+-- cONTRATO
+CALL sp_AgregarContrato(
+    1,
+    1,
+    1,
+    1,
+    '2025-03-01',
+    '2025-08-01',
+    'Aplicar conocimientos adquiridos'
+);
