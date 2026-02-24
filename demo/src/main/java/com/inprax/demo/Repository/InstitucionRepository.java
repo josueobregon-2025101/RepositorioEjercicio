@@ -11,7 +11,7 @@ public interface InstitucionRepository extends JpaRepository<Institucion, Intege
             String nombre,
             String correo,
             String direccion,
-            String telefono
+            String telefono 
     );
 }
 
