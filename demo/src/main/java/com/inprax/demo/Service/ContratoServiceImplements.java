@@ -37,13 +37,17 @@ public class ContratoServiceImplements implements ContratoService{
         Optional<Contrato> existente = contratoRepository.findById(id);
         if (existente.isPresent()){
             Contrato newContrato = existente.get();
-            newContrato.getIdEstudiante()
+            newContrato.setIdEstudiante(contrato.getIdEstudiante());
+            newContrato.setIdDocumento(contrato.getIdDocumento());
+            newContrato.setIdEmpresa(contrato.getIdEmpresa());
+            newContrato.setIdPostulacion(contrato.getIdPostulacion());
+            return contratoRepository.save(newContrato);
         }
         return null;
     }
 
     @Override
     public void deleteContratoById(Integer id) {
-
+    contratoRepository.deleteById(id);
     }
 }
