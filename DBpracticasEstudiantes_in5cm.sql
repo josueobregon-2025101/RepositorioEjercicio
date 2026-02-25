@@ -55,7 +55,7 @@ create table RepresentanteEmpresa (
     references Empresa(id_empresa) on delete cascade
 );
 create table Instituciones(
-	id_institucion int auto_increment not null,
+    id_institucion int auto_increment not null,
     nombre_institucion varchar(50),
     correo_institucion varchar(100),
     direccion_institucion varchar(100),
@@ -64,9 +64,8 @@ create table Instituciones(
 );
 
 create table Estudiantes (
-	id_estudiante int auto_increment not null,
+    id_estudiante int auto_increment not null,
     id_institucion int,
-    id_login int,
     nombre varchar(30) not null,
     apellido varchar(30) not null,
     telefono int,
@@ -77,25 +76,23 @@ create table Estudiantes (
     tutortel int,
     edad int,
     primary key(id_estudiante),
-    constraint fk_institucion foreign key (id_institucion)
-	references Instituciones(id_institucion) on delete cascade,
-    constraint fk_login foreign key (id_login) 
-    references Login(id_login) on delete cascade
+    constraint fk_estudiante_institucion foreign key (id_institucion)
+        references instituciones(id_institucion) on delete cascade
 );
 
-create table RepresentanteInstitucion(
-	id_representante_institucion int auto_increment not null,
+create table Representanteinstitucion(
+    id_representante_institucion int auto_increment not null,
     nombre_representante_institucion varchar(50),
     apellido_representante_institucion varchar(50),
     numero_telefono varchar(20),
     correo_representante_institucion varchar(100),
     id_institucion int,
-    id_estudiante int ,
+    id_estudiante int,
     primary key(id_representante_institucion),
-    constraint fk_id_institucion foreign key (id_institucion)
-	references Instituciones(id_institucion) on delete cascade,
-    constraint fk_estudiante foreign key (id_estudiante)
-	references Estudiantes(id_estudiante) on delete cascade
+    constraint fk_representante_institucion foreign key (id_institucion)
+        references instituciones(id_institucion) on delete cascade,
+    constraint fk_representante_estudiante foreign key (id_estudiante)
+        references estudiantes(id_estudiante) on delete cascade
 );
 
 create table Practicas(
