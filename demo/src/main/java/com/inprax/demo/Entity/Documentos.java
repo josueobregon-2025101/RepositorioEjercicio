@@ -3,6 +3,7 @@ package com.inprax.demo.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.util.Date;
 
@@ -10,16 +11,19 @@ import java.util.Date;
 @Table(name = "Documentos")
 public class Documentos {
     @NotNull(message = "El campo id no puede estar vacio")
+    @Positive(message = "El id no puede ser negativo")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_documento")
     private int idDocumento;
 
     @NotNull(message = "El cammpo id de Estudiante no puede estar vacio")
+    @Positive(message = "El id no puede ser negativo")
     @Column(name = "id_estudiante")
     private int idEstudiante;
 
     @NotNull(message = "El cammpo id de Empresa no puede estar vacio")
+    @Positive(message = "El id no puede ser negativo")
     @Column(name = "id_empresa")
     private int idEmpresa;
 
