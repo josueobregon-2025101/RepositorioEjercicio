@@ -1,5 +1,9 @@
 package com.inprax.demo.Entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +36,14 @@ public class Institucion {
     @NotBlank(message = "El número de teléfono es obligatorio")
     @Column(name = "numero_telefono")
     private String telefono;
+
+    @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Estudiantes> estudiantes;
+
+    @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<RepresentanteInstitucion> representantes;
 
 // GETTERS  AND SETTERS
 
