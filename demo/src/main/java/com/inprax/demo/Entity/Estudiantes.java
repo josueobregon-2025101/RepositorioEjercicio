@@ -1,6 +1,7 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Estudiantes")
@@ -10,9 +11,6 @@ public class Estudiantes {
 
     @Column(name = "id_estudiante")
     private Integer idestudiante;
-
-    @Column(name = "id_institucion")
-    private Integer idinstitucion;
 
     @Column(name = "id_login")
     private Integer idlogin;
@@ -44,7 +42,18 @@ public class Estudiantes {
     @Column(name = "edad")
     private Integer edad;
 
-    //Getter and Setters//
+    @NotNull(message = "El representante es obligatorio")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_representante")
+    private RepresentanteInstitucion representanteInstitucion;
+
+    @NotNull(message = "La institución es obligatoria")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_institucion")
+    private Institucion institucion;
+
+
+    //GETTERS AND SETTERS
 
     public Integer getIdestudiante() {
         return idestudiante;
@@ -52,14 +61,6 @@ public class Estudiantes {
 
     public void setIdestudiante(Integer idestudiante) {
         this.idestudiante = idestudiante;
-    }
-
-    public Integer getIdinstitucion() {
-        return idinstitucion;
-    }
-
-    public void setIdinstitucion(Integer idinstitucion) {
-        this.idinstitucion = idinstitucion;
     }
 
     public Integer getIdlogin() {
@@ -141,4 +142,21 @@ public class Estudiantes {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
+
+    public RepresentanteInstitucion getRepresentanteInstitucion() {
+        return representanteInstitucion;
+    }
+
+    public void setRepresentanteInstitucion(RepresentanteInstitucion representanteInstitucion) {
+        this.representanteInstitucion = representanteInstitucion;
+    }
+
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
+    }
+    
 }
