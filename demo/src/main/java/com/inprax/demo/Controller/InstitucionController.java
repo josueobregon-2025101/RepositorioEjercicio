@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,57 +21,73 @@ public class InstitucionController {
     private InstitucionService service;
 
     @GetMapping
-    public List<Institucion> getAll() {
+    public List<Institucion> listar() {
         return service.getAllInstituciones();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Integer id) {
+    public ResponseEntity<?> obtenerPorId(@PathVariable Integer id) {
+        Map<String, Object> respuesta = new HashMap<>();
         try {
-            Institucion institucion = service.getInstitucionById(id);
-            return new ResponseEntity<>(institucion, HttpStatus.OK);
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            return ResponseEntity.ok(service.getInstitucionById(id));
+        } catch (RuntimeException e) {
+            respuesta.put("mensaje", e.getMessage());
+            return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody Institucion institucion) {
+    public ResponseEntity<?> crear(@Valid @RequestBody Institucion institucion, BindingResult result) {
+        Map<String, Object> respuesta = new HashMap<>();
+
+        if (result.hasErrors()) {
+            Map<String, String> errores = new HashMap<>();
+            result.getFieldErrors().forEach(err -> {
+                errores.put(err.getField(), err.getDefaultMessage());
+            });
+            return new ResponseEntity<>(errores, HttpStatus.BAD_REQUEST);
+        }
+
         try {
             Institucion nueva = service.saveInstitucion(institucion);
             return new ResponseEntity<>(nueva, HttpStatus.CREATED);
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            respuesta.put("mensaje", e.getMessage());
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody Institucion institucion) {
+    public ResponseEntity<?> actualizar(@PathVariable Integer id, @Valid @RequestBody Institucion institucion, BindingResult result) {
+        Map<String, Object> respuesta = new HashMap<>();
+
+        if (result.hasErrors()) {
+            Map<String, String> errores = new HashMap<>();
+            result.getFieldErrors().forEach(err -> {
+                errores.put(err.getField(), err.getDefaultMessage());
+            });
+            return new ResponseEntity<>(errores, HttpStatus.BAD_REQUEST);
+        }
+
         try {
             Institucion actualizada = service.updateInstitucion(id, institucion);
             return new ResponseEntity<>(actualizada, HttpStatus.OK);
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            respuesta.put("mensaje", e.getMessage());
+            return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> eliminar(@PathVariable Integer id) {
+        Map<String, Object> respuesta = new HashMap<>();
         try {
             service.deleteInstitucion(id);
-            Map<String, String> response = new HashMap<>();
-            response.put("mensaje", "Institución eliminada correctamente");
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            respuesta.put("mensaje", "Institución eliminada con éxito");
+            return new ResponseEntity<>(respuesta, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            respuesta.put("mensaje", e.getMessage());
+            return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
         }
     }
 }
