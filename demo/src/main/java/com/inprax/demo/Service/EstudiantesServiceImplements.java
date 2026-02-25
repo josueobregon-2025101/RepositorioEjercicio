@@ -30,7 +30,7 @@ public class EstudiantesServiceImplements implements EstudiantesService {
 
     @Override
     public void deleteEstudiantes(Integer id) {
-        Estudiantes existingEstudiantes = estudiantesRepository.findById(id).orElseThrow(() -> new RuntimeException("El usuario no existe"));
+        estudiantesRepository.findById(id).orElseThrow(() -> new RuntimeException("El usuario no existe"));
         estudiantesRepository.deleteById(id);
     }
 }
