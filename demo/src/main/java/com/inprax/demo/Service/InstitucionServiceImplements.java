@@ -2,6 +2,8 @@ package com.inprax.demo.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
 import com.inprax.demo.Service.InstitucionService;
 import com.inprax.demo.Repository.InstitucionRepository;
 import com.inprax.demo.Entity.Institucion;
@@ -21,18 +23,15 @@ public class InstitucionServiceImplements implements InstitucionService {
 
     @Override
     public Institucion getInstitucionById(Integer id) {
-        Optional<Institucion> op = repository.findById(id);
-        if (op.isPresent()) {
-            return op.get();
-        }
-        throw new RuntimeException("No se encontró la institución con el ID: " + id);
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se encontró la institución con el ID: " + id));
     }
 
     @Override
     public Institucion saveInstitucion(Institucion institucion) throws RuntimeException {
-        String correo = institucion.getCorreo();
-        if (correo == null || (!correo.contains("@gmail.com") && !correo.contains("@outlook.com"))) {
-            throw new RuntimeException("Dominio no permitido: use @gmail.com o @outlook.com");
+        if (institucion.getCorreo() != null && !institucion.getCorreo().contains("@gmail.com") 
+            && !institucion.getCorreo().contains("@outlook.com") && !institucion.getCorreo().contains("@icloud.com") && !institucion.getCorreo().contains("yahoo.com")) {
+            throw new RuntimeException("El dominio del correo debe ser @gmail.com o @outlook.com");
         }
 
         boolean existe = repository.existsByNombreAndCorreoAndDireccionAndTelefono(
@@ -43,7 +42,7 @@ public class InstitucionServiceImplements implements InstitucionService {
         );
 
         if (existe) {
-            throw new RuntimeException("La institución ya existe con estos mismos datos");
+            throw new RuntimeException("Esta institución ya existe con los mismos datos registrados.");
         }
 
         return repository.save(institucion);
@@ -53,10 +52,11 @@ public class InstitucionServiceImplements implements InstitucionService {
     public Institucion updateInstitucion(Integer id, Institucion institucion) {
         Institucion existente = getInstitucionById(id);
 
-        String correo = institucion.getCorreo();
-        if (correo == null || (!correo.contains("@gmail.com") && !correo.contains("@outlook.com"))) {
-            throw new RuntimeException("Dominio no permitido: use @gmail.com o @outlook.com");
+        if (institucion.getCorreo() != null && !institucion.getCorreo().contains("@gmail.com") 
+            && !institucion.getCorreo().contains("@outlook.com") && !institucion.getCorreo().contains("@icloud.com") && !institucion.getCorreo().contains("yahoo.com")) {
+            throw new RuntimeException("El nuevo correo no tiene un dominio permitido.");
         }
+
 
         existente.setNombre(institucion.getNombre());
         existente.setCorreo(institucion.getCorreo());
@@ -68,10 +68,9 @@ public class InstitucionServiceImplements implements InstitucionService {
 
     @Override
     public void deleteInstitucion(Integer id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
-        } else {
-            throw new RuntimeException("No se puede eliminar: el ID no existe");
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("No se puede eliminar: la institución con ID " + id + " no existe.");
         }
+        repository.deleteById(id);
     }
 }
