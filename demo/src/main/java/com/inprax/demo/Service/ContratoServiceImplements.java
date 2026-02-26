@@ -41,6 +41,9 @@ public class ContratoServiceImplements implements ContratoService{
             newContrato.setIdDocumento(contrato.getIdDocumento());
             newContrato.setIdEmpresa(contrato.getIdEmpresa());
             newContrato.setIdPostulacion(contrato.getIdPostulacion());
+            newContrato.setFechaInicio(contrato.getFechaInicio());
+            newContrato.setFechaFin(contrato.getFechaFin());
+            newContrato.setObjetivos(contrato.getObjetivos());
             return contratoRepository.save(newContrato);
         }
         return null;
