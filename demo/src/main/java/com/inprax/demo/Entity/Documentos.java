@@ -10,8 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "Documentos")
 public class Documentos {
-    @NotNull(message = "El campo id no puede estar vacio")
-    @Positive(message = "El id no puede ser negativo")
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_documento")
@@ -28,19 +27,19 @@ public class Documentos {
     private int idEmpresa;
 
     @NotBlank(message = "El tipo de documento no puede estar vacio ")
-    @Column(name = "tipoDoc")
+    @Column(name = "tipo_doc")
     private String tipoDoc;
 
     @NotBlank(message = "El nombre del archivo no puede estar vacio")
-    @Column(name = "nombreArchivo")
+    @Column(name = "nombre_archivo")
     private String nombreArchivo;
 
     @NotBlank(message = "La url del archivo no puede estar vacio")
-    @Column(name = "urlArchivo")
+    @Column(name = "url_archivo")
     private String urlArchivo;
 
     @NotBlank(message = "La fecha de subida no puede estar vacia")
-    @Column(name = "fechaSubida")
+    @Column(name = "fecha_subida")
         private String fechaSubida;
 
     //Getters y Setters
