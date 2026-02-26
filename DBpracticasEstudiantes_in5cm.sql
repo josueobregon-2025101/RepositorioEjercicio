@@ -129,14 +129,13 @@ Create table Documentos(
 	id_documento int not null auto_increment,
     id_estudiante int,
     id_empresa int,
-    tipoDoc enum("Carta de Solicitud de Práctica","Carta de Presentación de la Institución",
-		"Curriculum Vitae (CV)","Fotocopia de DPI o CUI","Constancia de Estudios","Pensum de la Carrera",
-		"Certificación de Notas","Constancia de Seguro Estudiantil","Fotografías tamaño cédula",
-		"Informe Final de Práctica"),
-    nombreArchivo varchar(50),
-    urlArchivo varchar(2048),
-    fechaSubida datetime,
-    primary key (id_documento)
+    tipo_doc varchar(100),
+    nombre_archivo varchar(50),
+    url_archivo varchar(2048),
+    fecha_subida datetime,
+    primary key (id_documento),
+    foreign key(id_estudiante) references Estudiantes(id_estudiante) on delete cascade,
+    foreign key(id_empresa) references Empresa(id_empresa) on delete cascade
 );
 
 Create table Contrato(
@@ -145,10 +144,14 @@ Create table Contrato(
     id_empresa int,
     id_estudiante int,
     id_documento int,
-    fechaInicio date,
-    fechaFin date,
+    fecha_inicio date,
+    fecha_fin date,
     objetivos varchar(80),
-    primary key (id_contrato)
+    primary key (id_contrato),
+    foreign key(id_postulacion)references Postulaciones(id_postulacion) on delete cascade,
+	foreign key(id_empresa)references Empresa(id_empresa) on delete cascade,
+    foreign key(id_estudiante)references Estudiantes(id_estudiante)on delete cascade,
+    foreign key(id_documento)references Documentos(id_documento) on delete cascade
 );
 -- ////////////////////////----Procedimientos Almacenados----///////////////////////
 
@@ -840,17 +843,14 @@ delimiter $$
 create procedure sp_AgregarDocumentos(
     in d_id_estudiante int,
     in d_id_empresa int,
-    in d_tipoDoc enum("Carta de Solicitud de Práctica","Carta de Presentación de la Institución",
-		"Curriculum Vitae (CV)","Fotocopia de DPI o CUI","Constancia de Estudios","Pensum de la Carrera",
-		"Certificación de Notas","Constancia de Seguro Estudiantil","Fotografías tamaño cédula",
-		"Informe Final de Práctica"),
+    in d_tipoDoc varchar(100),
     in d_nombreArchivo varchar(50),
     in d_urlArchivo varchar(2048),
     in d_fechaSubida datetime
 )
  
 begin
-    insert into Documentos(id_estudiante, id_empresa, tipoDoc, nombreArchivo, urlArchivo,fechaSubida)
+    insert into Documentos(id_estudiante, id_empresa, tipo_doc, nombre_archivo, url_archivo,fecha_subida)
     values(d_id_estudiante, d_id_empresa, d_tipoDoc, d_nombreArchivo, d_urlArchivo, d_fechaSubida);
     select last_insert_id() as id_documento;
 end$$
@@ -858,7 +858,7 @@ end$$
 delimiter ;
  
 -- Actualizar Documentos --
- 
+
 delimiter $$
 create procedure sp_ActualizarDocumentos(
     in d_id_documento int,
@@ -877,10 +877,10 @@ begin
     update Documentos
     set id_estudiante    = d_id_estudiante,
         id_empresa      = d_id_empresa,
-        tipoDoc    = d_tipoDoc,
-        nombreArchivo  = d_nombreArchivo,
-        urlArchivo    = d_urlArchivo,
-        fechaSubida = d_fechaSubida
+        tipo_doc    = d_tipoDoc,
+        nombre_archivo  = d_nombreArchivo,
+        url_archivo    = d_urlArchivo,
+        fecha_subida = d_fechaSubida
     where id_documento = d_id_documento;
 end$$
  
@@ -935,7 +935,7 @@ create procedure sp_AgregarContrato(
 )
  
 begin
-    insert into Contrato(id_postulacion , id_empresa, id_estudiante, id_documento, fechaInicio,fechaFin,objetivos)
+    insert into Contrato(id_postulacion , id_empresa, id_estudiante, id_documento, fecha_inicio,fecha_fin,objetivos)
     values(c_id_postulacion, c_id_empresa, c_id_estudiante, c_id_documento, c_fechaInicio , c_fechaFin,c_objetivos);
     select last_insert_id() as id_contrato;
 end$$
@@ -962,8 +962,8 @@ begin
         id_empresa      = c_id_empresa,
         id_estudiante    = c_id_estudiante,
         id_documento  = c_id_documento,
-        fechaInicio    = c_fechaInicio,
-        fechaFin = c_fechaFin,
+        fecha_inicio    = c_fechaInicio,
+        fecha_fin = c_fechaFin,
         objetivos = c_objetivos
     where id_contrato = c_id_contrato;
 end$$
@@ -997,14 +997,14 @@ delimiter ;
 -- DBpracticasEstudiantes_in5cm
 -- ================================
 
--- 1️⃣ LOGIN (no tiene CREATE, se usa directamente en dependencias)
--- ⚠️ No existe sp_AgregarLogin en tu script, por eso se asume id_login = 1
+-- 1️LOGIN (no tiene CREATE, se usa directamente en dependencias)
+--  No existe sp_AgregarLogin en tu script, por eso se asume id_login = 1
 
 INSERT INTO Login(correo_login, usuario_login, contrasena_login, roles)
 VALUES ('admin@test.com','admin','1234','ADMIN');
 
 
--- 2️⃣ EMPRESA
+-- 2️ EMPRESA
 CALL sp_AgregarEmpresa(
     'Empresa Demo',
     'Tecnologia',
@@ -1018,7 +1018,7 @@ CALL sp_AgregarEmpresa(
 );
 
 
--- 3️⃣ ADMINISTRADORES
+-- 3️ ADMINISTRADORES
 CALL sp_AgregarAdministrador(
     'Carlos',
     'Ramirez',
@@ -1027,7 +1027,7 @@ CALL sp_AgregarAdministrador(
 );
 
 
--- 4️⃣ INSTITUCIONES
+-- 4️ INSTITUCIONES
 CALL sp_instituciones_create(
     'Instituto Central',
     'instituto@test.com',
@@ -1036,7 +1036,7 @@ CALL sp_instituciones_create(
 );
 
 
--- 5️⃣ ESTUDIANTES
+-- 5️ ESTUDIANTES
 CALL sp_Estudiantes_create(
     1,
     1,
@@ -1052,7 +1052,7 @@ CALL sp_Estudiantes_create(
 );
 
 
--- 6️⃣ REPRESENTANTE DE LA EMPRESA
+-- 6️ REPRESENTANTE DE LA EMPRESA
 CALL sp_RepresentanteEmpresa_create(
     1,
     'Luis',
@@ -1066,7 +1066,7 @@ CALL sp_RepresentanteEmpresa_create(
 );
 
 
--- 7️⃣ REPRESENTANTE DE LA INSTITUCIÓN
+-- 7️ REPRESENTANTE DE LA INSTITUCIÓN
 CALL sp_representantesInstitucion_create(
     'Maria',
     'Lopez',
@@ -1077,7 +1077,7 @@ CALL sp_representantesInstitucion_create(
 );
 
 
--- 8️⃣ PRACTICAS
+-- 8️ PRACTICAS
 CALL sp_insertar_practica(
     1,
     'Practica Profesional',
@@ -1090,7 +1090,7 @@ CALL sp_insertar_practica(
 );
 
 
--- 9️⃣ POSTULACIONES
+-- 9️ POSTULACIONES
 CALL sp_insertar_postulacion(
     1,
     'Postulación Práctica',
@@ -1100,18 +1100,18 @@ CALL sp_insertar_postulacion(
 );
 
 
--- 🔟 DOCUMENTOS
+--  DOCUMENTOS
 CALL sp_AgregarDocumentos(
     1,
     1,
     'Curriculum Vitae (CV)',
     'cv_juan.pdf',
     'https://servidor.com/cv_juan.pdf',
-    "2026-01-01"
+    NOW()
 );
 
 
--- cONTRATO
+-- CONTRATO
 CALL sp_AgregarContrato(
     1,
     1,
