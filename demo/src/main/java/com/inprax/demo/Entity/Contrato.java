@@ -35,11 +35,11 @@ public class Contrato {
     private int idDocumento;
 
     @NotBlank(message = "La fecha de inicio no puede estar vacia")
-    @Column(name = "fechaInicio")
+    @Column(name = "fecha_inicio")
     private String fechaInicio;
 
     @NotBlank(message = "La fecha final no puede estar vacia")
-    @Column(name = "fechaFin")
+    @Column(name = "fecha_fin")
     private String fechaFin;
 
     @NotBlank(message = "Los objetivos no pueden estar vacios")
