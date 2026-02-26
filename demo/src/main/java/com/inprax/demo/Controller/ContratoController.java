@@ -42,13 +42,12 @@ public class ContratoController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateContrato(@PathVariable Integer id,@RequestBody @Valid Contrato contrato){
         try {
-            Contrato existente = contratoService.getContratoById(id);
-            if(existente!= null){
-                Contrato update = contratoService.updateContrato(id,contrato);
-                return ResponseEntity.ok().body(update);
+            Contrato update = contratoService.updateContrato(id,contrato);
+            if(update!= null){
+                return ResponseEntity.ok(update);
             }else {
                 return ResponseEntity.notFound().build();
             }
@@ -57,7 +56,7 @@ public class ContratoController {
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteContratoById(@PathVariable @Valid Integer id){
         Contrato contrato = contratoService.getContratoById(id);
         if(contrato != null){
