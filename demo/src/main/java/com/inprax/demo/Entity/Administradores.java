@@ -7,6 +7,11 @@ import jakarta.validation.constraints.*;
 @Table(name = "Administradores")
 public class Administradores {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_administradores")
+    private Integer idAdministradores;
+
     @NotBlank(message = "El nombre del administrador es obligatorio")
     @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
     @Column(name = "nombre_administradores")
@@ -26,6 +31,14 @@ public class Administradores {
     @Positive(message = "El ID de login debe ser un número positivo")
     @Column(name = "id_login")
     private Integer idLogin;
+
+    public Integer getIdAdministradores() {
+        return idAdministradores;
+    }
+
+    public void setIdAdministradores(Integer idAdministradores) {
+        this.idAdministradores = idAdministradores;
+    }
 
     public String getNombreAdministradores() {
         return nombreAdministradores;
