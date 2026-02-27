@@ -2,6 +2,7 @@ package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Administradores;
 import com.inprax.demo.Service.AdministradoresService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class AdministradoresController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createAdministrador(@RequestBody Administradores administrador) {
+    public ResponseEntity<Object> createAdministrador(@Valid @RequestBody Administradores administrador) {
         try {
             Administradores creado = administradoresService.saveAdministrador(administrador);
             return new ResponseEntity<>(creado, HttpStatus.CREATED);
@@ -66,7 +67,7 @@ public class AdministradoresController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateAdministrador(@PathVariable Integer id, @RequestBody Administradores administrador) {
+    public ResponseEntity<Object> updateAdministrador(@PathVariable Integer id, @Valid @RequestBody Administradores administrador) {
         try {
             Administradores existente = administradoresService.getAdministradorById(id);
             if (existente == null) {
