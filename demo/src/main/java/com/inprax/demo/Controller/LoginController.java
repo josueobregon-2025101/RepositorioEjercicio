@@ -1,5 +1,6 @@
 package com.inprax.demo.Controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.LoginService;
@@ -20,7 +21,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> validarLogin(@RequestBody Login login) {
+    public ResponseEntity<Object> validarLogin(@Valid @RequestBody Login login) {
         try {
             Login resultado = loginService.validarLogin(
                     login.getCorreoLogin(),
