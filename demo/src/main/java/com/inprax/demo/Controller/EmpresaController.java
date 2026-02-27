@@ -2,6 +2,7 @@ package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Service.EmpresaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,7 @@ public class EmpresaController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createEmpresa(@RequestBody Empresa empresa) {
+    public ResponseEntity<Object> createEmpresa(@Valid @RequestBody Empresa empresa) {
         try {
             Empresa creada = empresaService.saveEmpresa(empresa);
             return new ResponseEntity<>(creada, HttpStatus.CREATED);
@@ -66,7 +67,7 @@ public class EmpresaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateEmpresa(@PathVariable Integer id, @RequestBody Empresa empresa) {
+    public ResponseEntity<Object> updateEmpresa(@PathVariable Integer id, @Valid @RequestBody Empresa empresa) {
         try {
             Empresa empresaExistente = empresaService.getEmpresaById(id);
             if (empresaExistente == null) {
