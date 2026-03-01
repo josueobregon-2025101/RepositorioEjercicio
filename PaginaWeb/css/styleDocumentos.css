@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: #1c1c1c;
+    font-family: "DM Sans",sans-serif;
 }
 header{
     width: 100%;
@@ -117,6 +118,28 @@ header span{
     display: block;
     margin-left: 5px;
     font-size: 20px;
+    margin-top: 6px;
+}
+.ultimoID{
+    display: block;
+    background-color: #2a2a2a;
+    width: 300px;
+    height: 100px;
+    padding: 20px;
+}
+.tituloID{
+     color: #4a5046;
+    display: block;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-family: sans-serif;
+    margin-bottom: 3px;
+}
+.TotalID{
+    color: #ffc107;
+    display: block;
+    margin-left: 5px;
+    font-size: 40px;
 }
 
 .Acciones{
@@ -173,3 +196,60 @@ header span{
 .botonAgregar:active{
     background-color:#ffe207 ;
 }
+.tablaDocs{
+    margin: 20px;
+    width: 96%;
+    border-collapse: collapse;
+    border: 2px solid #2A2A2A;
+    font-family: "DM Sans",sans-serif;
+}
+.cabeceraFila{
+    background-color: #2A2A2A;
+    height: 30px;
+}
+.tablaDocs thead tr th{
+    font-size: 15px;
+    padding: 3px;
+    color: #51595a;
+}
+.datosTabla td{
+    color: #cfc5c0;
+    align-items: center;
+    text-align: center;
+    height: 30px;
+}
+.IDspn{
+    background-color: #38301a;
+    color: #dda30e;
+    padding: 5px;
+}
+.btnEdit{
+    background-color: #1c1c1c;
+    color: #f2e8d8;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2b2b2b;
+    padding: 5px;
+}
+.btnEdit img{
+    width: 12px;
+    height: 12px;
+}
+.btnEdit:active{
+    background-color: #cfc5c0;
+    color: #1c1c1c;
+}
+.btnEliminar{
+    background-color: #e53935;
+    border: 0;
+    padding: 5px;
+}
+.btnEliminar img{
+    width: 13px;
+    height: 13px;
+}
+.btnEliminar:active{
+    background-color: #df9310;
+}
+
