@@ -19,7 +19,6 @@
             </div>
         </div>
     </header>
-    <div>
         <div class="principio">
             <h1>Gestión de Documentos</h1>
             <span>administra el registro de documentos del sistema</span>
@@ -33,9 +32,9 @@
                 <span class="tituloUS">Ultimo Documento almacenado</span>
                 <span class="Nombre">null</span>
             </div>
-            <div class="ultimoSubido">
-                <span class="tituloUS">Ultimo ID Ingresado</span>
-                <span class="TotalInt">0</span>
+            <div class="ultimoID">
+                <span class="tituloID">Ultimo ID Ingresado</span>
+                <span class="TotalID">0</span>
             </div>
         </div>
         <div class="Acciones">
@@ -48,8 +47,35 @@
 
         </div>
 
-    </div>
+        <div class="DivTabla">
+            <table class="tablaDocs">
+                <thead class="cabeceraFila">
+                    <tr>
+                        <th>ID Documento</th>
+                        <th>ID Estudiante</th>
+                        <th>ID Empresa</th>
+                        <th>Tipo Documento</th>
+                        <th>Nombre del Archivo</th>
+                        <th>URL</th>
+                        <th>Fecha Subida</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="datosTabla">
+                        <td><span class="IDspn">#1</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>contrato</td>
+                        <td>contrato1</td>
+                        <td>url</td>
+                        <td>22/09/2008</td>
+                        <td><button class="btnEdit"><img src="../Images/botonEditar.png" alt="">Editar</button>
+                            <button class="btnEliminar"><img src="../Images/cuboDeBasura.png" alt="">Eliminar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    
 </body>
 </html>
