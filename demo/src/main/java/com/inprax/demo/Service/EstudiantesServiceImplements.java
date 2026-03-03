@@ -25,11 +25,11 @@ public class EstudiantesServiceImplements implements EstudiantesService {
     @Override
     public Estudiantes saveEstudiantes(Estudiantes estudiantes) throws RuntimeException {
         if (estudiantes.getCorreo() == null && !estudiantes.getCorreo().endsWith("@gmail.com") && !estudiantes.getCorreo().endsWith("@outlook.com")) {
-            throw new BadRequestException("El dominio del correo debe ser @gmail.com o @outlook.com");
+            throw new BadRequestException("El dominio del correo debe ser @gmail.com o @outlook.com, verifique por favor");
         }
 
-        if (estudiantesRepository.existByCorreo(estudiantes.getCorreo())) {
-            throw new IllegalArgumentException("El correo ya existe");
+        if (estudiantesRepository.CorreoExistente(estudiantes.getCorreo())) {
+            throw new IllegalArgumentException("El correo ya existe, verifique por favor");
         }
 
         return estudiantesRepository.save(estudiantes);
