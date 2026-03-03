@@ -997,127 +997,132 @@ delimiter ;
 -- DBpracticasEstudiantes_in5cm
 -- ================================
 
--- 1️LOGIN (no tiene CREATE, se usa directamente en dependencias)
---  No existe sp_AgregarLogin en tu script, por eso se asume id_login = 1
+-- =========================
+-- LOGIN (5 USUARIOS)
+-- =========================
 
-INSERT INTO Login(correo_login, usuario_login, contrasena_login, roles)
-VALUES ('admin@test.com','admin','1234','ADMIN');
-
-
--- 2️ EMPRESA
-CALL sp_AgregarEmpresa(
-    'Empresa Demo',
-    'Tecnologia',
-    'Mediana',
-    '55511111',
-    'empresa@demo.com',
-    'Zona 1',
-    '8am - 5pm',
-    'Empresa de prueba',
-    1
-);
+insert into Login (correo_login, usuario_login, contrasena_login, roles) values
+('admin1@gmail.com','admin1','12345','Administrador'),
+('empresa1@gmail.com','empresa1','12345','Empresa'),
+('empresa2@gmail.com','empresa2','12345','Empresa'),
+('estudiante1@gmail.com','estudiante1','12345','Estudiante'),
+('estudiante2@gmail.com','estudiante2','12345','Estudiante');
 
 
--- 3️ ADMINISTRADORES
-CALL sp_AgregarAdministrador(
-    'Carlos',
-    'Ramirez',
-    'Activo',
-    1
-);
+-- =========================
+-- INSTITUCIONES (6 REGISTROS)
+-- =========================
+
+call sp_instituciones_create('Instituto Tecnológico Central','itc@gmail.com','Zona 1','22223333');
+call sp_instituciones_create('Colegio San José','csj@gmail.com','Zona 2','22224444');
+call sp_instituciones_create('Universidad Nacional','un@gmail.com','Zona 3','22225555');
+call sp_instituciones_create('Instituto Técnico Industrial','iti@gmail.com','Zona 4','22226666');
+call sp_instituciones_create('Colegio Mixto Moderno','cmm@gmail.com','Zona 5','22227777');
+call sp_instituciones_create('Universidad del Valle','uv@gmail.com','Zona 6','22228888');
 
 
--- 4️ INSTITUCIONES
-CALL sp_instituciones_create(
-    'Instituto Central',
-    'instituto@test.com',
-    'Zona 5',
-    '55522222'
-);
+-- =========================
+-- EMPRESAS (6 REGISTROS)
+-- =========================
+
+call sp_AgregarEmpresa('Tech Solutions','Tecnología','Grande','55511111','tech@gmail.com','Zona 10','8AM-5PM','Empresa de software',2);
+call sp_AgregarEmpresa('InnovaSoft','Tecnología','Mediana','55522222','innova@gmail.com','Zona 11','8AM-5PM','Desarrollo web',3);
+call sp_AgregarEmpresa('DataCorp','Análisis de Datos','Grande','55533333','data@gmail.com','Zona 12','9AM-6PM','Big Data',2);
+call sp_AgregarEmpresa('RedNetworks','Redes','Pequeña','55544444','red@gmail.com','Zona 13','8AM-4PM','Infraestructura de red',3);
+call sp_AgregarEmpresa('CyberSecurity GT','Seguridad','Mediana','55555555','cyber@gmail.com','Zona 14','9AM-5PM','Seguridad informática',2);
+call sp_AgregarEmpresa('SmartApps','Desarrollo','Pequeña','55566666','apps@gmail.com','Zona 15','8AM-3PM','Apps móviles',3);
 
 
--- 5️ ESTUDIANTES
-CALL sp_Estudiantes_create(
-    1,
-    1,
-    'Juan',
-    'Perez',
-    55533333,
-    '6to',
-    'Informatica',
-    'juan@test.com',
-    'Instituto Central',
-    55544444,
-    17
-);
+-- =========================
+-- ADMINISTRADORES (6 REGISTROS)
+-- =========================
+
+call sp_AgregarAdministrador('Carlos','Lopez','Activo',1);
+call sp_AgregarAdministrador('Ana','Martinez','Activo',1);
+call sp_AgregarAdministrador('Luis','Gomez','Inactivo',1);
+call sp_AgregarAdministrador('Maria','Perez','Activo',1);
+call sp_AgregarAdministrador('Jorge','Ramirez','Activo',1);
+call sp_AgregarAdministrador('Sofia','Hernandez','Activo',1);
 
 
--- 6️ REPRESENTANTE DE LA EMPRESA
-CALL sp_RepresentanteEmpresa_create(
-    1,
-    'Luis',
-    'Gomez',
-    'Supervisor',
-    55566666,
-    '101',
-    'Activo',
-    CURDATE(),
-    'luis@empresa.com'
-);
+-- =========================
+-- ESTUDIANTES (6 REGISTROS)
+-- =========================
+
+call sp_Estudiantes_create(1,4,'Juan','Perez',44441111,'5to Bach','Informática','juan@gmail.com','Instituto Tecnológico Central',33331111,18);
+call sp_Estudiantes_create(2,5,'Laura','Diaz',44442222,'6to Bach','Computación','laura@gmail.com','Colegio San José',33332222,19);
+call sp_Estudiantes_create(3,4,'Miguel','Lopez',44443333,'5to Bach','Sistemas','miguel@gmail.com','Universidad Nacional',33333333,20);
+call sp_Estudiantes_create(4,5,'Andrea','Ruiz',44444444,'6to Bach','Redes','andrea@gmail.com','Instituto Técnico Industrial',33334444,21);
+call sp_Estudiantes_create(5,4,'Pedro','Castro',44445555,'5to Bach','Programación','pedro@gmail.com','Colegio Mixto Moderno',33335555,18);
+call sp_Estudiantes_create(6,5,'Lucia','Morales',44446666,'6to Bach','Software','lucia@gmail.com','Universidad del Valle',33336666,22);
 
 
--- 7️ REPRESENTANTE DE LA INSTITUCIÓN
-CALL sp_representantesInstitucion_create(
-    'Maria',
-    'Lopez',
-    '55577777',
-    'maria@instituto.com',
-    1,
-    1
-);
+-- =========================
+-- PRACTICAS (6 REGISTROS)
+-- =========================
+
+call sp_insertar_practica(1,'Desarrollador Junior','2026-01-01 08:00:00','Presencial','Informática','Vigente','2 plazas','2026-01-01 08:00:00');
+call sp_insertar_practica(2,'Analista de Datos','2026-01-02 08:00:00','Híbrida','Sistemas','Vigente','1 plaza','2026-01-02 08:00:00');
+call sp_insertar_practica(3,'Soporte Técnico','2026-01-03 08:00:00','Presencial','Redes','Vigente','3 plazas','2026-01-03 08:00:00');
+call sp_insertar_practica(4,'Programador Web','2026-01-04 08:00:00','Remota','Computación','Vigente','2 plazas','2026-01-04 08:00:00');
+call sp_insertar_practica(5,'Tester QA','2026-01-05 08:00:00','Presencial','Software','Vigente','1 plaza','2026-01-05 08:00:00');
+call sp_insertar_practica(6,'Administrador de Redes','2026-01-06 08:00:00','Presencial','Redes','Vigente','2 plazas','2026-01-06 08:00:00');
 
 
--- 8️ PRACTICAS
-CALL sp_insertar_practica(
-    1,
-    'Practica Profesional',
-    NOW(),
-    'Presencial',
-    'Informatica',
-    '2025',
-    'Disponible',
-    NOW()
-);
+-- =========================
+-- POSTULACIONES (6 REGISTROS)
+-- =========================
+
+call sp_insertar_postulacion(1,'Postulación Dev','Interesado en desarrollo','01/01/2026','Pendiente');
+call sp_insertar_postulacion(2,'Postulación Data','Experiencia en datos','02/01/2026','Pendiente');
+call sp_insertar_postulacion(3,'Postulación Soporte','Conocimientos básicos','03/01/2026','Aceptado');
+call sp_insertar_postulacion(4,'Postulación Web','HTML y CSS','04/01/2026','Pendiente');
+call sp_insertar_postulacion(5,'Postulación QA','Pruebas manuales','05/01/2026','Rechazado');
+call sp_insertar_postulacion(6,'Postulación Redes','Configuración básica','06/01/2026','Pendiente');
+
+-- =========================================
+-- REPRESENTANTE EMPRESA (6 REGISTROS)
+-- =========================================
+
+call sp_RepresentanteEmpresa_create(1,'Mario','Lopez','Gerente TI',55510001,'101','Activo','2026-01-01','mario@tech.com');
+call sp_RepresentanteEmpresa_create(2,'Andrea','Gomez','Jefe Desarrollo',55510002,'102','Activo','2026-01-02','andrea@innova.com');
+call sp_RepresentanteEmpresa_create(3,'Carlos','Ruiz','Analista Senior',55510003,'103','Activo','2026-01-03','carlos@data.com');
+call sp_RepresentanteEmpresa_create(4,'Lucia','Martinez','Supervisor Redes',55510004,'104','Activo','2026-01-04','lucia@red.com');
+call sp_RepresentanteEmpresa_create(5,'Pedro','Ramirez','Encargado Seguridad',55510005,'105','Activo','2026-01-05','pedro@cyber.com');
+call sp_RepresentanteEmpresa_create(6,'Sofia','Hernandez','Lider Proyectos',55510006,'106','Activo','2026-01-06','sofia@apps.com');
 
 
--- 9️ POSTULACIONES
-CALL sp_insertar_postulacion(
-    1,
-    'Postulación Práctica',
-    'Postulación del estudiante a la práctica',
-    '2025-02-01',
-    'Pendiente'
-);
+-- =========================================
+-- REPRESENTANTE INSTITUCION (6 REGISTROS)
+-- =========================================
+
+call sp_representantesInstitucion_create('Luis','Morales','22220001','luis@itc.com',1,1);
+call sp_representantesInstitucion_create('Ana','Castro','22220002','ana@csj.com',2,2);
+call sp_representantesInstitucion_create('Miguel','Perez','22220003','miguel@un.com',3,3);
+call sp_representantesInstitucion_create('Laura','Diaz','22220004','laura@iti.com',4,4);
+call sp_representantesInstitucion_create('Jorge','Lopez','22220005','jorge@cmm.com',5,5);
+call sp_representantesInstitucion_create('Maria','Ramirez','22220006','maria@uv.com',6,6);
 
 
---  DOCUMENTOS
-CALL sp_AgregarDocumentos(
-    1,
-    1,
-    'Curriculum Vitae (CV)',
-    'cv_juan.pdf',
-    'https://servidor.com/cv_juan.pdf',
-    NOW()
-);
+-- =========================================
+-- DOCUMENTOS (6 REGISTROS)
+-- =========================================
+
+call sp_AgregarDocumentos(1,1,'Curriculum Vitae (CV)','cv_juan.pdf','/docs/cv_juan.pdf','2026-01-10 08:00:00');
+call sp_AgregarDocumentos(2,2,'Constancia de Estudios','constancia_laura.pdf','/docs/constancia_laura.pdf','2026-01-11 08:00:00');
+call sp_AgregarDocumentos(3,3,'Fotocopia de DPI o CUI','dpi_miguel.pdf','/docs/dpi_miguel.pdf','2026-01-12 08:00:00');
+call sp_AgregarDocumentos(4,4,'Carta de Solicitud de Práctica','carta_andrea.pdf','/docs/carta_andrea.pdf','2026-01-13 08:00:00');
+call sp_AgregarDocumentos(5,5,'Certificación de Notas','notas_pedro.pdf','/docs/notas_pedro.pdf','2026-01-14 08:00:00');
+call sp_AgregarDocumentos(6,6,'Pensum de la Carrera','pensum_lucia.pdf','/docs/pensum_lucia.pdf','2026-01-15 08:00:00');
 
 
--- CONTRATO
-CALL sp_AgregarContrato(
-    1,
-    1,
-    1,
-    1,
-    '2025-03-01',
-    '2025-08-01',
-    'Aplicar conocimientos adquiridos'
-);
+-- =========================================
+-- CONTRATO (6 REGISTROS)
+-- =========================================
+
+call sp_AgregarContrato(1,1,1,1,'2026-02-01','2026-06-01','Apoyo en desarrollo de software');
+call sp_AgregarContrato(2,2,2,2,'2026-02-02','2026-06-02','Análisis de bases de datos');
+call sp_AgregarContrato(3,3,3,3,'2026-02-03','2026-06-03','Soporte técnico empresarial');
+call sp_AgregarContrato(4,4,4,4,'2026-02-04','2026-06-04','Desarrollo web institucional');
+call sp_AgregarContrato(5,5,5,5,'2026-02-05','2026-06-05','Pruebas y control de calidad');
+call sp_AgregarContrato(6,6,6,6,'2026-02-06','2026-06-06','Administración de redes');
