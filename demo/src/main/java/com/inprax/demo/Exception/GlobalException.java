@@ -58,7 +58,7 @@ public class GlobalException {
 
     //Error 400
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> handleBadRequestException(BadRequestException ex, WebRequest request) {
+    public ResponseEntity<?> handlleBadRequestException(BadRequestException ex, WebRequest request) {
         return crearRespuesta(ex.getMessage(), request, HttpStatus.BAD_REQUEST);
     }
 
