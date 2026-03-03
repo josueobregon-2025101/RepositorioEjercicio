@@ -1,6 +1,9 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "Estudiantes")
@@ -11,36 +14,50 @@ public class Estudiantes {
     @Column(name = "id_estudiante")
     private Integer idestudiante;
 
+    @NotNull(message = "El id de la institucion es un campo obligatorio")
+    @Positive(message = "El id de la institucion debe ser positivo")
     @Column(name = "id_institucion")
     private Integer idinstitucion;
 
     @Column(name = "id_login")
     private Integer idlogin;
 
+    @NotBlank(message = "El nombre es un campo obligatorio")
     @Column(name = "nombre")
     private String nombre;
 
+    @NotBlank(message = "El apellido es un campo obligatorio")
     @Column(name = "apellido")
     private String apellido;
 
+    @NotNull(message = "El numero de telefono es un campo obligatorio")
+    @Positive(message = "El numero de telefono debe ser positivo")
     @Column(name = "telefono")
     private Integer telefono;
 
+    @NotBlank(message = "El grado es un campo obligatorio")
     @Column(name = "grado")
     private String grado;
 
+    @NotBlank(message = "La carrera es un campo obligatorio")
     @Column(name = "carrera")
     private String carrera;
 
+    @NotBlank(message = "El correro es un campo obligatorio")
     @Column(name = "correo")
     private String correo;
 
+    @NotBlank(message = "El nombre de la institucion es un campo obligatorio")
     @Column(name = "nombreInstitucion")
     private String nombreInstitucion;
 
+    @NotNull(message = "El numero de telefono del tutor es un campo obligatorio")
+    @Positive(message = "El numero de telefono del tutor debe ser positivo")
     @Column(name = "tutortel")
     private Integer tutortel;
 
+    @NotNull(message = "La edad es un campo obligatorio")
+    @Positive(message = "La edad debe ser positiva")
     @Column(name = "edad")
     private Integer edad;
 
