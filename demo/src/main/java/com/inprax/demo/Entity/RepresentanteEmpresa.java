@@ -1,6 +1,9 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.sql.Date;
 
@@ -13,30 +16,42 @@ public class RepresentanteEmpresa {
     @Column(name = "id_representantempresa")
     private Integer idrepresentantempresa;
 
+    @NotNull(message = "El id de la empresa es un campo obligatorio")
+    @Positive(message = "El id de la empresa debe ser positivo")
     @Column(name = "id_empresa")
     private Integer idempresa;
 
+    @NotBlank(message = "El nombre es un campo obligatorio")
     @Column(name = "nombres")
     private String nombres;
 
+    @NotBlank(message = "El apellido es un campo obligatorio")
     @Column(name = "apellidos")
     private String apellidos;
 
+    @NotBlank(message = "El cargo es un campo obligatorio")
     @Column(name = "cargo")
     private String cargo;
 
+    @NotNull(message = "El numero de telefono es un campo obligatorio")
+    @Positive(message = "El numero de telefono debe ser positivo")
     @Column(name = "telefono")
     private Integer telefono;
 
+    @NotBlank(message = "La extension es un campo obligatorio")
     @Column(name = "extension")
     private String extension;
 
+    @NotBlank(message = "El estado es un campo obligatorio")
     @Column(name = "estado")
     private String estado;
 
+    @NotNull(message = "La fecha del registro es un campo obligatorio")
+    @Positive(message = "La fecha del registro debe ser positiva")
     @Column(name = "fecha_registro")
     private Date fecharegistro;
 
+    @NotBlank(message = "El correro es un campo obligatorio")
     @Column(name = "correo")
     private String correo;
 
