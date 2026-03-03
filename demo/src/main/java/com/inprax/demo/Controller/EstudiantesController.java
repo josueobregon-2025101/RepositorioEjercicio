@@ -26,31 +26,19 @@ public class EstudiantesController {
 
     @PostMapping
     public ResponseEntity<Object> createdEstudiantes(@Valid @RequestBody Estudiantes estudiantes) {
-        try {
             Estudiantes createdEstudiantes = estudiantesService.saveEstudiantes(estudiantes);
             return new ResponseEntity<>(createdEstudiantes, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEstudiantes(@PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
-        try {
+    public ResponseEntity<?> updateEstudiantes(@Valid @PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
             Estudiantes updateEstudiantes = estudiantesService.updateEstudiantes(id, estudiantes);
             return ResponseEntity.ok(updateEstudiantes);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletedEmpleado(@PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
-        try {
+    public ResponseEntity<?> deletedEmpleado(@Valid @PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
             estudiantesService.deleteEstudiantes(id);
             return ResponseEntity.ok("Estudiante eliminado exitosamente");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
     }
 }
