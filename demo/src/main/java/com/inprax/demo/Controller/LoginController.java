@@ -1,14 +1,10 @@
 package com.inprax.demo.Controller;
 
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.*;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.LoginService;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/login")
@@ -21,7 +17,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> validarLogin(@Valid @RequestBody Login login) {
+    public ResponseEntity<?> validarLogin(@Valid @RequestBody Login login) {
         try {
             Login resultado = loginService.validarLogin(
                     login.getCorreoLogin(),
@@ -29,26 +25,13 @@ public class LoginController {
                     login.getContrasenaLogin(),
                     login.getRoles()
             );
-
-            if (resultado == null) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Credenciales inválidas");
-                error.put("mensaje", "El usuario no existe o los datos son incorrectos");
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+            if (resultado != null) {
+                return ResponseEntity.ok().body(resultado);
+            } else {
+                return ResponseEntity.status(401).body("Credenciales invalidas");
             }
-
-            Map<String, Object> respuesta = new HashMap<>();
-            respuesta.put("mensaje", "Login exitoso");
-            respuesta.put("idLogin", resultado.getIdLogin());
-            respuesta.put("usuario", resultado.getUsuarioLogin());
-            respuesta.put("roles", resultado.getRoles());
-            return ResponseEntity.ok(respuesta);
-
         } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al validar login");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+            return ResponseEntity.badRequest().build();
         }
     }
 }
