@@ -37,7 +37,7 @@ public class RepresentanteEmpresaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRepresentanteEmpresa(@PathVariable Integer id, @RequestBody RepresentanteEmpresa representanteEmpresa) {
+    public ResponseEntity<?> updateRepresentanteEmpresa(@Valid @PathVariable Integer id, @RequestBody RepresentanteEmpresa representanteEmpresa) {
         try {
             RepresentanteEmpresa updateRepresentanteEstudiantes = representanteEmpresaService.updateRepresentantesEmpresa(id, representanteEmpresa);
             return ResponseEntity.ok(updateRepresentanteEstudiantes);
@@ -47,7 +47,7 @@ public class RepresentanteEmpresaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletedEmpleado(@PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
+    public ResponseEntity<?> deletedEmpleado(@Valid @PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
         try {
             representanteEmpresaService.deleteRepresentantesEmpresa(id);
             return ResponseEntity.ok("Representante eliminado exitosamente");
