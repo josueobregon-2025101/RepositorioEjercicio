@@ -3,13 +3,10 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Service.EmpresaService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/empresas")
@@ -22,89 +19,52 @@ public class EmpresaController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> getAllEmpresas() {
-        try {
-            List<Empresa> empresas = empresaService.getAllEmpresas();
-            return ResponseEntity.ok(empresas);
-        } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al obtener empresas");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-        }
+    public List<Empresa> getAllEmpresas() {
+        return empresaService.getAllEmpresas();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getEmpresaById(@PathVariable Integer id) {
-        try {
-            Empresa empresa = empresaService.getEmpresaById(id);
-            if (empresa == null) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Empresa no encontrada");
-                error.put("mensaje", "No existe una empresa con el ID: " + id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-            }
+    public ResponseEntity<?> getEmpresaById(@PathVariable @Valid Integer id) {
+        Empresa empresa = empresaService.getEmpresaById(id);
+        if (empresa != null) {
             return ResponseEntity.ok(empresa);
-        } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al buscar empresa");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        } else {
+            return ResponseEntity.status(404).body("No existe la empresa");
         }
     }
 
     @PostMapping
-    public ResponseEntity<Object> createEmpresa(@Valid @RequestBody Empresa empresa) {
+    public ResponseEntity<?> createEmpresa(@Valid @RequestBody Empresa empresa) {
         try {
             Empresa creada = empresaService.saveEmpresa(empresa);
-            return new ResponseEntity<>(creada, HttpStatus.CREATED);
+            return ResponseEntity.ok().body(creada);
         } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al crear empresa");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.badRequest().body(error);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateEmpresa(@PathVariable Integer id, @Valid @RequestBody Empresa empresa) {
+    public ResponseEntity<?> updateEmpresa(@PathVariable Integer id, @Valid @RequestBody Empresa empresa) {
         try {
-            Empresa empresaExistente = empresaService.getEmpresaById(id);
-            if (empresaExistente == null) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Empresa no encontrada");
-                error.put("mensaje", "No existe una empresa con el ID: " + id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-            }
             Empresa actualizada = empresaService.updateEmpresa(id, empresa);
-            return ResponseEntity.ok(actualizada);
+            if (actualizada != null) {
+                return ResponseEntity.ok(actualizada);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al actualizar empresa");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.badRequest().body(error);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteEmpresa(@PathVariable Integer id) {
-        try {
-            Empresa empresaExistente = empresaService.getEmpresaById(id);
-            if (empresaExistente == null) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Empresa no encontrada");
-                error.put("mensaje", "No existe una empresa con el ID: " + id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-            }
+    public ResponseEntity<?> deleteEmpresa(@PathVariable @Valid Integer id) {
+        Empresa empresa = empresaService.getEmpresaById(id);
+        if (empresa != null) {
             empresaService.deleteEmpresa(id);
-            Map<String, String> respuesta = new HashMap<>();
-            respuesta.put("mensaje", "Empresa eliminada exitosamente");
-            return ResponseEntity.ok(respuesta);
-        } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al eliminar empresa");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+            return ResponseEntity.ok().body("Se elimino la empresa");
+        } else {
+            return ResponseEntity.status(404).body("No existe la empresa");
         }
     }
 }
