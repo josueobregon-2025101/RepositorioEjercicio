@@ -3,13 +3,10 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Administradores;
 import com.inprax.demo.Service.AdministradoresService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/administradores")
@@ -22,89 +19,52 @@ public class AdministradoresController {
     }
 
     @GetMapping
-    public ResponseEntity<Object> getAllAdministradores() {
-        try {
-            List<Administradores> administradores = administradoresService.getAllAdministradores();
-            return ResponseEntity.ok(administradores);
-        } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al obtener administradores");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
-        }
+    public List<Administradores> getAllAdministradores() {
+        return administradoresService.getAllAdministradores();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getAdministradorById(@PathVariable Integer id) {
-        try {
-            Administradores administrador = administradoresService.getAdministradorById(id);
-            if (administrador == null) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Administrador no encontrado");
-                error.put("mensaje", "No existe un administrador con el ID: " + id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-            }
+    public ResponseEntity<?> getAdministradorById(@PathVariable @Valid Integer id) {
+        Administradores administrador = administradoresService.getAdministradorById(id);
+        if (administrador != null) {
             return ResponseEntity.ok(administrador);
-        } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al buscar administrador");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        } else {
+            return ResponseEntity.status(404).body("No existe el administrador");
         }
     }
 
     @PostMapping
-    public ResponseEntity<Object> createAdministrador(@Valid @RequestBody Administradores administrador) {
+    public ResponseEntity<?> createAdministrador(@Valid @RequestBody Administradores administrador) {
         try {
             Administradores creado = administradoresService.saveAdministrador(administrador);
-            return new ResponseEntity<>(creado, HttpStatus.CREATED);
+            return ResponseEntity.ok().body(creado);
         } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al crear administrador");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.badRequest().body(error);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateAdministrador(@PathVariable Integer id, @Valid @RequestBody Administradores administrador) {
+    public ResponseEntity<?> updateAdministrador(@PathVariable Integer id, @Valid @RequestBody Administradores administrador) {
         try {
-            Administradores existente = administradoresService.getAdministradorById(id);
-            if (existente == null) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Administrador no encontrado");
-                error.put("mensaje", "No existe un administrador con el ID: " + id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-            }
             Administradores actualizado = administradoresService.updateAdministrador(id, administrador);
-            return ResponseEntity.ok(actualizado);
+            if (actualizado != null) {
+                return ResponseEntity.ok(actualizado);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al actualizar administrador");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.badRequest().body(error);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteAdministrador(@PathVariable Integer id) {
-        try {
-            Administradores existente = administradoresService.getAdministradorById(id);
-            if (existente == null) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Administrador no encontrado");
-                error.put("mensaje", "No existe un administrador con el ID: " + id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-            }
+    public ResponseEntity<?> deleteAdministrador(@PathVariable @Valid Integer id) {
+        Administradores administrador = administradoresService.getAdministradorById(id);
+        if (administrador != null) {
             administradoresService.deleteAdministrador(id);
-            Map<String, String> respuesta = new HashMap<>();
-            respuesta.put("mensaje", "Administrador eliminado exitosamente");
-            return ResponseEntity.ok(respuesta);
-        } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Error al eliminar administrador");
-            error.put("mensaje", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+            return ResponseEntity.ok().body("Se elimino el administrador");
+        } else {
+            return ResponseEntity.status(404).body("No existe el administrador");
         }
     }
 }
