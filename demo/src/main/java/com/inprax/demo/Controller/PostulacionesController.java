@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/api/Postulaciones")
+@RequestMapping("/api/postulaciones")
 public class PostulacionesController {
     private final PostulacionesService postulacionesService;
 
@@ -24,11 +24,11 @@ public class PostulacionesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getIdPostulaciones(@PathVariable Integer id){
-        try{
-            Postulaciones postulaciones = postulacionesService.getIdPostulaciones(id);
+        Postulaciones postulaciones = postulacionesService.getIdPostulaciones(id);
+        if (postulaciones != null) {
             return ResponseEntity.ok(postulaciones);
-        }catch (RuntimeException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Postulación no encontrada con ID: " + id);
         }
     }
 
@@ -45,11 +45,11 @@ public class PostulacionesController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updatePostulaciones(@RequestBody Postulaciones postulaciones,
                                                       @PathVariable Integer id){
-        try{
-            Postulaciones updatePostulaciones = postulacionesService.updatePostulaciones(id, postulaciones);
+        Postulaciones updatePostulaciones = postulacionesService.updatePostulaciones(id, postulaciones);
+        if (updatePostulaciones != null) {
             return ResponseEntity.ok(updatePostulaciones);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Postulación no encontrada con ID: " + id);
         }
     }
 
@@ -57,10 +57,9 @@ public class PostulacionesController {
     public ResponseEntity<Object> deletePostulaciones(@PathVariable Integer id){
         try{
             postulacionesService.deletePostulaciones(id);
-            return ResponseEntity.ok("Postulaciones con ID: "+ id +" eliminado correctamente");
+            return ResponseEntity.ok("Postulación con ID: "+ id +" eliminada correctamente");
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 }
