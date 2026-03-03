@@ -1,6 +1,7 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -13,6 +14,7 @@ public class Login {
     private Integer idLogin;
 
     @NotBlank(message = "El correo es obligatorio")
+    @Email(message = "El correo no tiene el formato correcto")
     @Column(name = "correo_login")
     private String correoLogin;
 
