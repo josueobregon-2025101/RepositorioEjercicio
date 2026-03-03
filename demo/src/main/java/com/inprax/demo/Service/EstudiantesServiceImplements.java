@@ -32,6 +32,10 @@ public class EstudiantesServiceImplements implements EstudiantesService {
             throw new IllegalArgumentException("El correo ya existe, verifique por favor");
         }
 
+        if (estudiantesRepository.existsByTelefono(estudiantes.getTelefono())) {
+            throw new IllegalArgumentException("El numero de telefono ya existe, verefique por favor");
+        }
+
         return estudiantesRepository.save(estudiantes);
     }
 
