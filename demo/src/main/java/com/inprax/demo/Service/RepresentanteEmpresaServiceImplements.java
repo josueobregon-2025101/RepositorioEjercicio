@@ -1,10 +1,13 @@
 package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.RepresentanteEmpresa;
+import com.inprax.demo.Exception.ResourceNotFoundException;
 import com.inprax.demo.Repository.RepresentanteEmpresaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RepresentanteEmpresaServiceImplements implements RepresentanteEmpresaService {
     private final RepresentanteEmpresaRepository representanteEmpresaRepository;
 
@@ -24,13 +27,13 @@ public class RepresentanteEmpresaServiceImplements implements RepresentanteEmpre
 
     @Override
     public RepresentanteEmpresa updateRepresentantesEmpresa(Integer id, RepresentanteEmpresa representanteEmpresa) {
-        RepresentanteEmpresa existingRepresentanteEmpresa = representanteEmpresaRepository.findById(id).orElseThrow(() -> new RuntimeException("No existe el representante"));
+        RepresentanteEmpresa existingRepresentanteEmpresa = representanteEmpresaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No existe el representante"));
         return representanteEmpresaRepository.save(existingRepresentanteEmpresa);
     }
 
     @Override
     public void deleteRepresentantesEmpresa(Integer id) {
-        representanteEmpresaRepository.findById(id).orElseThrow(() -> new RuntimeException("No existe el representante"));
+        representanteEmpresaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No existe el representante"));
         representanteEmpresaRepository.deleteById(id);
     }
 }
