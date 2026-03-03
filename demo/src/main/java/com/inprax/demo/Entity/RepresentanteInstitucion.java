@@ -41,6 +41,7 @@ public class RepresentanteInstitucion {
 
     @NotBlank(message = "El correo es obligatorio")
     @Email(message = "Formato de correo no valido")
+    @Column(name = "correo_representante_institucion")
     private String correo;
 
     @OneToMany(mappedBy = "representanteInstitucion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
