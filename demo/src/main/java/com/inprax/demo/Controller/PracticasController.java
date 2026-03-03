@@ -54,7 +54,7 @@ public class PracticasController {
         }
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletePracticas(@PathVariable Integer id){
         try{
             practicasService.deletePracticas(id);
