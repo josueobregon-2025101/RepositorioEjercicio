@@ -28,7 +28,7 @@ public class EstudiantesServiceImplements implements EstudiantesService {
             throw new BadRequestException("El dominio del correo debe ser @gmail.com o @outlook.com, verifique por favor");
         }
 
-        if (estudiantesRepository.CorreoExistente(estudiantes.getCorreo())) {
+        if (estudiantesRepository.existsByCorreo(estudiantes.getCorreo())) {
             throw new IllegalArgumentException("El correo ya existe, verifique por favor");
         }
 
