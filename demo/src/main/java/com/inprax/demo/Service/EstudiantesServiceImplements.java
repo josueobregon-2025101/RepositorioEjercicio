@@ -1,16 +1,20 @@
 package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.Estudiantes;
+import com.inprax.demo.Exception.ResourceNotFoundException;
 import com.inprax.demo.Repository.EstudiantesRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EstudiantesServiceImplements implements EstudiantesService {
     private final EstudiantesRepository estudiantesRepository;
 
     public EstudiantesServiceImplements(EstudiantesRepository estudiantesRepository) {
         this.estudiantesRepository = estudiantesRepository;
     }
+
 
     @Override
     public List<Estudiantes> getAllEstudiantes() {
@@ -24,13 +28,13 @@ public class EstudiantesServiceImplements implements EstudiantesService {
 
     @Override
     public Estudiantes updateEstudiantes(Integer id, Estudiantes estudiantes) {
-        Estudiantes existingEstudiantes = estudiantesRepository.findById(id).orElseThrow(() -> new RuntimeException("El usuario no existe"));
+        Estudiantes existingEstudiantes = estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El usuario no existe"));
         return estudiantesRepository.save(existingEstudiantes);
     }
 
     @Override
     public void deleteEstudiantes(Integer id) {
-        estudiantesRepository.findById(id).orElseThrow(() -> new RuntimeException("El usuario no existe"));
+        estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El usuario no existe"));
         estudiantesRepository.deleteById(id);
     }
 }
