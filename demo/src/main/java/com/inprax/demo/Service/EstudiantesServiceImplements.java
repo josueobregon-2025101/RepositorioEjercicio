@@ -1,6 +1,7 @@
 package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.Estudiantes;
+import com.inprax.demo.Exception.BadRequestException;
 import com.inprax.demo.Exception.ResourceNotFoundException;
 import com.inprax.demo.Repository.EstudiantesRepository;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,14 @@ public class EstudiantesServiceImplements implements EstudiantesService {
 
     @Override
     public Estudiantes saveEstudiantes(Estudiantes estudiantes) throws RuntimeException {
+        if (estudiantes.getCorreo() == null && !estudiantes.getCorreo().endsWith("@gmail.com") && !estudiantes.getCorreo().endsWith("@outlook.com")) {
+            throw new BadRequestException("El dominio del correo debe ser @gmail.com o @outlook.com");
+        }
+
+        if (estudiantesRepository.existByCorreo(estudiantes.getCorreo())) {
+            throw new IllegalArgumentException("El correo ya existe");
+        }
+
         return estudiantesRepository.save(estudiantes);
     }
 

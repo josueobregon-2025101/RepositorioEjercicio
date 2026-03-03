@@ -49,11 +49,17 @@ public class GlobalException {
         return crearRespuesta(mensajePersonalizado, request, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // Error 400
+    //Error 400
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
         String mensajePersonalizado = "Error: Los argumentos enviados son inválidos.";
         return crearRespuesta(mensajePersonalizado, request, HttpStatus.BAD_REQUEST);
+    }
+
+    //Error 400
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<?> handleBadRequestException(BadRequestException ex, WebRequest request) {
+        return crearRespuesta(ex.getMessage(), request, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<?> crearRespuesta(String mensaje, WebRequest request, HttpStatus status) {
