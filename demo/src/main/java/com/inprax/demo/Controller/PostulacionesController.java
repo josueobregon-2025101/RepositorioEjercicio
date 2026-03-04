@@ -2,6 +2,7 @@ package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Postulaciones;
 import com.inprax.demo.Service.PostulacionesService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class PostulacionesController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createPostulaciones(@RequestBody Postulaciones postulaciones){
+    public ResponseEntity<Object> createPostulaciones(@Valid @RequestBody Postulaciones postulaciones){
         try{
             Postulaciones createPostulaciones = postulacionesService.savePostulaciones(postulaciones);
             return new ResponseEntity<>(createPostulaciones, HttpStatus.CREATED);
@@ -43,7 +44,7 @@ public class PostulacionesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePostulaciones(@RequestBody Postulaciones postulaciones,
+    public ResponseEntity<Object> updatePostulaciones(@Valid @RequestBody Postulaciones postulaciones,
                                                       @PathVariable Integer id){
         Postulaciones updatePostulaciones = postulacionesService.updatePostulaciones(id, postulaciones);
         if (updatePostulaciones != null) {
