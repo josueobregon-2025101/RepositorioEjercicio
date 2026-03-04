@@ -1,81 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
+    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href=".././css/styleDocumentos.css">
+    <title>Mis documentos - Inprax</title>
+    
+    <!-- Enlace a la hoja de estilos externa para el diseño visual -->
+    <link rel="stylesheet" href="../Styles/documentos.css">
 </head>
 <body>
-    <header>
-        <div class="headerDiv">
-            <img src="../Images/carpetaIcon.png" class="carpetaIcon">
-            <span>Documentos</span>
-            <div class="divRight">
-               <label for="">user</label>
-                   <button class="btnUser" type="button"><img class="imageUser" src="../Images/userIcon.png" >
-                   </button>
-                
-            </div>
-        </div>
-    </header>
-        <div class="principio">
-            <h1>Gestión de Documentos</h1>
-            <span>administra el registro de documentos del sistema</span>
-        </div>
-        <div class="almacenadorCajas">
-            <div class="totalDocs">
-                <span class="tituloTotal">Total Documentos</span>
-                <span class="TotalInt">0</span>
-            </div>
-            <div class="ultimoSubido">
-                <span class="tituloUS">Ultimo Documento almacenado</span>
-                <span class="Nombre">null</span>
-            </div>
-            <div class="ultimoID">
-                <span class="tituloID">Ultimo ID Ingresado</span>
-                <span class="TotalID">0</span>
-            </div>
-        </div>
-        <div class="Acciones">
-            <div class="divBusqueda">
-                <img src="../Images/buscarIcon.png" alt="">
-                <input class="areaBusqueda" type="text" placeholder="Buscar por nombre">
-            </div> 
-            <input class="buscarId" type="number" min="0" placeholder="Buscar por ID" >
-            <button class="botonAgregar">+Agregar</button>
 
-        </div>
+    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
+    <div class="dashboard">
 
-        <div class="DivTabla">
-            <table class="tablaDocs">
-                <thead class="cabeceraFila">
-                    <tr>
-                        <th>ID Documento</th>
-                        <th>ID Estudiante</th>
-                        <th>ID Empresa</th>
-                        <th>Tipo Documento</th>
-                        <th>Nombre del Archivo</th>
-                        <th>URL</th>
-                        <th>Fecha Subida</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="datosTabla">
-                        <td><span class="IDspn">#1</span></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>contrato</td>
-                        <td>contrato1</td>
-                        <td>url</td>
-                        <td>22/09/2008</td>
-                        <td><button class="btnEdit"><img src="../Images/botonEditar.png" alt="">Editar</button>
-                            <button class="btnEliminar"><img src="../Images/cuboDeBasura.png" alt="">Eliminar</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../Images/INPRAX.png">
+            </div>
 
+            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+            <nav>
+                <ul>
+                    <li onclick="location.href='dashboard-estudiante.html'">Inicio</li>
+                    <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
+                    <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
+                    <li class="active">Mis documentos</li> <!-- Clase 'active' para resaltar la página actual -->
+                    <li onclick="location.href='perfil-estudiante.html'">Perfil</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
+        <main class="main-content">
+
+            <!-- Cabecera del panel: Título y botón de salida -->
+            <header class="header">
+                <h1>Mis documentos</h1>
+                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+            </header>
+
+            <!-- Contenedor específico para la gestión de archivos -->
+            <div class="container">
+
+                <!-- Rejilla de tarjetas (Cards) para documentos -->
+                <div class="documentos">
+
+                    <!-- Tarjeta de documento individual -->
+                    <div class="cardDocumento">
+                        <h3>Currículum Vitae</h3>
+                        <p>Archivo principal para postular a prácticas.</p>
+                        <div class="acciones">
+                            <a href="#" class="btnVer">Ver documento</a>
+                            <button class="btnSubir">Subir nuevo</button>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de documento individual -->
+                    <div class="cardDocumento">
+                        <h3>Carta de presentación</h3>
+                        <p>Documento para presentarte ante las empresas.</p>
+                        <div class="acciones">
+                            <a href="#" class="btnVer">Ver documento</a>
+                            <button class="btnSubir">Subir nuevo</button>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de documento individual -->
+                    <div class="cardDocumento">
+                        <h3>Portafolio</h3>
+                        <p>Muestra tus proyectos y trabajos realizados.</p>
+                        <div class="acciones">
+                            <a href="#" class="btnVer">Ver documento</a>
+                            <button class="btnSubir">Subir nuevo</button>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de documento individual -->
+                    <div class="cardDocumento">
+                        <h3>Certificados</h3>
+                        <p>Diplomas o constancias académicas.</p>
+                        <div class="acciones">
+                            <a href="#" class="btnVer">Ver documento</a>
+                            <button class="btnSubir">Subir nuevo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
