@@ -10,14 +10,18 @@ import jakarta.validation.constraints.Positive;
 public class Estudiantes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_estudiante")
     private Integer idestudiante;
 
-    @NotNull(message = "El id de la institucion es un campo obligatorio")
-    @Positive(message = "El id de la institucion debe ser positivo")
-    @Column(name = "id_institucion")
-    private Integer idinstitucion;
+    @NotNull(message = "El representante es obligatorio")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_representante")
+    private RepresentanteInstitucion representanteInstitucion;
+
+    @NotNull(message = "La institución es obligatoria")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_institucion")
+    private Institucion institucion;
 
     @Column(name = "id_login")
     private Integer idlogin;
@@ -61,8 +65,6 @@ public class Estudiantes {
     @Column(name = "edad")
     private Integer edad;
 
-    //Getter and Setters//
-
     public Integer getIdestudiante() {
         return idestudiante;
     }
@@ -71,12 +73,20 @@ public class Estudiantes {
         this.idestudiante = idestudiante;
     }
 
-    public Integer getIdinstitucion() {
-        return idinstitucion;
+    public RepresentanteInstitucion getRepresentanteInstitucion() {
+        return representanteInstitucion;
     }
 
-    public void setIdinstitucion(Integer idinstitucion) {
-        this.idinstitucion = idinstitucion;
+    public void setRepresentanteInstitucion(RepresentanteInstitucion representanteInstitucion) {
+        this.representanteInstitucion = representanteInstitucion;
+    }
+
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
     }
 
     public Integer getIdlogin() {
