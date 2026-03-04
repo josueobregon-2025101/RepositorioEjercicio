@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - INPRAX</title>
+    <link rel="stylesheet" href="../styles/register.css">
+</head>
+<body>
+
+  <!-- Fondo visual de la página -->
+  <div class="background"></div>
+
+  <!-- Contenedor principal -->
+  <div class="container">
+    <div class="register-box">
+            <div class="logo">
+                <img src="../Images/INPRAX.png">
+            </div>
+      <h2>Crear Cuenta</h2>
+
+      <!-- Formulario de registro -->
+      <form id="register-form">
+        <input type="text" name="fullname" placeholder="Nombre completo" required>
+        <input type="email" name="email" placeholder="Correo electrónico" required>
+        <input type="text" name="username" placeholder="Usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <input type="password" name="confirm_password" placeholder="Confirmar contraseña" required>
+
+        <select name="role" required>
+          <option value="" disabled selected>Selecciona tu rol</option>
+          <option value="estudiante">Estudiante</option>
+          <option value="empresa">Empresa</option>
+        </select>
+
+        <button type="submit">Registrarme</button>
+      </form>
+
+      <!-- Enlace para usuarios que ya tienen cuenta -->
+      <p class="login-link">
+        ¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2026 INPRAX - Plataforma de prácticas profesionales</p>
+    </div>
+  </footer>
+
+  <!-- JS del registro -->
+  <script src="../Scripts/register.js"></script>
+</body>
+</html>

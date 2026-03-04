@@ -1,0 +1,185 @@
+/* Configuración básica del documento: Fondo y alineación central del login */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Fuente estándar de sistema aplicada globalmente */
+  font-family: Arial, sans-serif;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    url("../images/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Contenedor principal que organiza el diseño central y el efecto de borde animado */
+.container {
+  /* Variables de diseño para facilitar el mantenimiento */
+  --form-width: 410px;
+  --login-box-color: #1C1C1C;
+  --input-color: #2a2a2a;
+  --button-color: #FFC107;
+  --footer-color: rgba(245, 245, 245, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--login-box-color);
+  padding: 6px;
+  width: var(--form-width);
+  box-shadow:
+    0 0 15px rgba(255, 193, 7, 0.1),
+    0 0 35px rgba(255, 193, 7, 0.05);
+}
+
+/* Efecto visual de borde giratorio mediante pseudo-elemento */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 70%,
+    #FFC107,
+    transparent 100%
+  );
+  animation: spin 2s linear infinite;
+}
+
+/* Animación de rotación para el efecto de borde */
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Caja de inicio de sesión: Estilos visuales y profundidad */
+.login-box {
+  background: #1C1C1C;
+  border-radius: 20px;
+  padding: 28px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    inset 0 0 15px rgba(255, 255, 255, 0.03),
+    0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Contenedor del nombre de la marca/plataforma (Estilo icono con imagen) */
+.logouser {
+  width: 70px;
+  height: 70px;
+  border-radius: 16px;
+  border: 2px solid #FFC107;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px auto;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+  opacity: 0;
+  transform: rotate(-15deg) scale(0.8);
+  animation: logoFade 1s forwards;
+}
+
+/* Estilo para la imagen del logo dentro del contenedor circular */
+.login-box .logouser img {
+  width: 60px;
+  height: 70px;
+  object-fit: contain;
+}
+
+/* Animación de entrada para el logo */
+@keyframes logoFade {
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Formulario de acceso: Organización de campos */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/* Cabecera del panel: Título del formulario */
+.header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFC107;
+  margin-bottom: 6px;
+}
+
+/* Campos de entrada de datos: Estilos y transiciones */
+.input {
+  width: 100%;
+  padding: 13px;
+  border-radius: 12px;
+  border: none;
+  background: var(--input-color);
+  color: #F5F5F5;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  font-family: inherit;
+}
+
+/* Interacción: Foco en los campos del formulario */
+.input:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 2px #FFC107, 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+/* Botón de acción principal: Estilos y efectos de elevación */
+.button {
+  width: 100%;
+  height: 46px;
+  border: none;
+  border-radius: 26px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--button-color);
+  color: #000;
+  transition: 0.3s;
+  box-shadow: 0 5px 14px rgba(255, 193, 7, 0.3);
+  font-family: inherit;
+}
+
+/* Interacción: Animación al pasar el mouse por el botón */
+.button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.5);
+}
+
+/* Pie de página: Enlace para usuarios que no tienen cuenta */
+.footer {
+  text-align: center;
+  color: var(--footer-color);
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Enlaces dentro del pie de página */
+.footer .link {
+  color: #FFC107;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Interacción de los enlaces del pie de página */
+.footer .link:hover {
+  text-decoration: underline;
+}
