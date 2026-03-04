@@ -79,6 +79,7 @@ public class EstudiantesController {
     }
 
     @DeleteMapping("/{id}")
+<<<<<<< HEAD
     public ResponseEntity<?> eliminar(@PathVariable Integer id) {
         Map<String, Object> respuesta = new HashMap<>();
         try {
@@ -89,5 +90,10 @@ public class EstudiantesController {
             respuesta.put("mensaje", e.getMessage());
             return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
         }
+=======
+    public ResponseEntity<?> deletedEstudiante(@Valid @PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
+            estudiantesService.deleteEstudiantes(id);
+            return ResponseEntity.ok("Estudiante eliminado exitosamente");
+>>>>>>> 15e6b3146dfd162c8eaa072bdc030441a440b02f
     }
 }

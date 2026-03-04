@@ -334,6 +334,7 @@ public class Estudiantes {
         return edad;
     }
 
+
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
