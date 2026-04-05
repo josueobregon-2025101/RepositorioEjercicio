@@ -23,6 +23,14 @@ public class EstudiantesServiceImplements implements EstudiantesService {
     }
 
     @Override
+    public Estudiantes getEstudianteById(Integer id) {
+        return
+                estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El estudiante no existe"));
+
+    }
+
+
+    @Override
     public Estudiantes saveEstudiantes(Estudiantes estudiantes) throws RuntimeException {
         if (estudiantes.getCorreo() == null && !estudiantes.getCorreo().endsWith("@gmail.com") && !estudiantes.getCorreo().endsWith("@outlook.com")) {
             throw new BadRequestException("El dominio del correo debe ser @gmail.com o @outlook.com, verifique por favor");
@@ -38,6 +46,19 @@ public class EstudiantesServiceImplements implements EstudiantesService {
     @Override
     public Estudiantes updateEstudiantes(Integer id, Estudiantes estudiantes) {
         Estudiantes existingEstudiantes = estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El usuario no existe"));
+
+        existingEstudiantes.setInstitucion(estudiantes.getInstitucion());
+        existingEstudiantes.setIdlogin(estudiantes.getIdlogin());
+        existingEstudiantes.setNombre(estudiantes.getNombre());
+        existingEstudiantes.setApellido(estudiantes.getApellido());
+        existingEstudiantes.setTelefono(estudiantes.getTelefono());
+        existingEstudiantes.setGrado(estudiantes.getGrado());
+        existingEstudiantes.setCarrera(estudiantes.getCarrera());
+        existingEstudiantes.setCorreo(estudiantes.getCorreo());
+        existingEstudiantes.setNombreInstitucion(estudiantes.getNombreInstitucion());
+        existingEstudiantes.setTutortel(estudiantes.getTutortel());
+        existingEstudiantes.setEdad(estudiantes.getEdad());
+
         return estudiantesRepository.save(existingEstudiantes);
     }
 
