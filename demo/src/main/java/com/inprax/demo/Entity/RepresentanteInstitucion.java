@@ -35,7 +35,7 @@ public class RepresentanteInstitucion {
     @Column(name = "correo_representante_institucion")
     private String correo;
 
-    @OneToMany(mappedBy = "representanteInstitucion", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Estudiantes> estudiantes;
 
