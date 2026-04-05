@@ -24,8 +24,7 @@ public class EstudiantesServiceImplements implements EstudiantesService {
 
     @Override
     public Estudiantes getEstudianteById(Integer id) {
-        return
-                estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El estudiante no existe"));
+        return estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El estudiante no existe"));
 
     }
 
