@@ -47,7 +47,7 @@ public class Estudiantes {
     private String correo;
 
     @NotBlank(message = "El nombre de la institucion es un campo obligatorio")
-    @Column(name = "nombreInstitucion")
+    @Column(name = "nombreinstitucion")
     private String nombreInstitucion;
 
     @NotNull(message = "El numero de telefono del tutor es un campo obligatorio")
