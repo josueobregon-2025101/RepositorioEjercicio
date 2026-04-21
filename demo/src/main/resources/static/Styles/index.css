@@ -1,0 +1,250 @@
+/* Configuración básica del documento: Reset de márgenes y box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Configuración básica del documento: Fondo y colores base */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: 
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+    url("../images/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Cabecera del panel: Contiene el logo y el menú de acceso */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  background: linear-gradient(90deg, #1C1C1C, #222);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.3s ease, padding 0.3s ease;
+}
+
+/* Contenedor del nombre de la marca/plataforma */
+.logo {
+  padding: 0;
+}
+
+/* Imagen del logo de la plataforma */
+.logo img {
+  width: 85px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: 0.3s;
+}
+
+.logo img:hover {
+  transform: scale(1.08);
+}
+
+/* Menú de navegación principal */
+.nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+/* Enlaces de navegación */
+.nav a {
+  text-decoration: none;
+  color: #F5F5F5;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav a:hover {
+  background: rgba(255, 193, 7, 0.2);
+  color: #FFC107;
+  transform: translateY(-2px);
+}
+
+/* Botón de registro */
+.btn-register {
+  background: #FFC107;
+  color: #1C1C1C;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(255,193,7,0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255,193,7,0.6);
+}
+
+/* Header cuando se hace scroll */
+.header.scrolled {
+  padding: 8px 40px;
+  background: #111;
+}
+
+/* Sección principal (Hero) */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.hero h1 {
+  font-size: 38px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: #bbb;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Botones del hero */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Botón principal */
+.btn-main {
+  background: #FFC107;
+  color: #1C1C1C;
+  padding: 12px 26px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.btn-main:hover {
+  transform: translateY(-2px);
+}
+
+/* Botón secundario */
+.btn-secondary {
+  border: 1px solid #FFC107;
+  color: #FFC107;
+  padding: 12px 26px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #FFC107;
+  color: #1C1C1C;
+}
+
+/* Sección de características */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 60px 40px;
+  flex-wrap: wrap;
+}
+
+/* Tarjetas */
+.card {
+  background: #111;
+  padding: 28px;
+  border-radius: 16px;
+  width: 250px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #FFC107;
+}
+
+.card h2 {
+  color: #FFC107;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* Sección CTA */
+.cta {
+  text-align: center;
+  padding: 70px 20px;
+}
+
+.cta h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.cta p {
+  color: #bbb;
+  margin-bottom: 25px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  color: #777;
+  font-size: 13px;
+  margin-top: auto;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+
+  .nav {
+    margin-top: 8px;
+    gap: 12px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 340px;
+  }
+}

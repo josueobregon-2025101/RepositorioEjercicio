@@ -1,5 +1,6 @@
 package com.inprax.demo.Service;
 
+import com.inprax.demo.Entity.Estudiantes;
 import com.inprax.demo.Entity.RepresentanteEmpresa;
 import org.springframework.stereotype.Service;
 
