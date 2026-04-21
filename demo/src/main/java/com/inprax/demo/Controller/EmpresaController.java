@@ -3,13 +3,12 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Service.EmpresaService;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/empresas")
+@Controller
+@RequestMapping("/admin/empresas")
 public class EmpresaController {
 
     private final EmpresaService empresaService;
@@ -19,52 +18,38 @@ public class EmpresaController {
     }
 
     @GetMapping
-    public List<Empresa> getAllEmpresas() {
-        return empresaService.getAllEmpresas();
+    public String getAllEmpresas(Model model) {
+        model.addAttribute("empresas", empresaService.getAllEmpresas());
+        return "Pages/Admin/empresas";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getEmpresaById(@PathVariable @Valid Integer id) {
-        Empresa empresa = empresaService.getEmpresaById(id);
-        if (empresa != null) {
-            return ResponseEntity.ok(empresa);
-        } else {
-            return ResponseEntity.status(404).body("No existe la empresa");
-        }
+    @GetMapping("/agregar")
+    public String agregarEmpresaForm() {
+        return "Pages/Admin/agregar-empresa";
     }
 
-    @PostMapping
-    public ResponseEntity<?> createEmpresa(@Valid @RequestBody Empresa empresa) {
-        try {
-            Empresa creada = empresaService.saveEmpresa(empresa);
-            return ResponseEntity.ok().body(creada);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+    @PostMapping("/guardar")
+    public String guardarEmpresa(@Valid @ModelAttribute Empresa empresa) {
+        empresaService.saveEmpresa(empresa);
+        return "redirect:/admin/empresas";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateEmpresa(@PathVariable Integer id, @Valid @RequestBody Empresa empresa) {
-        try {
-            Empresa actualizada = empresaService.updateEmpresa(id, empresa);
-            if (actualizada != null) {
-                return ResponseEntity.ok(actualizada);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+    @GetMapping("/editar/{id}")
+    public String editarEmpresaForm(@PathVariable Integer id, Model model) {
+        model.addAttribute("empresa", empresaService.getEmpresaById(id));
+        return "Pages/Admin/editar-empresa";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEmpresa(@PathVariable @Valid Integer id) {
-        Empresa empresa = empresaService.getEmpresaById(id);
-        if (empresa != null) {
-            empresaService.deleteEmpresa(id);
-            return ResponseEntity.ok().body("Se elimino la empresa");
-        } else {
-            return ResponseEntity.status(404).body("No existe la empresa");
-        }
+    @PostMapping("/editar")
+    public String editarEmpresa(@RequestParam Integer id,
+                                @Valid @ModelAttribute Empresa empresa) {
+        empresaService.updateEmpresa(id, empresa);
+        return "redirect:/admin/empresas";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarEmpresa(@PathVariable Integer id) {
+        empresaService.deleteEmpresa(id);
+        return "redirect:/admin/empresas";
     }
 }
