@@ -5,13 +5,14 @@ import com.inprax.demo.Service.EstudiantesService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/estudiantes")
+@Controller
+@RequestMapping("/estudiantes")
 public class EstudiantesController {
 
     private final EstudiantesService service;
@@ -23,6 +24,11 @@ public class EstudiantesController {
     @GetMapping
     public List<Estudiantes> listar() {
         return service.getAllEstudiantes();
+    }
+
+    @GetMapping("/estudiantes")
+    public String mostrarEstudiantes() {
+        return "Index/estudiantes";
     }
 
     @GetMapping("/{id}")
