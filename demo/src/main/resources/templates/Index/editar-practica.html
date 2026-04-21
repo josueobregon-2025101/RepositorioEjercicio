@@ -1,70 +1,61 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Práctica - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="../Styles/dashboard-empresa.css">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-empresa.css}">
 </head>
 <body>
 
-    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
-    <div class="dashboard">
+<!-- Contenedor principal que organiza el sidebar y el contenido central -->
+<div class="dashboard">
 
-        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
-        <aside class="sidebar">
-            <!-- Contenedor del nombre de la marca/plataforma -->
-            <div class="logo">
-                <img src="../Images/INPRAX.png">
+    <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/Images/INPRAX.png}" alt="Logo Inprax">
+        </div>
+
+        <ul>
+            <li th:onclick="|location.href='@{/empresa/dashboard}'|">Inicio</li>
+            <li th:onclick="|location.href='@{/empresa/crear-practica}'|">Crear práctica</li>
+            <li class="active" th:onclick="|location.href='@{/empresa/editar-practica}'|">Editar práctica</li>
+            <li th:onclick="|location.href='@{/empresa/postulantes}'|">Postulantes</li>
+            <li th:onclick="|location.href='@{/empresa/mis-postulaciones}'|">Mis postulaciones</li>
+            <li th:onclick="|location.href='@{/empresa/perfil}'|">Perfil</li>
+        </ul>
+    </aside>
+
+    <!-- Área de contenido principal -->
+    <main class="main-content">
+
+        <!-- Cabecera del panel -->
+        <header class="header">
+            <h1>Editar práctica</h1>
+            <button class="logout-btn" th:onclick="|location.href='@{/logout}'|">Cerrar sesión</button>
+        </header>
+
+        <!-- Sección de tarjetas (Cards) para seleccionar la práctica a modificar -->
+        <section class="cards">
+
+            <!-- Tarjeta dinámica usando Thymeleaf: itera sobre una lista de prácticas -->
+            <div class="card? th:each="practica : ${listaPracticas}? th:onclick="|location.href='@{/empresa/editar-practica/form/{id}(id=${practica.id})}'|">
+                <h3 th:text="|Práctica: ${practica.titulo}|">Práctica: Desarrollo Web</h3>
+                <p th:text="${practica.descripcionCorta}">Haz clic aquí para modificar los detalles de esta práctica publicada.</p>
             </div>
 
-            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <ul>
-                <li onclick="location.href='dashboard-empresa.html'">Inicio</li>
-                <li onclick="location.href='crear-practica.html'">Crear práctica</li>
-                <li class="active" onclick="location.href='editar-practica.html'">Editar práctica</li> <!-- Clase 'active' para resaltar la página actual -->
-                <li onclick="location.href='postulantes.html'">Postulantes</li>
-                <li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
-                <li onclick="location.href='perfil-empresa.html'">Perfil</li>
-            </ul>
-        </aside>
+            <!-- Mensaje cuando no hay prácticas disponibles -->
+            <div th:if="${#lists.isEmpty(listaPracticas)}" class="card">
+                <h3>No hay prácticas disponibles</h3>
+                <p>Primero crea una práctica para poder editarla.</p>
+            </div>
 
-        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
-        <main class="main-content">
-
-            <!-- Cabecera del panel: Título y botón de salida -->
-            <header class="header">
-                <h1>Editar práctica</h1>
-                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
-            </header>
-
-            <!-- Sección de tarjetas (Cards) para seleccionar la práctica a modificar -->
-            <section class="cards">
-
-                <!-- Tarjeta de acceso rápido para la edición de un registro específico -->
-                <div class="card" onclick="location.href='editar-practica-form.html'">
-                    <h3>Práctica: Desarrollo Web</h3>
-                    <p>Haz clic aquí para modificar los detalles de esta práctica publicada.</p>
-                </div>
-
-                <!-- Tarjeta de acceso rápido para la edición de un registro específico -->
-                <div class="card" onclick="location.href='editar-practica-form.html'">
-                    <h3>Práctica: Marketing Digital</h3>
-                    <p>Haz clic aquí para actualizar la información de esta práctica.</p>
-                </div>
-
-                <!-- Tarjeta de acceso rápido para la edición de un registro específico -->
-                <div class="card" onclick="location.href='editar-practica-form.html'">
-                    <h3>Práctica: Diseño Gráfico</h3>
-                    <p>Modifica los requisitos, descripción o fecha límite de esta práctica.</p>
-                </div>
-
-            </section>
-        </main>
-    </div>
+        </section>
+    </main>
+</div>
 </body>
 </html>
