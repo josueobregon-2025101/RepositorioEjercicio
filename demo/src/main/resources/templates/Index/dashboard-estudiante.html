@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://thymeleaf.org">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <title>Dashboard Estudiante - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="../Styles/dashboard-estudiante.css">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-estudiante.css}">
 </head>
 <body>
 
@@ -17,17 +17,31 @@
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="../Images/INPRAX.png">
+                <img th:src="@{/Images/INPRAX.png}">
             </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <nav>
                 <ul>
-                    <li class="active">Inicio</li> <!-- Clase 'active' para resaltar la página actual -->
-                    <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
-                    <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
-                    <li onclick="location.href='documentos.html'">Mis documentos</li>
-                    <li onclick="location.href='perfil-estudiante.html'">Perfil</li>
+                    <li class="active">
+                        <a th:href="@{/dashboard-estudiante}">Inicio</a>
+                    </li> 
+                    
+                    <li>
+                        <a th:href="@{/practicas}">Prácticas disponibles</a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/postulaciones}">Mis postulaciones</a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/documentos}">Mis documentos</a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/perfil-estudiante}">Perfil</a>
+                    </li>
                 </ul>
             </nav>
         </aside>
