@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://thymeleaf.org">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <title>Dashboard Empresa - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="../Styles/dashboard-empresa.css">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-empresa.css}">
 </head>
 <body>
 
@@ -18,18 +18,35 @@
         <aside class="sidebar">
             <!-- Contenedor del nombre de la marca/plataforma -->
             <div class="logo">
-                <img src="../Images/INPRAX.png">
+                <img th:src="@{/Images/INPRAX.png}">
             </div>
             
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <ul>
-                <li class="active" onclick="location.href='dashboard-empresa.html'">Inicio</li> <!-- Clase 'active' para resaltar la página actual -->
-                <li onclick="location.href='crear-practica.html'">Crear práctica</li>
-                <li onclick="location.href='editar-practica.html'">Editar práctica</li>
-                <li onclick="location.href='postulantes.html'">Postulantes</li>
-                <li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
-                <li onclick="location.href='perfil-empresa.html'">Perfil</li>
-            </ul>
+            <nav>
+                <ul>
+                    <li class="active">
+                        <a th:href="@{/dashboard-empresa}"><i class="fas fa-home"></i> Inicio</a>
+                    </li> 
+                    <li>
+                        <a th:href="@{/crear-practica}"><i class="fas fa-plus-circle"></i> Crear práctica</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/editar-practica}"><i class="fas fa-edit"></i> Editar práctica</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/postulantes}"><i class="fas fa-users"></i> Postulantes</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/mis-practicas}"><i class="fas fa-list-alt"></i> Mis prácticas</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/perfil-empresa}"><i class="fas fa-building"></i> Perfil</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                    </li>
+                </ul>
+            </nav>
         </aside>
 
         <!-- Área de contenido principal: Donde se muestra la información dinámica -->
