@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Estudiante - Inprax</title>
+    
+    <!-- Enlace a la hoja de estilos externa para el diseño visual -->
+    <link rel="stylesheet" href="../Styles/dashboard-estudiante.css">
+</head>
+<body>
+
+    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
+    <div class="dashboard">
+
+        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../Images/INPRAX.png">
+            </div>
+
+            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+            <nav>
+                <ul>
+                    <li class="active">Inicio</li> <!-- Clase 'active' para resaltar la página actual -->
+                    <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
+                    <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
+                    <li onclick="location.href='documentos.html'">Mis documentos</li>
+                    <li onclick="location.href='perfil-estudiante.html'">Perfil</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
+        <main class="main-content">
+
+            <!-- Cabecera del panel: Título y botón de salida -->
+            <header class="header">
+                <h1>Dashboard Estudiante</h1>
+                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+            </header>
+
+            <!-- Sección de accesos rápidos mediante tarjetas (Cards) -->
+            <section class="cards">
+
+                <!-- Tarjeta 1: Acceso directo a la búsqueda de prácticas -->
+                <div class="card" onclick="location.href='practicas.html'">
+                    <h3>Prácticas disponibles</h3>
+                    <p>Explora oportunidades de prácticas profesionales.</p>
+                </div>
+
+                <!-- Tarjeta 2: Acceso directo al seguimiento de postulaciones -->
+                <div class="card" onclick="location.href='postulaciones.html'">
+                    <h3>Mis postulaciones</h3>
+                    <p>Revisa el estado de tus postulaciones.</p>
+                </div>
+
+                <!-- Tarjeta 3: Acceso directo a la gestión de documentos -->
+                <div class="card" onclick="location.href='documentos.html'">
+                    <h3>Mis documentos</h3>
+                    <p>Administra tus archivos y CV.</p>
+                </div>
+
+                <!-- Tarjeta 4: Acceso directo a la gestión de perfil personal -->
+                <div class="card" onclick="location.href='perfil-estudiante.html'">
+                    <h3>Perfil</h3>
+                    <p>Actualiza tu información personal.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
