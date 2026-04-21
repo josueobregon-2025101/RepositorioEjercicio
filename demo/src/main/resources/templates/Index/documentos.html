@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <title>Mis documentos - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="../Styles/documentos.css">
+    <link rel="stylesheet" th:href="@{/Styles/documentos.css}">
 </head>
 <body>
 
@@ -17,7 +17,7 @@
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="../Images/INPRAX.png">
+                <img th:src="@{/Images/INPRAX.png}">
             </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->

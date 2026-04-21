@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <title>Perfil - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="../Styles/perfil-estudiante.css">
+    <link rel="stylesheet" href="@{/Styles/perfil-estudiante.css}">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
         <aside class="sidebar">
             <!-- Contenedor del nombre de la marca/plataforma -->
             <div class="logo">
-                <img src="../Images/INPRAX.png">
+                <img th:src="@{/Images/INPRAX.png}">
             </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
@@ -46,7 +46,7 @@
 
                 <!-- Sección para la imagen de perfil -->
                 <div class="profile-photo">
-                    <img src="../Images/perfil.png">
+                    <img th:src="@{/Images/perfil.png}">
                 </div>
 
                 <!-- Formulario de datos personales -->

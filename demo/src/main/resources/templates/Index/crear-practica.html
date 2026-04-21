@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<!-- Configuración básica del documento -->
 	<meta charset="UTF-8">
@@ -9,7 +9,7 @@
 	<title>Crear Práctica - Inprax</title>
 
 	<!-- Enlace al archivo CSS que da estilo a esta página -->
-	<link rel="stylesheet" href="../Styles/crear-practica.css">
+	<link rel="stylesheet" th:href="@/Styles/crear-practica.css}">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="../Images/INPRAX.png">
+                <img src="@{/Images/INPRAX.png}">
             </div>
             <ul>
                 <li onclick="location.href='dashboard-empresa.html'">Inicio</li>
