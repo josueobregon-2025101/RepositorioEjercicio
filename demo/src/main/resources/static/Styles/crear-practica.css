@@ -1,0 +1,195 @@
+/* Reset general para eliminar márgenes y asegurar consistencia en todos los navegadores */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Fondo general de la página con imagen y degradado oscuro encima */
+body {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url("../images/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #F5F5F5;
+}
+
+/* Contenedor principal que divide sidebar y contenido */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Barra lateral de navegación */
+.sidebar {
+  width: 240px;
+  background: #1C1C1C;
+  padding-top: 20px;
+}
+
+/* Estilo del logo o nombre de la aplicación */
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+/* Imagen del logo de la plataforma */
+.logo img {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+/* Quita los puntos de la lista del menú */
+.sidebar ul {
+  list-style: none;
+}
+
+/* Estilo de cada opción del menú */
+.sidebar ul li {
+  padding: 15px 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Efecto cuando el usuario pasa el mouse sobre una opción */
+.sidebar ul li:hover {
+  background: #FFC107;
+  color: #1C1C1C;
+}
+
+/* Opción activa del menú */
+.sidebar .active {
+  background: #FFC107;
+  color: #1C1C1C;
+  font-weight: bold;
+}
+
+/* Área principal donde aparece el contenido */
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Encabezado superior del panel */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* Color del título */
+.header h1 {
+  color: #FFC107;
+}
+
+/* Botón de cerrar sesión */
+.logout-btn {
+  background: #FFC107;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Efecto hover del botón */
+.logout-btn:hover {
+  background: #e0a800;
+}
+
+/* Contenedor del formulario */
+.form-container {
+  background: rgba(28,28,28,0.9);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Organización del formulario en dos columnas */
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Grupo que contiene label + input */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo de los títulos de cada campo */
+.input-group label {
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+/* Estilo de los campos de entrada */
+.input-group input, 
+.input-group select, 
+.input-group textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #F5F5F5;
+  color: #1C1C1C;
+  font-family: inherit;
+}
+
+/* Área de texto más grande */
+.input-group textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+/* Campo que ocupa todo el ancho del formulario */
+.full {
+  grid-column: span 2;
+}
+
+/* Contenedor del botón de publicar */
+.form-actions {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Botón para publicar la práctica */
+.btn-publicar {
+  background: #FFC107;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+/* Efecto cuando el mouse pasa sobre el botón */
+.btn-publicar:hover {
+  background: #e0a800;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .form {
+    grid-template-columns: 1fr;
+  }
+  .full {
+    grid-column: span 1;
+  }
+  .form-actions {
+    grid-column: span 1;
+  }
+}
