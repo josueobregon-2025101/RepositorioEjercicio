@@ -1,0 +1,197 @@
+/* Configuración básica del documento: Reset de márgenes y box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Fuente estándar de sistema aplicada globalmente */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Configuración básica del documento: Fondo y colores base */
+body {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
+        url("../images/fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #F5F5F5;
+}
+
+/* Contenedor principal 'dashboard' que organiza el sidebar y el contenido central */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Panel lateral (Sidebar): Menú de navegación fijo */
+.sidebar {
+    width: 240px;
+    background: #1C1C1C;
+    padding-top: 20px;
+}
+
+/* Contenedor del nombre de la marca/plataforma */
+.logo {
+	text-align: center;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+/* Imagen del logo de la plataforma */
+.logo img {
+	width: 120px;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	object-fit: contain;
+}
+
+/* Menú de navegación principal: Estilos de lista */
+.sidebar ul {
+    list-style: none;
+}
+
+/* Enlaces de navegación: Estilos y transiciones */
+.sidebar ul li {
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Interacción: Cambio de color al pasar el mouse sobre una opción */
+.sidebar ul li:hover {
+    background: #FFC107;
+    color: #1C1C1C;
+}
+
+/* Clase 'active' para resaltar la página actual */
+.sidebar .active {
+    background: #FFC107;
+    color: #1C1C1C;
+    font-weight: bold;
+}
+
+/* Área central de trabajo donde se muestra la información dinámica */
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* Cabecera del panel: Título y botón de salida */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #FFC107;
+}
+
+/* Botón de cierre de sesión que redirige al inicio del sitio */
+.logout-btn {
+    background: #FFC107;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #e0a800;
+}
+
+/* Contenedor específico para la gestión de información (Listado de prácticas) */
+.practicas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Tarjeta de acceso rápido para una práctica publicada: Estilos visuales */
+.practica-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(28,28,28,0.9);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+/* Interacción de la tarjeta: Animación y cambio de bordes */
+.practica-card:hover {
+    transform: translateY(-3px);
+    border-color: #FFC107;
+}
+
+/* Información de la práctica: Títulos y descripciones */
+.practica-info h3 {
+    color: #FFC107;
+    margin-bottom: 8px;
+}
+
+.practica-info p {
+    font-size: 14px;
+    color: #ddd;
+    margin-bottom: 5px;
+}
+
+/* Contenedor para botones de acción dentro de la tarjeta */
+.practica-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Botones de acción: Estilos base para la gestión de registros */
+.practica-actions button {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    font-family: inherit;
+}
+
+/* Botón de acción: Estilo para visualizar detalles o editar */
+.btn-ver {
+    background: #F5F5F5;
+    color: #1C1C1C;
+}
+
+/* Botón de acción: Estilo para eliminar o rechazar el registro */
+.btn-rechazar {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-ver:hover {
+    background: #ddd;
+}
+
+.btn-rechazar:hover {
+    background: #c0392b;
+}
+
+/* Diseño responsivo: Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none; /* Oculta el sidebar en móviles */
+    }
+
+    .practica-card {
+        flex-direction: column; /* Apila la información y los botones en vertical */
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .practica-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
