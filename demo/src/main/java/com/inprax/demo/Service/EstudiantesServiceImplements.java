@@ -1,85 +1,69 @@
 package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.Estudiantes;
+import com.inprax.demo.Exception.BadRequestException;
+import com.inprax.demo.Exception.ResourceNotFoundException;
 import com.inprax.demo.Repository.EstudiantesRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 @Service
 public class EstudiantesServiceImplements implements EstudiantesService {
-    
-    @Autowired
-    private EstudiantesRepository repository;
+    private final EstudiantesRepository estudiantesRepository;
+
+    public EstudiantesServiceImplements(EstudiantesRepository estudiantesRepository) {
+        this.estudiantesRepository = estudiantesRepository;
+    }
+
 
     @Override
     public List<Estudiantes> getAllEstudiantes() {
-        return repository.findAll();
+        return estudiantesRepository.findAll();
     }
 
-  @Override
+    @Override
     public Estudiantes getEstudianteById(Integer id) {
-    return repository.findById(id)
-            .orElseThrow(() -> new RuntimeException("No se encontró el estudiante con ID: " + id));
-}
+        return estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El estudiante no existe"));
+
+    }
+
 
     @Override
-    public Estudiantes saveEstudiante(Estudiantes e) throws RuntimeException {
-        if (e.getCorreo() != null && !e.getCorreo().contains("@gmail.com") && !e.getCorreo().contains("@outlook.com")) {
-            throw new RuntimeException("El correo del estudiante debe ser @gmail.com o @outlook.com");
+    public Estudiantes saveEstudiantes(Estudiantes estudiantes) throws RuntimeException {
+        if (estudiantes.getCorreo() == null && !estudiantes.getCorreo().endsWith("@gmail.com") && !estudiantes.getCorreo().endsWith("@outlook.com")) {
+            throw new BadRequestException("El dominio del correo debe ser @gmail.com o @outlook.com, verifique por favor");
         }
 
-        boolean existe = repository.existsByNombreAndApellidoAndCorreoAndTelefonoAndGradoAndCarreraAndEdadAndInstitucionAndRepresentanteInstitucion(
-                e.getNombre(),
-                e.getApellido(),
-                e.getCorreo(),
-                e.getTelefono(),
-                e.getGrado(),
-                e.getCarrera(),
-                e.getEdad(),
-                e.getInstitucion(),
-                e.getRepresentanteInstitucion()
-        );
-
-        if (existe) {
-            throw new RuntimeException("Este estudiante ya existe con los mismos datos registrados.");
+        if (estudiantesRepository.existsByCorreo(estudiantes.getCorreo())) {
+            throw new IllegalArgumentException("El correo ya existe, verifique por favor");
         }
 
-        return repository.save(e);
+        return estudiantesRepository.save(estudiantes);
     }
 
     @Override
-    public Estudiantes updateEstudiante(Integer id, Estudiantes e) {
-        Estudiantes existente = getEstudianteById(id);
+    public Estudiantes updateEstudiantes(Integer id, Estudiantes estudiantes) {
+        Estudiantes existingEstudiantes = estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El usuario no existe"));
 
-        if (e.getCorreo() != null && !e.getCorreo().contains("@gmail.com") && !e.getCorreo().contains("@outlook.com")) {
-            throw new RuntimeException("El nuevo correo no cumple con el dominio permitido.");
-        }
+        existingEstudiantes.setInstitucion(estudiantes.getInstitucion());
+        existingEstudiantes.setIdlogin(estudiantes.getIdlogin());
+        existingEstudiantes.setNombre(estudiantes.getNombre());
+        existingEstudiantes.setApellido(estudiantes.getApellido());
+        existingEstudiantes.setTelefono(estudiantes.getTelefono());
+        existingEstudiantes.setGrado(estudiantes.getGrado());
+        existingEstudiantes.setCarrera(estudiantes.getCarrera());
+        existingEstudiantes.setCorreo(estudiantes.getCorreo());
+        existingEstudiantes.setNombreInstitucion(estudiantes.getNombreInstitucion());
+        existingEstudiantes.setTutortel(estudiantes.getTutortel());
+        existingEstudiantes.setEdad(estudiantes.getEdad());
 
-        existente.setNombre(e.getNombre());
-        existente.setApellido(e.getApellido());
-        existente.setCorreo(e.getCorreo());
-        existente.setTelefono(e.getTelefono());
-        existente.setGrado(e.getGrado());
-        existente.setCarrera(e.getCarrera());
-        existente.setEdad(e.getEdad());
-        existente.setTutortel(e.getTutortel());
-        existente.setNombreInstitucion(e.getNombreInstitucion());
-        existente.setIdlogin(e.getIdlogin());
-        
-        existente.setInstitucion(e.getInstitucion());
-        existente.setRepresentanteInstitucion(e.getRepresentanteInstitucion());
-
-        return repository.save(existente);
+        return estudiantesRepository.save(existingEstudiantes);
     }
 
     @Override
-    public void deleteEstudiante(Integer id) {
-        if (!repository.existsById(id)) {
-            throw new RuntimeException("No se puede eliminar: el estudiante con ID " + id + " no existe.");
-        }
-        repository.deleteById(id);
+    public void deleteEstudiantes(Integer id) {
+        estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El usuario no existe"));
+        estudiantesRepository.deleteById(id);
     }
 }

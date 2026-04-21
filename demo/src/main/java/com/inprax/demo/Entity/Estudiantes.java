@@ -1,59 +1,64 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "Estudiantes")
 public class Estudiantes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_estudiante")
     private Integer idestudiante;
-
-    @Column(name = "id_login")
-    private Integer idlogin;
-
-    @Column(name = "nombre")
-    private String nombre;
-
-    @Column(name = "apellido")
-    private String apellido;
-
-    @Column(name = "telefono")
-    private Integer telefono;
-
-    @Column(name = "grado")
-    private String grado;
-
-    @Column(name = "carrera")
-    private String carrera;
-
-    @Column(name = "correo")
-    private String correo;
-
-    @Column(name = "nombreInstitucion")
-    private String nombreInstitucion;
-
-    @Column(name = "tutortel")
-    private Integer tutortel;
-
-    @Column(name = "edad")
-    private Integer edad;
-
-    @NotNull(message = "El representante es obligatorio")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_representante")
-    private RepresentanteInstitucion representanteInstitucion;
 
     @NotNull(message = "La institución es obligatoria")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_institucion")
     private Institucion institucion;
 
+    @Column(name = "id_login")
+    private Integer idlogin;
 
-    //GETTERS AND SETTERS
+    @NotBlank(message = "El nombre es un campo obligatorio")
+    @Column(name = "nombre")
+    private String nombre;
+
+    @NotBlank(message = "El apellido es un campo obligatorio")
+    @Column(name = "apellido")
+    private String apellido;
+
+    @NotNull(message = "El numero de telefono es un campo obligatorio")
+    @Positive(message = "El numero de telefono debe ser positivo")
+    @Column(name = "telefono")
+    private Integer telefono;
+
+    @NotBlank(message = "El grado es un campo obligatorio")
+    @Column(name = "grado")
+    private String grado;
+
+    @NotBlank(message = "La carrera es un campo obligatorio")
+    @Column(name = "carrera")
+    private String carrera;
+
+    @NotBlank(message = "El correro es un campo obligatorio")
+    @Column(name = "correo")
+    private String correo;
+
+    @NotBlank(message = "El nombre de la institucion es un campo obligatorio")
+    @Column(name = "nombreinstitucion")
+    private String nombreInstitucion;
+
+    @NotNull(message = "El numero de telefono del tutor es un campo obligatorio")
+    @Positive(message = "El numero de telefono del tutor debe ser positivo")
+    @Column(name = "tutortel")
+    private Integer tutortel;
+
+    @NotNull(message = "La edad es un campo obligatorio")
+    @Positive(message = "La edad debe ser positiva")
+    @Column(name = "edad")
+    private Integer edad;
 
     public Integer getIdestudiante() {
         return idestudiante;
@@ -61,6 +66,14 @@ public class Estudiantes {
 
     public void setIdestudiante(Integer idestudiante) {
         this.idestudiante = idestudiante;
+    }
+
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
     }
 
     public Integer getIdlogin() {
@@ -142,21 +155,4 @@ public class Estudiantes {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
-
-    public RepresentanteInstitucion getRepresentanteInstitucion() {
-        return representanteInstitucion;
-    }
-
-    public void setRepresentanteInstitucion(RepresentanteInstitucion representanteInstitucion) {
-        this.representanteInstitucion = representanteInstitucion;
-    }
-
-    public Institucion getInstitucion() {
-        return institucion;
-    }
-
-    public void setInstitucion(Institucion institucion) {
-        this.institucion = institucion;
-    }
-    
 }

@@ -79,7 +79,7 @@ public class RepresentanteInstitucionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Integer id) {
+    public ResponseEntity<?> eliminar(@Valid @PathVariable Integer id) {
         Map<String, Object> respuesta = new HashMap<>();
         try {
             representanteInstitucionService.deleteRepresentanteInstitucion(id);

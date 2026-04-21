@@ -1,0 +1,157 @@
+/* Configuración básica del documento: Reset de márgenes y box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Configuración básica del documento: Fondo y colores base */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
+    url("../images/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  /* Fuente estándar de sistema aplicada globalmente */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Contenedor principal que organiza el diseño central y empuja el footer al final */
+.container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Caja de registro: Estilos visuales y profundidad */
+.register-box {
+  background: rgba(28,28,28,0.9);
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  color: #F5F5F5;
+  text-align: center;
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Contenedor del nombre de la marca/plataforma */
+.register-box .logo {
+  text-align: center;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+/* Imagen del logo de la plataforma */
+.register-box .logo img {
+	width: 120px;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	object-fit: contain;
+}
+
+/* Cabecera del panel: Título del formulario */
+.register-box h2 {
+  margin-bottom: 25px;
+  color: #FFC107;
+}
+
+/* Campos de entrada de datos y selectores: Estilos y transiciones */
+.register-box input,
+.register-box select {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #1c1c1c;
+  color: #F5F5F5;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+  font-family: inherit;
+}
+
+/* Interacción: Foco en los campos del formulario */
+.register-box input:focus,
+.register-box select:focus {
+  border-color: #FFC107;
+}
+
+/* Botón de acción principal: Estilo y efectos */
+.register-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #FFC107;
+  color: #1c1c1c;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: inherit;
+}
+
+/* Interacción del botón de registro */
+.register-box button:hover {
+  background: #e0a800;
+}
+
+/* Pie de página del formulario: Enlace para usuarios que ya tienen cuenta */
+.register-box .login-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-box .login-link a {
+  color: #FFC107;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.register-box .login-link a:hover {
+  color: #e0a800;
+  text-decoration: underline;
+}
+
+/* Pie de página (Footer): Información de derechos de autor y marca */
+.footer {
+  width: 100%;
+  padding: 15px 0;
+  background: rgba(28,28,28,0.95);
+  text-align: center;
+  font-size: 13px;
+  color: #F5F5F5;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-content p {
+  margin: 0;
+  color: #FFC107;
+  font-weight: bold;
+}
+
+/* Diseño responsivo: Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+  .register-box {
+    padding: 30px 20px;
+  }
+
+  .register-box h2 {
+    font-size: 20px;
+  }
+
+  .register-box button {
+    font-size: 14px;
+  }
+}
