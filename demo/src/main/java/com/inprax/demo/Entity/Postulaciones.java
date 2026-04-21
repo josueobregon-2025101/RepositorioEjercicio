@@ -1,8 +1,6 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Postulaciones")
@@ -13,27 +11,21 @@ public class Postulaciones {
     @Column(name = "id_postulacion")
     private Integer idPostulacion;
 
-    @NotNull(message = "El ID de la práctica es obligatorio")
     @Column(name = "id_practica")
     private Integer idPractica;
 
-    @NotBlank(message = "El título de la postulación es obligatorio")
     @Column(name = "titulo")
     private String titulo;
 
-    @NotBlank(message = "La descripción de la postulación es obligatoria")
     @Column(name = "descripcion")
     private String descripcion;
 
-    @NotBlank(message = "La fecha de postulación es obligatoria")
     @Column(name = "fecha_post")
     private String fechaPost;
 
-    @NotBlank(message = "El estado de la postulación es obligatorio")
     @Column(name = "estado")
     private String estado;
 
-    // Getters y Setters (sin cambios)
     public Integer getIdPostulacion() {
         return idPostulacion;
     }

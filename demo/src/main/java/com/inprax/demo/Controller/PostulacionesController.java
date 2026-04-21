@@ -55,7 +55,7 @@ public class PostulacionesController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletePostulaciones(@PathVariable Integer id){
+    public ResponseEntity<Object> deletePostulaciones(@Valid @PathVariable Integer id){
         try{
             postulacionesService.deletePostulaciones(id);
             return ResponseEntity.ok("Postulación con ID: "+ id +" eliminada correctamente");

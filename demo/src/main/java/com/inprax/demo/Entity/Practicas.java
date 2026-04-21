@@ -1,8 +1,6 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Practicas")
@@ -13,39 +11,30 @@ public class Practicas {
     @Column(name = "id_practica")
     private Integer idPractica;
 
-    @NotNull(message = "El ID de la empresa es obligatorio")
     @Column(name = "id_empresa")
     private Integer idEmpresa;
 
-    @NotBlank(message = "El título de la práctica es obligatorio")
     @Column(name = "titulo")
     private String titulo;
 
-    @NotBlank(message = "El tiempo de práctica es obligatorio")
     @Column(name = "tiempo_practica")
     private String tiempoPractica;
 
-    @NotBlank(message = "El tipo de práctica es obligatorio")
     @Column(name = "tipo_practica")
     private String tipoPractica;
 
-    @NotBlank(message = "La carrera requerida es obligatoria")
     @Column(name = "carrera_practica")
     private String carreraPractica;
 
-    @NotBlank(message = "La vigencia de la práctica es obligatoria")
     @Column(name = "vigencia")
     private String vigencia;
 
-    @NotBlank(message = "La disponibilidad es obligatoria")
     @Column(name = "disponibilidad")
     private String disponibilidad;
 
-    @NotBlank(message = "El horario es obligatorio")
     @Column(name = "horario")
     private String horario;
 
-    // Getters y Setters (sin cambios)
     public Integer getIdPractica() {
         return idPractica;
     }
@@ -117,4 +106,5 @@ public class Practicas {
     public void setHorario(String horario) {
         this.horario = horario;
     }
+
 }

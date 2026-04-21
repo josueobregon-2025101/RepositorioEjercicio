@@ -38,7 +38,7 @@ public class PracticasController {
     public ResponseEntity<Object> createPracticas(@Valid @RequestBody Practicas practicas){
         try{
             Practicas createPracticas = practicasService.savePracticas(practicas);
-            return new ResponseEntity<>(createPracticas, HttpStatus.CREATED);
+            return new ResponseEntity<>(createPracticas,HttpStatus.CREATED);
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -56,12 +56,13 @@ public class PracticasController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletePracticas(@PathVariable Integer id){
+    public ResponseEntity<Object> deletePracticas(@Valid @PathVariable Integer id){
         try{
             practicasService.deletePracticas(id);
-            return ResponseEntity.ok("Práctica con ID " + id + " eliminada correctamente");
+            return ResponseEntity.ok("Practica con ID"+ id +" eliminado correctamente");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
 }

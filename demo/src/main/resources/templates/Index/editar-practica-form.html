@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Práctica - Inprax</title>
+    
+    <!-- Enlace a la hoja de estilos externa para el diseño visual -->
+    <link rel="stylesheet" th:href="@{/Styles/editar-practica-form.css}">
+</head>
+<body>
+
+    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
+    <div class="dashboard">
+
+        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/Images/INPRAX.png}">
+            </div>
+            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+            <ul>
+                <li onclick="location.href='dashboard-empresa.html'">Inicio</li>
+                <li onclick="location.href='crear-practica.html'">Crear práctica</li>
+                <li class="active">Editar práctica</li> <!-- Clase 'active' para resaltar la página actual -->
+                <li onclick="location.href='postulantes.html'">Postulantes</li>
+                <li onclick="location.href='mis-practicas.html'">Mis prácticas</li>
+                <li onclick="location.href='perfil-empresa.html'">Perfil</li>
+            </ul>
+        </aside>
+
+        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
+        <main class="main-content">
+
+            <!-- Cabecera del panel: Título y botón de salida -->
+            <header class="header">
+                <h1>Editar práctica</h1>
+                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+            </header>
+
+            <!-- Contenedor específico para la gestión de información del usuario -->
+            <section class="form-container">
+
+                <!-- Formulario de acceso para la modificación de registros existentes -->
+                <form class="form">
+
+                    <!-- Campos de entrada de datos con valores preestablecidos para editar -->
+                    <div class="input-group">
+                        <label>Título de la práctica</label>
+                        <input type="text" value="Desarrollo Web">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Área</label>
+                        <input type="text" value="Tecnología">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Duración</label>
+                        <input type="text" value="6 meses">
+                    </div>
+
+                    <!-- Selector de perfil para clasificar la modalidad -->
+                    <div class="input-group">
+                        <label>Modalidad</label>
+                        <select>
+                            <option selected>Presencial</option>
+                            <option>Remoto</option>
+                            <option>Híbrido</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo de área de texto para información extendida -->
+                    <div class="input-group full">
+                        <label>Descripción</label>
+                        <textarea>Práctica enfocada en desarrollo de aplicaciones web utilizando HTML, CSS y JavaScript.</textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Requisitos</label>
+                        <input type="text" value="Conocimientos básicos de programación">
+                    </div>
+
+                    <!-- Campo de fecha para vigencia de la práctica -->
+                    <div class="input-group">
+                        <label>Fecha límite de postulación</label>
+                        <input type="date" value="2026-03-31">
+                    </div>
+
+                    <!-- Botones de acción para gestionar la actualización del registro -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-publicar">Guardar cambios</button>
+                        <button type="button" class="btn-cancelar" onclick="location.href='mis-practicas.html'">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
