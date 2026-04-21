@@ -31,27 +31,27 @@ public class EstudiantesController {
         return "Index/estudiantes";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> obtener(@PathVariable Integer id) {
+    @GetMapping("/buscar/{id}")
+    public String obtener(@PathVariable Integer id) {
         Estudiantes obtener = service.getEstudianteById(id);
-        return ResponseEntity.ok(obtener);
+        return "Index/estudiantes";
     }
 
-    @PostMapping
-    public ResponseEntity<?> crear(@Valid @RequestBody Estudiantes estudiante, BindingResult result) {
+    @PostMapping("/agregar/{id}")
+    public String crear(@Valid Estudiantes estudiante, BindingResult result) {
         Estudiantes nuevo = service.saveEstudiantes(estudiante);
-        return new ResponseEntity<>(nuevo, HttpStatus.CREATED);
+        return "redirect:/Index/estudiantes";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable Integer id, @Valid @RequestBody Estudiantes estudiante, BindingResult result) {
+    @PostMapping ("/upgradear/{id}")
+    public String actualizar(@PathVariable Integer id, @Valid Estudiantes estudiante, BindingResult result) {
         Estudiantes actualizado = service.updateEstudiantes(id, estudiante);
-        return new ResponseEntity<>(actualizado, HttpStatus.OK);
+        return "redirect:/Index/estudiantes";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletedEstudiante(@Valid @PathVariable Integer id) {
+    @GetMapping("/eliminar/{id}")
+    public String deletedEstudiante(@Valid @PathVariable Integer id) {
         service.deleteEstudiantes(id);
-        return ResponseEntity.ok("Estudiante eliminado exitosamente");
+        return "redirect:/Index/estudiantes";
     }
 }
