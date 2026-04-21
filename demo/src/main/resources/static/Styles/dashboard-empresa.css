@@ -72,6 +72,18 @@ body {
 	font-weight: bold;
 }
 
+/* Esto asegura que el texto cambie a negro cuando el fondo sea amarillo */
+.sidebar nav ul li.active a {
+    color: #1C1C1C;
+    font-weight: bold;
+}
+
+/* El estilo del LI activo */
+.sidebar nav ul li.active {
+    background: #FFC107;
+    border-radius: 8px;
+}
+
 /* Área de contenido principal: Espaciado dinámico */
 .main-content {
 	flex: 1;
