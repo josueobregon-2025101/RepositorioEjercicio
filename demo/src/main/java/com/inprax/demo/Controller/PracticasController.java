@@ -2,6 +2,7 @@ package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Practicas;
 import com.inprax.demo.Service.PracticasService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class PracticasController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createPracticas(@RequestBody Practicas practicas){
+    public ResponseEntity<Object> createPracticas(@Valid @RequestBody Practicas practicas){
         try{
             Practicas createPracticas = practicasService.savePracticas(practicas);
             return new ResponseEntity<>(createPracticas,HttpStatus.CREATED);
@@ -44,7 +45,7 @@ public class PracticasController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePracticas(@RequestBody Practicas practicas,
+    public ResponseEntity<Object> updatePracticas(@Valid @RequestBody Practicas practicas,
                                                   @PathVariable Integer id){
         try{
             Practicas updatePracticas = practicasService.updatePracticas(practicas, id);
@@ -55,7 +56,7 @@ public class PracticasController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletePracticas(@PathVariable Integer id){
+    public ResponseEntity<Object> deletePracticas(@Valid @PathVariable Integer id){
         try{
             practicasService.deletePracticas(id);
             return ResponseEntity.ok("Practica con ID"+ id +" eliminado correctamente");

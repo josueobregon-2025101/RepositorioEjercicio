@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis postulaciones - Inprax</title>
+    
+    <!-- Enlace a la hoja de estilos externa para el diseño visual -->
+    <link rel="stylesheet" th:href="@{/Styles/postulaciones.css}">
+</head>
+<body>
+
+    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
+    <div class="dashboard">
+
+        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img th:src="@{/Images/INPRAX.png}">
+            </div>
+
+            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+            <nav>
+                <ul>
+                    <li><a th:href="@{/dashboard-estudiante}">Inicio</a></li>
+                    <li><a th:href="@{/practicas}">Prácticas disponibles</a></li>
+                    <li class="active"><a th:href="@{/mis-postulaciones}">Mis postulaciones</a></li>
+                    <li><a th:href="@{/documentos}">Mis documentos</a></li>
+                    <li><a th:href="@{/perfil-estudiante}">Perfil</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
+        <main class="main-content">
+
+            <!-- Cabecera del panel: Título y botón de salida -->
+            <header class="header">
+                <h1>Mis postulaciones</h1>
+                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+                <a th:href="@{/logout}" class="logout-btn" style="text-decoration: none; display: inline-block;">
+                    Cerrar sesión
+                </a>
+            </header>
+
+            <!-- Contenedor específico para la gestión de información del usuario -->
+            <div class="container">
+
+                <!-- Rejilla de tarjetas (Cards) para el seguimiento de solicitudes -->
+                <div class="postulaciones">
+
+                    <!-- Tarjeta de acceso rápido con estado de postulación -->
+                    <div class="cardPostulacion">
+                        <h3>Práctica en Marketing</h3>
+                        <p>Empresa: XYZ Marketing</p>
+                        <p>Duración: 3 meses</p>
+                        <span class="estado enviado">Enviado</span>
+                    </div>
+
+                    <!-- Tarjeta de acceso rápido con estado de postulación -->
+                    <div class="cardPostulacion">
+                        <h3>Práctica en Desarrollo Web</h3>
+                        <p>Empresa: Web Solutions</p>
+                        <p>Duración: 6 meses</p>
+                        <span class="estado revision">En revisión</span>
+                    </div>
+
+                    <!-- Tarjeta de acceso rápido con estado de postulación -->
+                    <div class="cardPostulacion">
+                        <h3>Práctica en Finanzas</h3>
+                        <p>Empresa: ABC Finanzas</p>
+                        <p>Duración: 4 meses</p>
+                        <span class="estado aceptado">Aceptado</span>
+                    </div>
+
+                    <!-- Tarjeta de acceso rápido con estado de postulación -->
+                    <div class="cardPostulacion">
+                        <h3>Práctica en Diseño Gráfico</h3>
+                        <p>Empresa: Creativos SA</p>
+                        <p>Duración: 5 meses</p>
+                        <span class="estado rechazado">Rechazado</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

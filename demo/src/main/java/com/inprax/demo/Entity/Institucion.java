@@ -37,11 +37,11 @@ public class Institucion {
     @Column(name = "numero_telefono")
     private String telefono;
 
-    @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "institucion", fetch = FetchType.LAZY) // SIN CASCADE
     @JsonIgnore
     private List<Estudiantes> estudiantes;
 
-    @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "institucion", fetch = FetchType.LAZY) // SIN CASCADE
     @JsonIgnore
     private List<RepresentanteInstitucion> representantes;
 

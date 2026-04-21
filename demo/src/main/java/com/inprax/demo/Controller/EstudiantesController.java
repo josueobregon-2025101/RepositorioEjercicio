@@ -5,40 +5,47 @@ import com.inprax.demo.Service.EstudiantesService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/estudiantes")
 public class EstudiantesController {
-    private final EstudiantesService estudiantesService;
 
-    public EstudiantesController(EstudiantesService estudiantesService) {
-        this.estudiantesService = estudiantesService;
+    private final EstudiantesService service;
+
+    public EstudiantesController(EstudiantesService service) {
+        this.service = service;
     }
 
     @GetMapping
-    public List<Estudiantes> getAllEstudiantes() {
-        return estudiantesService.getAllEstudiantes();
+    public List<Estudiantes> listar() {
+        return service.getAllEstudiantes();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtener(@PathVariable Integer id) {
+        Estudiantes obtener = service.getEstudianteById(id);
+        return ResponseEntity.ok(obtener);
     }
 
     @PostMapping
-    public ResponseEntity<Object> createdEstudiantes(@Valid @RequestBody Estudiantes estudiantes) {
-            Estudiantes createdEstudiantes = estudiantesService.saveEstudiantes(estudiantes);
-            return new ResponseEntity<>(createdEstudiantes, HttpStatus.CREATED);
+    public ResponseEntity<?> crear(@Valid @RequestBody Estudiantes estudiante, BindingResult result) {
+        Estudiantes nuevo = service.saveEstudiantes(estudiante);
+        return new ResponseEntity<>(nuevo, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEstudiantes(@Valid @PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
-            Estudiantes updateEstudiantes = estudiantesService.updateEstudiantes(id, estudiantes);
-            return ResponseEntity.ok(updateEstudiantes);
+    public ResponseEntity<?> actualizar(@PathVariable Integer id, @Valid @RequestBody Estudiantes estudiante, BindingResult result) {
+        Estudiantes actualizado = service.updateEstudiantes(id, estudiante);
+        return new ResponseEntity<>(actualizado, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletedEmpleado(@Valid @PathVariable Integer id, @RequestBody Estudiantes estudiantes) {
-            estudiantesService.deleteEstudiantes(id);
-            return ResponseEntity.ok("Estudiante eliminado exitosamente");
+    public ResponseEntity<?> deletedEstudiante(@Valid @PathVariable Integer id) {
+        service.deleteEstudiantes(id);
+        return ResponseEntity.ok("Estudiante eliminado exitosamente");
     }
 }

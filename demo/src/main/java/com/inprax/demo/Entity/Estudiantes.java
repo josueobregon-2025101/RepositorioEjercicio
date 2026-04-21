@@ -13,11 +13,6 @@ public class Estudiantes {
     @Column(name = "id_estudiante")
     private Integer idestudiante;
 
-    @NotNull(message = "El representante es obligatorio")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_representante")
-    private RepresentanteInstitucion representanteInstitucion;
-
     @NotNull(message = "La institución es obligatoria")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_institucion")
@@ -52,7 +47,7 @@ public class Estudiantes {
     private String correo;
 
     @NotBlank(message = "El nombre de la institucion es un campo obligatorio")
-    @Column(name = "nombreInstitucion")
+    @Column(name = "nombreinstitucion")
     private String nombreInstitucion;
 
     @NotNull(message = "El numero de telefono del tutor es un campo obligatorio")
@@ -71,14 +66,6 @@ public class Estudiantes {
 
     public void setIdestudiante(Integer idestudiante) {
         this.idestudiante = idestudiante;
-    }
-
-    public RepresentanteInstitucion getRepresentanteInstitucion() {
-        return representanteInstitucion;
-    }
-
-    public void setRepresentanteInstitucion(RepresentanteInstitucion representanteInstitucion) {
-        this.representanteInstitucion = representanteInstitucion;
     }
 
     public Institucion getInstitucion() {
