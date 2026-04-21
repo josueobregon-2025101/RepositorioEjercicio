@@ -3,13 +3,12 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Administradores;
 import com.inprax.demo.Service.AdministradoresService;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/administradores")
+@Controller
+@RequestMapping("/admin")
 public class AdministradoresController {
 
     private final AdministradoresService administradoresService;
@@ -18,53 +17,20 @@ public class AdministradoresController {
         this.administradoresService = administradoresService;
     }
 
-    @GetMapping
-    public List<Administradores> getAllAdministradores() {
-        return administradoresService.getAllAdministradores();
+    @GetMapping("/dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("administradores", administradoresService.getAllAdministradores());
+        return "Pages/Admin/dashboard-admin";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getAdministradorById(@PathVariable @Valid Integer id) {
-        Administradores administrador = administradoresService.getAdministradorById(id);
-        if (administrador != null) {
-            return ResponseEntity.ok(administrador);
-        } else {
-            return ResponseEntity.status(404).body("No existe el administrador");
-        }
+    @GetMapping("/perfil")
+    public String perfil() {
+        return "Pages/Admin/perfil-admin";
     }
 
-    @PostMapping
-    public ResponseEntity<?> createAdministrador(@Valid @RequestBody Administradores administrador) {
-        try {
-            Administradores creado = administradoresService.saveAdministrador(administrador);
-            return ResponseEntity.ok().body(creado);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateAdministrador(@PathVariable Integer id, @Valid @RequestBody Administradores administrador) {
-        try {
-            Administradores actualizado = administradoresService.updateAdministrador(id, administrador);
-            if (actualizado != null) {
-                return ResponseEntity.ok(actualizado);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAdministrador(@PathVariable @Valid Integer id) {
-        Administradores administrador = administradoresService.getAdministradorById(id);
-        if (administrador != null) {
-            administradoresService.deleteAdministrador(id);
-            return ResponseEntity.ok().body("Se elimino el administrador");
-        } else {
-            return ResponseEntity.status(404).body("No existe el administrador");
-        }
+    @PostMapping("/perfil/guardar")
+    public String guardarPerfil(@Valid @ModelAttribute Administradores administrador) {
+        administradoresService.saveAdministrador(administrador);
+        return "redirect:/admin/perfil";
     }
 }
