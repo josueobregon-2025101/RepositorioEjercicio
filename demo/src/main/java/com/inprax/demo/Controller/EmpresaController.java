@@ -4,12 +4,13 @@ import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Service.EmpresaService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/empresas")
+@Controller
+@RequestMapping("/empresas")
 public class EmpresaController {
 
     private final EmpresaService empresaService;
@@ -31,6 +32,11 @@ public class EmpresaController {
         } else {
             return ResponseEntity.status(404).body("No existe la empresa");
         }
+    }
+
+    @GetMapping("/empresas")
+    public String mostrarEstudiantes() {
+        return "Index/empresas";
     }
 
     @PostMapping
