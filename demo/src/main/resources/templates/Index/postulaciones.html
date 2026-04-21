@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://thymeleaf.org">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <title>Mis postulaciones - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="../Styles/postulaciones.css">
+    <link rel="stylesheet" th:href="@{/Styles/postulaciones.css}">
 </head>
 <body>
 
@@ -17,17 +17,17 @@
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="../Images/INPRAX.png">
+                <img th:src="@{/Images/INPRAX.png}">
             </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <nav>
                 <ul>
-                    <li onclick="location.href='dashboard-estudiante.html'">Inicio</li>
-                    <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
-                    <li class="active">Mis postulaciones</li> <!-- Clase 'active' para resaltar la página actual -->
-                    <li onclick="location.href='documentos.html'">Mis documentos</li>
-                    <li onclick="location.href='perfil-estudiante.html'">Perfil</li>
+                    <li><a th:href="@{/dashboard-estudiante}">Inicio</a></li>
+                    <li><a th:href="@{/practicas}">Prácticas disponibles</a></li>
+                    <li class="active"><a th:href="@{/mis-postulaciones}">Mis postulaciones</a></li>
+                    <li><a th:href="@{/documentos}">Mis documentos</a></li>
+                    <li><a th:href="@{/perfil-estudiante}">Perfil</a></li>
                 </ul>
             </nav>
         </aside>
@@ -39,7 +39,9 @@
             <header class="header">
                 <h1>Mis postulaciones</h1>
                 <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+                <a th:href="@{/logout}" class="logout-btn" style="text-decoration: none; display: inline-block;">
+                    Cerrar sesión
+                </a>
             </header>
 
             <!-- Contenedor específico para la gestión de información del usuario -->
