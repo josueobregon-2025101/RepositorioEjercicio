@@ -5,11 +5,12 @@ import com.inprax.demo.Service.PracticasService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/Practicas")
 public class PracticasController {
 
@@ -32,6 +33,11 @@ public class PracticasController {
         }catch(RuntimeException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/prac")
+    public String practicas(){
+        return "Index/practicas";
     }
 
     @PostMapping
