@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <!-- Configuración básica del documento -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  
+
   <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-  <link rel="stylesheet" href="../styles/login.css">
+  <link rel="stylesheet" th:href="@{/styles/login.css}">
 </head>
 <body>
 
@@ -19,13 +19,13 @@
   <!-- Caja de inicio de sesión: Estilos visuales y profundidad -->
   <div class="login-box">
     <!-- Formulario de acceso para el inicio de sesión -->
-    <form class="form">
-      
+    <form th:action="@{/login}" method="post" class="form">
+
       <!-- Contenedor del nombre de la marca/plataforma -->
       <div class="logouser">
-        <img src="../Images/login.png" alt="Logo INPRAX">
+        <img th:src="@{/Images/login.png}" alt="Logo INPRAX">
       </div>
-      
+
       <!-- Cabecera del panel: Título del formulario -->
       <div class="header">Iniciar sesión</div>
 
@@ -39,13 +39,13 @@
       <!-- Pie de página: Enlace para usuarios que no tienen cuenta -->
       <div class="footer">
         ¿No tienes cuenta?
-        <a href="register.html" class="link">Crear cuenta</a>
+        <a th:href="@{/register}" class="link">Crear cuenta</a>
       </div>
     </form>
   </div>
 </div>
 
 <!-- Enlace al script externo para la lógica de autenticación -->
-<script src="../Scripts/login.js"></script>
+<script th:src="@{/Scripts/login.js}"></script>
 </body>
 </html>
