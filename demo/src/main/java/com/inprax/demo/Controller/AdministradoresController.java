@@ -40,55 +40,6 @@ public class AdministradoresController {
         return "Index/dashboard-admin";
     }
 
-    @GetMapping
-    public List<Administradores> getAllAdministradores() {
-        return administradoresService.getAllAdministradores();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getAdministradorById(@PathVariable @Valid Integer id) {
-        Administradores administrador = administradoresService.getAdministradorById(id);
-        if (administrador != null) {
-            return ResponseEntity.ok(administrador);
-        } else {
-            return ResponseEntity.status(404).body("No existe el administrador");
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity<?> createAdministrador(@Valid @RequestBody Administradores administrador) {
-        try {
-            Administradores creado = administradoresService.saveAdministrador(administrador);
-            return ResponseEntity.ok().body(creado);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateAdministrador(@PathVariable Integer id, @Valid @RequestBody Administradores administrador) {
-        try {
-            Administradores actualizado = administradoresService.updateAdministrador(id, administrador);
-            if (actualizado != null) {
-                return ResponseEntity.ok(actualizado);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAdministrador(@PathVariable @Valid Integer id) {
-        Administradores administrador = administradoresService.getAdministradorById(id);
-        if (administrador != null) {
-            administradoresService.deleteAdministrador(id);
-            return ResponseEntity.ok().body("Se elimino el administrador");
-        } else {
-            return ResponseEntity.status(404).body("No existe el administrador");
-        }
-    }
 
     
 }
