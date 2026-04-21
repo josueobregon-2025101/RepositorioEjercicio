@@ -52,23 +52,31 @@ body {
 	color: #FFC107;
 }
 
-/* Menú de navegación principal: Estilos de lista */
-.sidebar ul {
-	list-style: none;
+/* Seleccionamos el enlace dentro del li */
+.sidebar ul li a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: inherit;        /* Usa el color blanco/gris del li */
+    display: block;        /* Ocupa todo el ancho y alto disponible */
+    width: 100%;
+    height: 100%;
 }
 
-/* Enlaces de navegación: Estilos y transiciones */
+/* Ajuste del padding: lo movemos del li al a para que todo sea clickable */
 .sidebar li {
-	padding: 12px 14px;
-	margin-bottom: 10px;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: 0.2s;
+    padding: 0; /* Quitamos el padding original del li */
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sidebar li a {
+    padding: 12px 14px; /* Ponemos el padding aquí */
 }
 
 /* Interacción: Cambio de color al pasar el mouse */
 .sidebar li:hover {
-	background: #2a2a2a;
+    background: #2a2a2a;
 }
 
 /* Clase 'active' para resaltar la página actual */
@@ -76,6 +84,18 @@ body {
 	background: #FFC107;
 	color: #1C1C1C;
 	font-weight: bold;
+}
+
+/* Evitamos que el active se opaque con el hover */
+.sidebar li.active:hover {
+    background: #FFC107; /* Mantiene su color original aunque pases el mouse */
+    cursor: default;
+}
+
+/* Cuando el li es active, el texto del enlace debe ser oscuro */
+.sidebar .active a {
+    color: #1C1C1C;
+    font-weight: bold;
 }
 
 /* Área de contenido principal: Espaciado dinámico */
