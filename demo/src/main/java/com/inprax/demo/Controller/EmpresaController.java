@@ -3,12 +3,13 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Service.EmpresaService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @Controller
-@RequestMapping("/admin/empresas")
+@RequestMapping("/api/empresas")
 public class EmpresaController {
 
     private final EmpresaService empresaService;
@@ -18,38 +19,70 @@ public class EmpresaController {
     }
 
     @GetMapping
-    public String getAllEmpresas(Model model) {
-        model.addAttribute("empresas", empresaService.getAllEmpresas());
-        return "Pages/Admin/empresas";
+    @ResponseBody
+    public List<Empresa> getAllEmpresas() {
+        return empresaService.getAllEmpresas();
     }
 
-    @GetMapping("/agregar")
-    public String agregarEmpresaForm() {
-        return "Pages/Admin/agregar-empresa";
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> getEmpresaById(@PathVariable @Valid Integer id) {
+        Empresa empresa = empresaService.getEmpresaById(id);
+        if (empresa != null) {
+            return ResponseEntity.ok(empresa);
+        } else {
+            return ResponseEntity.status(404).body("No se encontro la empresa");
+        }
     }
 
-    @PostMapping("/guardar")
-    public String guardarEmpresa(@Valid @ModelAttribute Empresa empresa) {
-        empresaService.saveEmpresa(empresa);
-        return "redirect:/admin/empresas";
+    @GetMapping("/empresas")
+    public String empresas() {
+        return "Index/empresas";
     }
 
-    @GetMapping("/editar/{id}")
-    public String editarEmpresaForm(@PathVariable Integer id, Model model) {
-        model.addAttribute("empresa", empresaService.getEmpresaById(id));
-        return "Pages/Admin/editar-empresa";
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<?> saveEmpresa(@Valid @RequestBody Empresa empresa) {
+        try {
+            Empresa nuevaEmpresa = empresaService.saveEmpresa(empresa);
+            if (nuevaEmpresa != null) {
+                return ResponseEntity.ok(nuevaEmpresa);
+            } else {
+                return ResponseEntity.status(402).body("No se creo la empresa");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Error al crear la empresa");
+        }
     }
 
-    @PostMapping("/editar")
-    public String editarEmpresa(@RequestParam Integer id,
-                                @Valid @ModelAttribute Empresa empresa) {
-        empresaService.updateEmpresa(id, empresa);
-        return "redirect:/admin/empresas";
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> updateEmpresa(@PathVariable Integer id, @RequestBody @Valid Empresa empresa) {
+        try {
+            Empresa actualizada = empresaService.updateEmpresa(id, empresa);
+            if (actualizada != null) {
+                return ResponseEntity.ok(actualizada);
+            } else {
+                return ResponseEntity.status(404).body("No se encontro la empresa");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-    @GetMapping("/eliminar/{id}")
-    public String eliminarEmpresa(@PathVariable Integer id) {
-        empresaService.deleteEmpresa(id);
-        return "redirect:/admin/empresas";
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> deleteEmpresa(@PathVariable @Valid Integer id) {
+        Empresa empresa = empresaService.getEmpresaById(id);
+        if (empresa != null) {
+            try {
+                empresaService.deleteEmpresa(id);
+                return ResponseEntity.ok("Se elimino la Empresa " + id);
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        } else {
+            return ResponseEntity.status(404).body("No se encontro la empresa " + id);
+        }
     }
 }
