@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <title>Mis documentos - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" th:href="@{/Styles/documentos.css}">
+    <link rel="stylesheet" href="../Styles/documentos.css">
 </head>
 <body>
 
@@ -17,17 +17,17 @@
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
             <div class="logo">
-                <img th:src="@{/Images/INPRAX.png}">
+                <img src="../Images/INPRAX.png">
             </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <nav>
                 <ul>
-                    <li><a th:href="@{/api/estudiantes/dashboard}" style="display:block;color:white; text-decoration:none;">Inicio</a></li>
-                    <li><a th:href="@{/practicas}" style="display:block;color:white; text-decoration:none;">Prácticas disponibles</a></li>
-                    <li><a th:href="@{/postulaciones}" style="display:block;color:white; text-decoration:none;">Mis postulaciones</a></li>
-                    <li class="active"><a th:href="@{/api/Documentos/documentos}" style="display:block;color:black; text-decoration:none;">Mis documentos</a></li>
-                    <li><a th:href="@{/perfil-estudiante}" style="display:block;color:white; text-decoration:none;">Perfil</a></li>
+                    <li onclick="location.href='dashboard-estudiante.html'">Inicio</li>
+                    <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
+                    <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
+                    <li class="active">Mis documentos</li> <!-- Clase 'active' para resaltar la página actual -->
+                    <li onclick="location.href='perfil-estudiante.html'">Perfil</li>
                 </ul>
             </nav>
         </aside>

@@ -10,7 +10,6 @@ public class InpraxApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(InpraxApplication.class, args);
 	}
-
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Api funcionando");

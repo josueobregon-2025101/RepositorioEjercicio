@@ -5,11 +5,12 @@ import com.inprax.demo.Entity.Documentos;
 import com.inprax.demo.Service.DocumentosService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/Documentos")
 public class DocumentosController {
     private final DocumentosService documentosService;
@@ -32,6 +33,12 @@ public class DocumentosController {
             return ResponseEntity.status(404).body("No se encontro el documento");
         }
 
+    }
+
+    //Levantar Documentos
+    @GetMapping("/documentos")
+    public String Documentos(){
+        return "Index/documentos";
     }
 
     @PostMapping
