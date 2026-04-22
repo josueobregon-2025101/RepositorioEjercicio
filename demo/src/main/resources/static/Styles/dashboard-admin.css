@@ -287,6 +287,22 @@ body {
     border-color: #FFC107;
 }
 
+.input-containerB {
+position: relative !important;
+display: block !important;
+width: 50%;
+}
+
+
+.input-containerB input, 
+.input-containerB select {
+width: 50% !important;
+padding: 10px 12px 10px 20px !important;
+display: block !important;
+box-sizing: border-box !important;
+position: relative;
+}
+
 .form-actions {
     text-align: center;
     margin-top: 20px;
