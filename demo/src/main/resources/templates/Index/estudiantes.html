@@ -76,7 +76,7 @@
 
         <!-- Sección de accesos rápidos para la creación de nuevos registros -->
         <div class="actions">
-          <a th:href="@{/agregar/estudiante}" class="btn"
+          <a th:href="@{estudiantes/agregarestudiante}" class="btn"
             ><i class="fas fa-plus"></i> Agregar Estudiante</a
           >
         </div>
@@ -91,11 +91,11 @@
                 <th>ID Login</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
+                <th>Edad</th>
                 <th>Teléfono</th>
                 <th>Carrera</th>
                 <th>Correo</th>
                 <th>Teléfono Tutor</th>
-                <th>Edad</th>
                 <th class="actions">Acciones</th>
               </tr>
             </thead>
@@ -107,22 +107,21 @@
                 <td th:text="${estudiante.idlogin}"></td>
                 <td th:text="${estudiante.nombre}"></td>
                 <td th:text="${estudiante.apellido}"></td>
+                <td th:text="${estudiante.edad}">18</td>
                 <td th:text="${estudiante.telefono}">555-1234</td>
                 <td th:text="${estudiante.carrera}">Ingeniería de Sistemas</td>
                 <td th:text="${estudiante.correo}">juan.perez@mail.com</td>
                 <td th:text="${estudiante.tutortel}">555-5678</td>
-                <td th:text="${estudiante.edad}">18</td>
                 <td class="actions">
-                  <!-- Botones de acción para gestionar la edición o eliminación del registro -->
                   <div class="action-buttons">
                     <a
-                      th:href="@{/admin/estudiantes/{id}(id=${estudiante.idestudiante})}"
+                      th:href="@{/admin/estudiantes/editarestudiante/{id}(id=${estudiante.idestudiante})}"
                       class="action-btn edit"
                       ><i class="fas fa-edit"></i
                     ></a>
                     <a
                       th:href="@{/admin/estudiantes/eliminar/{id}(id=${estudiante.idestudiante})}"
-                      class="action-btn delete"
+                      class="action-btn delete" onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
                       ><i class="fas fa-trash-alt"></i
                     ></a>
                   </div>
