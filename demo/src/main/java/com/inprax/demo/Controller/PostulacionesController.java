@@ -34,7 +34,7 @@ public class PostulacionesController {
         }
     }
 
-     @GetMapping("/post")
+     @GetMapping("/postulaciones")
      public String postulaciones(){
         return "Index/postulaciones";
      }
