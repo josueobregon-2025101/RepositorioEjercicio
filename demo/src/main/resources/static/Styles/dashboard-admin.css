@@ -25,7 +25,7 @@ body {
 
 /* ========================== Sidebar: Menú de navegación fijo ========================== */
 .sidebar {
-    width: 250px;
+    width: 200px;
     background: #1C1C1C;
     padding: 30px 0;
     display: flex;
@@ -70,7 +70,7 @@ body {
     font-size: 1rem;
     color: #F5F5F5;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 
 .sidebar nav ul li a i {
@@ -139,7 +139,7 @@ body {
     border-radius: 6px;
     font-weight: bold;
     text-decoration: none;
-    transition: background 0.3s;
+    transition: background 0.5s;
     cursor: pointer;
     font-family: inherit;
 }
@@ -167,9 +167,14 @@ body {
 
 .table th, .table td {
     padding: 12px 15px;
-    text-align: left;
+    text-align: center;
     color: #F5F5F5;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.table th:first-child,
+.table td:first-child {
+    text-align: left;
 }
 
 .table th {
@@ -185,18 +190,16 @@ body {
 .action-btn {
     display: inline-block;
     padding: 6px 10px;
+    margin: 2px 4px;
     border-radius: 5px;
     text-decoration: none;
-    color: #F5F5F5;
-    margin-right: 5px;
-    transition: background 0.3s;
-    font-family: inherit;
+    transition: background 0.5s;
 }
 
 /* Colores específicos para la moderación y gestión de registros */
-.action-btn.edit { background: #17a2b8; } 
-.action-btn.delete { background: #dc3545; } 
-.action-btn.accept { background: #28a745; } 
+.action-btn.edit { background: #17a2b8; }
+.action-btn.delete { background: #dc3545; }
+.action-btn.accept { background: #28a745; }
 .action-btn.reject { background: #ffc107; color: #1C1C1C; }
 
 /* ========================== Rejilla de tarjetas (Cards) estadísticas ========================== */
@@ -212,14 +215,14 @@ body {
     padding: 25px;
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
+    transition: transform 0.5s, background 0.5s;
     text-align: center;
     border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Interacción de la tarjeta: Animación y cambio de colores */
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     background: #FFC107;
     color: #1C1C1C;
 }
@@ -241,22 +244,44 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
+.profile-card h2 {
+    margin-bottom: 25px;
+}
+
 /* Estilos para inputs, selectores y áreas de texto del formulario */
+.profile-form .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-form .form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #FFC107;
+}
+
 .profile-form .form-group input,
 .profile-form .form-group select,
 .profile-form .form-group textarea {
+    width: 100%;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid rgba(255,255,255,0.3);
     background: rgba(0,0,0,0.3);
     color: #F5F5F5;
     outline: none;
-    transition: border 0.3s, background 0.3s;
+    transition: border 0.5s, background 0.5s;
     font-family: inherit;
 }
 
 .profile-form .form-group input:focus {
     border-color: #FFC107;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* Botones de acción del formulario */
@@ -266,6 +291,7 @@ body {
     padding: 10px 18px;
     border-radius: 6px;
     font-weight: bold;
+    width: 100%;
     border: none;
     cursor: pointer;
     font-family: inherit;
