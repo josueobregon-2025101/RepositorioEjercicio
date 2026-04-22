@@ -31,7 +31,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100vh;
+    height: 145vh;
 }
 
 /* Contenedor del nombre de la marca/plataforma o imagen del logo */
@@ -70,7 +70,7 @@ body {
     font-size: 1rem;
     color: #F5F5F5;
     border-radius: 8px;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 .sidebar nav ul li a i {
@@ -139,7 +139,7 @@ body {
     border-radius: 6px;
     font-weight: bold;
     text-decoration: none;
-    transition: background 0.5s;
+    transition: background 0.3s;
     cursor: pointer;
     font-family: inherit;
 }
@@ -172,7 +172,7 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.table th:first-child,
+.table th:first-child, 
 .table td:first-child {
     text-align: left;
 }
@@ -187,20 +187,28 @@ body {
 }
 
 /* ========================== Botones de acción dentro de la tabla ========================== */
-.action-btn {
+.action-btn,
+.action-btn i {
     display: inline-block;
-    padding: 6px 10px;
+    padding: 5px 8px;
     margin: 2px 4px;
     border-radius: 5px;
     text-decoration: none;
-    transition: background 0.5s;
+    transition: background 0.3s;
+    color: #FFFFFF !important;
+}
+
+.action-btn:hover {
+    filter: brightness(0.9);
+    color: #FFFFFF;
 }
 
 /* Colores específicos para la moderación y gestión de registros */
-.action-btn.edit { background: #17a2b8; }
-.action-btn.delete { background: #dc3545; }
-.action-btn.accept { background: #28a745; }
+.action-btn.edit { background: #17a2b8; } 
+.action-btn.delete { background: #dc3545; } 
+.action-btn.accept { background: #28a745; } 
 .action-btn.reject { background: #ffc107; color: #1C1C1C; }
+
 
 /* ========================== Rejilla de tarjetas (Cards) estadísticas ========================== */
 .cards {
@@ -215,14 +223,14 @@ body {
     padding: 25px;
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.5s, background 0.5s;
+    transition: transform 0.3s, background 0.3s;
     text-align: center;
     border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Interacción de la tarjeta: Animación y cambio de colores */
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     background: #FFC107;
     color: #1C1C1C;
 }
@@ -271,7 +279,7 @@ body {
     background: rgba(0,0,0,0.3);
     color: #F5F5F5;
     outline: none;
-    transition: border 0.5s, background 0.5s;
+    transition: border 0.3s, background 0.3s;
     font-family: inherit;
 }
 
@@ -282,6 +290,10 @@ body {
 .form-actions {
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 25px;
 }
 
 /* Botones de acción del formulario */
@@ -296,6 +308,25 @@ body {
     cursor: pointer;
     font-family: inherit;
 }
+
+.form-actions .btn-cancel {
+   background: #dc3545;
+    color: #ffff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.readonly-input {
+            background-color: #F4F7F9 !important;
+            color: #888 !important;
+            cursor: not-allowed;
+            border: 1px solid #DFE2E8;
+        }
 
 /* ========================== Diseño responsivo: Ajustes para pantallas pequeñas ========================== */
 @media (max-width: 768px) {

@@ -2,6 +2,8 @@ package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Repository.LoginRepository;
+
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,4 +19,5 @@ public class LoginServiceImplements implements LoginService {
                 .findByCorreoLoginAndUsuarioLoginAndContrasenaLoginAndRoles(correoLogin, usuarioLogin, contrasenaLogin, roles)
                 .orElse(null);
     }
+
 }

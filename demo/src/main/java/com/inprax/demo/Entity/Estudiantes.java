@@ -29,8 +29,7 @@ public class Estudiantes {
     @Column(name = "apellido")
     private String apellido;
 
-    @NotNull(message = "El numero de telefono es un campo obligatorio")
-    @Positive(message = "El numero de telefono debe ser positivo")
+    @NotBlank(message = "El numero de telefono es un campo obligatorio")
     @Column(name = "telefono")
     private String telefono;
 
@@ -50,8 +49,7 @@ public class Estudiantes {
     @Column(name = "nombreinstitucion")
     private String nombreInstitucion;
 
-    @NotNull(message = "El numero de telefono del tutor es un campo obligatorio")
-    @Positive(message = "El numero de telefono del tutor debe ser positivo")
+    @NotBlank(message = "El numero de telefono del tutor es un campo obligatorio")
     @Column(name = "tutortel")
     private String tutortel;
 

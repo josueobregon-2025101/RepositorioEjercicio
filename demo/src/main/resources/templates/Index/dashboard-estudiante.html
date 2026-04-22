@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://thymeleaf.org">
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
@@ -23,17 +23,25 @@
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <nav>
                 <ul>
-                    <li><a th:href="@{/dashboard-estudiante}" class="active"><i class="fas fa-home"></i> Inicio</a></li>
-
-                    <li><a th:href="@{/practicas}"><i class="fas fa-search"></i> Prácticas disponibles</a></li>
-
-                    <li><a th:href="@{/postulaciones}"><i class="fas fa-file-alt"></i> Mis postulaciones</a></li>
-
-                    <li><a th:href="@{/documentos}"><i class="fas fa-folder-open"></i> Mis documentos</a></li>
-
-                    <li><a th:href="@{/perfil-estudiante}"><i class="fas fa-user-circle"></i> Perfil</a></li>
-
-                    <li><a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                    <li class="active">
+                        <a th:href="@{/dashboard-estudiante}">Inicio</a>
+                    </li> 
+                    
+                    <li>
+                        <a th:href="@{/practicas}">Prácticas disponibles</a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/postulaciones}">Mis postulaciones</a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/documentos}">Mis documentos</a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/perfil-estudiante}">Perfil</a>
+                    </li>
                 </ul>
             </nav>
         </aside>
