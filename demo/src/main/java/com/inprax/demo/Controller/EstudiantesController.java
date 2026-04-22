@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api/Estudiantes")
 public class EstudiantesController {
 
     @Autowired
@@ -44,7 +45,7 @@ public class EstudiantesController {
     @PostMapping("/admin/estudiantes/guardarestudiante")
     public String guardarEstudiante(@ModelAttribute Estudiantes estudiantes) {
         service.saveEstudiantes(estudiantes);
-        return "redirect:/admin/estudiantes";
+        return "redirect:/api/Estudiantes/admin/estudiantes";
     }
 
     @GetMapping("/admin/estudiantes/editarestudiante/{id}")
@@ -52,7 +53,7 @@ public class EstudiantesController {
         Estudiantes estudiantes = service.getEstudianteById(id);
         model.addAttribute("estudiantes", estudiantes);
         model.addAttribute("institucion", institucionService.getAllInstituciones());
-        return "editar-estudiante";
+        return "Index/editar-estudiante";
     }
     
     
@@ -61,7 +62,7 @@ public class EstudiantesController {
     @GetMapping("/admin/estudiantes/eliminar/{id}")
     public String eliminarEstudiante(@PathVariable Integer id) {
         service.deleteEstudiantes(id);
-        return "redirect:/admin/estudiantes";
+        return "redirect:/api/Estudiantes/admin/estudiantes";
     }
 
 
