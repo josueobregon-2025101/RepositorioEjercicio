@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +22,11 @@ public class EstudiantesController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<Estudiantes> listar() {
-        return service.getAllEstudiantes();
+    @GetMapping("/lista")
+    public String listarEstudiantes(Model model) {
+        List<Estudiantes> lista = service.getAllEstudiantes();
+        model.addAttribute("estudiantes", lista);
+        return "Index/estudiantes";
     }
 
     @GetMapping("/estudiantes")
@@ -33,19 +36,19 @@ public class EstudiantesController {
 
     @GetMapping("/buscar/{id}")
     public String obtener(@PathVariable Integer id) {
-        Estudiantes obtener = service.getEstudianteById(id);
+        service.getEstudianteById(id);
         return "Index/estudiantes";
     }
 
     @PostMapping("/agregar/{id}")
     public String crear(@Valid Estudiantes estudiante, BindingResult result) {
-        Estudiantes nuevo = service.saveEstudiantes(estudiante);
+        service.saveEstudiantes(estudiante);
         return "redirect:/Index/estudiantes";
     }
 
     @PostMapping ("/upgradear/{id}")
     public String actualizar(@PathVariable Integer id, @Valid Estudiantes estudiante, BindingResult result) {
-        Estudiantes actualizado = service.updateEstudiantes(id, estudiante);
+        service.updateEstudiantes(id, estudiante);
         return "redirect:/Index/estudiantes";
     }
 
