@@ -2,59 +2,60 @@ package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Estudiantes;
 import com.inprax.demo.Service.EstudiantesService;
-import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.inprax.demo.Service.InstitucionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/estudiantes")
 public class EstudiantesController {
 
-    private final EstudiantesService service;
+    @Autowired
+    private EstudiantesService service;
 
-    public EstudiantesController(EstudiantesService service) {
-        this.service = service;
-    }
+    @Autowired
+    private InstitucionService institucionService;
 
-    @GetMapping("/lista")
+
+    @GetMapping("/admin/estudiantes")
     public String listarEstudiantes(Model model) {
-        List<Estudiantes> lista = service.getAllEstudiantes();
-        model.addAttribute("estudiantes", lista);
+        List<Estudiantes> estudiantes = service.getAllEstudiantes();
+        model.addAttribute("estudiantes", estudiantes);
         return "Index/estudiantes";
     }
 
-    @GetMapping("/estudiantes")
-    public String mostrarEstudiantes() {
-        return "Index/estudiantes";
+    @GetMapping("/admin/estudiantes/agregarestudiante")
+    public String estudianteNuevo(Model model) {
+        model.addAttribute("estudiantes", new Estudiantes());
+        model.addAttribute("institucion", institucionService.getAllInstituciones());
+        return "Index/agregar-estudiante";
     }
 
-    @GetMapping("/buscar/{id}")
-    public String obtener(@PathVariable Integer id) {
-        service.getEstudianteById(id);
-        return "Index/estudiantes";
+    @PostMapping("/admin/estudiantes/guardarestudiante")
+    public String guardarEstudiante(@ModelAttribute Estudiantes estudiantes) {
+        service.saveEstudiantes(estudiantes);
+        return "redirect:/admin/estudiantes";
     }
 
-    @PostMapping("/agregar/{id}")
-    public String crear(@Valid Estudiantes estudiante, BindingResult result) {
-        service.saveEstudiantes(estudiante);
-        return "redirect:/Index/estudiantes";
+    @GetMapping("/admin/estudiantes/editarestudiante/{id}")
+    public String editarEstudiante(@PathVariable Integer id, Model model) {
+        Estudiantes estudiantes = service.getEstudianteById(id);
+        model.addAttribute("estudiantes", estudiantes);
+        model.addAttribute("institucion", institucionService.getAllInstituciones());
+        return "editar-estudiante";
     }
 
-    @PostMapping ("/upgradear/{id}")
-    public String actualizar(@PathVariable Integer id, @Valid Estudiantes estudiante, BindingResult result) {
-        service.updateEstudiantes(id, estudiante);
-        return "redirect:/Index/estudiantes";
-    }
 
-    @GetMapping("/eliminar/{id}")
-    public String deletedEstudiante(@Valid @PathVariable Integer id) {
+
+
+    @GetMapping("/admin/estudiantes/eliminar/{id}")
+    public String eliminarEstudiante(@PathVariable Integer id) {
         service.deleteEstudiantes(id);
-        return "redirect:/Index/estudiantes";
+        return "redirect:/admin/estudiantes";
     }
+
+
 }
