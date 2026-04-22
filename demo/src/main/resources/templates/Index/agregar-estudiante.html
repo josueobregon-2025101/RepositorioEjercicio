@@ -7,7 +7,7 @@
     <title>Agregar Estudiante</title>
     
     <!-- Vinculación de los estilos específicos para la interfaz del administrador -->
-    <link rel="stylesheet" th:href="@{../Styles/dashboard-admin.css}">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
     <!-- Enlace a la biblioteca de iconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -19,7 +19,7 @@
         <aside class="sidebar">
             <!-- Contenedor del nombre de la marca/plataforma -->
             <div class="logo">
-                <img th:src="@{../Images/INPRAX.png}">
+                <img th:src="@{/Images/INPRAX.png}">
             </div>
             <!-- Menú de navegación principal con iconos -->
             <nav>
@@ -51,31 +51,70 @@
                 <div class="profile-card">
                     <h2>Nuevo Estudiante</h2>
                     <!-- Formulario de acceso para el registro de nuevos estudiantes -->
-                    <form action="#" method="post" class="profile-form">
+                    <form id="formEstudiante" th:action="@{/admin/estudiantes/guardarestudiante}" th:object="${estudiantes}" method="post" class="profile-form">
                         <!-- Campos de entrada de datos para el usuario -->
-                        <div class="form-group">
-                            <label for="nombre">Nombre completo:</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez">
+                         <div class="form-group">
+                            <label for="institucion">Intitucion:</label>
+                            <div class="input-container">
+                                <select th:field="*{institucion}" id="institucion" required>
+                                    <option value="">Selecciona una institucion</option>
+                                    <option th:each="i : ${institucion}"
+                                            th:value="${i.id}"
+                                            th:text="${i.nombre}">
+                                        </option>
+                                </select>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="correo">Correo:</label>
-                            <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com">
+                            <label for="idLogin">ID Login:</label>
+                            <input type="text" id="idLogin" th:field="*{idlogin}" placeholder="Ej: 1">
                         </div>
+
                         <div class="form-group">
-                            <label for="telefono">Teléfono:</label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="555-0000">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ej: Juan">
                         </div>
+
+                        <div class="form-group">
+                            <label for="apellido">Apellido:</label>
+                            <input type="text" id="apellido" th:field="*{apellido}" placeholder="Ej: Pérez">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edad">Edad:</label>
+                            <input type="text" id="edad" th:field="*{edad}" placeholder="Ej: 18">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Telefono:</label>
+                            <input type="tel" id="telefono" th:field="*{telefono}" placeholder="Ej: 5469-8702">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="grado">Grado:</label>
+                            <input type="text" id="grado" th:field="*{grado}" placeholder="Ej: 5to">
+                        </div>
+
                         <div class="form-group">
                             <label for="carrera">Carrera:</label>
-                            <input type="text" id="carrera" name="carrera" placeholder="Ej: Ingeniería en Sistemas">
+                            <input type="text" id="carrera" th:field="*{carrera}" placeholder="Ej: Informatica">
                         </div>
+
                         <div class="form-group">
-                            <label for="password">Contraseña:</label>
-                            <input type="password" id="password" name="password" placeholder="********">
+                            <label for="correo">Correo:</label>
+                            <input type="email" id="correo" th:field="*{correo}" placeholder="Ej: example@gmail.com">
                         </div>
+
+                        <div class="form-group">
+                            <label for="tutortel">Telefono del Tutor:</label>
+                            <input type="tel" id="tutortel" th:field="*{tutortel}" placeholder="Ej: 5469-8702">
+                        </div>
+                        
+
                         <!-- Botones de acción para gestionar la creación del registro -->
                         <div class="form-actions">
-                            <button type="button" class="btn"><i class="fas fa-save"></i> Guardar Estudiante</button>
+                            <button type="submit" class="btn"><i class="fas fa-save"></i> Guardar Estudiante</button>
                         </div>
                     </form>
                 </div>
