@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api/administradores")
 public class AdministradoresController {
 
     private final AdministradoresService administradoresService;
