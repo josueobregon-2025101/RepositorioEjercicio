@@ -43,8 +43,9 @@ public class EstudiantesController {
     }
 
     @PostMapping("/admin/estudiantes/guardarestudiante")
-    public String guardarEstudiante(@ModelAttribute Estudiantes estudiantes) {
+    public String guardarEstudiante(@ModelAttribute Estudiantes estudiantes, Model model) {
         service.saveEstudiantes(estudiantes);
+        model.addAttribute("institucion", institucionService.getAllInstituciones());
         return "redirect:/api/Estudiantes/admin/estudiantes";
     }
 
