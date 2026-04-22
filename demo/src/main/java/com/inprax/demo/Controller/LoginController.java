@@ -3,11 +3,12 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.LoginService;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/login")
+@Controller
 public class LoginController {
 
     private final LoginService loginService;
@@ -16,8 +17,20 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping
-    public ResponseEntity<?> validarLogin(@Valid @RequestBody Login login) {
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String loginForm() {
+        return "Index/Login";
+    }
+
+    @PostMapping("/login")
+    public String validarLogin(@Valid @ModelAttribute Login login,
+                               HttpSession session,
+                               Model model) {
         try {
             Login resultado = loginService.validarLogin(
                     login.getCorreoLogin(),
@@ -26,12 +39,15 @@ public class LoginController {
                     login.getRoles()
             );
             if (resultado != null) {
-                return ResponseEntity.ok().body(resultado);
+                session.setAttribute("usuarioLogueado", resultado);
+                return "redirect:/admin/dashboard";
             } else {
-                return ResponseEntity.status(401).body("Credenciales invalidas");
+                model.addAttribute("error", "Credenciales inválidas");
+                return "Pages/login";
             }
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            model.addAttribute("error", "Error al iniciar sesión");
+            return "Index/Login";
         }
     }
 }
