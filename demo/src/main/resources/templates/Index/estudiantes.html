@@ -7,7 +7,7 @@
     <title>Gestión de Estudiantes</title>
 
     <!-- Vinculación de los estilos específicos para la interfaz del administrador -->
-    <link rel="stylesheet" th:href="@{../Styles/dashboard-admin.css}" />
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}" />
     <!-- Enlace a la biblioteca de iconos Font Awesome -->
     <link
       rel="stylesheet"
@@ -21,35 +21,35 @@
       <aside class="sidebar">
         <!-- Contenedor del nombre de la marca/plataforma -->
         <div class="logo">
-          <img th:src="@{../Images/INPRAX.png}" />
+          <img th:src="@{/Images/INPRAX.png}" />
         </div>
         <!-- Menú de navegación principal con iconos -->
         <nav>
           <ul>
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <li>
-              <a th:href="@{/admin/dashboard}"
+              <a th:href="@{/api/administradores/admin}"
                 ><i class="fas fa-home"></i> Dashboard</a
               >
             </li>
             <li>
-              <a th:href="@{/admin/estudiantes}" class="active"
+              <a th:href="@{/api/Estudiantes/admin/estudiantes}" class="active"
                 ><i class="fas fa-user-graduate"></i> Estudiantes</a
               >
             </li>
             <!-- Clase 'active' para resaltar la página actual -->
             <li>
-              <a th:href="@{/admin/empresas}"
+              <a th:href="@{/api/admin/empresas}"
                 ><i class="fas fa-building"></i> Empresas</a
               >
             </li>
             <li>
-              <a th:href="@{/admin/practicas}"
+              <a th:href="@{/api/admin/practicas}"
                 ><i class="fas fa-briefcase"></i> Prácticas</a
               >
             </li>
             <li>
-              <a th:href="@{/admin/perfil}"
+              <a th:href="@{/api/admin/perfil}"
                 ><i class="fas fa-user"></i> Perfil</a
               >
             </li>
@@ -93,6 +93,7 @@
                 <th>Apellido</th>
                 <th>Edad</th>
                 <th>Teléfono</th>
+                <th>Grado</th>
                 <th>Carrera</th>
                 <th>Correo</th>
                 <th>Teléfono Tutor</th>
@@ -109,18 +110,19 @@
                 <td th:text="${estudiante.apellido}"></td>
                 <td th:text="${estudiante.edad}">18</td>
                 <td th:text="${estudiante.telefono}">555-1234</td>
+                <td th:text="${estudiante.grado}">10</td>
                 <td th:text="${estudiante.carrera}">Ingeniería de Sistemas</td>
                 <td th:text="${estudiante.correo}">juan.perez@mail.com</td>
                 <td th:text="${estudiante.tutortel}">555-5678</td>
                 <td class="actions">
                   <div class="action-buttons">
                     <a
-                      th:href="@{/admin/estudiantes/editarestudiante/{id}(id=${estudiante.idestudiante})}"
+                      th:href="@{/api/Estudiantes/admin/estudiantes/editarestudiante/{id}(id=${estudiante.idestudiante})}"
                       class="action-btn edit"
                       ><i class="fas fa-edit"></i
                     ></a>
                     <a
-                      th:href="@{/admin/estudiantes/eliminar/{id}(id=${estudiante.idestudiante})}"
+                      th:href="@{/api/Estudiantes/admin/estudiantes/eliminar/{id}(id=${estudiante.idestudiante})}"
                       class="action-btn delete" onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
                       ><i class="fas fa-trash-alt"></i
                     ></a>
