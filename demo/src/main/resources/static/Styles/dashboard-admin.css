@@ -25,7 +25,7 @@ body {
 
 /* ========================== Sidebar: Menú de navegación fijo ========================== */
 .sidebar {
-    width: 250px;
+    width: 200px;
     background: #1C1C1C;
     padding: 30px 0;
     display: flex;
@@ -167,9 +167,14 @@ body {
 
 .table th, .table td {
     padding: 12px 15px;
-    text-align: left;
+    text-align: center;
     color: #F5F5F5;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.table th:first-child, 
+.table td:first-child {
+    text-align: left;
 }
 
 .table th {
@@ -185,12 +190,10 @@ body {
 .action-btn {
     display: inline-block;
     padding: 6px 10px;
+    margin: 2px 4px;
     border-radius: 5px;
     text-decoration: none;
-    color: #F5F5F5;
-    margin-right: 5px;
     transition: background 0.3s;
-    font-family: inherit;
 }
 
 /* Colores específicos para la moderación y gestión de registros */
@@ -241,10 +244,27 @@ body {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
+.profile-card h2 {
+    margin-bottom: 25px;
+}
+
 /* Estilos para inputs, selectores y áreas de texto del formulario */
+.profile-form .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-form .form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #FFC107;
+}
+
 .profile-form .form-group input,
 .profile-form .form-group select,
 .profile-form .form-group textarea {
+    width: 100%;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid rgba(255,255,255,0.3);
@@ -259,6 +279,11 @@ body {
     border-color: #FFC107;
 }
 
+.form-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
 /* Botones de acción del formulario */
 .form-actions .btn {
     background: #FFC107;
@@ -266,6 +291,7 @@ body {
     padding: 10px 18px;
     border-radius: 6px;
     font-weight: bold;
+    width: 100%;
     border: none;
     cursor: pointer;
     font-family: inherit;
