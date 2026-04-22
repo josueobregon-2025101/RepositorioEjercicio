@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moderación de Prácticas</title>
-
     <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 <div class="dashboard">
 
@@ -16,6 +16,7 @@
         <div class="logo">
             <img th:src="@{/Images/INPRAX.png}" alt="Logo INPRAX">
         </div>
+
         <nav>
             <ul>
                 <li><a th:href="@{/dashboard-admin}"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -30,6 +31,7 @@
 
     <!-- Main content -->
     <main class="main-content">
+
         <header class="header">
             <h1>Moderación de Prácticas</h1>
             <a th:href="@{/logout}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
@@ -41,6 +43,7 @@
 
         <div class="table-container">
             <table class="table">
+
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -51,26 +54,31 @@
                     <th>Acciones</th>
                 </tr>
                 </thead>
+
                 <tbody>
-                <!-- Iteración dinámica con Thymeleaf -->
                 <tr th:each="practica : ${practicas}">
-                    <td th:text="${practica.id}">1</td>
+                    <td th:text="${practica.idPractica}">1</td>
                     <td th:text="${practica.titulo}">Título</td>
-                    <td th:text="${practica.empresa}">Empresa</td>
-                    <td th:text="${practica.estudiante}">Estudiante</td>
-                    <td th:text="${practica.estado}">Estado</td>
+                    <td th:text="${practica.idEmpresa}">Empresa</td>
+                    <td th:text="${practica.carreraPractica}">Carrera</td>
+                    <td th:text="${practica.vigencia}">Estado</td>
+
                     <td>
-                        <a th:href="@{/practicas/editar/{id}(id=${practica.id})}" class="action-btn edit"><i class="fas fa-edit"></i></a>
-                        <a th:href="@{/practicas/aprobar/{id}(id=${practica.id})}" class="action-btn accept"><i class="fas fa-check"></i></a>
-                        <a th:href="@{/practicas/rechazar/{id}(id=${practica.id})}" class="action-btn reject"><i class="fas fa-times"></i></a>
-                        <form th:action="@{/practicas/eliminar/{id}(id=${practica.id})}" method="post" style="display:inline;">
+                        <a th:href="@{/practicas/editar/{id}(id=${practica.idPractica})}" class="action-btn edit"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{/practicas/aprobar/{id}(id=${practica.idPractica})}" class="action-btn accept"><i class="fas fa-check"></i></a>
+                        <a th:href="@{/practicas/rechazar/{id}(id=${practica.idPractica})}" class="action-btn reject"><i class="fas fa-times"></i></a>
+
+                        <form th:action="@{/practicas/eliminar/{id}(id=${practica.idPractica})}" method="post" style="display:inline;">
                             <button type="submit" class="action-btn delete"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
+
                 </tr>
                 </tbody>
+
             </table>
         </div>
+
     </main>
 </div>
 </body>
