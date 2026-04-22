@@ -4,12 +4,14 @@ import com.inprax.demo.Entity.Administradores;
 import com.inprax.demo.Service.AdministradoresService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/administradores")
+@Controller
+@RequestMapping("/administradores")
 public class AdministradoresController {
 
     private final AdministradoresService administradoresService;
@@ -18,9 +20,16 @@ public class AdministradoresController {
         this.administradoresService = administradoresService;
     }
 
-    @GetMapping
-    public List<Administradores> getAllAdministradores() {
-        return administradoresService.getAllAdministradores();
+    @GetMapping("/lista")
+    public String mostrarAdministradores(Model model) {
+        List<Administradores> listar = administradoresService.getAllAdministradores();
+        model.addAttribute("administrador", listar);
+        return "Index/administradores";
+    }
+
+    @GetMapping("/administradores")
+    public String mostrarAdministrador() {
+        return "Index/administradores";
     }
 
     @GetMapping("/{id}")
@@ -43,28 +52,28 @@ public class AdministradoresController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateAdministrador(@PathVariable Integer id, @Valid @RequestBody Administradores administrador) {
+    @PostMapping("/upgradear/{id}")
+    public String updateAdministrador(@PathVariable Integer id, @Valid @RequestBody Administradores administrador) {
         try {
             Administradores actualizado = administradoresService.updateAdministrador(id, administrador);
             if (actualizado != null) {
-                return ResponseEntity.ok(actualizado);
+                return "redirect:/Index/administradores";
             } else {
-                return ResponseEntity.notFound().build();
+                return "No existe el administrador";
             }
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return e.getMessage();
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAdministrador(@PathVariable @Valid Integer id) {
+    @GetMapping("/eliminar/{id}")
+    public String deleteAdministrador(@PathVariable @Valid Integer id) {
         Administradores administrador = administradoresService.getAdministradorById(id);
         if (administrador != null) {
             administradoresService.deleteAdministrador(id);
-            return ResponseEntity.ok().body("Se elimino el administrador");
+            return "redirect:/Index/administradores";
         } else {
-            return ResponseEntity.status(404).body("No existe el administrador");
+            return "No existe el administrador";
         }
     }
 }

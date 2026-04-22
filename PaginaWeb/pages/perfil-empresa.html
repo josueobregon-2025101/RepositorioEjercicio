@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<!-- Configuración básica del documento -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Perfil Empresa - Inprax</title>
+	
+	<!-- Enlace a la hoja de estilos externa para el diseño visual -->
+	<link rel="stylesheet" href="../Styles/perfil-empresa.css">
+</head>
+<body>
+
+	<!-- Contenedor principal que organiza el sidebar y el contenido central -->
+	<div class="dashboard">
+
+		<!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+		<aside class="sidebar">
+			<div class="logo">
+                <img src="../Images/INPRAX.png">
+            </div>
+
+			<!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+			<ul>
+				<li onclick="location.href='dashboard-empresa.html'">Inicio</li>
+                <li onclick="location.href='crear-practica.html'">Crear práctica</li>
+                <li onclick="location.href='editar-practica.html'">Editar práctica</li>
+                <li onclick="location.href='postulantes.html'">Postulantes</li>
+                <li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
+                <li class="active" onclick="location.href='perfil-empresa.html'">Perfil</li>
+			</ul>
+		</aside>
+
+		<!-- Área de contenido principal: Donde se muestra la información dinámica -->
+		<main class="main-content">
+
+			<!-- Cabecera del panel: Título y botón de salida -->
+			<header class="header">
+				<h1>Perfil de la Empresa</h1>
+				<!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+				<button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+			</header>
+
+			<!-- Contenedor específico para la gestión de información del usuario -->
+			<section class="profile-container">
+
+				<!-- Sección para la imagen de perfil o logo corporativo -->
+				<div class="profile-logo">
+					<img src="../Images/perfil.png">
+				</div>
+
+				<!-- Formulario de datos personales/corporativos -->
+				<div class="profile-form">
+
+					<!-- Campos de entrada de datos para el usuario -->
+					<div class="input-group">
+						<label>Nombre de la empresa</label>
+						<input type="text" value="Empresa Tech">
+					</div>
+
+					<div class="input-group">
+						<label>Correo empresarial</label>
+						<input type="email" value="empresa@email.com">
+					</div>
+
+					<div class="input-group">
+						<label>Teléfono</label>
+						<input type="text" value="5555-1234">
+					</div>
+
+					<div class="input-group">
+						<label>Dirección</label>
+						<input type="text" value="Ciudad, País">
+					</div>
+
+					<!-- Campo de área de texto para información extendida -->
+					<div class="input-group full">
+						<label>Descripción de la empresa</label>
+						<textarea>Empresa dedicada al desarrollo de software y tecnología.</textarea>
+					</div>
+
+					<div class="input-group">
+						<label>Sitio web</label>
+						<input type="text" value="www.empresa.com">
+					</div>
+
+					<div class="input-group">
+						<label>Sector</label>
+						<input type="text" value="Tecnología">
+					</div>
+				</div>
+
+				<!-- Botones de acción para gestionar la edición de datos -->
+				<div class="profile-actions">
+					<button class="btn-edit">Editar</button>
+					<button class="btn-save">Guardar cambios</button>
+				</div>
+			</section>
+		</main>
+	</div>
+</body>
+</html>
