@@ -75,15 +75,21 @@
         </header>
 
         <!-- Sección de accesos rápidos para la creación de nuevos registros -->
-        <div class="actions">
-          <a th:href="@{estudiantes/agregarestudiante}" class="btn"
-            ><i class="fas fa-plus"></i> Agregar Estudiante</a
-          >
+        <div style="display: flex; gap: 15px; align-items: right;">
+          <div class="input-containerB" style="margin: 0;">
+            <input type="text" id="buscar" placeholder="Buscar estudiante..." onkeyup="filtrarTabla()" style="width: 50%;"/>
+          </div>
         </div>
+
+        <div class="actions" >
+            <a th:href="@{estudiantes/agregarestudiante}" class="btn"
+              ><i class="fas fa-plus"></i> Agregar Estudiante</a
+            >
+          </div>
 
         <!-- Contenedor específico para la visualización de datos en formato de tabla -->
         <div class="table-container">
-          <table class="table">
+          <table class="table" id="tablaEstudiantes">
             <thead>
               <tr>
                 <th>ID</th>
@@ -134,5 +140,18 @@
         </div>
       </main>
     </div>
+
+    <script>
+        function filtrarTabla() {
+            const input = document.getElementById("buscar").value.toLowerCase();
+            const filas = document.querySelectorAll("#tablaEstudiantes tbody tr");
+
+            filas.forEach(fila => {
+                const texto = fila.innerText.toLowerCase();
+                fila.style.display = texto.includes(input) ? "" : "none";
+            });
+        }
+    </script>
+
   </body>
 </html>
