@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,10 +36,21 @@ public class PracticasController {
         }
     }
 
-    @GetMapping("/prac")
-    public String practicas(){
+    @GetMapping("/practicas")
+    public String practicas(Model model){
+        List<Practicas> practicas = practicasService.getAllPracticas();
+        model.addAttribute("practicas", practicas);
         return "Index/practicas";
     }
+
+
+    @GetMapping("/practicas-admin")
+    public String mostrarPracticas(Model model) {
+        List<Practicas> practicas = practicasService.getAllPracticas();
+        model.addAttribute("practicas", practicas);
+        return "Index/practicas-admin";
+    }
+
 
     @PostMapping
     public ResponseEntity<Object> createPracticas(@Valid @RequestBody Practicas practicas){
