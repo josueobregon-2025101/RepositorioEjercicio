@@ -44,7 +44,7 @@ public class Empresa {
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
-    @NotNull(message = "El ID de login es obligatorio")
+    // VERIFICAR PORQUE APARECE LOGIN SI SE DEBE CREAR ANTES UNA EMPRESA @NotNull(message = "El ID de login es obligatorio")
     @Positive(message = "El ID de login debe ser un numero positivo")
     @Column(name = "id_login")
     private Integer idLogin;
