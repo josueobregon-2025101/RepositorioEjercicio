@@ -27,7 +27,14 @@ public class EmpresaServiceImplements implements EmpresaService {
 
     @Override
     public Empresa saveEmpresa(Empresa empresa) {
-        return empresaRepository.save(empresa);
+        //METODO PARA GUARDAR LA EMPRESA
+
+    if (empresaRepository.findByNombreEmpresa(empresa.getNombreEmpresa()) != null) {
+        return null;
+    }
+    Empresa newEmpresa = empresa;
+        System.out.println("Nombre: " + empresa.getNombreEmpresa());
+        return empresaRepository.save(newEmpresa);
     }
 
     @Override
