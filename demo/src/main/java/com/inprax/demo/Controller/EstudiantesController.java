@@ -3,22 +3,16 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Estudiantes;
 import com.inprax.demo.Service.EstudiantesService;
 import com.inprax.demo.Service.InstitucionService;
-import com.inprax.demo.Service.LoginService;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Controller
-@RequestMapping("/api/Estudiantes")
+@RequestMapping("/estudiantes")
 public class EstudiantesController {
 
     @Autowired
@@ -28,27 +22,33 @@ public class EstudiantesController {
     private InstitucionService institucionService;
 
 
-    @GetMapping("/admin/estudiantes")
+    @GetMapping("/estudiantes")
     public String listarEstudiantes(Model model) {
         List<Estudiantes> estudiantes = service.getAllEstudiantes();
         model.addAttribute("estudiantes", estudiantes);
         return "Index/estudiantes";
     }
 
-    @GetMapping("/admin/estudiantes/agregarestudiante")
+    @GetMapping("/estudiantes/dashboard")
+    public String dashboardEstudianteString(Model model) {
+        return "Index/dashboard-estudiante";
+    }
+    
+
+    @GetMapping("/estudiantes/nuevos")
     public String estudianteNuevo(Model model) {
         model.addAttribute("estudiantes", new Estudiantes());
         model.addAttribute("institucion", institucionService.getAllInstituciones());
         return "Index/agregar-estudiante";
     }
 
-    @PostMapping("/admin/estudiantes/guardarestudiante")
+    @PostMapping("/estudiantes/guardar")
     public String guardarEstudiante(@ModelAttribute Estudiantes estudiantes) {
         service.saveEstudiantes(estudiantes);
-        return "redirect:/api/Estudiantes/admin/estudiantes";
+        return "redirect:/estudiantes/estudiantes";
     }
 
-    @GetMapping("/admin/estudiantes/editarestudiante/{id}")
+    @GetMapping("/estudiantes/editar/{id}")
     public String editarEstudiante(@PathVariable Integer id, Model model) {
         Estudiantes estudiantes = service.getEstudianteById(id);
         model.addAttribute("estudiantes", estudiantes);
@@ -56,13 +56,10 @@ public class EstudiantesController {
         return "Index/editar-estudiante";
     }
     
-    
-    
-
-    @GetMapping("/admin/estudiantes/eliminar/{id}")
+    @GetMapping("/estudiantes/eliminar/{id}")
     public String eliminarEstudiante(@PathVariable Integer id) {
         service.deleteEstudiantes(id);
-        return "redirect:/api/Estudiantes/admin/estudiantes";
+        return "redirect:/estudiantes/estudiantes";
     }
 
 
