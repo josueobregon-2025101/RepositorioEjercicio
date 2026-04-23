@@ -51,23 +51,23 @@
             <div class="profile-card">
                 <h2>Nueva Empresa</h2>
                 <!-- Formulario de acceso para el registro de nuevas empresas -->
-                <form th:action="@{/admin/empresas/guardar}" method="post" class="profile-form">
+                <form th:action="@{/empresas/guardar}" method="post" class="profile-form">
                     <!-- Campos de entrada de datos para el usuario -->
                     <div class="form-group">
                         <label for="nombre">Nombre de la empresa:</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Ej: ACME S.A.">
+                        <input type="text" id="nombre" name="nombreEmpresa" placeholder="Ej: ACME S.A.">
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo:</label>
-                        <input type="email" id="correo" name="correo" placeholder="empresa@correo.com">
+                        <input type="email" id="correo" name="correoEmpresa" placeholder="empresa@correo.com">
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono:</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="555-0000">
+                        <input type="tel" id="telefono" name="telefonoEmpresa" placeholder="555-0000">
                     </div>
                     <div class="form-group">
                         <label for="direccion">Dirección:</label>
-                        <input type="text" id="direccion" name="direccion" placeholder="Calle 123, Ciudad">
+                        <input type="text" id="direccion" name="direccionEmpresa" placeholder="Calle 123, Ciudad">
                     </div>
                     <div class="form-group">
                         <label for="sector">Sector:</label>
