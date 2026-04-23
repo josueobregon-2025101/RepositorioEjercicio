@@ -10,4 +10,6 @@ import com.inprax.demo.Entity.Login;
 public interface LoginService {
 
     Login validarLogin(String correoLogin, String usuarioLogin, String contrasenaLogin, String roles);
+
+    Login registrarLogin(String usuarioLogin, String contrasenaLogin, String correoLogin, String roles);
 }
