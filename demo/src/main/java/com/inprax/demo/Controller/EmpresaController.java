@@ -5,11 +5,12 @@ import com.inprax.demo.Service.EmpresaService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/empresas")
+@RequestMapping("/empresas")
 public class EmpresaController {
 
     private final EmpresaService empresaService;
@@ -38,6 +39,35 @@ public class EmpresaController {
     @GetMapping("/empresas")
     public String empresas() {
         return "Index/empresas";
+    }
+
+    @GetMapping("/empresas/nuevo")
+    public String agregarEmpresa(){
+    return "Index/agregar-empresa";
+    }
+
+    @PostMapping("/guardar")
+    public String nuevaEmpresa(Empresa empresa, Model model) {
+        //Sirve pero solo con datos quemados y nombre opcional
+
+        // 🔥 datos quemados
+        empresa.setTipoEmpresa("Tecnologia");
+        empresa.setTamanoEmpresa("Mediana");
+        empresa.setTelefonoEmpresa("12345678");
+        empresa.setCorreoEmpresa("empresa@test.com");
+        empresa.setDireccionEmpresa("Ciudad Guatemala");
+        empresa.setHorarioEmpresa("8:00 AM - 5:00 PM");
+        empresa.setDescripcion("Empresa de prueba");
+        empresa.setIdLogin(1); //<-VERIFICAR PORQUE ESTA EN LA DB
+
+        Empresa e = empresaService.saveEmpresa(empresa);
+
+        if (e == null) {
+            model.addAttribute("error", "La empresa ya existe");
+            return "Index/agregar-empresa";
+        }
+        System.out.println("Empresa agregado correctamente");
+        return "redirect:/empresas/empresas";
     }
 
     @PostMapping
