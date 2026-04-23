@@ -20,4 +20,17 @@ public class LoginServiceImplements implements LoginService {
                 .orElse(null);
     }
 
+    @Override
+    public Login registrarLogin(String usuarioLogin, String contrasenaLogin, String correoLogin, String roles){
+        if (loginRepository.findByUsuarioLogin(usuarioLogin) != null) {
+            return null;
+        }
+        Login l = new Login();
+        l.setUsuarioLogin(usuarioLogin);
+        l.setContrasenaLogin(contrasenaLogin);
+        l.setCorreoLogin(correoLogin);
+        l.setRoles(roles);
+        return loginRepository.save(l);
+    }
+
 }
