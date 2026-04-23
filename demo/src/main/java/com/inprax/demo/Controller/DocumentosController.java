@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/Documentos")
+@RequestMapping("/documentos")
 public class DocumentosController {
     private final DocumentosService documentosService;
 
