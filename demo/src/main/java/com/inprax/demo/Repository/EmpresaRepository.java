@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
-    //METODO PARA BUSCAR POR NOMBRE QUE NO SEA REPETIDO
-    Empresa findByNombreEmpresa(String nombreEmpresa);
 }
