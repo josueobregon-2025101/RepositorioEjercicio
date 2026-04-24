@@ -1,6 +1,7 @@
 package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Empresa;
+import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EmpresaService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -47,20 +48,18 @@ public class EmpresaController {
     }
 
     @PostMapping("/guardar")
-    public String nuevaEmpresa(Empresa empresa, Model model) {
+    public String nuevaEmpresa(Empresa empresa, Login login, Model model) {
         //Sirve pero solo con datos quemados y nombre opcional
 
         // 🔥 datos quemados
         empresa.setTipoEmpresa("Tecnologia");
         empresa.setTamanoEmpresa("Mediana");
         empresa.setTelefonoEmpresa("12345678");
-        empresa.setCorreoEmpresa("empresa@test.com");
         empresa.setDireccionEmpresa("Ciudad Guatemala");
         empresa.setHorarioEmpresa("8:00 AM - 5:00 PM");
         empresa.setDescripcion("Empresa de prueba");
-        empresa.setIdLogin(1); //<-VERIFICAR PORQUE ESTA EN LA DB
 
-        Empresa e = empresaService.saveEmpresa(empresa);
+        Empresa e = empresaService.saveEmpresa(empresa,login);
 
         if (e == null) {
             model.addAttribute("error", "La empresa ya existe");
@@ -69,7 +68,7 @@ public class EmpresaController {
         System.out.println("Empresa agregado correctamente");
         return "redirect:/empresas/empresas";
     }
-
+    /*
     @PostMapping
     @ResponseBody
     public ResponseEntity<?> saveEmpresa(@Valid @RequestBody Empresa empresa) {
@@ -84,6 +83,8 @@ public class EmpresaController {
             return ResponseEntity.status(400).body("Error al crear la empresa");
         }
     }
+
+     */
 
     @PutMapping("/{id}")
     @ResponseBody
