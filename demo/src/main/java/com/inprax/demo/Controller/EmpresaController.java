@@ -1,5 +1,6 @@
 package com.inprax.demo.Controller;
 
+import com.inprax.demo.DTO.EmpresaDTO;
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EmpresaService;
@@ -43,21 +44,23 @@ public class EmpresaController {
     }
 
     @GetMapping("/empresas/nuevo")
-    public String agregarEmpresa(){
-    return "Index/agregar-empresa";
+    public String agregarEmpresa(Model model){
+        model.addAttribute("empresaDTO", new EmpresaDTO());
+        return "Index/agregar-empresa";
     }
 
     @PostMapping("/guardar")
-    public String nuevaEmpresa(Empresa empresa, Login login, Model model) {
-        //Sirve pero solo con datos quemados y nombre opcional
+    public String nuevaEmpresa(@ModelAttribute EmpresaDTO dto, Model model) {
+        Empresa empresa = new Empresa();
+        empresa.setNombreEmpresa( dto.getNombreEmpresa());
+        empresa.setTelefonoEmpresa( dto.getTelefonoEmpresa());
+        empresa.setTipoEmpresa( dto.getTipoEmpresa());
+        empresa.setCorreoEmpresa(dto.getCorreoEmpresa());
 
-        // 🔥 datos quemados
-        empresa.setTipoEmpresa("Tecnologia");
-        empresa.setTamanoEmpresa("Mediana");
-        empresa.setTelefonoEmpresa("12345678");
-        empresa.setDireccionEmpresa("Ciudad Guatemala");
-        empresa.setHorarioEmpresa("8:00 AM - 5:00 PM");
-        empresa.setDescripcion("Empresa de prueba");
+        Login login = new Login();
+        login.setUsuarioLogin(dto.getUsuarioLogin());
+        login.setContrasenaLogin(dto.getContrasenaLogin());
+        login.setCorreoLogin(dto.getCorreoLogin());
 
         Empresa e = empresaService.saveEmpresa(empresa,login);
 
