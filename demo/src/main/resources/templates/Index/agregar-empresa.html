@@ -54,31 +54,35 @@
                     <p th:text="${error}"></p>
                 </div>
                 <!-- Formulario de acceso para el registro de nuevas empresas -->
-                <form th:action="@{/empresas/guardar}" method="post" class="profile-form">
+                <form th:action="@{/empresas/guardar}" th:object="${empresaDTO}" method="post" class="profile-form">
                     <!-- Campos de entrada de datos para el usuario -->
                     <div class="form-group">
                         <label for="sector">Nombre de Usuario:</label>
-                        <input type="text" id="user" name="usuarioLogin" placeholder="Ej: ACMEUSER">
+                        <input type="text" id="user" th:field="*{usuarioLogin}" placeholder="Ej: ACMEUSER">
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña:</label>
-                        <input type="password" id="password" name="contrasenaLogin" placeholder="********">
+                        <input type="password" id="password" th:field="*{contrasenaLogin}" placeholder="********">
                     </div>
                     <div class="form-group">
                         <label for="nombre">Nombre de la empresa:</label>
-                        <input type="text" id="nombre" name="nombreEmpresa" placeholder="Ej: ACME S.A.">
+                        <input type="text" id="nombre" th:field="*{nombreEmpresa}" placeholder="Ej: ACME S.A.">
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo:</label>
-                        <input type="email" id="correo" name="correoLogin" placeholder="empresa@correo.com">
+                        <input type="email" id="correo" th:field="*{correoLogin}" placeholder="empresa@correo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Empresa:</label>
+                        <input type="email" id="correoE" th:field="*{correoEmpresa}" placeholder="empresa@correo.com">
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono:</label>
-                        <input type="tel" id="telefono" name="telefonoEmpresa" placeholder="555-0000">
+                        <input type="tel" id="telefono" th:field="*{telefonoEmpresa}" placeholder="555-0000">
                     </div>
                     <div class="form-group">
                         <label for="sector">Sector de Empresa:</label>
-                        <input type="text" id="sector" name="tipoEmpresa" placeholder="Ej: Tecnología">
+                        <input type="text" id="sector" th:field="*{tipoEmpresa}" placeholder="Ej: Tecnología">
                     </div>
                     <!-- Botones de acción para gestionar la creación del registro -->
                     <div class="form-actions">
