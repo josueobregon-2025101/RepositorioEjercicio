@@ -1,6 +1,7 @@
 package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.Empresa;
+import com.inprax.demo.Entity.Login;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface EmpresaService {
 
     Empresa getEmpresaById(Integer id);
 
-    Empresa saveEmpresa(Empresa empresa);
+    Empresa saveEmpresa(Empresa empresa, Login login);
 
     Empresa updateEmpresa(Integer id, Empresa empresa);
 
