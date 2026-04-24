@@ -1,91 +1,78 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Práctica</title>
-    
-    <!-- Vinculación de los estilos específicos para la interfaz del administrador -->
-    <link rel="stylesheet" href="../Styles/dashboard-admin.css">
-    <!-- Enlace a la biblioteca de iconos Font Awesome -->
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 <div class="dashboard">
-
-    <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
     <aside class="sidebar">
-        <!-- Contenedor del nombre de la marca/plataforma -->
         <div class="logo">
-                <img src="../Images/INPRAX.png">
-            </div>
-        <!-- Menú de navegación principal con iconos -->
+            <img th:src="@{/Images/INPRAX.png}">
+        </div>
         <nav>
             <ul>
-                <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-                <li><a href="dashboard-admin.html"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="estudiantes.html"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
-                <li><a href="empresas.html"><i class="fas fa-building"></i> Empresas</a></li>
-                <li><a href="practicas-admin.html" class="active"><i class="fas fa-briefcase"></i> Prácticas</a></li> <!-- Clase 'active' para resaltar la página actual -->
-                <li><a href="perfil-admin.html"><i class="fas fa-user"></i> Perfil</a></li>
-                <!-- Enlace de cierre de sesión que redirige al inicio del sitio -->
-                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                <li><a th:href="@{/admin/dashboard}"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a th:href="@{/admin/estudiantes}"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                <li><a th:href="@{/admin/empresas}"><i class="fas fa-building"></i> Empresas</a></li>
+                <li><a th:href="@{/admin/practicas}" class="active"><i class="fas fa-briefcase"></i> Prácticas</a></li>
+                <li><a th:href="@{/admin/perfil}"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
             </ul>
         </nav>
     </aside>
 
-    <!-- Área de contenido principal: Donde se muestra la información dinámica -->
     <main class="main-content">
-        <!-- Cabecera del panel: Título y botón de salida -->
         <header class="header">
             <h1>Editar Práctica</h1>
-            <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-            <a href="index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            <a th:href="@{/logout}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
         </header>
 
-        <!-- Contenedor específico para la gestión de información del usuario -->
         <div class="profile-container">
-            <!-- Tarjeta que contiene el formulario de edición -->
             <div class="profile-card">
                 <h2>Detalles de la Práctica</h2>
-                <!-- Formulario de acceso para la modificación de registros existentes -->
-                <form action="#" method="post" class="profile-form">
-                    <!-- Campos de entrada de datos con valores preestablecidos para editar -->
+                <form th:action="@{/admin/practicas/editar/{id}(id=${practica.idPractica})}"
+                      th:object="${practica}" method="post" class="profile-form">
+
                     <div class="form-group">
                         <label for="titulo">Título de la práctica:</label>
-                        <input type="text" id="titulo" name="titulo" value="Práctica Desarrollo Web">
+                        <input type="text" id="titulo" name="titulo" th:value="${practica.titulo}">
                     </div>
                     <div class="form-group">
-                        <label for="empresa">Empresa:</label>
-                        <input type="text" id="empresa" name="empresa" value="Tech Solutions">
+                        <label for="tipoPractica">Tipo de práctica:</label>
+                        <input type="text" id="tipoPractica" name="tipoPractica" th:value="${practica.tipoPractica}">
                     </div>
                     <div class="form-group">
-                        <label for="estudiante">Estudiante asignado:</label>
-                        <input type="text" id="estudiante" name="estudiante" value="Juan Pérez">
+                        <label for="carreraPractica">Carrera:</label>
+                        <input type="text" id="carreraPractica" name="carreraPractica" th:value="${practica.carreraPractica}">
                     </div>
-                    <!-- Campo de área de texto para información extendida -->
                     <div class="form-group">
-                        <label for="descripcion">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" rows="5">Desarrollo de una página web completa usando HTML, CSS y JavaScript.</textarea>
+                        <label for="tiempoPractica">Duración:</label>
+                        <input type="text" id="tiempoPractica" name="tiempoPractica" th:value="${practica.tiempoPractica}">
                     </div>
-                    <!-- Selector de perfil para clasificar el estado de la moderación -->
                     <div class="form-group">
-                        <label for="estado">Estado:</label>
-                        <select id="estado" name="estado">
-                            <option value="Pendiente" selected>Pendiente</option>
-                            <option value="Aprobada">Aprobada</option>
-                            <option value="Rechazada">Rechazada</option>
-                        </select>
+                        <label for="horario">Horario:</label>
+                        <input type="text" id="horario" name="horario" th:value="${practica.horario}">
                     </div>
-                    <!-- Botones de acción para gestionar la actualización del registro -->
+                    <div class="form-group">
+                        <label for="disponibilidad">Disponibilidad:</label>
+                        <input type="text" id="disponibilidad" name="disponibilidad" th:value="${practica.disponibilidad}">
+                    </div>
+                    <div class="form-group">
+                        <label for="vigencia">Vigencia:</label>
+                        <input type="text" id="vigencia" name="vigencia" th:value="${practica.vigencia}">
+                    </div>
+
                     <div class="form-actions">
-                        <button type="button" class="btn"><i class="fas fa-save"></i> Guardar Cambios</button>
+                        <button type="submit" class="btn"><i class="fas fa-save"></i> Guardar Cambios</button>
+                        <a th:href="@{/admin/practicas}" class="btn" style="background:#6c757d;">Cancelar</a>
                     </div>
                 </form>
             </div>
         </div>
-
     </main>
 </div>
 </body>
