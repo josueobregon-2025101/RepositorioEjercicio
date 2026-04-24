@@ -1,7 +1,9 @@
 package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.Empresa;
+import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Repository.EmpresaRepository;
+import com.inprax.demo.Repository.LoginRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,10 +12,15 @@ import java.util.List;
 public class EmpresaServiceImplements implements EmpresaService {
 
     private final EmpresaRepository empresaRepository;
+    private final LoginRepository loginRepository;
 
-    public EmpresaServiceImplements(EmpresaRepository empresaRepository) {
+    public EmpresaServiceImplements(EmpresaRepository empresaRepository, LoginRepository loginRepository) {
         this.empresaRepository = empresaRepository;
+        this.loginRepository = loginRepository;
     }
+
+
+
 
     @Override
     public List<Empresa> getAllEmpresas() {
@@ -26,15 +33,25 @@ public class EmpresaServiceImplements implements EmpresaService {
     }
 
     @Override
-    public Empresa saveEmpresa(Empresa empresa) {
+    public Empresa saveEmpresa(Empresa empresa, Login login) {
         //METODO PARA GUARDAR LA EMPRESA
 
-    if (empresaRepository.findByNombreEmpresa(empresa.getNombreEmpresa()) != null) {
+    if (loginRepository.findByUsuarioLogin(login.getUsuarioLogin()) != null) {
         return null;
     }
-    Empresa newEmpresa = empresa;
-        System.out.println("Nombre: " + empresa.getNombreEmpresa());
-        return empresaRepository.save(newEmpresa);
+        Login loginNew = new Login();
+        loginNew.setUsuarioLogin(login.getUsuarioLogin());
+        loginNew.setCorreoLogin(login.getCorreoLogin());
+        loginNew.setContrasenaLogin(login.getContrasenaLogin());
+        loginNew.setRoles("Empresa");
+
+        Login loginGuardado =loginRepository.save(loginNew);
+
+
+        empresa.setIdLogin(loginGuardado.getIdLogin());
+        empresa.setCorreoEmpresa(login.getCorreoLogin());
+
+        return empresaRepository.save(empresa);
     }
 
     @Override
