@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/empresas")
@@ -39,7 +42,9 @@ public class EmpresaController {
     }
 
     @GetMapping("/empresas")
-    public String empresas() {
+    public String empresas(Model model) {
+        List<Empresa> empresas= empresaService.getAllEmpresas();
+        model.addAttribute("empresas", empresas);
         return "Index/empresas";
     }
 
@@ -89,7 +94,7 @@ public class EmpresaController {
 
      */
 
-    @PutMapping("/{id}")
+    @PutMapping("editar/{id}")
     @ResponseBody
     public ResponseEntity<?> updateEmpresa(@PathVariable Integer id, @RequestBody @Valid Empresa empresa) {
         try {
@@ -104,19 +109,11 @@ public class EmpresaController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseBody
-    public ResponseEntity<?> deleteEmpresa(@PathVariable @Valid Integer id) {
-        Empresa empresa = empresaService.getEmpresaById(id);
-        if (empresa != null) {
-            try {
-                empresaService.deleteEmpresa(id);
-                return ResponseEntity.ok("Se elimino la Empresa " + id);
-            } catch (IllegalArgumentException e) {
-                return ResponseEntity.badRequest().body(e.getMessage());
-            }
-        } else {
-            return ResponseEntity.status(404).body("No se encontro la empresa " + id);
-        }
+    @GetMapping("/empresas/eliminar/{id}")
+    public String eliminarEmpresa(@PathVariable Integer id) {
+        empresaService.deleteEmpresa(id);
+            return "redirect:/empresas/empresas";
     }
+    
+    
 }
