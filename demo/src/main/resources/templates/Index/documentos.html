@@ -5,91 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis documentos - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/documentos.css}">
 </head>
 <body>
 
-    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
-    <div class="dashboard">
+<!-- Contenedor principal que organiza el sidebar y el contenido central -->
+<div class="dashboard">
 
-        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img th:src="@{/Images/INPRAX.png}">
-            </div>
+    <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/Images/INPRAX.png}">
+        </div>
 
-            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <nav>
-                <ul>
-                    <li onclick="location.href='dashboard-estudiante.html'">Inicio</li>
-                    <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
-                    <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
-                    <li class="active">Mis documentos</li> <!-- Clase 'active' para resaltar la página actual -->
-                    <li onclick="location.href='perfil-estudiante.html'">Perfil</li>
-                </ul>
-            </nav>
-        </aside>
+        <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+        <nav>
+            <ul>
+                <li onclick="location.href='/estudiante/dashboard'">Inicio</li>
+                <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
+                <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
+                <li class="active">Mis documentos</li> <!-- Clase 'active' para resaltar la página actual -->
+                <li onclick="location.href='perfil-estudiante.html'">Perfil</li>
+            </ul>
+        </nav>
+    </aside>
 
-        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
-        <main class="main-content">
+    <!-- Área de contenido principal: Donde se muestra la información dinámica -->
+    <main class="main-content">
 
-            <!-- Cabecera del panel: Título y botón de salida -->
-            <header class="header">
-                <h1>Mis documentos</h1>
-                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
-            </header>
+        <!-- Cabecera del panel: Título y botón de salida -->
+        <header class="header">
+            <h1>Mis documentos</h1>
+            <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+            <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+        </header>
 
-            <!-- Contenedor específico para la gestión de archivos -->
-            <div class="container">
+        <!-- Contenedor específico para la gestión de archivos -->
+        <div class="container">
 
-                <!-- Rejilla de tarjetas (Cards) para documentos -->
-                <div class="documentos">
+            <!-- Rejilla de tarjetas (Cards) para documentos -->
+            <div class="documentos">
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Currículum Vitae</h3>
-                        <p>Archivo principal para postular a prácticas.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
+                <!-- Tarjeta de documento individual -->
+                <div class="cardDocumento">
+                    <h3>Currículum Vitae</h3>
+                    <p>Archivo principal para postular a prácticas.</p>
+                    <div class="acciones">
+                        <a href="#" class="btnVer">Ver documento</a>
+                        <button class="btnSubir">Subir nuevo</button>
                     </div>
+                </div>
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Carta de presentación</h3>
-                        <p>Documento para presentarte ante las empresas.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
+                <!-- Tarjeta de documento individual -->
+                <div class="cardDocumento">
+                    <h3>Carta de presentación</h3>
+                    <p>Documento para presentarte ante las empresas.</p>
+                    <div class="acciones">
+                        <a href="#" class="btnVer">Ver documento</a>
+                        <button class="btnSubir">Subir nuevo</button>
                     </div>
+                </div>
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Portafolio</h3>
-                        <p>Muestra tus proyectos y trabajos realizados.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
+                <!-- Tarjeta de documento individual -->
+                <div class="cardDocumento">
+                    <h3>Portafolio</h3>
+                    <p>Muestra tus proyectos y trabajos realizados.</p>
+                    <div class="acciones">
+                        <a href="#" class="btnVer">Ver documento</a>
+                        <button class="btnSubir">Subir nuevo</button>
                     </div>
+                </div>
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Certificados</h3>
-                        <p>Diplomas o constancias académicas.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
+                <!-- Tarjeta de documento individual -->
+                <div class="cardDocumento">
+                    <h3>Certificados</h3>
+                    <p>Diplomas o constancias académicas.</p>
+                    <div class="acciones">
+                        <a href="#" class="btnVer">Ver documento</a>
+                        <button class="btnSubir">Subir nuevo</button>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+</div>
 </body>
 </html>
