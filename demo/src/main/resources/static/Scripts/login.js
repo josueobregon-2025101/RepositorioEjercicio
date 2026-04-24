@@ -2,7 +2,7 @@ const form = document.querySelector(".form");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 
-// Crear usuarios de prueba siempre
+// Usuarios de prueba
 const initialUsers = [
     { id: 1, name: "Marcos Montenegro", email: "admin@plataforma.com", password: "admin123", role: "admin" },
     { id: 2, name: "Juan Pérez", email: "juan@correo.com", password: "juan1234", role: "estudiante" },
@@ -10,57 +10,26 @@ const initialUsers = [
 ];
 localStorage.setItem("users", JSON.stringify(initialUsers));
 
-// Escuchar envío del formulario
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-
+form.addEventListener("submit", function(e) {
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
 
-    if(!emailValue || !passwordValue){
+    if (!emailValue || !passwordValue) {
+        e.preventDefault();
         alert("Completa todos los campos");
         return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(!emailRegex.test(emailValue)){
+    if (!emailRegex.test(emailValue)) {
+        e.preventDefault();
         alert("Correo inválido");
         return;
     }
 
-    if(passwordValue.length < 6){
-        alert("La contraseña debe tener mínimo 6 caracteres");
+    if (passwordValue.length < 3) {
+        e.preventDefault();
+        alert("La contraseña debe tener mínimo 3 caracteres");
         return;
-    }
-
-    // Recuperar usuarios
-    const users = JSON.parse(localStorage.getItem("users"));
-
-    // Buscar usuario
-    const userFound = users.find(
-        user => user.email === emailValue && user.password === passwordValue
-    );
-
-    if(!userFound){
-        alert("Credenciales incorrectas");
-        return;
-    }
-
-    // Guardar sesión
-    localStorage.setItem("session", JSON.stringify(userFound));
-
-    // Redirección según rol
-    switch(userFound.role){
-        case "admin":
-            window.location.href = "dashboard-admin.html";
-            break;
-        case "estudiante":
-            window.location.href = "dashboard-estudiante.html";
-            break;
-        case "empresa":
-            window.location.href = "dashboard-empresa.html";
-            break;
-        default:
-            alert("Rol desconocido");
     }
 });
