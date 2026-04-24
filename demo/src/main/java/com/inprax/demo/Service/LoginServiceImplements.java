@@ -9,12 +9,15 @@ public class LoginServiceImplements implements LoginService {
 
     private final LoginRepository loginRepository;
 
-    public LoginServiceImplements(LoginRepository loginRepository) { this.loginRepository = loginRepository; }
+    public LoginServiceImplements(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
+    }
 
     @Override
-    public Login validarLogin(String correoLogin, String usuarioLogin, String contrasenaLogin, String roles) {
+    public Login validarLogin(String correoLogin, String contrasenaLogin) {
         return loginRepository
-                .findByCorreoLoginAndUsuarioLoginAndContrasenaLoginAndRoles(correoLogin, usuarioLogin, contrasenaLogin, roles)
+                .findByCorreoLoginAndContrasenaLogin(correoLogin, contrasenaLogin)
                 .orElse(null);
     }
 }
+
