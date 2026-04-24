@@ -5,93 +5,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" href="@{/Styles/perfil-estudiante.css}">
 </head>
 <body>
 
-    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
-    <div class="dashboard">
+<!-- Contenedor principal que organiza el sidebar y el contenido central -->
+<div class="dashboard">
 
-        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
-        <aside class="sidebar">
-            <!-- Contenedor del nombre de la marca/plataforma -->
-            <div class="logo">
-                <img th:src="@{/Images/INPRAX.png}">
+    <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+    <aside class="sidebar">
+        <!-- Contenedor del nombre de la marca/plataforma -->
+        <div class="logo">
+            <img th:src="@{/Images/INPRAX.png}">
+        </div>
+
+        <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+        <ul>
+            <li onclick="location.href='/estudiante/dashboard'">Inicio</li>
+            <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
+            <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
+            <li onclick="location.href='documentos.html'">Mis documentos</li>
+            <li class="active">Perfil</li> <!-- Clase 'active' para resaltar la página actual -->
+        </ul>
+    </aside>
+
+    <!-- Área de contenido principal: Donde se muestra la información dinámica -->
+    <main class="main-content">
+
+        <!-- Cabecera del panel: Título y botón de salida -->
+        <header class="header">
+            <h1>Perfil del Estudiante</h1>
+            <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+            <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+        </header>
+
+        <!-- Contenedor específico para la gestión de información del usuario -->
+        <section class="profile-container">
+
+            <!-- Sección para la imagen de perfil -->
+            <div class="profile-photo">
+                <img th:src="@{/Images/perfil.png}">
             </div>
 
-            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <ul>
-                <li onclick="location.href='dashboard-estudiante.html'">Inicio</li>
-                <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
-                <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
-                <li onclick="location.href='documentos.html'">Mis documentos</li>
-                <li class="active">Perfil</li> <!-- Clase 'active' para resaltar la página actual -->
-            </ul>
-        </aside>
+            <!-- Formulario de datos personales -->
+            <div class="profile-form">
 
-        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
-        <main class="main-content">
-
-            <!-- Cabecera del panel: Título y botón de salida -->
-            <header class="header">
-                <h1>Perfil del Estudiante</h1>
-                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
-            </header>
-
-            <!-- Contenedor específico para la gestión de información del usuario -->
-            <section class="profile-container">
-
-                <!-- Sección para la imagen de perfil -->
-                <div class="profile-photo">
-                    <img th:src="@{/Images/perfil.png}">
+                <!-- Campos de entrada de datos para el usuario -->
+                <div class="input-group">
+                    <label>Nombre</label>
+                    <input type="text" value="Juan">
                 </div>
 
-                <!-- Formulario de datos personales -->
-                <div class="profile-form">
-
-                    <!-- Campos de entrada de datos para el usuario -->
-                    <div class="input-group">
-                        <label>Nombre</label>
-                        <input type="text" value="Juan">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Apellido</label>
-                        <input type="text" value="Pérez">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Correo</label>
-                        <input type="email" value="juan@email.com">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Teléfono</label>
-                        <input type="text" value="5555-5555">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Institución</label>
-                        <input type="text" value="Instituto Técnico">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Carrera</label>
-                        <input type="text" value="Desarrollo de Software">
-                    </div>
-
+                <div class="input-group">
+                    <label>Apellido</label>
+                    <input type="text" value="Pérez">
                 </div>
 
-                <!-- Botones de acción para gestionar la edición de datos -->
-                <div class="profile-actions">
-                    <button class="btn-edit">Editar</button>
-                    <button class="btn-save">Guardar</button>
+                <div class="input-group">
+                    <label>Correo</label>
+                    <input type="email" value="juan@email.com">
                 </div>
-            </section>
-        </main>
-    </div>
+
+                <div class="input-group">
+                    <label>Teléfono</label>
+                    <input type="text" value="5555-5555">
+                </div>
+
+                <div class="input-group">
+                    <label>Institución</label>
+                    <input type="text" value="Instituto Técnico">
+                </div>
+
+                <div class="input-group">
+                    <label>Carrera</label>
+                    <input type="text" value="Desarrollo de Software">
+                </div>
+
+            </div>
+
+            <!-- Botones de acción para gestionar la edición de datos -->
+            <div class="profile-actions">
+                <button class="btn-edit">Editar</button>
+                <button class="btn-save">Guardar</button>
+            </div>
+        </section>
+    </main>
+</div>
 </body>
 </html>
