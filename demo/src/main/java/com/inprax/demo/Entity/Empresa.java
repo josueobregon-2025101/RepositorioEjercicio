@@ -18,23 +18,23 @@ public class Empresa {
     @Column(name = "nombre_empresa")
     private String nombreEmpresa;
 
-    @NotBlank(message = "El tipo de empresa es obligatorio")
+
     @Column(name = "tipo_empresa")
     private String tipoEmpresa;
 
-    @NotBlank(message = "El tamano de la empresa es obligatorio")
+
     @Column(name = "tamano_empresa")
     private String tamanoEmpresa;
 
-    @NotBlank(message = "El telefono de la empresa es obligatorio")
+
     @Column(name = "telefono_empresa")
     private String telefonoEmpresa;
 
-    @NotBlank(message = "El correo de la empresa es obligatorio")
+
     @Column(name = "correo_empresa")
     private String correoEmpresa;
 
-    @NotBlank(message = "La direccion de la empresa es obligatoria")
+
     @Column(name = "direccion_empresa")
     private String direccionEmpresa;
 
