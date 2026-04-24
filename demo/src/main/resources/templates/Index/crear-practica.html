@@ -13,102 +13,102 @@
 </head>
 <body>
 
-	<!-- Contenedor principal del dashboard -->
-	<div class="dashboard">
+<!-- Contenedor principal del dashboard -->
+<div class="dashboard">
 
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="@{/Images/INPRAX.png}">
-            </div>
-            <ul>
-                <li onclick="location.href='dashboard-empresa.html'">Inicio</li>
-                <li class="active" onclick="location.href='crear-practica.html'">Crear práctica</li>
-                <li onclick="location.href='editar-practica.html'">Editar práctica</li>
-                <li onclick="location.href='postulantes.html'">Postulantes</li>
-                <li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
-                <li onclick="location.href='perfil-empresa.html'">Perfil</li>
-            </ul>
-        </aside>
+	<!-- Sidebar -->
+	<aside class="sidebar">
+		<div class="logo">
+			<img src="@{/Images/INPRAX.png}">
+		</div>
+		<ul>
+			<li onclick="location.href='/empresa/dashboard'">Inicio</li>
+			<li class="active" onclick="location.href='crear-practica.html'">Crear práctica</li>
+			<li onclick="location.href='editar-practica.html'">Editar práctica</li>
+			<li onclick="location.href='postulantes.html'">Postulantes</li>
+			<li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
+			<li onclick="location.href='perfil-empresa.html'">Perfil</li>
+		</ul>
+	</aside>
 
 
-		<!-- Área principal donde se muestra el contenido -->
-		<main class="main-content">
+	<!-- Área principal donde se muestra el contenido -->
+	<main class="main-content">
 
-			<!-- Encabezado superior de la página -->
-			<header class="header">
+		<!-- Encabezado superior de la página -->
+		<header class="header">
 
-				<!-- Título de la sección -->
-				<h1>Crear nueva práctica</h1>
+			<!-- Título de la sección -->
+			<h1>Crear nueva práctica</h1>
 
-				<!-- Botón para cerrar sesión -->
-				<button class="logout-btn" onclick="location.href=''">
-					Cerrar sesión
-				</button>
+			<!-- Botón para cerrar sesión -->
+			<button class="logout-btn" onclick="location.href=''">
+				Cerrar sesión
+			</button>
 
-			</header>
+		</header>
 
-			<!-- Contenedor del formulario para crear la práctica -->
-			<section class="form-container">
+		<!-- Contenedor del formulario para crear la práctica -->
+		<section class="form-container">
 
-				<!-- Formulario donde la empresa ingresa los datos -->
-				<form class="form">
+			<!-- Formulario donde la empresa ingresa los datos -->
+			<form class="form">
 
-					<!-- Campo para escribir el título de la práctica -->
-					<div class="input-group">
-						<label>Título de la práctica</label>
-						<input type="text" placeholder="Ejemplo: Práctica en Desarrollo Web">
-					</div>
+				<!-- Campo para escribir el título de la práctica -->
+				<div class="input-group">
+					<label>Título de la práctica</label>
+					<input type="text" placeholder="Ejemplo: Práctica en Desarrollo Web">
+				</div>
 
-					<!-- Campo para el área o categoría -->
-					<div class="input-group">
-						<label>Área</label>
-						<input type="text" placeholder="Ejemplo: Tecnología">
-					</div>
+				<!-- Campo para el área o categoría -->
+				<div class="input-group">
+					<label>Área</label>
+					<input type="text" placeholder="Ejemplo: Tecnología">
+				</div>
 
-					<!-- Campo para la duración de la práctica -->
-					<div class="input-group">
-						<label>Duración</label>
-						<input type="text" placeholder="Ejemplo: 6 meses">
-					</div>
+				<!-- Campo para la duración de la práctica -->
+				<div class="input-group">
+					<label>Duración</label>
+					<input type="text" placeholder="Ejemplo: 6 meses">
+				</div>
 
-					<!-- Selección de modalidad -->
-					<div class="input-group">
-						<label>Modalidad</label>
-						<select>
-							<option>Presencial</option>
-							<option>Remoto</option>
-							<option>Híbrido</option>
-						</select>
-					</div>
+				<!-- Selección de modalidad -->
+				<div class="input-group">
+					<label>Modalidad</label>
+					<select>
+						<option>Presencial</option>
+						<option>Remoto</option>
+						<option>Híbrido</option>
+					</select>
+				</div>
 
-					<!-- Campo grande para describir la práctica -->
-					<div class="input-group full">
-						<label>Descripción</label>
-						<textarea placeholder="Describe la práctica"></textarea>
-					</div>
+				<!-- Campo grande para describir la práctica -->
+				<div class="input-group full">
+					<label>Descripción</label>
+					<textarea placeholder="Describe la práctica"></textarea>
+				</div>
 
-					<!-- Campo para requisitos que debe cumplir el estudiante -->
-					<div class="input-group">
-						<label>Requisitos</label>
-						<input type="text" placeholder="Ejemplo: Conocimientos básicos de programación">
-					</div>
+				<!-- Campo para requisitos que debe cumplir el estudiante -->
+				<div class="input-group">
+					<label>Requisitos</label>
+					<input type="text" placeholder="Ejemplo: Conocimientos básicos de programación">
+				</div>
 
-					<!-- Fecha límite para que los estudiantes se postulen -->
-					<div class="input-group">
-						<label>Fecha límite de postulación</label>
-						<input type="date">
-					</div>
+				<!-- Fecha límite para que los estudiantes se postulen -->
+				<div class="input-group">
+					<label>Fecha límite de postulación</label>
+					<input type="date">
+				</div>
 
-					<!-- Botón para enviar y publicar la práctica -->
-					<div class="form-actions">
-						<button type="submit" class="btn-publicar">
-							Publicar práctica
-						</button>
-					</div>
-				</form>
-			</section>
-		</main>
-	</div>
+				<!-- Botón para enviar y publicar la práctica -->
+				<div class="form-actions">
+					<button type="submit" class="btn-publicar">
+						Publicar práctica
+					</button>
+				</div>
+			</form>
+		</section>
+	</main>
+</div>
 </body>
 </html>
