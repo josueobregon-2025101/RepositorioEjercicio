@@ -5,153 +5,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle del Postulante - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/postulantes.css}">
 </head>
 <body>
 
-    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
-    <div class="dashboard">
+<!-- Contenedor principal que organiza el sidebar y el contenido central -->
+<div class="dashboard">
 
-        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img th:src="@{/Images/INPRAX.png}">
+    <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img th:src="@{/Images/INPRAX.png}">
+        </div>
+
+        <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
+        <ul>
+            <li onclick="location.href='/empresa/dashboard'">Inicio</li>
+            <li onclick="location.href='crear-practica.html'">Crear práctica</li>
+            <li onclick="location.href='editar-practica.html'">Editar práctica</li>
+            <li class="active" onclick="location.href='postulantes.html'">Postulantes</li> <!-- Clase 'active' para resaltar la página actual -->
+            <li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
+            <li onclick="location.href='perfil-empresa.html'">Perfil</li>
+        </ul>
+    </aside>
+
+    <!-- Área de contenido principal: Donde se muestra la información dinámica -->
+    <main class="main-content">
+
+        <!-- Cabecera del panel: Título y botón de salida -->
+        <header class="header">
+            <h1>Postulantes</h1>
+            <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
+            <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+        </header>
+
+        <!-- LISTA DE POSTULANTES: Vista general de candidatos -->
+        <section id="inicio" class="postulantes-container">
+
+            <!-- Tarjeta de acceso rápido para un postulante -->
+            <div class="postulante-card">
+                <div class="postulante-info">
+                    <h3>Juan Pérez</h3>
+                    <p>Carrera: Desarrollo de Software</p>
+                    <p>Institución: Instituto Técnico</p>
+                    <p>Práctica: Desarrollo Web</p>
+                </div>
+                <!-- Botones de acción para gestionar la moderación del registro -->
+                <div class="postulante-actions">
+                    <a href="#juan" class="btn-ver">Ver perfil</a>
+                    <button class="btn-aceptar">Aceptar</button>
+                    <button class="btn-rechazar">Rechazar</button>
+                </div>
             </div>
-            
-            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <ul>
-                <li onclick="location.href='dashboard-empresa.html'">Inicio</li>
-                <li onclick="location.href='crear-practica.html'">Crear práctica</li>
-                <li onclick="location.href='editar-practica.html'">Editar práctica</li>
-                <li class="active" onclick="location.href='postulantes.html'">Postulantes</li> <!-- Clase 'active' para resaltar la página actual -->
-                <li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
-                <li onclick="location.href='perfil-empresa.html'">Perfil</li>
-            </ul>
-        </aside>
 
-        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
-        <main class="main-content">
-
-            <!-- Cabecera del panel: Título y botón de salida -->
-            <header class="header">
-                <h1>Postulantes</h1>
-                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
-            </header>
-
-            <!-- LISTA DE POSTULANTES: Vista general de candidatos -->
-            <section id="inicio" class="postulantes-container">
-
-                <!-- Tarjeta de acceso rápido para un postulante -->
-                <div class="postulante-card">
-                    <div class="postulante-info">
-                        <h3>Juan Pérez</h3>
-                        <p>Carrera: Desarrollo de Software</p>
-                        <p>Institución: Instituto Técnico</p>
-                        <p>Práctica: Desarrollo Web</p>
-                    </div>
-                    <!-- Botones de acción para gestionar la moderación del registro -->
-                    <div class="postulante-actions">
-                        <a href="#juan" class="btn-ver">Ver perfil</a>
-                        <button class="btn-aceptar">Aceptar</button>
-                        <button class="btn-rechazar">Rechazar</button>
-                    </div>
+            <!-- Tarjeta de acceso rápido para un postulante -->
+            <div class="postulante-card">
+                <div class="postulante-info">
+                    <h3>María López</h3>
+                    <p>Carrera: Marketing Digital</p>
+                    <p>Institución: Universidad Central</p>
+                    <p>Práctica: Marketing</p>
                 </div>
-
-                <!-- Tarjeta de acceso rápido para un postulante -->
-                <div class="postulante-card">
-                    <div class="postulante-info">
-                        <h3>María López</h3>
-                        <p>Carrera: Marketing Digital</p>
-                        <p>Institución: Universidad Central</p>
-                        <p>Práctica: Marketing</p>
-                    </div>
-                    <div class="postulante-actions">
-                        <a href="#maria" class="btn-ver">Ver perfil</a>
-                        <button class="btn-aceptar">Aceptar</button>
-                        <button class="btn-rechazar">Rechazar</button>
-                    </div>
-                </div>
-
-                <!-- Tarjeta de acceso rápido para un postulante -->
-                <div class="postulante-card">
-                    <div class="postulante-info">
-                        <h3>Carlos Gómez</h3>
-                        <p>Carrera: Diseño Gráfico</p>
-                        <p>Institución: Instituto Creativo</p>
-                        <p>Práctica: Diseño</p>
-                    </div>
-                    <div class="postulante-actions">
-                        <a href="#carlos" class="btn-ver">Ver perfil</a>
-                        <button class="btn-aceptar">Aceptar</button>
-                        <button class="btn-rechazar">Rechazar</button>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- DETALLES DE CADA POSTULANTE: Vistas detalladas mediante IDs -->
-            
-            <!-- Sección de detalle específica -->
-            <section id="juan" class="postulante-detail">
-                <h1>Juan Pérez</h1>
-                <div class="info-postulante">
-                    <p><strong>Correo:</strong> juan@email.com</p>
-                    <p><strong>Teléfono:</strong> 5555-1234</p>
-                    <p><strong>Institución:</strong> Instituto Técnico</p>
-                    <p><strong>Carrera:</strong> Desarrollo de Software</p>
-                    <p><strong>Semestre:</strong> 5to</p>
-                    <p><strong>Promedio:</strong> 85</p>
-                    <p>Estudiante apasionado por el desarrollo web, con conocimientos en HTML, CSS, JavaScript y bases de datos. Interesado en adquirir experiencia profesional.</p>
-                </div>
-                <!-- Botones de acción para gestionar la decisión final -->
-                <div class="acciones-postulante">
-                    <button class="btn-aceptar">Aceptar postulante</button>
+                <div class="postulante-actions">
+                    <a href="#maria" class="btn-ver">Ver perfil</a>
+                    <button class="btn-aceptar">Aceptar</button>
                     <button class="btn-rechazar">Rechazar</button>
-                    <a href="#inicio" class="btn-volver">Volver</a>
                 </div>
-            </section>
+            </div>
 
-            <section id="maria" class="postulante-detail">
-                <h1>María López</h1>
-                <div class="info-postulante">
-                    <p><strong>Correo:</strong> maria@email.com</p>
-                    <p><strong>Teléfono:</strong> 5555-5678</p>
-                    <p><strong>Institución:</strong> Universidad Central</p>
-                    <p><strong>Carrera:</strong> Marketing Digital</p>
-                    <p><strong>Semestre:</strong> 6to</p>
-                    <p><strong>Promedio:</strong> 92</p>
-                    <p>Apasionada por las estrategias de marketing digital y redes sociales, con experiencia en campañas pequeñas y deseo de crecer profesionalmente.</p>
+            <!-- Tarjeta de acceso rápido para un postulante -->
+            <div class="postulante-card">
+                <div class="postulante-info">
+                    <h3>Carlos Gómez</h3>
+                    <p>Carrera: Diseño Gráfico</p>
+                    <p>Institución: Instituto Creativo</p>
+                    <p>Práctica: Diseño</p>
                 </div>
-                <div class="acciones-postulante">
-                    <button class="btn-aceptar">Aceptar postulante</button>
+                <div class="postulante-actions">
+                    <a href="#carlos" class="btn-ver">Ver perfil</a>
+                    <button class="btn-aceptar">Aceptar</button>
                     <button class="btn-rechazar">Rechazar</button>
-                    <a href="#inicio" class="btn-volver">Volver</a>
                 </div>
-            </section>
+            </div>
 
-            <section id="carlos" class="postulante-detail">
-                <h1>Carlos Gómez</h1>
-                <div class="info-postulante">
-                    <p><strong>Correo:</strong> carlos@email.com</p>
-                    <p><strong>Teléfono:</strong> 5555-9012</p>
-                    <p><strong>Institución:</strong> Instituto Creativo</p>
-                    <p><strong>Carrera:</strong> Diseño Gráfico</p>
-                    <p><strong>Semestre:</strong> 4to</p>
-                    <p><strong>Promedio:</strong> 88</p>
-                    <p>Creativo y detallista, con habilidades en diseño gráfico, edición y branding. Busca experiencia profesional en diseño digital.</p>
-                </div>
-                <div class="acciones-postulante">
-                    <button class="btn-aceptar">Aceptar postulante</button>
-                    <button class="btn-rechazar">Rechazar</button>
-                    <a href="#inicio" class="btn-volver">Volver</a>
-                </div>
-            </section>
+        </section>
 
-        </main>
-    </div>
+        <!-- DETALLES DE CADA POSTULANTE: Vistas detalladas mediante IDs -->
+
+        <!-- Sección de detalle específica -->
+        <section id="juan" class="postulante-detail">
+            <h1>Juan Pérez</h1>
+            <div class="info-postulante">
+                <p><strong>Correo:</strong> juan@email.com</p>
+                <p><strong>Teléfono:</strong> 5555-1234</p>
+                <p><strong>Institución:</strong> Instituto Técnico</p>
+                <p><strong>Carrera:</strong> Desarrollo de Software</p>
+                <p><strong>Semestre:</strong> 5to</p>
+                <p><strong>Promedio:</strong> 85</p>
+                <p>Estudiante apasionado por el desarrollo web, con conocimientos en HTML, CSS, JavaScript y bases de datos. Interesado en adquirir experiencia profesional.</p>
+            </div>
+            <!-- Botones de acción para gestionar la decisión final -->
+            <div class="acciones-postulante">
+                <button class="btn-aceptar">Aceptar postulante</button>
+                <button class="btn-rechazar">Rechazar</button>
+                <a href="#inicio" class="btn-volver">Volver</a>
+            </div>
+        </section>
+
+        <section id="maria" class="postulante-detail">
+            <h1>María López</h1>
+            <div class="info-postulante">
+                <p><strong>Correo:</strong> maria@email.com</p>
+                <p><strong>Teléfono:</strong> 5555-5678</p>
+                <p><strong>Institución:</strong> Universidad Central</p>
+                <p><strong>Carrera:</strong> Marketing Digital</p>
+                <p><strong>Semestre:</strong> 6to</p>
+                <p><strong>Promedio:</strong> 92</p>
+                <p>Apasionada por las estrategias de marketing digital y redes sociales, con experiencia en campañas pequeñas y deseo de crecer profesionalmente.</p>
+            </div>
+            <div class="acciones-postulante">
+                <button class="btn-aceptar">Aceptar postulante</button>
+                <button class="btn-rechazar">Rechazar</button>
+                <a href="#inicio" class="btn-volver">Volver</a>
+            </div>
+        </section>
+
+        <section id="carlos" class="postulante-detail">
+            <h1>Carlos Gómez</h1>
+            <div class="info-postulante">
+                <p><strong>Correo:</strong> carlos@email.com</p>
+                <p><strong>Teléfono:</strong> 5555-9012</p>
+                <p><strong>Institución:</strong> Instituto Creativo</p>
+                <p><strong>Carrera:</strong> Diseño Gráfico</p>
+                <p><strong>Semestre:</strong> 4to</p>
+                <p><strong>Promedio:</strong> 88</p>
+                <p>Creativo y detallista, con habilidades en diseño gráfico, edición y branding. Busca experiencia profesional en diseño digital.</p>
+            </div>
+            <div class="acciones-postulante">
+                <button class="btn-aceptar">Aceptar postulante</button>
+                <button class="btn-rechazar">Rechazar</button>
+                <a href="#inicio" class="btn-volver">Volver</a>
+            </div>
+        </section>
+
+    </main>
+</div>
 
 </body>
 </html>
