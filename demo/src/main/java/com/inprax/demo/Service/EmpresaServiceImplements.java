@@ -49,7 +49,6 @@ public class EmpresaServiceImplements implements EmpresaService {
 
 
         empresa.setIdLogin(loginGuardado.getIdLogin());
-        empresa.setCorreoEmpresa(login.getCorreoLogin());
 
         return empresaRepository.save(empresa);
     }
