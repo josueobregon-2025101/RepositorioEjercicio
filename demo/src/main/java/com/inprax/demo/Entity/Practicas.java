@@ -1,6 +1,7 @@
 package com.inprax.demo.Entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Practicas")
@@ -18,7 +19,7 @@ public class Practicas {
     private String titulo;
 
     @Column(name = "tiempo_practica")
-    private String tiempoPractica;
+    private LocalDateTime tiempoPractica;
 
     @Column(name = "tipo_practica")
     private String tipoPractica;
@@ -33,7 +34,7 @@ public class Practicas {
     private String disponibilidad;
 
     @Column(name = "horario")
-    private String horario;
+    private LocalDateTime horario;
 
     public Integer getIdPractica() {
         return idPractica;
@@ -59,11 +60,11 @@ public class Practicas {
         this.titulo = titulo;
     }
 
-    public String getTiempoPractica() {
+    public LocalDateTime getTiempoPractica() {
         return tiempoPractica;
     }
 
-    public void setTiempoPractica(String tiempoPractica) {
+    public void setTiempoPractica(LocalDateTime tiempoPractica) {
         this.tiempoPractica = tiempoPractica;
     }
 
@@ -99,12 +100,11 @@ public class Practicas {
         this.disponibilidad = disponibilidad;
     }
 
-    public String getHorario() {
+    public LocalDateTime getHorario() {
         return horario;
     }
 
-    public void setHorario(String horario) {
+    public void setHorario(LocalDateTime horario) {
         this.horario = horario;
     }
-
 }
