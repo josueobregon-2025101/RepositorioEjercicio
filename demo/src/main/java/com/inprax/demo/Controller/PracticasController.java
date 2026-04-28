@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -32,6 +33,18 @@ public class PracticasController {
         }catch(RuntimeException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/admin/practicas/agregar")
+    public String mostrarFormularioAgregar(Model model) {
+        model.addAttribute("practica", new Practicas());
+        return "admin/agregar-practica";
+    }
+
+    @PostMapping("/admin/practicas/agregar")
+    public String guardarPractica(@ModelAttribute Practicas practica) {
+        practicasService.savePracticas(practica);
+        return "redirect:/admin/practicas";
     }
 
     @PostMapping
