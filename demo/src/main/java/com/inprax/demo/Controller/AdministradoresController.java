@@ -33,7 +33,7 @@ public class AdministradoresController {
         this.practicasService = practicasService;
     }
 
-    //Vistas de Admin //
+    //vistas
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
@@ -44,33 +44,24 @@ public class AdministradoresController {
     }
 
     @GetMapping("/perfil")
-    public String perfil(Model model) {
+    public String perfil() {
         return "Index/perfil-admin";
     }
 
-    @PostMapping("/perfil/guardar")
-    public String guardarPerfilPost(@ModelAttribute Administradores administrador) {
-        administradoresService.saveAdministrador(administrador);
-        return "redirect:/admin/perfil";
-    }
-
     @GetMapping("/practicas")
-    public String practicasAdmin(Model model) {
-        List<Practicas> practicas = practicasService.getAllPracticas();
-        model.addAttribute("practicas", practicas);
+    public String practicas(Model model) {
+        model.addAttribute("practicas", practicasService.getAllPracticas());
         return "Index/practicas-admin";
     }
 
     @GetMapping("/practicas/editar/{id}")
     public String editarPractica(@PathVariable Integer id, Model model) {
-        Practicas practica = practicasService.getIdPracticas(id);
-        model.addAttribute("practica", practica);
+        model.addAttribute("practica", practicasService.getIdPracticas(id));
         return "Index/editar-practicaadmin";
     }
 
     @PostMapping("/practicas/editar/{id}")
-    public String actualizarPractica(@PathVariable Integer id,
-                                     @ModelAttribute Practicas practica) {
+    public String actualizarPractica(@PathVariable Integer id, @ModelAttribute Practicas practica) {
         practicasService.updatePracticas(practica, id);
         return "redirect:/admin/practicas";
     }
@@ -81,10 +72,16 @@ public class AdministradoresController {
         return "redirect:/admin/practicas";
     }
 
+
     @GetMapping("/estudiantes")
     public String estudiantes(Model model) {
         model.addAttribute("estudiantes", estudiantesService.getAllEstudiantes());
         return "Index/estudiantes";
+    }
+
+    @GetMapping("/estudiantes/nuevo")
+    public String nuevoEstudiante(Model model) {
+        return "redirect:/estudiantes/nuevo";
     }
 
     @GetMapping("/empresas")
@@ -93,7 +90,17 @@ public class AdministradoresController {
         return "Index/empresas";
     }
 
-    // api rest //
+    @GetMapping("/empresas/nuevo")
+    public String nuevaEmpresa() {
+        return "redirect:/empresas/nuevo";
+    }
+
+    @GetMapping("/empresas/guardar")
+    public String guardarEmpresaRedirect() {
+        return "redirect:/empresas/nuevo";
+    }
+
+    //APIs
 
     @GetMapping("/lista")
     @ResponseBody
@@ -104,20 +111,16 @@ public class AdministradoresController {
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> getAdministradorById(@PathVariable @Valid Integer id) {
-        Administradores administrador = administradoresService.getAdministradorById(id);
-        if (administrador != null) {
-            return ResponseEntity.ok(administrador);
-        } else {
-            return ResponseEntity.status(404).body("No existe el administrador");
-        }
+        Administradores a = administradoresService.getAdministradorById(id);
+        return a != null ? ResponseEntity.ok(a)
+                : ResponseEntity.status(404).body("No existe el administrador");
     }
 
     @PostMapping
     @ResponseBody
     public ResponseEntity<?> createAdministrador(@Valid @RequestBody Administradores administrador) {
         try {
-            Administradores creado = administradoresService.saveAdministrador(administrador);
-            return ResponseEntity.ok(creado);
+            return ResponseEntity.ok(administradoresService.saveAdministrador(administrador));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al crear el administrador");
         }
@@ -129,11 +132,8 @@ public class AdministradoresController {
                                                  @Valid @RequestBody Administradores administrador) {
         try {
             Administradores actualizado = administradoresService.updateAdministrador(id, administrador);
-            if (actualizado != null) {
-                return ResponseEntity.ok(actualizado);
-            } else {
-                return ResponseEntity.status(404).body("No existe el administrador");
-            }
+            return actualizado != null ? ResponseEntity.ok(actualizado)
+                    : ResponseEntity.status(404).body("No existe el administrador");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -142,12 +142,11 @@ public class AdministradoresController {
     @DeleteMapping("/{id}")
     @ResponseBody
     public ResponseEntity<?> deleteAdministrador(@PathVariable @Valid Integer id) {
-        Administradores administrador = administradoresService.getAdministradorById(id);
-        if (administrador != null) {
+        Administradores a = administradoresService.getAdministradorById(id);
+        if (a != null) {
             administradoresService.deleteAdministrador(id);
-            return ResponseEntity.ok("Administrador " + id + " eliminado correctamente");
-        } else {
-            return ResponseEntity.status(404).body("No existe el administrador");
+            return ResponseEntity.ok("Administrador " + id + " eliminado");
         }
+        return ResponseEntity.status(404).body("No existe el administrador");
     }
 }
