@@ -19,7 +19,7 @@
     <aside class="sidebar">
         <!-- Contenedor del nombre de la marca/plataforma -->
         <div class="logo">
-            <img src="../Images/INPRAX.png">
+            <img th:src="@{/Images/INPRAX.png}">
         </div>
         <!-- Menú de navegación principal con iconos -->
         <nav>
@@ -51,7 +51,7 @@
             <div class="profile-card">
                 <h2>Nueva Práctica</h2>
                 <!-- Formulario de acceso para el registro de nuevas oportunidades -->
-                <form action="#" method="post" class="profile-form">
+                <form th:action="@{/admin/practicas/agregar}" method="post" th:object="${practica}">
                     <!-- Campos de entrada de datos para el usuario -->
                     <div class="form-group">
                         <label for="titulo">Título:</label>
