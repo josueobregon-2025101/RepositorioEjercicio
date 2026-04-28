@@ -7,35 +7,22 @@
     <link rel="stylesheet" th:href="@{/Styles/login.css}">
 </head>
 <body>
-
 <div class="background"></div>
-
 <div class="container">
     <div class="login-box">
         <form th:action="@{/login}" method="post" class="form">
-
             <div class="logouser">
                 <img th:src="@{/Images/login.png}" alt="Logo INPRAX">
             </div>
-
             <div class="header">Iniciar sesión</div>
 
-            <!-- Mensaje de error -->
-            <p th:if="${error}" th:text="${error}" style="color:red; text-align:center;"></p>
+            <p th:if="${error}" th:text="${error}" style="color:red;text-align:center;"></p>
 
-            <input type="email"
-                   id="email"
-                   name="correoLogin"
-                   class="input"
-                   placeholder="Correo electrónico"
-                   required>
+            <input type="text" id="identificador" name="identificador"
+                   class="input" placeholder="Correo o usuario" required>
 
-            <input type="password"
-                   id="password"
-                   name="contrasenaLogin"
-                   class="input"
-                   placeholder="Contraseña"
-                   required>
+            <input type="password" id="password" name="contrasenaLogin"
+                   class="input" placeholder="Contraseña" required>
 
             <button type="submit" class="button sign-in">Iniciar sesión</button>
 
@@ -43,11 +30,9 @@
                 ¿No tienes cuenta?
                 <a th:href="@{/register}" class="link">Crear cuenta</a>
             </div>
-
         </form>
     </div>
 </div>
-
 <script th:src="@{/Scripts/login.js}"></script>
 </body>
 </html>
