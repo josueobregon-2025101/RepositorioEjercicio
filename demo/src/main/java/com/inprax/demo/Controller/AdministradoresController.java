@@ -41,6 +41,11 @@ public class AdministradoresController {
         return "Index/dashboard-admin";
     }
 
+    @GetMapping("/perfil")
+    public String perfilAdmin(){
+       return "Index/perfil-admin";
+    }
+
 
     
 }

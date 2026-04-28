@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label for="institucion">Intitucion:</label>
                             <div class="input-container">
-                                <select th:field="*{institucion}" required>
+                                <select th:field="*{institucion}" id="institucion" required>
                                     <option value="">Selecciona una institucion</option>
                                     <option th:each="i : ${institucion}" th:value="${i.id}" th:text="${i.nombre}">
                                     </option>
