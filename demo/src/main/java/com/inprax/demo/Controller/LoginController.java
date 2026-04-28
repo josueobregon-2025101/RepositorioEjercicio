@@ -22,6 +22,11 @@ public class LoginController {
     @GetMapping("/login")
     public String loginForm() { return "Index/Login"; }
 
+    @GetMapping("/index")
+    public String mostrarIndex() {
+        return "Index/index";
+    }
+
     @PostMapping("/login")
     public String validarLogin(@RequestParam String identificador,
                                @RequestParam String contrasenaLogin,
@@ -50,13 +55,13 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login";
+        return "redirect:/index";
     }
 
     @GetMapping("/admin/logout")
     public String logoutAdmin(HttpSession session) {
         session.invalidate();
-        return "redirect:/login";
+        return "redirect:/index";
     }
 
     @GetMapping("/register")
