@@ -17,25 +17,26 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String index() {
-        return "redirect:/login";
-    }
+    public String index() { return "redirect:/login"; }
 
     @GetMapping("/login")
-    public String loginForm() {
-        return "Index/Login";
-    }
+    public String loginForm() { return "Index/Login"; }
 
     @PostMapping("/login")
-    public String validarLogin(@RequestParam String correoLogin,
+    public String validarLogin(@RequestParam String identificador,
                                @RequestParam String contrasenaLogin,
                                HttpSession session,
                                Model model) {
         try {
-            Login resultado = loginService.validarLogin(correoLogin, contrasenaLogin);
+            Login resultado = loginService.validarLogin(identificador, contrasenaLogin);
             if (resultado != null) {
                 session.setAttribute("usuarioLogueado", resultado);
-                return "redirect:/admin/dashboard";
+                return switch (resultado.getRoles()) {
+                    case "Administrador" -> "redirect:/admin/dashboard";
+                    case "Empresa"       -> "redirect:/empresa/dashboard";
+                    case "Estudiante"    -> "redirect:/estudiante/dashboard";
+                    default              -> "redirect:/login";
+                };
             } else {
                 model.addAttribute("error", "Credenciales inválidas");
                 return "Index/Login";
@@ -45,28 +46,6 @@ public class LoginController {
             return "Index/Login";
         }
     }
-
-    //redirecs de las rutas
-    @GetMapping("/dashboard-admin.html")
-    public String oldDashboardAdmin() { return "redirect:/admin/dashboard"; }
-
-    @GetMapping("/Index/dashboard-admin.html")
-    public String oldIndexDashboardAdmin() { return "redirect:/admin/dashboard"; }
-
-    @GetMapping("/perfil-admin.html")
-    public String oldPerfilAdmin() { return "redirect:/admin/perfil"; }
-
-    @GetMapping("/practicas-admin.html")
-    public String oldPracticasAdmin() { return "redirect:/admin/practicas"; }
-
-    @GetMapping("/estudiantes.html")
-    public String oldEstudiantes() { return "redirect:/admin/estudiantes"; }
-
-    @GetMapping("/empresas.html")
-    public String oldEmpresas() { return "redirect:/admin/empresas"; }
-
-    @GetMapping("/login.html")
-    public String oldLogin() { return "redirect:/login"; }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -79,4 +58,19 @@ public class LoginController {
         session.invalidate();
         return "redirect:/login";
     }
+
+    @GetMapping("/register")
+    public String registerForm() { return "Index/register"; }
+
+    // redirects
+    @GetMapping("/dashboard-admin.html")
+    public String r1() { return "redirect:/admin/dashboard"; }
+    @GetMapping("/Index/dashboard-admin.html")
+    public String r2() { return "redirect:/admin/dashboard"; }
+    @GetMapping("/perfil-admin.html")
+    public String r3() { return "redirect:/admin/perfil"; }
+    @GetMapping("/practicas-admin.html")
+    public String r4() { return "redirect:/admin/practicas"; }
+    @GetMapping("/login.html")
+    public String r5() { return "redirect:/login"; }
 }
