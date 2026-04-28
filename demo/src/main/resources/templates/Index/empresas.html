@@ -90,8 +90,9 @@
                     <td>
                         
                         <!-- Botones de acción para gestionar la edición o eliminación del registro -->
-                        <a
-                      th:href="@{/empresas/empresas/editar/{id}(id=${empresas.idEmpresa})}"
+                        <!--agregar el script para mostrar editar -->
+                        <a href="#"
+                         th:onclick="'editarActive(' + ${empresas.idEmpresa} + ');return false;'"
                       class="action-btn edit"
                       ><i class="fas fa-edit"></i
                     ></a>
@@ -105,7 +106,62 @@
                 </tbody>
             </table>
         </div>
+        <div class="editarInactivo" id="editarContainer">
+            <form th:object="${empresa}" class="profile-form">
+                <!-- Campos de entrada de datos para editar -->
+                <div class="form-group">
+                    <label for="idLogin">IDLogin:</label>
+                    <input type="hidden" id="idLogin" th:field="*{idLogin}" >
+                </div>
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" th:field="*{idEmpresa}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre de la empresa:</label>
+                    <input type="text" id="nombre" th:field="*{nombreEmpresa}" placeholder="Ej: ACME S.A.">
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo Empresa:</label>
+                    <input type="email" id="correo" th:field="*{correoEmpresa}" placeholder="empresa@correo.com">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" th:field="*{telefonoEmpresa}" placeholder="555-0000">
+                </div>
+                <div class="form-group">
+                    <label for="sector">Sector de Empresa:</label>
+                    <input type="text" id="sector" th:field="*{tipoEmpresa}" placeholder="Ej: Tecnología">
+                </div>
+                <div class="form-group">
+                    <label for="sector">tamaño de Empresa:</label>
+                    <input type="text" id="tamanio" th:field="*{tamanoEmpresa}" placeholder="Ej: Mediano">
+                </div>
+                <div class="form-group">
+                    <label for="direction">direccion de empresa:</label>
+                    <input type="text" id="direction" th:field="*{direccionEmpresa}" placeholder="11av, Ciudad Guatemala">
+                </div>
+                <div class="form-group">
+                    <label for="sector">horario de empresa:</label>
+                    <input type="text" id="horario" th:field="*{horarioEmpresa}" placeholder="Ej: Mediano">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">descripcion:</label>
+                    <input type="text" id="descripcion" th:field="*{descripcion}" placeholder="Empresa dedicada a...">
+                </div>
+                <!-- boton para cancelar editar-->
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" th:onclick="'editarInactive();'"><i class="fas fa-close"></i> Cancelar</button>
+                </div>
+                <!-- Botones de acción para gestionar la creación del editar -->
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="actualizarEmpresa()"><i class="fas fa-save" ></i> Editar</button>
+                </div>
+            </form>
+
+        </div>
     </main>
 </div>
+<script th:src="@{/Scripts/empresa.js}"></script>
 </body>
 </html>
