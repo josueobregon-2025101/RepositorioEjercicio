@@ -93,16 +93,38 @@
                 <td th:text="${estudiante.tutortel}">555-5678</td>
                 <td class="actions">
                   <div class="action-buttons">
-                    <a
-                      th:href="@{/estudiantes/estudiantes/editar/{id}(id=${estudiante.idestudiante})}"
-                      class="action-btn edit"
-                      ><i class="fas fa-edit"></i
-                    ></a>
-                    <a
-                      th:href="@{/estudiantes/estudiantes/eliminar/{id}(id=${estudiante.idestudiante})}"
-                      class="action-btn delete" onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"
-                      ><i class="fas fa-trash-alt"></i
-                    ></a>
+                    <a th:href="@{/estudiantes/estudiantes/editar/{id}(id=${estudiante.idestudiante})}"
+                      class="action-btn edit">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                    <a th:href="@{/estudiantes/eliminar/{id}(id=${estudiante.idestudiante})}" 
+                      class="action-btn delete">
+
+                      <svg class="trash-icon" viewBox="0 0 24 24" width="24" height="24">
+
+                        <!-- Tapa -->
+                        <path class="lid"
+                              d="M3 6h18"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linecap="round"/>
+
+                        <!-- Cuerpo -->
+                        <path class="bin"
+                              d="M6 6l1 14h10l1-14"
+                              fill="none"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linejoin="round"/>
+
+                        <!-- Interior -->
+                        <path d="M10 10v6M14 10v6"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linecap="round"/>
+
+                      </svg>
+                    </a>
                   </div>
                 </td>
               </tr>
@@ -124,6 +146,22 @@
             });
         }
     </script>
+
+    <script th:scr="@{/Scripts/icons.js}"></script>
+
+    <div id="modalEliminar" class="modal">
+        <div class="modal-content">
+          
+          <h3>¿Eliminar registro?</h3>
+          <p>Esta acción no se puede deshacer.</p>
+
+          <div class="modal-buttons">
+            <button id="btnCancelar" onclick="cerrarModal()">Cancelar</button>
+            <button id="btnConfirmar" onclick="confirmarEliminar()">Eliminar</button>
+          </div>
+
+        </div>
+      </div>
 
   </body>
 </html>

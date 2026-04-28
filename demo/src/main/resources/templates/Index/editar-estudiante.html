@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label for="institucion">Intitucion:</label>
                             <div class="input-container">
-                                <select th:field="*{institucion}" required>
+                                <select th:field="*{institucion}" id="institucion" required>
                                     <option value="">Selecciona una institucion</option>
                                     <option th:each="i : ${institucion}" th:value="${i.id}" th:text="${i.nombre}">
                                     </option>
@@ -130,7 +130,7 @@
 
                         <div class="form-actions">
                             <button type="submit" class="btn"><i class="fas fa-save"></i> Guardar Estudiante</button>
-                            <a th:href="@{/api/Estudiantes/admin/estudiantes}" class="btn-cancel"><i
+                            <a th:href="@{/estudiantes/estudiantes}" class="btn-cancel"><i
                                     class="fas fa-times"></i> Cancelar</a>
                         </div>
                     </form>
