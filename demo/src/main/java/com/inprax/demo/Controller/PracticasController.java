@@ -3,16 +3,15 @@ package com.inprax.demo.Controller;
 import com.inprax.demo.Entity.Practicas;
 import com.inprax.demo.Service.PracticasService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/Practicas")
+@RequestMapping("/practicas")
 public class PracticasController {
 
     private final PracticasService practicasService;
@@ -21,66 +20,102 @@ public class PracticasController {
         this.practicasService = practicasService;
     }
 
-    @GetMapping
-    public List<Practicas> getAllPracticas(){
-        return practicasService.getAllPracticas();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getIdPracticas(@PathVariable Integer id){
-        try{
-            Practicas practicas = practicasService.getIdPracticas(id);
-            return ResponseEntity.ok(practicas);
-        }catch(RuntimeException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
-
     @GetMapping("/practicas")
-    public String practicas(Model model){
+    public String verPracticas(Model model){
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
         return "Index/practicas";
     }
 
-
-    @GetMapping("/practicas-admin")
-    public String mostrarPracticas(Model model) {
-        List<Practicas> practicas = practicasService.getAllPracticas();
-        model.addAttribute("practicas", practicas);
-        return "Index/practicas-admin";
+    @GetMapping("/agregar")
+    public String mostrarFormularioAgregar(Model model) {
+        model.addAttribute("practica", new Practicas());
+        return "Index/agregar-practica";
     }
 
-
-    @PostMapping
-    public ResponseEntity<Object> createPracticas(@Valid @RequestBody Practicas practicas){
-        try{
-            Practicas createPracticas = practicasService.savePracticas(practicas);
-            return new ResponseEntity<>(createPracticas,HttpStatus.CREATED);
-        }catch (RuntimeException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePracticas(@Valid @RequestBody Practicas practicas,
-                                                  @PathVariable Integer id){
-        try{
-            Practicas updatePracticas = practicasService.updatePracticas(practicas, id);
-            return ResponseEntity.ok(updatePracticas);
-        }catch (RuntimeException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletePracticas(@Valid @PathVariable Integer id){
-        try{
-            practicasService.deletePracticas(id);
-            return ResponseEntity.ok("Practica con ID"+ id +" eliminado correctamente");
+    @PostMapping("/guardar")
+    public String guardarPractica(@Valid @ModelAttribute Practicas practicas,
+                                  RedirectAttributes redirectAttributes) {
+        try {
+            practicasService.savePracticas(practicas);
+            redirectAttributes.addFlashAttribute("message", "¡Práctica agregada exitosamente!");
+            redirectAttributes.addFlashAttribute("messageType", "success");
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            redirectAttributes.addFlashAttribute("message", "Error al guardar: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/practicas/practicas";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable Integer id, Model model,
+                                          RedirectAttributes redirectAttributes) {
+        try {
+            Practicas practica = practicasService.getIdPracticas(id);
+            model.addAttribute("practica", practica);
+            return "Index/editar-practica-form";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("message", "Práctica no encontrada");
+            redirectAttributes.addFlashAttribute("messageType", "error");
+            return "redirect:/practicas/practicas";
         }
     }
 
+    @PostMapping("/actualizar/{id}")
+    public String actualizarPractica(@PathVariable Integer id,
+                                     @Valid @ModelAttribute Practicas practicas,
+                                     RedirectAttributes redirectAttributes) {
+        try {
+            practicasService.updatePracticas(practicas, id);
+            redirectAttributes.addFlashAttribute("message", "¡Práctica actualizada exitosamente!");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("message", "Error al actualizar: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/practicas/practicas";
+    }
+
+    @PostMapping("/aprobar/{id}")
+    public String aprobarPractica(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            Practicas practica = practicasService.getIdPracticas(id);
+            practica.setVigencia("Aprobado");
+            practicasService.updatePracticas(practica, id);
+            redirectAttributes.addFlashAttribute("message", "¡Práctica aprobada exitosamente!");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("message", "Error al aprobar: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/practicas/practicas";
+    }
+
+    @PostMapping("/rechazar/{id}")
+    public String rechazarPractica(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            Practicas practica = practicasService.getIdPracticas(id);
+            practica.setVigencia("Rechazado");
+            practicasService.updatePracticas(practica, id);
+            redirectAttributes.addFlashAttribute("message", "¡Práctica rechazada!");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("message", "Error al rechazar: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/practicas/practicas";
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarPractica(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            practicasService.deletePracticas(id);
+            redirectAttributes.addFlashAttribute("message", "¡Práctica eliminada exitosamente!");
+            redirectAttributes.addFlashAttribute("messageType", "success");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("message", "Error al eliminar: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("messageType", "error");
+        }
+        return "redirect:/practicas/practicas";
+    }
 }
