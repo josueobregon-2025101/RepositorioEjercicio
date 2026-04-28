@@ -45,6 +45,7 @@ public class EmpresaController {
     public String empresas(Model model) {
         List<Empresa> empresas= empresaService.getAllEmpresas();
         model.addAttribute("empresas", empresas);
+        model.addAttribute("empresa", new Empresa());
         return "Index/empresas";
     }
 
@@ -94,7 +95,7 @@ public class EmpresaController {
 
      */
 
-    @PutMapping("editar/{id}")
+    @PutMapping("/empresas/editar/{id}")
     @ResponseBody
     public ResponseEntity<?> updateEmpresa(@PathVariable Integer id, @RequestBody @Valid Empresa empresa) {
         try {
