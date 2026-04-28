@@ -1,58 +1,43 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- Configuración básica del documento -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Cuenta - INPRAX</title>
-  <link rel="stylesheet" th:href="@{/styles/register.css}">
+  <link rel="stylesheet" th:href="@{/Styles/register.css}">
 </head>
 <body>
-
-<!-- Fondo visual de la página -->
 <div class="background"></div>
-
-<!-- Contenedor principal -->
 <div class="container">
   <div class="register-box">
     <div class="logo">
-      <img th:src="@{/Images/INPRAX.png}">
+      <img th:src="@{/Images/INPRAX.png}" alt="INPRAX">
     </div>
     <h2>Crear Cuenta</h2>
 
-    <!-- Formulario de registro -->
+    <p th:if="${error}" th:text="${error}" style="color:red;text-align:center;"></p>
+
     <form th:action="@{/register}" method="post" id="register-form">
-      <input type="text" name="fullname" placeholder="Nombre completo" required>
-      <input type="email" name="email" placeholder="Correo electrónico" required>
-      <input type="text" name="username" placeholder="Usuario" required>
-      <input type="password" name="password" placeholder="Contraseña" required>
-      <input type="password" name="confirm_password" placeholder="Confirmar contraseña" required>
-
-      <select name="role" required>
+      <input type="email"    name="correoLogin"     placeholder="Correo electrónico" required>
+      <input type="text"     name="usuarioLogin"    placeholder="Usuario" required>
+      <input type="password" name="contrasenaLogin" placeholder="Contraseña" required>
+      <select name="roles" required>
         <option value="" disabled selected>Selecciona tu rol</option>
-        <option value="estudiante">Estudiante</option>
-        <option value="empresa">Empresa</option>
+        <option value="Estudiante">Estudiante</option>
+        <option value="Empresa">Empresa</option>
       </select>
-
       <button type="submit">Registrarme</button>
     </form>
 
-    <!-- Enlace para usuarios que ya tienen cuenta -->
     <p class="login-link">
       ¿Ya tienes cuenta? <a th:href="@{/login}">Inicia sesión</a>
     </p>
   </div>
 </div>
-
-<!-- Pie de página -->
-<!-- Footer -->
 <footer class="footer">
   <div class="footer-content">
     <p>© 2026 INPRAX - Plataforma de prácticas profesionales</p>
   </div>
 </footer>
-
-<!-- JS del registro -->
-<script th:src="@{/Scripts/register.js}"></script>
 </body>
 </html>
