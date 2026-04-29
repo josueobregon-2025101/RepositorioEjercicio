@@ -55,8 +55,8 @@
                 <div class="profile-card">
                     <h2>Nuevo Estudiante</h2>
                     <!-- Formulario de acceso para el registro de nuevos estudiantes -->
-                    <form id="formEstudiante" th:action="@{/estudiantes/estudiantes/guardar}"
-                        th:object="${estudiantes}" method="post" class="profile-form">
+                    <form id="formEstudiante" th:action="@{/estudiantes/estudiantes/guardar}" th:object="${estudiantes}"
+                        method="post" class="profile-form">
                         <!-- Campos de entrada de datos para el usuario -->
                         <div class="form-group">
                             <label for="institucion">Intitucion:</label>
@@ -124,6 +124,9 @@
                         <!-- Botones de acción para gestionar la creación del registro -->
                         <div class="form-actions">
                             <button type="submit" class="btn"><i class="fas fa-save"></i> Guardar Estudiante</button>
+
+                            <a th:href="@{/estudiantes/estudiantes}" class="btn-cancel"><i class="fas fa-times"></i>
+                                Cancelar</a>
                         </div>
                     </form>
                 </div>
