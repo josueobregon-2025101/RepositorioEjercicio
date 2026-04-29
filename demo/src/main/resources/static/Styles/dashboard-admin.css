@@ -13,6 +13,7 @@
     --bg2: #1C1C1C;
     --bg3: #1C1C1C;
 
+    --bg-image: url("/Images/Fondo.jpg");
     --overlay1: rgba(0,0,0,0.6);
     --overlay2: rgba(0,0,0,0.85);
 
@@ -55,6 +56,7 @@
     --bg2: #1C1C1C;
     --bg3: #1C1C1C;
 
+    --bg-image: url("/Images/Fondo.jpg");
     --overlay1: rgba(0,0,0,0.6);
     --overlay2: rgba(0,0,0,0.85);
 
@@ -98,6 +100,9 @@
     --bg2: #ECEEF3;
     --bg3: #FFFFFF;
 
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
+
     --primary: #7453B2;
     --primary-hover: #5e43a0;
     --card: #0C1825;
@@ -123,6 +128,9 @@
     --bg: #06090A;
     --bg2: #0E1112;
     --bg3: #0E1112;
+
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
 
     --primary: #16A2C5;
     --primary-hover: #1389A7;
@@ -151,6 +159,7 @@
     --bg2: #111710;
     --bg3: #111710;
 
+
     --primary: #99D991;
     --primary-hover: #7FCF75;
     --nav: #E8EDE8;
@@ -177,6 +186,9 @@
     --bg2: #FFFFFF;
     --bg3: #FFFFFF;
 
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
+
     --primary: #52525B;
     --primary-hover: #3F3F46;
     --nav: #18181B;
@@ -201,13 +213,68 @@
 /* Configuración básica del documento: Fondo y colores base */
 body {
     min-height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
-              url("/Images/Fondo.jpg");
     background-color: var(--bg);
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+}
+
+#bgvideo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -4;
+    display: none;
+}
+
+#logo {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#logo:hover {
+    transform: scale(1.05);
+}
+
+body.video-bg #bgvideo {
+    display: block;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--bg-image);
     background-size: cover;
     background-position: center;
-    color: var(--text);
+    z-index: -3;
 }
+
+body.video-bg::after {
+    display: none;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(var(--overlay1), var(--overlay2));
+    z-index: -2;
+}
+
+body.image-bg {
+    background:
+        linear-gradient(var(--overlay1), var(--overlay2)),
+        var(--bg-image);
+    background-size: cover;
+    background-position: center;
+}
+
+
 
 /* Contenedor principal que organiza el sidebar y el contenido central */
 .dashboard {
