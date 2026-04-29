@@ -227,7 +227,7 @@ html {
 }
 
 .auth-buttons {
-  margin-left: auto; /* empuja todo a la derecha */
+  margin-left: auto;
   display: flex;
   gap: 12px;
 }
