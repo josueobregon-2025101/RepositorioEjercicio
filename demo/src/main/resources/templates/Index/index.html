@@ -8,9 +8,15 @@
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/index.css}">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
 </head>
 <body>
 
+<div id="loading-screen">
+    <video autoplay muted playsinline id="loading-video">
+        <source th:src="@{/videos/Index.mp4}" type="video/mp4">
+    </video>
+</div>
     <!-- Cabecera del panel: Contiene el logo y el menú de acceso -->
     <header class="header">
         <div class="logo">
@@ -139,6 +145,6 @@
 
         sections.forEach(s => observer.observe(s));
     </script>
-
+<script th:src="@{/Scripts/practicas.js}"></script>
 </body>
 </html>
