@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crear Cuenta - INPRAX</title>
-  <link rel="stylesheet" th:href="@{/styles/register.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - INPRAX</title>
+    <link rel="stylesheet" th:href="@{/styles/register.css}">
 </head>
 <body>
 
 <div class="background"></div>
 
 <div class="container">
-  <div class="register-box">
-    <div class="logo">
-      <img th:src="@{/Images/INPRAX.png}" alt="Logo INPRAX">
+    <div class="register-wrapper">
+        <div class="register-box">
+            <div class="logo">
+                <img th:src="@{/Images/INPRAX.png}" alt="Logo INPRAX">
+            </div>
+            <h2>Crear Cuenta</h2>
+
+            <div th:if="${error}" class="alert-error" style="color: #ff4d4d; background: rgba(255, 77, 77, 0.1); padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
+                <p th:text="${error}"></p>
+            </div>
+
+            <form th:action="@{/register/registro}" method="post">
+
+                <input type="email" name="correoLogin" placeholder="Correo electrónico" required>
+
+                <input type="text" name="usuarioLogin" placeholder="Nombre de usuario" required>
+
+                <input type="password" name="contrasenaLogin" placeholder="Contraseña" required>
+
+                <select name="rolLogin" required>
+                    <option value="" disabled selected>Selecciona un rol</option>
+                    <option value="ESTUDIANTE">Estudiante</option>
+                    <option value="EMPRESA">Empresa</option>
+                </select>
+
+                <button type="submit">Crear Cuenta</button>
+            </form>
+
+            <p class="login-link">
+                ¿Ya tienes cuenta? <a th:href="@{/login/login}">Inicia sesión</a>
+            </p>
+        </div>
     </div>
-    <h2>Crear Cuenta</h2>
-
-    <div th:if="${error}" class="alert-error" style="color: #ff4d4d; background: rgba(255, 77, 77, 0.1); padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center;">
-      <p th:text="${error}"></p>
-    </div>
-
-    <form th:action="@{/register/registro}" method="post">
-      
-      <input type="email" name="correoLogin" placeholder="Correo electrónico" required>
-      
-      <input type="text" name="usuarioLogin" placeholder="Nombre de usuario" required>
-      
-      <input type="password" name="contrasenaLogin" placeholder="Contraseña" required>
-      
-      <select name="roles" required>
-        <option value="" disabled selected>Selecciona tu rol</option>
-        <option value="ESTUDIANTE">Estudiante</option>
-        <option value="EMPRESA">Empresa</option>
-      </select>
-
-      <button type="submit">Registrarme</button>
-    </form>
-
-    <p class="login-link">
-      ¿Ya tienes cuenta? <a th:href="@{/login/login}">Inicia sesión</a>
-    </p>
-  </div>
 </div>
 
 <footer class="footer">
-  <div class="footer-content">
-    <p>© 2026 INPRAX - Plataforma de prácticas profesionales</p>
-  </div>
+    <div class="footer-content">
+        <p>© 2026 INPRAX - Plataforma de prácticas profesionales</p>
+    </div>
 </footer>
 
 </body>

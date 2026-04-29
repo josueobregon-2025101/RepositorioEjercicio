@@ -210,7 +210,6 @@
     --icon: #1969DD;
 }
 
-/* Configuración básica del documento: Fondo y colores base */
 body {
     min-height: 100vh;
     background-color: var(--bg);
@@ -295,12 +294,11 @@ body.image-bg {
 }
 
 .sidebar i {
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: all 0.6s ease;
 }
 
 .sidebar a:hover i {
     transform: scale(1.2) rotate(5deg);
-    color: #4CAF50;
 }
 
 /* Contenedor del nombre de la marca/plataforma o imagen del logo */
@@ -339,7 +337,7 @@ body.image-bg {
     font-size: 1rem;
     color: var(--nav);
     border-radius: 8px;
-    transition: transform 0.3s ease;
+    transition: all 0.6s ease;
     position: relative;
     overflow: hidden;
 }
@@ -351,9 +349,11 @@ body.image-bg {
 
 /* Interacción: Clase 'active' y efecto hover para resaltar la página actual */
 .sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
+.sidebar nav ul li a.active{
+    padding-left: 35px;
     background: var(--focus);
-    color: var(--text);
+    transition: 0.6s;
+    color: var(--text-inverse);
     font-weight: bold;
 }
 
@@ -364,8 +364,7 @@ body.image-bg {
     top: 0;
     width: 0;
     height: 100%;
-    color: var(--primary);
-    transition: width 0.3s ease;
+    color: var(--primary);;
     z-index: -1;
 }
 
@@ -376,8 +375,8 @@ body.image-bg {
 .sidebar nav ul li a:hover i,
 .sidebar nav ul li a.active i {
     color: var(--text-inverse);
+    transition: 0.6s;
 }
-
 /* =================Area central de trabajo donde se muestra la información dinámica ================= */
 .main-content {
     flex: 1;
@@ -415,7 +414,7 @@ body.image-bg {
 
 .logout-btn i {
     margin-right: 6px;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
 }
 
 .logout-btn:hover {
@@ -460,7 +459,7 @@ body.image-bg {
     font-family: inherit;
     position: relative;
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .actions .btn i {
@@ -508,13 +507,13 @@ body.image-bg {
 }
 
 .table tbody tr {
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
 }
 
 /* Interacción de filas para mejorar la lectura */
 .table tbody tr:hover {
     background: var(--table-row-hover);
-    transition: 0.5s;
+    transition: 0.6s;
 }
 
 /* ========================== Botones de acción dentro de la tabla ========================== */
@@ -543,7 +542,7 @@ body.image-bg {
     backdrop-filter: blur(6px);
     background: var(--danger);
     position: relative;
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
 }
 
 .action-btn.delete:hover {
@@ -593,7 +592,7 @@ body.image-bg {
     cursor: pointer;
     backdrop-filter: blur(6px);
     background: var(--info);
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
 }
 
 .action-btn.edit:hover {
@@ -610,24 +609,44 @@ body.image-bg {
 /* Colores específicos para la moderación y gestión de registros */
 .action-btn.accept {
     background: var(--success);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    background: var(--info);
+    transition: all 0.6s ease;
+}
+
+.action-btn.accept:hover {
+    background: var(--success);
+    transform: scale(1.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .action-btn.reject {
     background: var(--warning);
     color: var(--text-inverse);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    background: var(--info);
+    transition: all 0.5s ease;
 }
 
-.action-btn.edit {
-    background: #17a2b8;
-}
-
-.action-btn.accept {
-    background: #28a745;
-}
-
-.action-btn.reject {
-    background: #ffc107;
-    color: #1C1C1C;
+.action-btn.reject:hover {
+    background: var(--warning);
+    color: var(--text-inverse);
+    transform: scale(1.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -650,13 +669,13 @@ body.image-bg {
     padding: 25px;
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card i {
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.5s ease, color 0.5s ease;
 }
 
 .card:hover i {
@@ -705,7 +724,7 @@ body.image-bg {
     text-align: center;
     width: 320px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: modalIn 0.3s ease;
+    animation: modalIn 0.5s ease;
 }
 
 .modal-content h3 {
@@ -789,7 +808,7 @@ body.image-bg {
     color: var(--input-text);
     border: 1px solid var(--border);
     outline: none;
-    transition: border 0.3s, background 0.3s;
+    transition: border 0.6s, background 0.6s;
     font-family: inherit;
 }
 
@@ -894,7 +913,7 @@ body.image-bg {
     cursor: pointer;
     background: var(--primary);
     color: var(--bg);
-    transition: transform 0.2s ease;
+    transition: transform 0.5s ease;
 }
 
 .theme-switcher button:hover {
@@ -1020,4 +1039,68 @@ body.image-bg {
 
 #editarContainer form::-webkit-scrollbar-thumb {
     display: none;
+}
+
+/* 🎥 ESTILOS PARA EL VIDEO DE FONDO */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Cubre toda la pantalla */
+    z-index: -2;        /* Lo coloca detrás de todo */
+}
+
+/* Capa de superposición oscura para mejorar legibilidad (opcional pero recomendado) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.85));
+    z-index: -1;        /* Entre el video y el contenido */
+    pointer-events: none;
+}
+
+/* Contenedor principal que organiza el sidebar y el contenido central */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    animation: pageLoad 0.8s ease-in-out;
+    position: relative;
+    z-index: 1;         /* Asegura que el contenido esté sobre el video */
+}
+
+/* ========================== PANTALLA DE CARGA ========================== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;                    /* Por encima de TODO */
+    background: #000;                 /* Fondo negro de respaldo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#loading-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Clase que se agrega para ocultar la pantalla de carga */
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;            /* Permite interactuar con el contenido debajo */
 }
