@@ -227,12 +227,11 @@ body {
 }
 
 .sidebar i {
-    transition: transform 0.5s ease, color 0.5s ease;
+    transition: all 0.6s ease;
 }
 
 .sidebar a:hover i {
     transform: scale(1.2) rotate(5deg);
-    color: #4CAF50;
 }
 
 /* Contenedor del nombre de la marca/plataforma o imagen del logo */
@@ -278,16 +277,16 @@ body {
 
 .sidebar nav ul li a i {
     margin-right: 12px;
-    transition: all 0.6s ease;
     font-size: 1.1rem;
 }
 
 /* Interacción: Clase 'active' y efecto hover para resaltar la página actual */
 .sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
+.sidebar nav ul li a.active{
+    padding-left: 35px;
     background: var(--focus);
     transition: 0.6s;
-    color: var(--text);
+    color: var(--text-inverse);
     font-weight: bold;
 }
 
@@ -304,7 +303,6 @@ body {
 
 .sidebar nav ul li a:hover::before {
     width: 100%;
-    transition: 0.6s;
 }
 
 .sidebar nav ul li a:hover i,
@@ -312,7 +310,6 @@ body {
     color: var(--text-inverse);
     transition: 0.6s;
 }
-
 /* =================Area central de trabajo donde se muestra la información dinámica ================= */
 .main-content {
     flex: 1;
