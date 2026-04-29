@@ -7,14 +7,206 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Tema Por Defecto */
+:root {
+    --bg: #1C1C1C;
+    --bg2: #1C1C1C;
+    --bg3: #1C1C1C;
+
+    --overlay1: rgba(0,0,0,0.6);
+    --overlay2: rgba(0,0,0,0.85);
+
+    --primary: #FFC107;
+    --primary-hover: #e0a800;
+
+    --accent: #FFC107;
+    --accent-hover: #e0a800;
+
+    --text: #F5F5F5;
+    --text-muted: #CCCCCC;
+    --text-inverse: #1C1C1C;
+
+    --focus: #FFC107;
+    --hover: #e0a800;
+
+    --border: rgba(255,255,255,0.1);
+
+    --table-bg: rgba(28,28,28,0.9);
+    --table-row-hover: rgba(255,255,255,0.1);
+
+    --input-bg: rgba(0,0,0,0.3);
+    --input-text: #F5F5F5;
+
+    --modal-bg: #1C1C1C;
+
+    --icon: #FFC107;
+
+    --danger: #DC3545;
+    --danger-hover: #C82333;
+    --success: #28A745;
+    --info: #17A2B8;
+    --warning: #FFC107;
+    --secondary: #6C757D;
+
+}
+
+.theme-yellow {
+    --bg: #1C1C1C;
+    --bg2: #1C1C1C;
+    --bg3: #1C1C1C;
+
+    --overlay1: rgba(0,0,0,0.6);
+    --overlay2: rgba(0,0,0,0.85);
+
+    --primary: #FFC107;
+    --primary-hover: #e0a800;
+
+    --accent: #FFC107;
+    --accent-hover: #e0a800;
+    --card: #F5F5F5;
+    --nav: #F5F5F5;
+    --text: #F5F5F5;
+    --text-muted: #CCCCCC;
+    --text-inverse: #1C1C1C;
+
+    --focus: #FFC107;
+    --hover: #e0a800;
+
+    --border: rgba(255,255,255,0.1);
+
+    --table-bg: rgba(28,28,28,0.9);
+    --table-row-hover: rgba(255,255,255,0.1);
+
+    --input-bg: rgba(0,0,0,0.3);
+    --input-text: #F5F5F5;
+
+    --modal-bg: #1C1C1C;
+
+    --icon: #FFC107;
+
+    --danger: #DC3545;
+    --danger-hover: #C82333;
+    --success: #28A745;
+    --info: #17A2B8;
+    --warning: #FFC107;
+    --secondary: #6C757D;
+}
+
+
+.theme-purple {
+    --bg: #F4F6FB;
+    --bg2: #ECEEF3;
+    --bg3: #FFFFFF;
+
+    --primary: #7453B2;
+    --primary-hover: #5e43a0;
+    --card: #0C1825;
+    --nav: #0C1825;
+    --text: #EAEFF0;
+    --text-muted: #6B7280;
+    --text-inverse: #FFFFFF;
+
+    --focus: #5e43a0;
+    --hover: #D8B4C2;
+
+    --border: #D9DCE3;
+
+    --input-bg: #F4F6FB;
+    --input-text: #0C1825;
+
+    --modal-bg: #ECEEF3;
+
+    --icon: #9D76C1;
+}
+
+.theme-cyan-dark {
+    --bg: #06090A;
+    --bg2: #0E1112;
+    --bg3: #0E1112;
+
+    --primary: #16A2C5;
+    --primary-hover: #1389A7;
+    --nav: #EAEFF0;
+    --card: #EAEFF0;
+    --text: #EAEFF0;
+    --text-muted: #A0B3B8;
+    --text-inverse: #000000;
+
+    --focus: #293537;
+    --hover: #1E3A40;
+
+    --border: #1F2A2D;
+
+    --input-bg: #0E1112;
+    --input-text: #EAEFF0;
+
+    --modal-bg: #0E1112;
+
+    --icon: #42B5D1;
+
+}
+
+.theme-green-dark {
+    --bg: #090F08;
+    --bg2: #111710;
+    --bg3: #111710;
+
+    --primary: #99D991;
+    --primary-hover: #7FCF75;
+    --nav: #E8EDE8;
+    --card: #E8EDE8;
+    --text: #E8EDE8;
+    --text-muted: #A5B0A5;
+    --text-inverse: #000000;
+
+    --focus: #162D12;
+    --hover: #1F3D18;
+
+    --border: #1E2A1C;
+
+    --input-bg: #111710;
+    --input-text: #E8EDE8;
+
+    --modal-bg: #111710;
+
+    --icon: #4EEF3A;
+}
+
+.theme-blue-light {
+    --bg: #F4F4F5;
+    --bg2: #FFFFFF;
+    --bg3: #FFFFFF;
+
+    --primary: #52525B;
+    --primary-hover: #3F3F46;
+    --nav: #18181B;
+    --card: #18181B;
+    --text: #F5F5F5;
+    --text-muted: #6B7280;
+    --text-inverse: #FFFFFF;
+
+    --focus: #366DDD;
+    --hover: #D4D4D8;
+
+    --border: #E4E4E7;
+
+    --input-bg: #FFFFFF;
+    --input-text: #18181B;
+
+    --modal-bg: #FFFFFF;
+
+    --icon: #1969DD;
+}
+
 /* Configuración básica del documento: Fondo y colores base */
 body {
     min-height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.85)),
-        url("/Images/Fondo.jpg");
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+              url("/Images/Fondo.jpg");
+    background-color: var(--bg);
     background-size: cover;
     background-position: center;
-    color: #F5F5F5;
+    color: var(--text);
 }
 
 /* Contenedor principal que organiza el sidebar y el contenido central */
@@ -27,7 +219,7 @@ body {
 /* ========================== Sidebar: Menú de navegación fijo ========================== */
 .sidebar {
     width: 200px;
-    background: #1C1C1C;
+    background: var(--bg);
     padding: 30px 0;
     display: flex;
     flex-direction: column;
@@ -50,7 +242,7 @@ body {
     margin-bottom: 40px;
     font-size: 1.8rem;
     font-weight: bold;
-    color: #FFC107;
+    color: var(--primary);
 }
 
 .logo img {
@@ -78,7 +270,7 @@ body {
     padding: 12px 25px;
     text-decoration: none;
     font-size: 1rem;
-    color: #F5F5F5;
+    color: var(--nav);
     border-radius: 8px;
     transition: transform 0.3s ease;
     position: relative;
@@ -93,8 +285,8 @@ body {
 /* Interacción: Clase 'active' y efecto hover para resaltar la página actual */
 .sidebar nav ul li a:hover,
 .sidebar nav ul li a.active {
-    background: #FFC107;
-    color: #1C1C1C;
+    background: var(--focus);
+    color: var(--text);
     font-weight: bold;
 }
 
@@ -105,7 +297,7 @@ body {
     top: 0;
     width: 0;
     height: 100%;
-    background: #FFC107;
+    color: var(--primary);
     transition: width 0.3s ease;
     z-index: -1;
 }
@@ -116,7 +308,7 @@ body {
 
 .sidebar nav ul li a:hover i,
 .sidebar nav ul li a.active i {
-    color: #1C1C1C;
+    color: var(--text-inverse);
 }
 
 /* =================Area central de trabajo donde se muestra la información dinámica ================= */
@@ -136,19 +328,19 @@ body {
 }
 
 .header h1 {
-    color: #FFC107;
+    color: var(--primary);
 }
 
 /* Botón de cierre de sesión que redirige al inicio del sitio */
 .logout-btn {
-    background: #FFC107;
+    background: var(--primary);
+    color: var(--text-inverse);
     border: none;
     padding: 10px 18px;
     border-radius: 6px;
     font-weight: bold;
     display: flex;
     align-items: center;
-    color: #1C1C1C;
     text-decoration: none;
     font-family: inherit;
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -161,7 +353,7 @@ body {
 
 .logout-btn:hover {
     transform: translateX(5px);
-    background: #f73131;
+    background: var(--danger);
     font-size: clamp(1.3rem, 1.3vw, 1.3rem);
     transition: .6s;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
@@ -170,6 +362,11 @@ body {
 .logout-btn:hover i {
     transform: translateX(4px);
     transition: transform 0.5s ease;
+}
+
+.logout-btn:active {
+    background: var(--danger-hover);
+    transform: scale(0.95);
 }
 
 /* ========================== Botones de acciones rápidas ========================== */
@@ -186,8 +383,8 @@ body {
 
 .actions .btn {
     display: inline-block;
-    background: #FFC107;
-    color: #1C1C1C;
+    background: var(--primary);
+    color: var(--text-inverse);
     padding: 10px 18px;
     border-radius: 6px;
     font-weight: bold;
@@ -206,7 +403,7 @@ body {
 }
 
 .actions .btn:hover {
-    background: #e0a800;
+    background: var(--primary-hover);
     transform: translateY(5px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
     font-size: clamp(1.3rem, 1.3vw, 1.3rem);
@@ -221,7 +418,7 @@ body {
 .table {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(28, 28, 28, 0.9);
+    background: var(--table-bg);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -230,7 +427,7 @@ body {
 .table td {
     padding: 12px 15px;
     text-align: center;
-    color: #F5F5F5;
+    color: var(--text);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -249,7 +446,7 @@ body {
 
 /* Interacción de filas para mejorar la lectura */
 .table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--table-row-hover);
     transition: 0.5s;
 }
 
@@ -277,13 +474,13 @@ body {
     border-radius: 10px;
     cursor: pointer;
     backdrop-filter: blur(6px);
-    background: #dc3545;
+    background: var(--danger);
     position: relative;
     transition: all 0.5s ease;
 }
 
 .action-btn.delete:hover {
-    background: #f73131;
+    background: var(--danger-hover);
     transform: scale(1.4);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -328,7 +525,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
     backdrop-filter: blur(6px);
-    background: #17a2b8;
+    background: var(--info);
     transition: all 0.5s ease;
 }
 
@@ -345,12 +542,12 @@ body {
 
 /* Colores específicos para la moderación y gestión de registros */
 .action-btn.accept {
-    background: #28a745;
+    background: var(--success);
 }
 
 .action-btn.reject {
-    background: #ffc107;
-    color: #1C1C1C;
+    background: var(--warning);
+    color: var(--text-inverse);
 }
 
 .action-btn.edit {
@@ -381,7 +578,8 @@ body {
 }
 
 .card {
-    background: rgba(28, 28, 28, 0.9);
+    background: var(--bg2);
+    color: var(--card);
     padding: 25px;
     border-radius: 12px;
     cursor: pointer;
@@ -396,15 +594,15 @@ body {
 
 .card:hover i {
     transform: rotate(10deg) scale(1.3);
-    color: #1C1C1C;
+    color: var(--text-inverse);
 }
 
 /* Interacción de la tarjeta: Animación y cambio de colores */
 .card:hover {
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-    background: #FFC107;
-    color: #1C1C1C;
+    background: var(--primary);
+    color: var(--text-inverse);
 }
 
 .cards .card:nth-child(1) {
@@ -434,7 +632,7 @@ body {
 }
 
 .modal-content {
-    background: #1C1C1C;
+    background: var(--modal-bg);
     padding: 25px;
     border-radius: 12px;
     text-align: center;
@@ -444,7 +642,7 @@ body {
 }
 
 .modal-content h3 {
-    color: #FFC107;
+    color: var(--primary);
     margin-bottom: 10px;
 }
 
@@ -510,7 +708,7 @@ body {
 .profile-form .form-group label {
     margin-bottom: 8px;
     font-weight: bold;
-    color: #FFC107;
+    color: var(--primary);
 }
 
 .profile-form .form-group input,
@@ -520,15 +718,16 @@ body {
     padding: 10px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(0, 0, 0, 0.3);
-    color: #F5F5F5;
+    background: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--border);
     outline: none;
     transition: border 0.3s, background 0.3s;
     font-family: inherit;
 }
 
 .profile-form .form-group input:focus {
-    border-color: #FFC107;
+    border-color: var(--primary);
 }
 
 .input-containerB input {
@@ -546,7 +745,7 @@ body {
 .input-containerB input:focus {
     outline: none;
     background: rgba(0, 0, 0, 0.3);
-    border: 4px solid #FFC107;
+    border: 4px solid var(--primary);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     width: 40rem;
 }
@@ -562,8 +761,8 @@ body {
 
 /* Botones de acción del formulario */
 .form-actions .btn {
-    background: #FFC107;
-    color: #1C1C1C;
+    background: var(--primary);
+    color: var(--text-inverse);
     padding: 10px 18px;
     border-radius: 6px;
     font-weight: bold;
@@ -575,14 +774,14 @@ body {
 }
 
 .form-actions .btn:hover {
-    background: rgb(255, 217, 0);
+    background: var(--primary-hover);
+    box-shadow: 0 4px 10px var(--primary);
     transform: scale(1.1);
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgb(255, 217, 0);
 }
 
 .form-actions .btn-cancel {
-    background: #dc3545;
+    background: var(--danger);
     text-decoration: none;
     color: #ffff;
     padding: 10px 18px;
@@ -596,10 +795,10 @@ body {
 }
 
 .form-actions .btn-cancel:hover {
-    background: rgb(255, 0, 25);
+    background: var(--danger-hover);
+    box-shadow: 0 4px 10px var(--danger);
     transform: scale(1.1);
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgb(255, 0, 25);
 }
 
 .readonly-input {
@@ -607,6 +806,32 @@ body {
     color: #888 !important;
     cursor: not-allowed;
     border: 1px solid #DFE2E8;
+}
+
+.theme-switcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--bg2);
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    gap: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.theme-switcher button {
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: var(--primary);
+    color: var(--bg);
+    transition: transform 0.2s ease;
+}
+
+.theme-switcher button:hover {
+    transform: scale(1.1);
 }
 
 @keyframes modalIn {
