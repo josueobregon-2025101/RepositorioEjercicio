@@ -6,13 +6,22 @@
     <title>Moderación de Prácticas</title>
 
     <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
-
     <link rel="stylesheet" th:href="@{/Styles/practicas.css}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
+
+<div id="loading-screen">
+    <video autoplay muted playsinline id="loading-video">
+        <source th:src="@{/videos/PracticasLoader.mp4}" type="video/mp4">
+    </video>
+</div>
+<video autoplay muted loop playsinline id="bg-video">
+    <source th:src="@{/videos/fondo.mp4}" type="video/mp4">
+</video>
+
 <div class="dashboard">
 
     <aside class="sidebar">
@@ -68,35 +77,31 @@
                 </thead>
                 <tbody>
                 <tr th:each="practica : ${practicas}">
-                    <td th:text="${practica.idPractica}">1</td>
-                    <td th:text="${practica.titulo}">Título</td>
-                    <td th:text="${practica.idEmpresa}">Empresa ID</td>
-                    <td th:text="${practica.tipoPractica}">Tipo</td>
-                    <td th:text="${practica.carreraPractica}">Carrera</td>
+                    <td th:text="${practica.idPractica}"></td>
+                    <td th:text="${practica.titulo}"></td>
+                    <td th:text="${practica.idEmpresa}"></td>
+                    <td th:text="${practica.tipoPractica}"></td>
+                    <td th:text="${practica.carreraPractica}"></td>
 
                     <td>
                         <span th:if="${practica.vigencia == 'Aprobado'}" class="status-badge approved">
                             <i class="fas fa-check-circle"></i> Aprobado
                         </span>
-
                         <span th:if="${practica.vigencia == 'Rechazado'}" class="status-badge rejected">
                             <i class="fas fa-times-circle"></i> Rechazado
                         </span>
-
                         <span th:if="${practica.vigencia == 'Vigente'}" class="status-badge active">
                             <i class="fas fa-check"></i> Vigente
                         </span>
-
                         <span th:if="${practica.vigencia == 'Pendiente'}" class="status-badge pending">
                             <i class="fas fa-hourglass-half"></i> Pendiente
                         </span>
-
                         <span th:unless="${practica.vigencia == 'Aprobado' or practica.vigencia == 'Rechazado' or practica.vigencia == 'Vigente' or practica.vigencia == 'Pendiente'}">
                             <span class="status-badge" th:text="${practica.vigencia}"></span>
                         </span>
                     </td>
 
-                    <td th:text="${practica.disponibilidad}">Disponibilidad</td>
+                    <td th:text="${practica.disponibilidad}"></td>
 
                     <td>
                         <a th:href="@{/practicas/editar/{id}(id=${practica.idPractica})}" class="action-btn edit">
@@ -129,5 +134,6 @@
 
     </main>
 </div>
+<script th:src="@{/Scripts/practicas.js}"></script>
 </body>
 </html>
