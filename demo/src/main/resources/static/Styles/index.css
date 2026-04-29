@@ -10,10 +10,11 @@ body {
   margin: 0;
   min-height: 100vh;
   background: 
-    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+    linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.9)),
     url("../images/fondo.jpg");
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   background-repeat: no-repeat;
   color: #F5F5F5;
   display: flex;
@@ -21,19 +22,29 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,193,7,0.12), transparent 60%);
+  z-index: -1;
+}
+
 /* Cabecera del panel: Contiene el logo y el menú de acceso */
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px 40px;
-  background: linear-gradient(90deg, #1C1C1C, #222);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  justify-content: flex-start;
+  gap: 40px;
+
+  padding: 14px 40px;
+
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(10px);
+
   position: sticky;
   top: 0;
-  z-index: 100;
-  transition: background 0.3s ease, padding 0.3s ease;
+  z-index: 1000;
 }
 
 /* Contenedor del nombre de la marca/plataforma */
@@ -63,19 +74,70 @@ body {
 
 /* Enlaces de navegación */
 .nav a {
-  text-decoration: none;
-  color: #F5F5F5;
-  font-size: 13px;
-  font-weight: 500;
+  position: relative;
   padding: 6px 12px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.nav a.active {
+  color: #FFC107;
+  font-weight: bold;
+  position: relative;
 }
 
 .nav a:hover {
   background: rgba(255, 193, 7, 0.2);
   color: #FFC107;
   transform: translateY(-2px);
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background: #FFC107;
+  transition: 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav a:hover::after {
+  width: 80%;
+}
+
+.nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: #FFC107;
+  border-radius: 10px;
+}
+
+.nav-left {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.btn-login {
+  color: #FFC107;
+  border: 1px solid #FFC107;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn-login:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
 }
 
 /* Botón de registro */
@@ -87,11 +149,12 @@ body {
   font-weight: bold;
   box-shadow: 0 4px 12px rgba(255,193,7,0.4);
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .btn-register:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255,193,7,0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
 }
 
 /* Header cuando se hace scroll */
@@ -102,87 +165,119 @@ body {
 
 /* Sección principal (Hero) */
 .hero {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
   text-align: center;
-  padding: 100px 20px;
+  padding: 120px 20px;
 }
 
 .hero-content {
-  max-width: 650px;
+  max-width: 750px;
+ animation: fadeUp 1s ease-out;
 }
 
 .hero h1 {
-  font-size: 38px;
-  margin-bottom: 20px;
+  font-size: 44px;
+  font-weight: bold;
+  line-height: 1.2;
+
+  background: linear-gradient(90deg, #ffffff, #FFC107);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero p {
-  color: #bbb;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  color: #ccc;
+  font-size: 16px;
   line-height: 1.6;
 }
 
 /* Botones del hero */
 .hero-buttons {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Botón principal */
 .btn-main {
   background: #FFC107;
   color: #1C1C1C;
-  padding: 12px 26px;
   border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
-  transition: all 0.2s ease;
+  will-change: transform;
+  padding: 12px 24px;
+  transition: 0.3s ease;
 }
 
 .btn-main:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
+}
+
+.auth-buttons {
+  margin-left: auto; /* empuja todo a la derecha */
+  display: flex;
+  gap: 12px;
 }
 
 /* Botón secundario */
 .btn-secondary {
   border: 1px solid #FFC107;
   color: #FFC107;
-  padding: 12px 26px;
   border-radius: 10px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  will-change: transform;
+  padding: 12px 24px;
+  font-weight: bold;
+  transition: 0.3s ease;
 }
 
 .btn-secondary:hover {
   background: #FFC107;
   color: #1C1C1C;
+  transform: translateY(-3px);
 }
 
 /* Sección de características */
 .features {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  padding: 60px 40px;
+  gap: 35px;
+
+  padding: 120px 40px;
   flex-wrap: wrap;
 }
 
 /* Tarjetas */
 .card {
-  background: #111;
-  padding: 28px;
-  border-radius: 16px;
-  width: 250px;
+  width: 280px;
+  padding: 35px;
+  border-radius: 18px;
+
+  background: rgba(17,17,17,0.75);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.05);
   text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  transition: 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
   border-color: #FFC107;
 }
 
@@ -199,27 +294,40 @@ body {
 /* Sección CTA */
 .cta {
   text-align: center;
-  padding: 70px 20px;
+  padding: 140px 30px;
 }
 
 .cta h2 {
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #FFC107;
 }
 
 .cta p {
-  color: #bbb;
-  margin-bottom: 25px;
+  max-width: 750px;
+  margin: 0 auto 25px auto;
+  color: #ccc;
+  line-height: 1.6;
 }
 
 /* Footer */
 .footer {
   text-align: center;
-  padding: 20px;
-  background: #111;
+  padding: 50px 20px;
+  background: #0f0f0f;
   color: #777;
   font-size: 13px;
-  margin-top: auto;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsivo */
