@@ -108,14 +108,41 @@
                     <td th:text="${empresas.horarioEmpresa}"></td>
                     <td th:text="${empresas.descripcion}"></td>
                     <td th:text="${empresas.idLogin}"></td>
-                    <td>
-                        <!-- Botones de acción para gestionar la edición o eliminación del registro -->
-                        <a href="#" th:onclick="'editarActive(' + ${empresas.idEmpresa} + ');return false;'"
-                           class="action-btn edit"><i class="fas fa-edit"></i></a>
-                        <a th:href="@{/empresas/empresas/eliminar/{id}(id=${empresas.idEmpresa})}"
-                           class="action-btn delete"
-                           onclick="return confirm('¿Estas seguro que quieres eliminar este registro?')"><i
-                                class="fas fa-trash-alt"></i></a>
+                    <td class="actions">
+                        <div class="action-buttons">
+                            <!-- Botones de acción para gestionar la edición o eliminación del registro -->
+                            <a href="#" th:onclick="'editarActive(' + ${empresas.idEmpresa} + ');return false;'"
+                               class="action-btn edit"><i class="fas fa-pen"></i></a>
+
+                            <a th:href="@{/empresas/empresas/eliminar/{id}(id=${empresas.idEmpresa})}"
+                               class="action-btn delete">
+
+                                <svg class="trash-icon" viewBox="0 0 24 24" width="24" height="24">
+
+                                    <!-- Tapa -->
+                                    <path class="lid"
+                                          d="M3 6h18"
+                                          stroke="white"
+                                          stroke-width="2"
+                                          stroke-linecap="round"/>
+
+                                    <!-- Cuerpo -->
+                                    <path class="bin"
+                                          d="M6 6l1 14h10l1-14"
+                                          fill="none"
+                                          stroke="white"
+                                          stroke-width="2"
+                                          stroke-linejoin="round"/>
+
+                                    <!-- Interior -->
+                                    <path d="M10 10v6M14 10v6"
+                                          stroke="white"
+                                          stroke-width="2"
+                                          stroke-linecap="round"/>
+
+                                </svg>
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
