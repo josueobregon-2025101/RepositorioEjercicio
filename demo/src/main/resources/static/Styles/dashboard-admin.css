@@ -227,7 +227,7 @@ body {
 }
 
 .sidebar i {
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.5s ease, color 0.5s ease;
 }
 
 .sidebar a:hover i {
@@ -271,13 +271,14 @@ body {
     font-size: 1rem;
     color: var(--nav);
     border-radius: 8px;
-    transition: transform 0.3s ease;
+    transition: all 0.6s ease;
     position: relative;
     overflow: hidden;
 }
 
 .sidebar nav ul li a i {
     margin-right: 12px;
+    transition: all 0.6s ease;
     font-size: 1.1rem;
 }
 
@@ -285,6 +286,7 @@ body {
 .sidebar nav ul li a:hover,
 .sidebar nav ul li a.active {
     background: var(--focus);
+    transition: 0.6s;
     color: var(--text);
     font-weight: bold;
 }
@@ -296,18 +298,19 @@ body {
     top: 0;
     width: 0;
     height: 100%;
-    color: var(--primary);
-    transition: width 0.3s ease;
+    color: var(--primary);;
     z-index: -1;
 }
 
 .sidebar nav ul li a:hover::before {
     width: 100%;
+    transition: 0.6s;
 }
 
 .sidebar nav ul li a:hover i,
 .sidebar nav ul li a.active i {
     color: var(--text-inverse);
+    transition: 0.6s;
 }
 
 /* =================Area central de trabajo donde se muestra la información dinámica ================= */
@@ -347,7 +350,7 @@ body {
 
 .logout-btn i {
     margin-right: 6px;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
 }
 
 .logout-btn:hover {
@@ -392,7 +395,7 @@ body {
     font-family: inherit;
     position: relative;
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .actions .btn i {
@@ -440,13 +443,13 @@ body {
 }
 
 .table tbody tr {
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
 }
 
 /* Interacción de filas para mejorar la lectura */
 .table tbody tr:hover {
     background: var(--table-row-hover);
-    transition: 0.5s;
+    transition: 0.6s;
 }
 
 /* ========================== Botones de acción dentro de la tabla ========================== */
@@ -475,7 +478,7 @@ body {
     backdrop-filter: blur(6px);
     background: var(--danger);
     position: relative;
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
 }
 
 .action-btn.delete:hover {
@@ -525,7 +528,7 @@ body {
     cursor: pointer;
     backdrop-filter: blur(6px);
     background: var(--info);
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
 }
 
 .action-btn.edit:hover {
@@ -542,24 +545,44 @@ body {
 /* Colores específicos para la moderación y gestión de registros */
 .action-btn.accept {
     background: var(--success);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    background: var(--info);
+    transition: all 0.6s ease;
+}
+
+.action-btn.accept:hover {
+    background: var(--success);
+    transform: scale(1.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .action-btn.reject {
     background: var(--warning);
     color: var(--text-inverse);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    background: var(--info);
+    transition: all 0.5s ease;
 }
 
-.action-btn.edit {
-    background: #17a2b8;
-}
-
-.action-btn.accept {
-    background: #28a745;
-}
-
-.action-btn.reject {
-    background: #ffc107;
-    color: #1C1C1C;
+.action-btn.reject:hover {
+    background: var(--warning);
+    color: var(--text-inverse);
+    transform: scale(1.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -582,13 +605,13 @@ body {
     padding: 25px;
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card i {
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.5s ease, color 0.5s ease;
 }
 
 .card:hover i {
@@ -637,7 +660,7 @@ body {
     text-align: center;
     width: 320px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: modalIn 0.3s ease;
+    animation: modalIn 0.5s ease;
 }
 
 .modal-content h3 {
@@ -721,7 +744,7 @@ body {
     color: var(--input-text);
     border: 1px solid var(--border);
     outline: none;
-    transition: border 0.3s, background 0.3s;
+    transition: border 0.6s, background 0.6s;
     font-family: inherit;
 }
 
@@ -826,7 +849,7 @@ body {
     cursor: pointer;
     background: var(--primary);
     color: var(--bg);
-    transition: transform 0.2s ease;
+    transition: transform 0.5s ease;
 }
 
 .theme-switcher button:hover {
