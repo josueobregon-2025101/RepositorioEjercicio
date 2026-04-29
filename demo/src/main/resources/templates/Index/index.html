@@ -9,6 +9,12 @@
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/index.css}">
     <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
+    <script>
+    (function() {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+    </script>
 </head>
 <body>
 
@@ -146,5 +152,6 @@
         sections.forEach(s => observer.observe(s));
     </script>
 <script th:src="@{/Scripts/practicas.js}"></script>
+    <script th:src="@{/Scripts/temas.js}"></script>
 </body>
 </html>

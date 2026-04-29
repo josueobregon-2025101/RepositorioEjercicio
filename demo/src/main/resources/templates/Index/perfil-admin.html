@@ -10,6 +10,13 @@
     <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
     <!-- Enlace a la biblioteca de iconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script>
+    (function() {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+    </script>
 </head>
 <body>
 
@@ -86,7 +93,18 @@
             </div>
         </div>
 
+        <div class="theme-switcher">
+            <button data-theme="theme-yellow">🟡</button>
+            <button data-theme="theme-purple">🟣</button>
+            <button data-theme="theme-cyan-dark">🔵</button>
+            <button data-theme="theme-green-dark">🟢</button>
+            <button data-theme="theme-blue-light">⚪</button>
+        </div>
+
     </main>
 </div>
+
+    <script th:src="@{/Scripts/temas.js}"></script>
+
 </body>
 </html>
