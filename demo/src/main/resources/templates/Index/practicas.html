@@ -111,15 +111,16 @@
 
                     <td th:text="${practica.disponibilidad}"></td>
 
-                    <td>
+                    <td class="actions">
+                        <div class="action-buttons">
                         <a th:href="@{/practicas/editar/{id}(id=${practica.idPractica})}" class="action-btn edit">
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-pen"></i>
                         </a>
 
                         <form th:action="@{/practicas/aprobar/{id}(id=${practica.idPractica})}" method="post" style="display:inline;">
-                            <button type="submit" class="action-btn accept" onclick="return confirm('¿Aprobar esta práctica?')">
+                            <a type="submit" class="action-btn accept" onclick="return confirm('¿Aprobar esta práctica?')">
                                 <i class="fas fa-check"></i>
-                            </button>
+                            </a>
                         </form>
 
                         <form th:action="@{/practicas/rechazar/{id}(id=${practica.idPractica})}" method="post" style="display:inline;">
@@ -130,9 +131,33 @@
 
                         <form th:action="@{/practicas/eliminar/{id}(id=${practica.idPractica})}" method="post" style="display:inline;">
                             <button type="submit" class="action-btn delete" onclick="return confirm('¿Eliminar esta práctica permanentemente?')">
-                                <i class="fas fa-trash-alt"></i>
+                                <svg class="trash-icon" viewBox="0 0 24 24" width="24" height="24">
+
+                                    <!-- Tapa -->
+                                    <path class="lid"
+                                          d="M3 6h18"
+                                          stroke="white"
+                                          stroke-width="2"
+                                          stroke-linecap="round"/>
+
+                                    <!-- Cuerpo -->
+                                    <path class="bin"
+                                          d="M6 6l1 14h10l1-14"
+                                          fill="none"
+                                          stroke="white"
+                                          stroke-width="2"
+                                          stroke-linejoin="round"/>
+
+                                    <!-- Interior -->
+                                    <path d="M10 10v6M14 10v6"
+                                          stroke="white"
+                                          stroke-width="2"
+                                          stroke-linecap="round"/>
+
+                                </svg>
                             </button>
                         </form>
+                        </div>
                     </td>
 
                 </tr>
