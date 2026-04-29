@@ -2,8 +2,6 @@ package com.inprax.demo.Service;
 
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Repository.LoginRepository;
-
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,17 +9,25 @@ public class LoginServiceImplements implements LoginService {
 
     private final LoginRepository loginRepository;
 
-    public LoginServiceImplements(LoginRepository loginRepository) { this.loginRepository = loginRepository; }
-
-    @Override
-    public Login validarLogin(String correoLogin, String usuarioLogin, String contrasenaLogin, String roles) {
-        return loginRepository
-                .findByCorreoLoginAndUsuarioLoginAndContrasenaLoginAndRoles(correoLogin, usuarioLogin, contrasenaLogin, roles)
-                .orElse(null);
+    public LoginServiceImplements(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
     }
 
     @Override
-    public Login registrarLogin(String usuarioLogin, String contrasenaLogin, String correoLogin, String roles){
+    public Login validarLogin(String identificador, String contrasenaLogin) {
+        if (identificador.contains("@")) {
+            return loginRepository
+                    .findByCorreoLoginAndContrasenaLogin(identificador, contrasenaLogin)
+                    .orElse(null);
+        } else {
+            return loginRepository
+                    .findByUsuarioLoginAndContrasenaLogin(identificador, contrasenaLogin)
+                    .orElse(null);
+        }
+    }
+
+    @Override
+    public Login registrarLogin(String usuarioLogin, String contrasenaLogin, String correoLogin, String roles) {
         if (loginRepository.findByUsuarioLogin(usuarioLogin) != null) {
             return null;
         }
@@ -32,5 +38,4 @@ public class LoginServiceImplements implements LoginService {
         l.setRoles(roles);
         return loginRepository.save(l);
     }
-
 }
