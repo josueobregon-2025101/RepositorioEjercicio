@@ -19,16 +19,16 @@
     </script>
 
 </head>
-<body>
+<body class="image-bg">
 
-<video autoplay muted loop playsinline id="bg-video">
-    <source th:src="@{/videos/fondo.mp4}" type="video/mp4">
-</video>
+    <video id="bgvideo" autoplay muted loop playsinline></video>
+
+
 <div class="dashboard">
 
     <aside class="sidebar">
         <div class="logo">
-            <img th:src="@{/Images/INPRAX.png}" alt="INPRAX">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
         </div>
         <nav>
             <ul>
