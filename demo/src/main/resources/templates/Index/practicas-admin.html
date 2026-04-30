@@ -15,13 +15,16 @@
         </script>
 
 </head>
-<body>
+<body class="image-bg">
+
+    <video id="bgvideo" autoplay muted loop playsinline></video>
+
 <div class="dashboard">
 
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <img th:src="@{/Images/INPRAX.png}" alt="Logo INPRAX">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
         </div>
         <nav>
             <ul>
