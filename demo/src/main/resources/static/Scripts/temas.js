@@ -7,11 +7,11 @@ const themes = [
 ]
 
 const themebackgrounds = {
-    "theme-yellow": { type: "image", value: "/Images/Fondo.jpg" },
-    "theme-purple": { type: "image", value: "/Images/Fondo.jpg" },
-    "theme-cyan-dark": { type: "video", value: "/Images/bg1.mp4" },
+    "theme-yellow": { type: "video", value: "/Images/fondoamarillo.mp4" },
+    "theme-purple": { type: "video", value: "/Images/fondomorado.mp4" },
+    "theme-cyan-dark": { type: "video", value: "/Images/fondocyan.mp4" },
     "theme-green-dark": { type: "video", value: "/Images/fondoverde.mp4" },
-    "theme-blue-light": { type: "image", value: "/Images/fondo3.jpg" }
+    "theme-blue-light": { type: "video", value: "/Images/fondoceleste.mp4" }
 }
 
 function applytheme(theme) {
