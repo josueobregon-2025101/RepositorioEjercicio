@@ -10,13 +10,16 @@
     <!-- Enlace a la biblioteca de iconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
+<body class="image-bg">
+
+    <video id="bgvideo" autoplay muted loop playsinline></video>
+
 <div class="dashboard">
 
     <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
     <aside class="sidebar">
         <div class="logo">
-            <img th:src="@{/Images/INPRAX.png}" alt="Logo INPRAX">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
         </div>
         <nav>
             <ul>
