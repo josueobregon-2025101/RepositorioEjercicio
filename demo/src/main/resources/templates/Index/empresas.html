@@ -21,7 +21,9 @@
 
 </head>
 
-<body>
+<body class="image-bg">
+
+    <video id="bgvideo" autoplay muted loop playsinline></video>
 
 <div id="loading-screen">
     <video autoplay muted playsinline id="loading-video">
@@ -29,9 +31,6 @@
     </video>
 </div>
 
-<video autoplay muted loop playsinline id="bg-video">
-    <source th:src="@{/videos/fondo.mp4}" type="video/mp4">
-</video>
 
 <!-- Contenedor principal que organiza el sidebar y el contenido central -->
 <div class="dashboard">
@@ -40,7 +39,7 @@
     <aside class="sidebar">
         <!-- Contenedor del nombre de la marca/plataforma -->
         <div class="logo">
-            <img th:src="@{/Images/INPRAX.png}" alt="INPRAX">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
         </div>
         <!-- Menú de navegación principal con iconos -->
         <nav>
