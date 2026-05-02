@@ -46,6 +46,11 @@ public class AdministradoresController {
        return "Index/perfil-admin";
     }
 
+    
+    @GetMapping("/configuracion")
+    public String config(){
+       return "Index/configuracion";
+    }
 
     
 }
