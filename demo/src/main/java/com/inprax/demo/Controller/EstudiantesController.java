@@ -72,5 +72,6 @@ public class EstudiantesController {
        return "Index/configuracion-estudiante";
     }
 
-
+    @GetMapping("/perfil")
+    public String perfilEstudiante(){ return "Index/perfil-estudiante";}
 }
