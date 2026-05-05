@@ -11,16 +11,25 @@
 	<!-- Enlace al archivo CSS que da estilo a esta página -->
 	<link rel="stylesheet" th:href="@/Styles/crear-practica.css}">
 </head>
-<body>
+    <script>
+    (function() {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+    </script>
+</head>
+<body class="image-bg">
+
+    <video id="bgvideo" autoplay muted loop playsinline></video>
 
 	<!-- Contenedor principal del dashboard -->
 	<div class="dashboard">
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="logo">
-                <img src="@{/Images/INPRAX.png}">
-            </div>
+        <div class="logo">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
+        </div>
             <ul>
                 <li onclick="location.href='dashboard-empresa.html'">Inicio</li>
                 <li class="active" onclick="location.href='crear-practica.html'">Crear práctica</li>
