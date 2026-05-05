@@ -9,16 +9,25 @@
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/documentos.css}">
 </head>
-<body>
+    <script>
+    (function() {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+    </script>
+</head>
+<body class="image-bg">
+
+    <video id="bgvideo" autoplay muted loop playsinline></video>
 
     <!-- Contenedor principal que organiza el sidebar y el contenido central -->
     <div class="dashboard">
 
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
-            <div class="logo">
-                <img th:src="@{/Images/INPRAX.png}">
-            </div>
+        <div class="logo">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
+        </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <nav>
