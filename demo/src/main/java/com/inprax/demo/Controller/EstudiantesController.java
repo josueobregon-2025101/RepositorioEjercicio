@@ -68,10 +68,12 @@ public class EstudiantesController {
     }
 
     @GetMapping("/configuracion")
-    public String configestudiante(){
+    public String configestudiante() {
        return "Index/configuracion-estudiante";
     }
 
     @GetMapping("/perfil")
-    public String perfilEstudiante(){ return "Index/perfil-estudiante";}
+    public String perfilEstudiante() {
+        return "Index/perfil-estudiante";
+    }
 }
