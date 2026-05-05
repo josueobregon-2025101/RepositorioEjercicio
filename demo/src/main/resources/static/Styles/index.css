@@ -70,6 +70,7 @@ body::before {
   display: flex;
   gap: 18px;
   align-items: center;
+  flex: 1;
 }
 
 /* Enlaces de navegación */
@@ -231,6 +232,7 @@ html {
   margin-left: auto;
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 /* Botón secundario */
@@ -260,7 +262,7 @@ html {
   padding: 140px 50px;
   flex-wrap: wrap;
   scroll-margin-top: 120px;
-  margin-bottom: 145px;
+  margin-bottom: 165px;
 }
 
 
@@ -299,8 +301,8 @@ html {
 .cta {
   text-align: center;
   padding: 140px 30px;
-  scroll-margin-top: 150px;
-  margin-bottom: 140px;
+  scroll-margin-top: 180px;
+  margin-bottom: 450px;
 }
 
 .cta h2 {
@@ -318,11 +320,12 @@ html {
 
 /* Footer */
 .footer {
+  min-height: 10vh;
   text-align: center;
-  padding: 50px 20px;
+  padding: 80px 20px;
   background: #0f0f0f;
   color: #777;
-  font-size: 13px;
+  font-size: 20px;
 }
 
 @keyframes fadeUp {
