@@ -165,13 +165,14 @@ body::before {
 
 /* Sección principal (Hero) */
 .hero {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
   text-align: center;
-  padding: 120px 20px;
+  padding: 80 20px;
+  margin-bottom: 180px;
 }
 
 .hero-content {
@@ -254,11 +255,14 @@ html {
 .features {
   display: flex;
   justify-content: center;
-  gap: 35px;
+  gap: 50px;
 
-  padding: 120px 40px;
+  padding: 140px 50px;
   flex-wrap: wrap;
+  scroll-margin-top: 120px;
+  margin-bottom: 145px;
 }
+
 
 /* Tarjetas */
 .card {
@@ -295,6 +299,8 @@ html {
 .cta {
   text-align: center;
   padding: 140px 30px;
+  scroll-margin-top: 150px;
+  margin-bottom: 140px;
 }
 
 .cta h2 {
@@ -322,7 +328,7 @@ html {
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(35px);
   }
   to {
     opacity: 1;
