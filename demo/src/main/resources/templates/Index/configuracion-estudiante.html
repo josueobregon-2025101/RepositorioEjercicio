@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuración</title>
+
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script>
+    (function() {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+    </script>
+</head>
+
+<body class="video-bg">
+
+<video id="bgvideo" autoplay muted loop playsinline></video>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
+        </div>
+
+        <nav>
+            <ul>
+                    <li>
+                        <a th:href="@{/estudiantes/estudiantes/dashboard}">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li> 
+                    
+                    <li>
+                        <a th:href="@{/practicas/practicas}">
+                            <i class="fas fa-briefcase"></i> Prácticas disponibles
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/postulaciones/postulaciones}">
+                            <i class="fas fa-file"></i> Mis postulaciones
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/documentos/documentos}">
+                            <i class="fas fa-folder"></i> Mis documentos
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/perfil/perfil}">
+                            <i class="fas fa-user"></i> Perfil
+                        </a>
+                    </li>
+                    <li>
+                    <a th:href="@{/estudiantes/configuracion}" class="active">
+                        <i class="fas fa-cog"></i> Configuración
+                    </a>
+                    </li>
+                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="header">
+            <h1>Configuración</h1>
+        </header>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3><i class="fas fa-palette"></i> Tema</h3>
+
+                <div class="action-buttons">
+                    <button class="btn" data-theme="theme-yellow">🟡</button>
+                    <button class="btn" data-theme="theme-purple">🟣</button>
+                    <button class="btn" data-theme="theme-cyan-dark">🔵</button>
+                    <button class="btn" data-theme="theme-green-dark">🟢</button>
+                    <button class="btn" data-theme="theme-blue-light">⚪</button>
+                </div>
+            </div>
+
+
+
+            <div class="card">
+                <h3><i class="fas fa-rotate-left"></i> Restablecer</h3>
+
+                <div class="action-buttons">
+                    <button class="btn" onclick="resetConfig()">Restablecer</button>
+                </div>
+            </div>
+
+    </main>
+</div>
+
+<script th:src="@{/Scripts/temas.js}"></script>
+
+<script>
+function setBackground(type) {
+    const body = document.body
+    body.classList.remove("video-bg", "image-bg")
+    if (type === "video") {
+        body.classList.add("video-bg")
+    } else {
+        body.classList.add("image-bg")
+    }
+    localStorage.setItem("bgType", type)
+}
+
+(function(){
+    const bg = localStorage.getItem("bgType") || "video"
+    setBackground(bg)
+})()
+
+function resetConfig(){
+    localStorage.clear()
+    location.reload()
+}
+</script>
+
+</body>
+</html>
