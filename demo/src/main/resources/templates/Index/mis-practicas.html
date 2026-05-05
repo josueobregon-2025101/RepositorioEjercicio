@@ -8,13 +8,22 @@
     <!-- Hoja de estilos -->
     <link rel="stylesheet" th:href="@{/Styles/mis-practicas.css}">
 </head>
-<body>
+    <script>
+    (function() {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+    </script>
+</head>
+<body class="image-bg">
+
+    <video id="bgvideo" autoplay muted loop playsinline></video>
 <div class="dashboard">
 
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <img th:src="@{/Images/INPRAX.png}" alt="Logo INPRAX">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
         </div>
         <ul>
             <li><a th:href="@{/dashboard-empresa}">Inicio</a></li>

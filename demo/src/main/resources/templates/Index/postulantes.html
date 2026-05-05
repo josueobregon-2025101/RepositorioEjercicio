@@ -9,26 +9,63 @@
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/postulantes.css}">
 </head>
-<body>
+    <script>
+    (function() {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+    </script>
+</head>
+<body class="image-bg">
 
+    <video id="bgvideo" autoplay muted loop playsinline></video>
     <!-- Contenedor principal que organiza el sidebar y el contenido central -->
     <div class="dashboard">
 
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
-            <div class="logo">
-                <img th:src="@{/Images/INPRAX.png}">
-            </div>
+        <div class="logo">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
+        </div>
             
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <ul>
-                <li onclick="location.href='dashboard-empresa.html'">Inicio</li>
-                <li onclick="location.href='crear-practica.html'">Crear práctica</li>
-                <li onclick="location.href='editar-practica.html'">Editar práctica</li>
-                <li class="active" onclick="location.href='postulantes.html'">Postulantes</li> <!-- Clase 'active' para resaltar la página actual -->
-                <li onclick="location.href='mis-practicas.html'">Mis postulaciones</li>
-                <li onclick="location.href='perfil-empresa.html'">Perfil</li>
-            </ul>
+                    <li>
+                        <a th:href="@{/estudiantes/estudiantes/dashboard}">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li> 
+                    
+                    <li>
+                        <a th:href="@{/practicas/practicas}">
+                            <i class="fas fa-briefcase"></i> Prácticas disponibles
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/postulaciones/postulaciones}">
+                            <i class="fas fa-file"></i> Mis postulaciones
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/documentos/documentos}">
+                            <i class="fas fa-folder"></i> Mis documentos
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a th:href="@{/perfil/perfil}">
+                            <i class="fas fa-user"></i> Perfil
+                        </a>
+                    </li>
+                    <li>
+                    <a th:href="@{/estudiantes/configuracion}" class="active">
+                        <i class="fas fa-cog"></i> Configuración
+                    </a>
+                    </li>
+                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                </ul>
         </aside>
 
         <!-- Área de contenido principal: Donde se muestra la información dinámica -->
