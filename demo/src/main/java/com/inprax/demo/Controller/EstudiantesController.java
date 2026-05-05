@@ -1,8 +1,10 @@
 package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Estudiantes;
+import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EstudiantesService;
 import com.inprax.demo.Service.InstitucionService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,10 @@ public class EstudiantesController {
 
 
     @GetMapping("/estudiantes")
-    public String listarEstudiantes(Model model) {
+    public String listarEstudiantes(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
+        model.addAttribute("rolUsuario", rol);
         List<Estudiantes> estudiantes = service.getAllEstudiantes();
         model.addAttribute("estudiantes", estudiantes);
         return "Index/estudiantes";
@@ -33,7 +38,7 @@ public class EstudiantesController {
     public String dashboardEstudianteString(Model model) {
         return "Index/dashboard-estudiante";
     }
-    
+
 
     @GetMapping("/estudiantes/nuevos")
     public String estudianteNuevo(Model model) {
@@ -55,7 +60,7 @@ public class EstudiantesController {
         model.addAttribute("institucion", institucionService.getAllInstituciones());
         return "Index/editar-estudiante";
     }
-    
+
     @GetMapping("/estudiantes/eliminar/{id}")
     public String eliminarEstudiante(@PathVariable Integer id) {
         service.deleteEstudiantes(id);

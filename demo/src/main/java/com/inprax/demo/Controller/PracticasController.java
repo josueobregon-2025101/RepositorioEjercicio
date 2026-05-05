@@ -1,7 +1,9 @@
 package com.inprax.demo.Controller;
 
+import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Entity.Practicas;
 import com.inprax.demo.Service.PracticasService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,10 @@ public class PracticasController {
     }
 
     @GetMapping("/practicas")
-    public String verPracticas(Model model){
+    public String verPracticas(HttpSession session, Model model){
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
+        model.addAttribute("rolUsuario", rol);
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
         return "Index/practicas";
