@@ -1,209 +1,369 @@
-/* Configuración básica del documento: Reset de márgenes y box-sizing */
+:root {
+    --bg: #1C1C1C;
+    --bg-sidebar: #111;
+    --bg-container: rgba(0,0,0,0.45);
+    --bg-card: rgba(28,28,28,0.9);
+    --bg-hover: #2a2a2a;
+    --primary: #FFC107;
+    --primary-hover: #ffb300;
+    --text: #F5F5F5;
+    --text-muted: #ddd;
+    --text-inverse: #1C1C1C;
+    --border: rgba(255,255,255,0.08);
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
+    --bg-image: url("../images/fondo.jpg");
+    --nav: #F5F5F5;
+    --focus: #FFC107;
+}
+
+.theme-purple {
+    --bg: #EAEFF0;
+    --bg-sidebar: #0C1825;
+    --bg-container: rgba(255,255,255,0.7);
+    --bg-card: #FFFFFF;
+    --bg-hover: #D8B4C2;
+    --primary: #7453B2;
+    --primary-hover: #5e43a0;
+    --text: #0C1825;
+    --text-muted: #6B7280;
+    --text-inverse: #FFFFFF;
+    --border: #D9DCE3;
+    --overlay1: rgba(234,239,240,0.8);
+    --overlay2: rgba(234,239,240,0.9);
+    --bg-image: url("../images/fondo-purple.jpg");
+    --nav: #EAEFF0;
+    --focus: #7453B2;
+}
+
+.theme-cyan-dark {
+    --bg: #06090A;
+    --bg-sidebar: #0E1112;
+    --bg-container: rgba(14,17,18,0.8);
+    --bg-card: #0E1112;
+    --bg-hover: #1E3A40;
+    --primary: #16A2C5;
+    --primary-hover: #1389A7;
+    --text: #EAEFF0;
+    --text-muted: #A0B3B8;
+    --text-inverse: #000000;
+    --border: #1F2A2D;
+    --overlay1: rgba(6,9,10,0.9);
+    --overlay2: rgba(6,9,10,0.95);
+    --bg-image: url("../images/fondo-cyan.jpg");
+    --nav: #EAEFF0;
+    --focus: #16A2C5;
+}
+
+.theme-green-dark {
+    --bg: #090F08;
+    --bg-sidebar: #111710;
+    --bg-container: rgba(17,23,16,0.8);
+    --bg-card: #111710;
+    --bg-hover: #1F3D18;
+    --primary: #99D991;
+    --primary-hover: #7FCF75;
+    --text: #E8EDE8;
+    --text-muted: #A5B0A5;
+    --text-inverse: #000000;
+    --border: #1E2A1C;
+    --overlay1: rgba(9,15,8,0.9);
+    --overlay2: rgba(9,15,8,0.95);
+    --bg-image: url("../images/fondo-green.jpg");
+    --nav: #E8EDE8;
+    --focus: #162D12;
+}
+
+.theme-blue-light {
+    --bg: #F4F4F5;
+    --bg-sidebar: #FFFFFF;
+    --bg-container: rgba(255,255,255,0.8);
+    --bg-card: #FFFFFF;
+    --bg-hover: #E4E4E7;
+    --primary: #366DDD;
+    --primary-hover: #1969DD;
+    --text: #18181B;
+    --text-muted: #6B7280;
+    --text-inverse: #FFFFFF;
+    --border: #E4E4E7;
+    --overlay1: rgba(244,244,245,0.8);
+    --overlay2: rgba(244,244,245,0.9);
+    --bg-image: url("../images/fondo-blue.jpg");
+    --nav: #18181B;
+    --focus: #366DDD;
+}
+
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	/* Fuente estándar de sistema aplicada globalmente */
-	font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Configuración básica del documento: Fondo y colores base */
 body {
-	min-height: 100vh;
-	background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
-	url("../images/fondo.jpg");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	color: #F5F5F5;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+    position: relative;
+    overflow-x: hidden;
+    transition: all 0.5s ease;
 }
 
-/* Contenedor principal que organiza el sidebar y el contenido central */
-.dashboard {
-	display: flex;
-	min-height: 100vh;
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(var(--overlay1), var(--overlay2));
+    z-index: -2;
 }
 
-/* Panel lateral (Sidebar): Menú de navegación fijo */
-.sidebar {
-	width: 230px;
-	background: #111;
-	padding: 30px 20px;
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    z-index: -3;
+    transition: background-image 0.5s ease;
 }
 
-/* Contenedor del nombre de la marca/plataforma */
-.logo {
-	text-align: center;
-	margin-bottom: 30px;
-	padding: 10px;
-}
-
-/* Imagen del logo de la plataforma */
-.logo img {
-	width: 120px;
-	height: auto;
-	display: block;
-	margin: 0 auto;
-	object-fit: contain;
-}
-
-/* Título del logo */
-.logo h2 {
-	color: #FFC107;
-}
-
-/* Seleccionamos el enlace dentro del li */
-.sidebar ul li a {
-    text-decoration: none; /* Elimina el subrayado */
-    color: inherit;        /* Usa el color blanco/gris del li */
-    display: block;        /* Ocupa todo el ancho y alto disponible */
+#bgvideo {
+    position: fixed;
+    inset: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    z-index: -4;
+    display: none;
 }
 
-/* Ajuste del padding: lo movemos del li al a para que todo sea clickable */
-.sidebar li {
-    padding: 0; /* Quitamos el padding original del li */
+body.video-bg #bgvideo {
+    display: block;
+}
+
+body.video-bg::after {
+    display: none;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    animation: pageLoad 0.8s ease-in-out;
+}
+
+.sidebar {
+    width: 230px;
+    background: var(--bg-sidebar);
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    border-right: 1px solid var(--border);
+    transition: all 0.5s ease;
+}
+
+.sidebar i {
+    transition: all 0.6s ease;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#logo {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#logo:hover {
+    transform: scale(1.05);
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
     margin-bottom: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.2s;
 }
 
-.sidebar li a {
-    padding: 12px 14px; /* Ponemos el padding aquí */
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--nav);
+    border-radius: 8px;
+    transition: all 0.6s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-/* Interacción: Cambio de color al pasar el mouse */
-.sidebar li:hover {
-    background: #2a2a2a;
+.sidebar nav ul li a i {
+    margin-right: 12px;
+    font-size: 1.1rem;
 }
 
-/* Clase 'active' para resaltar la página actual */
-.sidebar .active {
-	background: #FFC107;
-	color: #1C1C1C;
-	font-weight: bold;
-}
-
-/* Evitamos que el active se opaque con el hover */
-.sidebar li.active:hover {
-    background: #FFC107; /* Mantiene su color original aunque pases el mouse */
-    cursor: default;
-}
-
-/* Cuando el li es active, el texto del enlace debe ser oscuro */
-.sidebar .active a {
-    color: #1C1C1C;
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    padding-left: 35px;
+    background: var(--focus);
+    color: var(--text-inverse);
     font-weight: bold;
 }
 
-/* Área de contenido principal: Espaciado dinámico */
+.sidebar nav ul li a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: var(--primary);
+    z-index: -1;
+}
+
+.sidebar nav ul li a:hover::before,
+.sidebar nav ul li a.active::before {
+    width: 100%;
+}
+
+.sidebar nav ul li a:hover i,
+.sidebar nav ul li a.active i {
+    transform: scale(1.2) rotate(5deg);
+    color: var(--text-inverse);
+	transition: 0.6s;
+}
+
 .main-content {
-	flex: 1;
-	padding: 35px;
+    flex: 1;
+    padding: 35px;
+    animation: fadeInUp 0.8s ease-in-out;
+    position: relative;
 }
 
-/* Cabecera del panel: Alineación de elementos */
 .header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
-/* Título de la cabecera */
 .header h1 {
-	font-size: 32px;
+    color: var(--primary);
+    font-size: 2rem;
 }
 
-/* Botón que redirige al login o página principal (Cierra la sesión) */
 .logout-btn {
-	background: #FFC107;
-	border: none;
-	padding: 10px 18px;
-	border-radius: 6px;
-	cursor: pointer;
-	font-weight: bold;
-	color: #1C1C1C;
+    background: var(--primary);
+    color: var(--text-inverse);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Interacción del botón de cierre de sesión */
+.logout-btn i {
+    margin-right: 6px;
+    transition: transform 0.5s ease;
+}
+
 .logout-btn:hover {
-	background: #ffb300;
+    transform: translateX(5px);
+    opacity: 0.9;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor específico para la gestión de información del usuario */
+.logout-btn:hover i {
+    transform: translateX(4px);
+}
+
 .container {
-	background: rgba(0,0,0,0.45);
-	padding: 25px;
-	border-radius: 12px;
-	backdrop-filter: blur(4px);
+    background: var(--bg-container);
+    padding: 25px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
 }
 
-/* Rejilla de tarjetas (Cards) para el seguimiento de solicitudes */
 .postulaciones {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-	gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
 }
 
-/* Tarjeta de acceso rápido con estado de postulación: Estilos visuales */
 .cardPostulacion {
-	background: rgba(28,28,28,0.9);
-	padding: 20px;
-	border-radius: 10px;
-	border: 1px solid rgba(255,255,255,0.08);
-	transition: 0.25s;
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: 0.3s ease;
 }
 
-/* Interacción de la tarjeta: Animación y cambio de bordes */
 .cardPostulacion:hover {
-	border-color: #FFC107;
-	transform: translateY(-3px);
+    border-color: var(--primary);
+    transform: translateY(-5px);
 }
 
-/* Título dentro de la tarjeta de postulación */
 .cardPostulacion h3 {
-	color: #FFC107;
-	margin-bottom: 10px;
-	font-size: 18px;
+    color: var(--primary);
+    margin-bottom: 10px;
 }
 
-/* Descripción dentro de la tarjeta de postulación */
 .cardPostulacion p {
-	font-size: 14px;
-	margin-bottom: 6px;
-	color: #ddd;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: var(--text-muted);
 }
 
-/* Etiquetas de estado: Estilos base para el seguimiento */
 .estado {
-	margin-top: 10px;
-	display: inline-block;
-	padding: 6px 10px;
-	border-radius: 6px;
-	font-size: 13px;
-	font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
-/* Colores específicos según el progreso de la postulación */
 .estado.enviado {
-	background: #2c2c2c;
-	color: #FFC107;
+    background: #2c2c2c;
+    color: #FFC107;
 }
 
 .estado.revision {
-	background: #1f2a38;
-	color: #4fc3f7;
+    background: #1f2a38;
+    color: #4fc3f7;
 }
 
 .estado.aceptado {
-	background: #1b3a1b;
-	color: #66bb6a;
+    background: #1b3a1b;
+    color: #66bb6a;
 }
 
 .estado.rechazado {
-	background: #3a1b1b;
-	color: #ef5350;
+    background: #3a1b1b;
+    color: #ef5350;
+}
+
+@keyframes pageLoad {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
