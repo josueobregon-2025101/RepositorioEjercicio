@@ -1,185 +1,431 @@
+/* Configuración básica del documento: Reset de márgenes y aplicación de fuentes globales */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Se utilizan fuentes estándar del sistema para asegurar compatibilidad sin archivos externos */
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Tema Por Defecto */
 :root {
-	--bg: #1C1C1C;
-	--bg2: #1C1C1C;
+    --bg: #1C1C1C;
+    --bg2: #1C1C1C;
+    --bg3: #1C1C1C;
 
-	--overlay1: rgba(6,9,10,0.5);
-	--overlay2: rgba(6,9,10,0.7);
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
 
-	--primary: #FFC107;
-	--primary-hover: #e0a800;
+    --primary: #FFC107;
+    --primary-hover: #e0a800;
 
-	--text: #F5F5F5;
-	--text-muted: #CCCCCC;
-	--text-inverse: #1C1C1C;
+    --accent: #FFC107;
+    --accent-hover: #e0a800;
 
-	--border: rgba(255,255,255,0.1);
+    --text: #F5F5F5;
+    --text-muted: #CCCCCC;
+    --text-inverse: #1C1C1C;
 
-	--nav: #F5F5F5;
+    --focus: #FFC107;
+    --hover: #e0a800;
 
-	--input-bg: rgba(0,0,0,0.3);
-	--modal-bg: #1C1C1C;
+    --border: rgba(255,255,255,0.1);
 
-	--danger: #DC3545;
-	--success: #28A745;
-	--info: #17A2B8;
-	--warning: #FFC107;
+    --table-bg: rgba(28,28,28,0.9);
+    --table-row-hover: rgba(255,255,255,0.1);
 
-	--focus: var(--primary);
+    --input-bg: rgba(0,0,0,0.3);
+    --input-text: #F5F5F5;
 
-	--card: rgba(28,28,28,0.9);
-	--sidebar: #111;
+    --modal-bg: #1C1C1C;
 
-	--shadow: rgba(0,0,0,0.25);
+    --icon: #FFC107;
 
-	--bg-image: none;
+    --danger: #DC3545;
+    --danger-hover: #C82333;
+    --success: #28A745;
+    --info: #17A2B8;
+    --warning: #FFC107;
+    --secondary: #6C757D;
+
+}
+
+.theme-yellow {
+    --bg: #1C1C1C;
+    --bg2: #1C1C1C;
+    --bg3: #1C1C1C;
+
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
+
+    --primary: #FFC107;
+    --primary-hover: #e0a800;
+
+    --accent: #FFC107;
+    --accent-hover: #e0a800;
+    --card: #1C1C1C;
+    --nav: #F5F5F5;
+    --text: #F5F5F5;
+    --text-muted: #CCCCCC;
+    --text-inverse: #1c1c1c;
+
+    --focus: #FFC107;
+    --hover: #e0a800;
+
+    --border: rgba(255,255,255,0.1);
+
+    --table-bg: rgba(28,28,28,0.9);
+    --table-row-hover: rgba(255,255,255,0.1);
+
+    --input-bg: rgba(0,0,0,0.3);
+    --input-text: #F5F5F5;
+
+    --modal-bg: #1C1C1C;
+
+    --icon: #FFC107;
+
+    --danger: #DC3545;
+    --danger-hover: #C82333;
+    --success: #28A745;
+    --info: #17A2B8;
+    --warning: #FFC107;
+    --secondary: #6C757D;
+}
+
+
+.theme-purple {
+    --bg: #EAEFF0;
+    --bg2: #ECEEF3;
+    --bg3: #FFFFFF;
+
+
+    --primary: #7453B2;
+    --primary-hover: #5e43a0;
+    --card: #0C1825;
+    --nav: #0C1825;
+    --text: #EAEFF0;
+    --text-muted: #6B7280;
+    --text-inverse: #FFFFFF;
+
+    --focus: #5e43a0;
+    --hover: #D8B4C2;
+
+    --border: #D9DCE3;
+
+    --input-bg: #F4F6FB;
+    --input-text: #0C1825;
+
+    --modal-bg: #ECEEF3;
+
+    --icon: #9D76C1;
+}
+
+.theme-cyan-dark {
+    --bg: #06090A;
+    --bg2: #0E1112;
+    --bg3: #0E1112;
+
+    --primary: #16A2C5;
+    --primary-hover: #1389A7;
+    --nav: #EAEFF0;
+    --card: #EAEFF0;
+    --text: #EAEFF0;
+    --text-muted: #A0B3B8;
+    --text-inverse: #000000;
+
+    --focus: #293537;
+    --hover: #1E3A40;
+
+    --border: #1F2A2D;
+
+    --input-bg: #0E1112;
+    --input-text: #EAEFF0;
+
+    --modal-bg: #0E1112;
+
+    --icon: #42B5D1;
+
+}
+
+.theme-green-dark {
+    --bg: #090F08;
+    --bg2: #111710;
+    --bg3: #111710;
+
+
+    --primary: #99D991;
+    --primary-hover: #7FCF75;
+    --nav: #E8EDE8;
+    --card: #E8EDE8;
+    --text: #E8EDE8;
+    --text-muted: #A5B0A5;
+    --text-inverse: #000000;
+
+    --focus: #162D12;
+    --hover: #1F3D18;
+
+    --border: #1E2A1C;
+
+    --input-bg: #111710;
+    --input-text: #E8EDE8;
+
+    --modal-bg: #111710;
+
+    --icon: #4EEF3A;
+}
+
+.theme-blue-light {
+    --bg: #F4F4F5;
+    --bg2: #FFFFFF;
+    --bg3: #FFFFFF;
+
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
+
+    --primary: #52525B;
+    --primary-hover: #3F3F46;
+    --nav: #18181B;
+    --card: #18181B;
+    --text: #F5F5F5;
+    --text-muted: #6B7280;
+    --text-inverse: #FFFFFF;
+
+    --focus: #366DDD;
+    --hover: #D4D4D8;
+
+    --border: #E4E4E7;
+
+    --input-bg: #FFFFFF;
+    --input-text: #18181B;
+
+    --modal-bg: #FFFFFF;
+
+    --icon: #1969DD;
 }
 
 body {
-	min-height: 100vh;
-	color: var(--text);
-	background: var(--bg);
-	background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
-		url("/images/fondo.jpg");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	position: relative;
-	overflow-x: hidden;
-}
-
-body::after {
-	content: "";
-	position: fixed;
-	inset: 0;
-	background: var(--bg-image);
-	background-size: cover;
-	background-position: center;
-	z-index: -2;
-}
-
-body::before {
-	content: "";
-	position: fixed;
-	inset: 0;
-	background: linear-gradient(var(--overlay1), var(--overlay2));
-	z-index: -1;
+    min-height: 100vh;
+    background-color: var(--bg);
+    color: var(--text);
+    position: relative;
+    overflow: auto;
 }
 
 #bgvideo {
-	position: fixed;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	z-index: -3;
-	display: none;
-	pointer-events: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -4;
+    display: none;
+}
+
+#logo {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#logo:hover {
+    transform: scale(1.05);
 }
 
 body.video-bg #bgvideo {
-	display: block;
+    display: block;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    z-index: -3;
 }
 
 body.video-bg::after {
-	display: none;
+    display: none;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(var(--overlay1), var(--overlay2));
+    z-index: -2;
+}
+
+body.image-bg {
+    background:
+        linear-gradient(var(--overlay1), var(--overlay2)),
+        var(--bg-image);
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+/* Contenedor principal que organiza el sidebar y el contenido central */
 .dashboard {
-	display: flex;
-	min-height: 100vh;
-	position: relative;
-	z-index: 1;
+    display: flex;
+    min-height: 100vh;
+    animation: pageLoad 0.8s ease-in-out;
 }
 
+/* ========================== Sidebar: Menú de navegación fijo ========================== */
 .sidebar {
-	width: 230px;
-	background: var(--sidebar);
-	padding: 30px 20px;
-	position: relative;
-	z-index: 2;
+    width: 200px;
+    background: var(--bg);
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 145vh;
 }
 
-.logo {
-	text-align: center;
-	margin-bottom: 30px;
-	padding: 10px;
+.sidebar i {
+    transition: all 0.6s ease;
+}
+
+.sidebar a:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Contenedor del nombre de la marca/plataforma o imagen del logo */
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary);
 }
 
 .logo img {
-	width: 120px;
-	height: auto;
-	display: block;
-	margin: 0 auto;
-	object-fit: contain;
+    width: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
 }
 
-.sidebar ul {
-	list-style: none;
+/* Menú de navegación principal: Estilos de lista */
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
 }
 
-.sidebar ul li {
-	margin-bottom: 10px;
-	border-radius: 6px;
-	transition: 0.3s;
+.sidebar nav ul li {
+    margin-bottom: 10px;
 }
 
-.sidebar ul li:hover {
-	background: rgba(255,255,255,0.08);
+/* Enlaces de navegación: Estilos, iconos y transiciones */
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--nav);
+    border-radius: 8px;
+    transition: all 0.6s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.sidebar ul li a {
-	text-decoration: none;
-	color: var(--nav);
-	display: block;
-	padding: 12px 14px;
-	transition: 0.3s;
+.sidebar nav ul li a i {
+    margin-right: 12px;
+    font-size: 1.1rem;
 }
 
-.sidebar .active {
-	background: var(--primary);
-	color: var(--text-inverse);
-	font-weight: bold;
+/* Interacción: Clase 'active' y efecto hover para resaltar la página actual */
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active{
+    padding-left: 35px;
+    background: var(--focus);
+    transition: 0.6s;
+    color: var(--text-inverse);
+    font-weight: bold;
 }
 
+.sidebar nav ul li a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    color: var(--primary);;
+    z-index: -1;
+}
+
+.sidebar nav ul li a:hover::before {
+    width: 100%;
+}
+
+.sidebar nav ul li a:hover i,
+.sidebar nav ul li a.active i {
+    color: var(--text-inverse);
+    transition: 0.6s;
+}
+/* =================Area central de trabajo donde se muestra la información dinámica ================= */
 .main-content {
-	flex: 1;
-	padding: 35px;
-	position: relative;
-	z-index: 2;
+    flex: 1;
+    padding: 30px;
+    animation: fadeInUp 0.8s ease-in-out;
+    position: relative;
 }
 
+/* Cabecera del panel: Título y botón de salida */
 .header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .header h1 {
-	font-size: 32px;
-	color: var(--primary);
+    color: var(--primary);
 }
 
+/* Botón de cierre de sesión que redirige al inicio del sitio */
 .logout-btn {
-	background: var(--primary);
-	border: none;
-	padding: 10px 18px;
-	border-radius: 6px;
-	cursor: pointer;
-	font-weight: bold;
-	color: var(--text-inverse);
-	transition: 0.3s;
+    background: var(--primary);
+    color: var(--text-inverse);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: inherit;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logout-btn i {
+    margin-right: 6px;
+    transition: transform 0.5s ease;
 }
 
 .logout-btn:hover {
-	background: var(--primary-hover);
+    transform: translateX(5px);
+    background: var(--danger);
+    font-size: clamp(1.3rem, 1.3vw, 1.3rem);
+    transition: .6s;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.logout-btn:hover i {
+    transform: translateX(4px);
+    transition: transform 0.5s ease;
+}
+
+.logout-btn:active {
+    background: var(--danger-hover);
+    transform: scale(0.95);
 }
 
 .cards {
@@ -193,14 +439,16 @@ body.video-bg::after {
 	padding: 25px;
 	border-radius: 12px;
 	border: 1px solid var(--border);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	cursor: pointer;
-	transition: 0.3s;
+	transition: 0.5s;
 	color: var(--text);
 }
 
 .card:hover {
-	transform: translateY(-6px);
+	transform: translateY(-8px);
 	border-color: var(--primary);
+    transition: .6s;
 	box-shadow: 0 15px 30px var(--shadow);
 	background: var(--primary);
 	color: var(--text-inverse);
@@ -209,19 +457,114 @@ body.video-bg::after {
 .card h3 {
 	color: var(--primary);
 	margin-bottom: 10px;
+    transition: transform 0.5s ease;
 }
 
 .card p {
 	font-size: 14px;
-	color: var(--text-muted);
+    font-weight: bold;
+	color: var(--text-inverse);
+    transition: transform 0.5s ease;
 }
 
-@media (max-width: 768px) {
-	.sidebar {
-		display: none;
-	}
 
-	.main-content {
-		padding: 20px;
-	}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================== Diseño responsivo: Ajustes para pantallas pequeñas ========================== */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .profile-card {
+        width: 90%;
+    }
+}
+/* Contenedor principal que organiza el sidebar y el contenido central */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    animation: pageLoad 0.8s ease-in-out;
+    position: relative;
+    z-index: 1;         /* Asegura que el contenido esté sobre el video */
+}
+
+/* ========================== PANTALLA DE CARGA ========================== */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;                    /* Por encima de TODO */
+    background: #000;                 /* Fondo negro de respaldo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#loading-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Clase que se agrega para ocultar la pantalla de carga */
+#loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;            /* Permite interactuar con el contenido debajo */
 }
