@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +20,11 @@ public class PostulacionesController {
         this.postulacionesService = postulacionesService;
     }
 
-    @GetMapping
-    public List<Postulaciones> getAllPostulaciones(){
-        return postulacionesService.getAllPostulaciones();
+    @GetMapping("/postulaciones")
+    public String listarPostulaciones(Model model) {
+        List<Postulaciones> postulaciones = postulacionesService.getAllPostulaciones();
+        model.addAttribute("postulaciones", postulaciones);
+        return "Index/postulaciones";
     }
 
     @GetMapping("/{id}")
@@ -34,10 +37,7 @@ public class PostulacionesController {
         }
     }
 
-     @GetMapping("/postulaciones")
-     public String postulaciones(){
-        return "Index/postulaciones";
-     }
+    
 
     @PostMapping
     public ResponseEntity<Object> createPostulaciones(@Valid @RequestBody Postulaciones postulaciones){
