@@ -38,7 +38,7 @@ public class LoginController {
                 session.setAttribute("usuarioLogueado", resultado);
                 return switch (resultado.getRoles()) {
                     case "Administrador" -> "redirect:/api/administradores/admin";
-                    case "Empresa"       -> "redirect:/empresas/dashboard";
+                    case "Empresa"       -> "redirect:/empresa/dashboard";
                     case "Estudiante"    -> "redirect:/estudiantes/estudiantes/dashboard";
                     default              -> "redirect:/login/login";
                 };
