@@ -1,44 +1,117 @@
-/* Configuración básica del documento: Reset de márgenes y aplicación de fuentes globales */
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	/* Se utilizan fuentes estándar del sistema para asegurar consistencia */
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Configuración básica del documento: Fondo y colores base */
+:root {
+	--bg: #1C1C1C;
+	--bg2: #1C1C1C;
+
+	--overlay1: rgba(6,9,10,0.5);
+	--overlay2: rgba(6,9,10,0.7);
+
+	--primary: #FFC107;
+	--primary-hover: #e0a800;
+
+	--text: #F5F5F5;
+	--text-muted: #CCCCCC;
+	--text-inverse: #1C1C1C;
+
+	--border: rgba(255,255,255,0.1);
+
+	--nav: #F5F5F5;
+
+	--input-bg: rgba(0,0,0,0.3);
+	--modal-bg: #1C1C1C;
+
+	--danger: #DC3545;
+	--success: #28A745;
+	--info: #17A2B8;
+	--warning: #FFC107;
+
+	--focus: var(--primary);
+
+	--card: rgba(28,28,28,0.9);
+	--sidebar: #111;
+
+	--shadow: rgba(0,0,0,0.25);
+
+	--bg-image: none;
+}
+
 body {
 	min-height: 100vh;
-	background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
-	url("/images/fondo.jpg");
+	color: var(--text);
+	background: var(--bg);
+	background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
+		url("/images/fondo.jpg");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	color: #F5F5F5;
+	position: relative;
+	overflow-x: hidden;
 }
 
-/* Contenedor principal 'dashboard' que organiza el sidebar y el contenido central */
+body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background: var(--bg-image);
+	background-size: cover;
+	background-position: center;
+	z-index: -2;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	background: linear-gradient(var(--overlay1), var(--overlay2));
+	z-index: -1;
+}
+
+#bgvideo {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -3;
+	display: none;
+	pointer-events: none;
+}
+
+body.video-bg #bgvideo {
+	display: block;
+}
+
+body.video-bg::after {
+	display: none;
+}
+
 .dashboard {
 	display: flex;
 	min-height: 100vh;
+	position: relative;
+	z-index: 1;
 }
 
-/* Panel lateral (Sidebar): Menú de navegación fijo */
 .sidebar {
 	width: 230px;
-	background: #111;
+	background: var(--sidebar);
 	padding: 30px 20px;
+	position: relative;
+	z-index: 2;
 }
 
-/* Contenedor del nombre de la marca/plataforma */
 .logo {
 	text-align: center;
 	margin-bottom: 30px;
 	padding: 10px;
 }
 
-/* Imagen del logo de la plataforma */
 .logo img {
 	width: 120px;
 	height: auto;
@@ -47,58 +120,41 @@ body {
 	object-fit: contain;
 }
 
-/* Título del logo */
-.logo h2 {
-	color: #FFC107;
-}
-
-/* Menú de navegación principal: Estilos de lista */
 .sidebar ul {
 	list-style: none;
 }
 
+.sidebar ul li {
+	margin-bottom: 10px;
+	border-radius: 6px;
+	transition: 0.3s;
+}
+
+.sidebar ul li:hover {
+	background: rgba(255,255,255,0.08);
+}
+
 .sidebar ul li a {
-    text-decoration: none; /* Quita el subrayado */
-    color: inherit;        /* Hereda el color blanco o negro (si está activo) */
-    display: block;        /* Permite que todo el botón sea cliqueable */
-    width: 100%;
-    height: 100%;
-    padding: 12px 14px;    /* Movemos el padding del li al enlace */
+	text-decoration: none;
+	color: var(--nav);
+	display: block;
+	padding: 12px 14px;
+	transition: 0.3s;
 }
 
-/* Enlaces de navegación: Estilos y transiciones */
-.sidebar li {
-    padding: 0; 
-    margin-bottom: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-/* Interacción: Cambio de color al pasar el mouse */
-.sidebar li:hover {
-	background: #2a2a2a;
-}
-
-/* Clase 'active' para resaltar la página actual */
 .sidebar .active {
-	background: #FFC107;
-	color: #1C1C1C;
+	background: var(--primary);
+	color: var(--text-inverse);
 	font-weight: bold;
 }
 
-.sidebar .active a {
-    color: #1C1C1C;
-    font-weight: bold;
-}
-
-/* Área de contenido principal: Espaciado dinámico */
 .main-content {
 	flex: 1;
 	padding: 35px;
+	position: relative;
+	z-index: 2;
 }
 
-/* Cabecera del panel: Alineación de elementos */
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -106,68 +162,63 @@ body {
 	margin-bottom: 30px;
 }
 
-/* Título de la cabecera */
 .header h1 {
 	font-size: 32px;
-	color: #FFC107;
+	color: var(--primary);
 }
 
-/* Botón que redirige al login o página principal (Cierra la sesión) */
 .logout-btn {
-	background: #FFC107;
+	background: var(--primary);
 	border: none;
 	padding: 10px 18px;
 	border-radius: 6px;
 	cursor: pointer;
 	font-weight: bold;
-	color: #1C1C1C;
-	font-family: inherit;
+	color: var(--text-inverse);
+	transition: 0.3s;
 }
 
-/* Interacción del botón de cierre de sesión */
 .logout-btn:hover {
-	background: #ffb300;
+	background: var(--primary-hover);
 }
 
-/* Rejilla de tarjetas (Cards) para acceso rápido a funciones clave */
 .cards {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	gap: 20px;
 }
 
-/* Tarjeta de acceso rápido: Estilos visuales */
 .card {
-	background: rgba(28,28,28,0.9);
+	background: var(--card);
 	padding: 25px;
 	border-radius: 12px;
-	border: 1px solid rgba(255,255,255,0.08);
+	border: 1px solid var(--border);
 	cursor: pointer;
-	transition: 0.25s;
+	transition: 0.3s;
+	color: var(--text);
 }
 
-/* Interacción de la tarjeta: Animación y cambio de bordes */
 .card:hover {
-	transform: translateY(-4px);
-	border-color: #FFC107;
+	transform: translateY(-6px);
+	border-color: var(--primary);
+	box-shadow: 0 15px 30px var(--shadow);
+	background: var(--primary);
+	color: var(--text-inverse);
 }
 
-/* Título dentro de la tarjeta */
 .card h3 {
-	color: #FFC107;
+	color: var(--primary);
 	margin-bottom: 10px;
 }
 
-/* Descripción dentro de la tarjeta */
 .card p {
 	font-size: 14px;
-	color: #ddd;
+	color: var(--text-muted);
 }
 
-/* Diseño responsivo: Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
 	.sidebar {
-		display: none; /* Oculta el sidebar en móviles */
+		display: none;
 	}
 
 	.main-content {
