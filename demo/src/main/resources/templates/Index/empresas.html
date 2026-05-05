@@ -13,17 +13,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <script>
-    (function() {
-        const theme = localStorage.getItem("theme") || "theme-yellow"
-        document.documentElement.classList.add(theme)
-    })();
+        (function() {
+            const theme = localStorage.getItem("theme") || "theme-yellow"
+            document.documentElement.classList.add(theme)
+        })();
     </script>
 
 </head>
 
 <body class="image-bg">
 
-    <video id="bgvideo" autoplay muted loop playsinline></video>
+<video id="bgvideo" autoplay muted loop playsinline></video>
 
 <div id="loading-screen">
     <video autoplay muted playsinline id="loading-video">
@@ -44,19 +44,24 @@
         <!-- Menú de navegación principal con iconos -->
         <nav>
             <ul>
-                <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-                <li><a th:href="@{/api/administradores/admin}"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a th:href="@{/estudiantes/estudiantes}"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
-                <li><a th:href="@{/empresas/empresas}" class="active"><i class="fas fa-building"></i> Empresas</a></li>
-                <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas</a></li>
-                <li><a th:href="@{/api/administradores/perfil}"><i class="fas fa-user"></i> Perfil</a></li>
-                <li>
-                    <a th:href="@{/api/administradores/configuracion}">
-                        <i class="fas fa-cog"></i> Configuración
-                    </a>
-                </li>
-                <!-- Enlace de cierre de sesión que redirige al inicio del sitio -->
-                <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                <!-- Sidebar Administrador -->
+                <th:block th:if="${rolUsuario == 'Administrador'}">
+                    <li><a th:href="@{/api/administradores/admin}"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a th:href="@{/estudiantes/estudiantes}"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                    <li><a th:href="@{/empresas/empresas}" class="active"><i class="fas fa-building"></i> Empresas</a></li>
+                    <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas</a></li>
+                    <li><a th:href="@{/api/administradores/perfil}"><i class="fas fa-user"></i> Perfil</a></li>
+                    <li><a th:href="@{/api/administradores/configuracion}"><i class="fas fa-cog"></i> Configuración</a></li>
+                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                </th:block>
+                <!-- Sidebar Empresa -->
+                <th:block th:if="${rolUsuario == 'Empresa'}">
+                    <li><a th:href="@{/empresa/dashboard}"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a th:href="@{/estudiantes/estudiantes}"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                    <li><a th:href="@{/empresas/empresas}" class="active"><i class="fas fa-building"></i> Empresas</a></li>
+                    <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas</a></li>
+                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                </th:block>
             </ul>
         </nav>
     </aside>
@@ -70,7 +75,7 @@
             <a th:href="@{/login/index}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
         </header>
 
-        <div class="actions">
+        <div class="actions" th:if="${rolUsuario != 'Empresa'}">
             <a th:href="@{/empresas/empresas/nuevo}" class="btn"><i class="fas fa-plus"></i> Agregar Empresa</a>
         </div>
 
@@ -113,7 +118,7 @@
                     <td th:text="${empresas.descripcion}"></td>
                     <td th:text="${empresas.idLogin}"></td>
                     <td class="actions">
-                        <div class="action-buttons">
+                        <div class="action-buttons" th:if="${rolUsuario != 'Empresa'}">
                             <!-- Botones de acción para gestionar la edición o eliminación del registro -->
                             <a href="#" th:onclick="'editarActive(' + ${empresas.idEmpresa} + ');return false;'"
                                class="action-btn edit"><i class="fas fa-pen"></i></a>
@@ -147,13 +152,14 @@
                                 </svg>
                             </a>
                         </div>
+                        <span th:if="${rolUsuario == 'Empresa'}" style="color: #aaa; font-size: 0.85em;">Solo lectura</span>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="editarInactivo" id="editarContainer">
+        <div class="editarInactivo" id="editarContainer" th:if="${rolUsuario != 'Empresa'}">
             <form th:object="${empresa}" class="profile-form">
                 <!-- Campos de entrada de datos para editar -->
                 <div class="form-group">
