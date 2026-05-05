@@ -63,11 +63,11 @@
 
     --accent: #FFC107;
     --accent-hover: #e0a800;
-    --card: #F5F5F5;
+    --card: #1C1C1C;
     --nav: #F5F5F5;
     --text: #F5F5F5;
     --text-muted: #CCCCCC;
-    --text-inverse: #1C1C1C;
+    --text-inverse: #1c1c1c;
 
     --focus: #FFC107;
     --hover: #e0a800;
@@ -416,6 +416,19 @@ body.image-bg {
     font-size: clamp(1.3rem, 1.3vw, 1.3rem);
     transition: .6s;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+<<<<<<< HEAD
+=======
+}
+
+.logout-btn:hover i {
+    transform: translateX(4px);
+    transition: transform 0.5s ease;
+}
+
+.logout-btn:active {
+    background: var(--danger-hover);
+    transform: scale(0.95);
+>>>>>>> 091385c75c842cbc41a5a87b08fc742949b468f7
 }
 
 .logout-btn:hover i {
@@ -675,6 +688,7 @@ body.image-bg {
 }
 
 .card {
+<<<<<<< HEAD
     background: var(--bg2);
     color: var(--card);
     padding: 25px;
@@ -683,6 +697,16 @@ body.image-bg {
     transition: transform 0.5s ease, box-shadow 0.5s ease;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
+=======
+	background: var(--card);
+	padding: 25px;
+	border-radius: 12px;
+	border: 1px solid var(--border);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	cursor: pointer;
+	transition: 0.5s;
+	color: var(--text);
+>>>>>>> 091385c75c842cbc41a5a87b08fc742949b468f7
 }
 
 .card i {
@@ -696,6 +720,7 @@ body.image-bg {
 
 /* Interacción de la tarjeta: Animación y cambio de colores */
 .card:hover {
+<<<<<<< HEAD
     transform: translateY(-8px) scale(1.03);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
     background: var(--primary);
@@ -995,6 +1020,83 @@ body.image-bg {
         display: none;
     }
 
+=======
+	transform: translateY(-8px);
+	border-color: var(--primary);
+    transition: .6s;
+	box-shadow: 0 15px 30px var(--shadow);
+	background: var(--primary);
+	color: var(--text-inverse);
+}
+
+.card h3 {
+	color: var(--primary);
+	margin-bottom: 10px;
+    transition: transform 0.5s ease;
+}
+
+.card p {
+	font-size: 14px;
+    font-weight: bold;
+	color: var(--text-inverse);
+    transition: transform 0.5s ease;
+}
+
+
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================== Diseño responsivo: Ajustes para pantallas pequeñas ========================== */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+>>>>>>> 091385c75c842cbc41a5a87b08fc742949b468f7
     .main-content {
         padding: 20px;
     }
@@ -1003,6 +1105,7 @@ body.image-bg {
         width: 90%;
     }
 }
+<<<<<<< HEAD
 
 /* diseño de ventana Emergente para editar*/
 .editarActivo {
@@ -1053,6 +1156,8 @@ body.image-bg {
 }
 
 
+=======
+>>>>>>> 091385c75c842cbc41a5a87b08fc742949b468f7
 /* Contenedor principal que organiza el sidebar y el contenido central */
 .dashboard {
     display: flex;
