@@ -62,5 +62,10 @@ public class EstudiantesController {
         return "redirect:/estudiantes/estudiantes";
     }
 
+    @GetMapping("/configuracion")
+    public String configestudiante(){
+       return "Index/configuracion-estudiante";
+    }
+
 
 }
