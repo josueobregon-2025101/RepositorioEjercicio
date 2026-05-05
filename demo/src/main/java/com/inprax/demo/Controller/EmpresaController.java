@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
@@ -27,11 +28,6 @@ public class EmpresaController {
     @ResponseBody
     public List<Empresa> getAllEmpresas() {
         return empresaService.getAllEmpresas();
-    }
-
-    @GetMapping("/dashboard")
-    public String dashboardempresa(Model model) {
-        return "Index/dashboard-empresa";
     }
 
     @GetMapping("/{id}")
@@ -118,12 +114,6 @@ public class EmpresaController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
-
-
-    @GetMapping("/configuracion")
-    public String configempresa(){
-       return "Index/configuracion-empresa";
     }
 
     @GetMapping("/empresas/eliminar/{id}")
