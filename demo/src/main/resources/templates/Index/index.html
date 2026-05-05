@@ -31,12 +31,12 @@
             <img th:src="@{/Images/INPRAX.png}">
         </div>
 
-        <nav class="nav nav-left">
+        <nav class="nav">
         <a href="#hero" class="active">Inicio</a>
         <a href="#features">Características</a>
         <a href="#about">Nosotros</a>
         <a href="#contact">Contacto</a>
-    </nav>
+        </nav>
         
         <div class="auth-buttons">
         <a th:href="@{/login/login}" class="btn-login">Iniciar sesión</a>
@@ -137,21 +137,49 @@
     </main>
 
     <script>
-        const sections = document.querySelectorAll("section");
+        const sections = document.querySelectorAll("section, footer");
         const navLinks = document.querySelectorAll(".nav a");
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "-25% 0px -25% 0px",
+            threshold: 0.1
+        };
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => link.classList.remove("active"));
+                const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50;
+                
+                if (entry.isIntersecting && !isAtBottom) {
+                    const id = entry.target.getAttribute("id");
+                    const activeLink = document.querySelector(`.nav a[href="#${id}"]`);
 
-                    const activeLink = document.querySelector(`.nav a[href="#${entry.target.id}"]`);
-                    if (activeLink) activeLink.classList.add("active");
+                    if (activeLink) {
+                        navLinks.forEach(link => link.classList.remove("active"));
+                        activeLink.classList.add("active");
+                    }
                 }
             });
-        }, { threshold: 0.6 });
+        }, observerOptions);
 
         sections.forEach(s => observer.observe(s));
+
+        window.addEventListener("scroll", () => {
+            const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50;
+            const isAtTop = window.scrollY < 50;
+
+            if (isAtBottom) {
+                navLinks.forEach(link => link.classList.remove("active"));
+                const contactLink = document.querySelector('.nav a[href="#contact"]');
+                if (contactLink) contactLink.classList.add("active");
+            } else if (isAtTop) {
+                navLinks.forEach(link => link.classList.remove("active"));
+                const heroLink = document.querySelector('.nav a[href="#hero"]');
+                if (heroLink) heroLink.classList.add("active");
+            }
+        });
+
+
     </script>
 <script th:src="@{/Scripts/practicas.js}"></script>
     <script th:src="@{/Scripts/temas.js}"></script>
