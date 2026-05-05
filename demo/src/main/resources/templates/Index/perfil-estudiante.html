@@ -7,9 +7,20 @@
     <title>Perfil - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="@{/Styles/perfil-estudiante.css}">
+    <link rel="stylesheet" th:href="@{/Styles/perfil-estudiante.css}">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script>
+        (function() {
+            const theme = localStorage.getItem("theme") || "theme-yellow"
+            document.documentElement.classList.add(theme)
+        })();
+    </script>
 </head>
-<body>
+<body class="image-bg">
+
+<video id="bgvideo" autoplay muted loop playsinline></video>
 
     <!-- Contenedor principal que organiza el sidebar y el contenido central -->
     <div class="dashboard">
@@ -18,17 +29,22 @@
         <aside class="sidebar">
             <!-- Contenedor del nombre de la marca/plataforma -->
             <div class="logo">
-                <img th:src="@{/Images/INPRAX.png}">
+                <img id="logo" th:src="@{/Images/INPRAX.png}">
             </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <ul>
-                <li onclick="location.href='dashboard-estudiante.html'">Inicio</li>
-                <li onclick="location.href='practicas.html'">Prácticas disponibles</li>
-                <li onclick="location.href='postulaciones.html'">Mis postulaciones</li>
-                <li onclick="location.href='documentos.html'">Mis documentos</li>
-                <li class="active">Perfil</li> <!-- Clase 'active' para resaltar la página actual -->
-            </ul>
+            <nav>
+                <ul>
+                    <li><a th:href="@{/estudiantes/estudiantes/dashboard}"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas disponibles</a></li>
+                    <li><a th:href="@{/postulaciones/postulaciones}"><i class="fas fa-file"></i> Mis postulaciones</a></li>
+                    <li><a th:href="@{/documentos/documentos}"><i class="fas fa-folder"></i> Mis documentos</a></li>
+                    <li><a th:href="@{/estudiantes/perfil}" class="active"><i class="fas fa-user"></i> Perfil</a></li>
+                    <li><a th:href="@{/estudiantes/configuracion}"><i class="fas fa-cog"></i> Configuración</a></li>
+                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                </ul>
+            </nav>
+
         </aside>
 
         <!-- Área de contenido principal: Donde se muestra la información dinámica -->
@@ -38,50 +54,47 @@
             <header class="header">
                 <h1>Perfil del Estudiante</h1>
                 <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
-            </header>
+                <a th:href="@{/login/index}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>            </header>
 
             <!-- Contenedor específico para la gestión de información del usuario -->
             <section class="profile-container">
 
-                <!-- Sección para la imagen de perfil -->
-                <div class="profile-photo">
-                    <img th:src="@{/Images/perfil.png}">
-                </div>
-
                 <!-- Formulario de datos personales -->
-                <div class="profile-form">
-
+                <div class="profile-card">
+                    <h2>Información Personal</h2>
                     <!-- Campos de entrada de datos para el usuario -->
-                    <div class="input-group">
-                        <label>Nombre</label>
-                        <input type="text" value="Juan">
-                    </div>
+                    <form class="profile-form">
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" value="Juan">
+                        </div>
 
-                    <div class="input-group">
-                        <label>Apellido</label>
-                        <input type="text" value="Pérez">
-                    </div>
+                        <div class="form-group">
+                            <label>Apellido</label>
+                            <input type="text" value="Pérez">
+                        </div>
 
-                    <div class="input-group">
-                        <label>Correo</label>
-                        <input type="email" value="juan@email.com">
-                    </div>
+                        <div class="form-group">
+                            <label>Correo</label>
+                            <input type="email" value="juan@email.com">
+                        </div>
 
-                    <div class="input-group">
-                        <label>Teléfono</label>
-                        <input type="text" value="5555-5555">
-                    </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="text" value="5555-5555">
+                        </div>
 
-                    <div class="input-group">
-                        <label>Institución</label>
-                        <input type="text" value="Instituto Técnico">
-                    </div>
+                        <div class="form-group">
+                            <label>Institución</label>
+                            <input type="text" value="Instituto Técnico">
+                        </div>
 
-                    <div class="input-group">
-                        <label>Carrera</label>
-                        <input type="text" value="Desarrollo de Software">
-                    </div>
+                        <div class="form-group">
+                            <label>Carrera</label>
+                            <input type="text" value="Desarrollo de Software">
+                        </div>
+                    </form>
+
 
                 </div>
 
@@ -91,7 +104,15 @@
                     <button class="btn-save">Guardar</button>
                 </div>
             </section>
+            <div class="theme-switcher">
+                <button data-theme="theme-yellow">🟡</button>
+                <button data-theme="theme-purple">🟣</button>
+                <button data-theme="theme-cyan-dark">🔵</button>
+                <button data-theme="theme-green-dark">🟢</button>
+                <button data-theme="theme-blue-light">⚪</button>
+            </div>
         </main>
     </div>
+<script th:src="@{/Scripts/temas.js}"></script>
 </body>
 </html>
