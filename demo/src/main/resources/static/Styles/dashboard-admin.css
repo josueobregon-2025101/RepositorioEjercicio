@@ -208,7 +208,7 @@ body {
     background-color: var(--bg);
     color: var(--text);
     position: relative;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #bgvideo {
@@ -375,7 +375,7 @@ body.image-bg {
     flex: 1;
     padding: 30px;
     animation: fadeInUp 0.8s ease-in-out;
-    position: relative;
+    position: relative; 
 }
 
 /* Cabecera del panel: Título y botón de salida */
