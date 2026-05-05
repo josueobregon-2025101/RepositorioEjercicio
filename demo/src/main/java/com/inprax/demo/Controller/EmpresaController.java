@@ -4,6 +4,7 @@ import com.inprax.demo.DTO.EmpresaDTO;
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EmpresaService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,13 @@ public class EmpresaController {
     }
 
     @GetMapping("/empresas")
-    public String empresas(Model model) {
+    public String empresas(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        if (usuario != null && usuario.getRoles().equals("Empresa")) {
+            return "redirect:/empresa/dashboard";
+        }
+        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
+        model.addAttribute("rolUsuario", rol);
         List<Empresa> empresas= empresaService.getAllEmpresas();
         model.addAttribute("empresas", empresas);
         model.addAttribute("empresa", new Empresa());
@@ -113,8 +120,8 @@ public class EmpresaController {
     @GetMapping("/empresas/eliminar/{id}")
     public String eliminarEmpresa(@PathVariable Integer id) {
         empresaService.deleteEmpresa(id);
-            return "redirect:/empresas/empresas";
+        return "redirect:/empresas/empresas";
     }
-    
-    
+
+
 }
