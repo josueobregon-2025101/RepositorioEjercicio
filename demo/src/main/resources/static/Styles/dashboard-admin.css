@@ -1064,31 +1064,33 @@ body.image-bg {
 
 /* ========================== PANTALLA DE CARGA ========================== */
 #loading-screen {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;                    /* Por encima de TODO */
-    background: #000;                 /* Fondo negro de respaldo */
-    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 9999;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s ease-in-out;
+    overflow: hidden;
 }
 
 #loading-video {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
     background: #000;
 }
 
-/* Clase que se agrega para ocultar la pantalla de carga */
+/* Clase para ocultar la pantalla de carga */
 #loading-screen.fade-out {
     opacity: 0;
-    pointer-events: none;            /* Permite interactuar con el contenido debajo */
+    transition: opacity 0.5s ease;
+    pointer-events: none;
 }
