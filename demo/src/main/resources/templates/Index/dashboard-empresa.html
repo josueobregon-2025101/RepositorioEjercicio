@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,130 +18,130 @@
 
 <body>
 
-    <video id="bgvideo" autoplay muted loop playsinline>
-        <source src="/video/fondo.mp4" type="video/mp4">
-    </video>
+<video id="bgvideo" autoplay muted loop playsinline>
+    <source src="/video/fondo.mp4" type="video/mp4">
+</video>
 
-    <div class="dashboard">
+<div class="dashboard">
 
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="../Images/INPRAX.png">
-            </div>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="../Images/INPRAX.png">
+        </div>
 
-            <nav>
-                <ul>
-                    <li>
-                        <a th:href="@{/empresa/dashboard}" class="active">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/crear-practica}">
-                            <i class="fas fa-plus-circle"></i> Crear práctica
-                        </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/editar-practica}">
-                            <i class="fas fa-edit"></i> Editar práctica
-                        </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/postulantes}">
-                            <i class="fas fa-users"></i> Postulantes
-                        </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/mis-practicas}">
-                            <i class="fas fa-briefcase"></i> Mis prácticas
-                        </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/perfil-empresa}">
-                            <i class="fas fa-user"></i> Perfil
-                        </a>
-                    </li>
-                    <li>
-                    <a th:href="@{/empresas/configuracion}">
+        <nav>
+            <ul>
+                <li>
+                    <a th:href="@{/empresa/dashboard}" class="active">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/crear-practica}">
+                        <i class="fas fa-plus-circle"></i> Crear práctica
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/editar-practica}">
+                        <i class="fas fa-edit"></i> Editar práctica
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/postulantes}">
+                        <i class="fas fa-users"></i> Postulantes
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/mis-practicas}">
+                        <i class="fas fa-briefcase"></i> Mis prácticas
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/perfil-empresa}">
+                        <i class="fas fa-user"></i> Perfil
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/empresa/configuracion}">
                         <i class="fas fa-cog"></i> Configuración
                     </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/login/index}">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+                </li>
+                <li>
+                    <a th:href="@{/login/index}">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 
-        <main class="main-content">
+    <main class="main-content">
 
-            <header class="header">
-                <h1>Dashboard Administrador</h1>
+        <header class="header">
+            <h1>Dashboard Administrador</h1>
 
-                <a th:href="@{/login/index}" class="btn logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Cerrar sesión
-                </a>
-            </header>
+            <a th:href="@{/login/index}" class="btn logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Cerrar sesión
+            </a>
+        </header>
 
-            <section class="cards">
+        <section class="cards">
 
-                <div class="card" onclick="location.href='/crear-practica'">
-                    <h3>Crear práctica</h3>
-                    <p>Publica nuevas oportunidades de prácticas para estudiantes.</p>
-                </div>
+            <div class="card" onclick="location.href='/crear-practica'">
+                <h3>Crear práctica</h3>
+                <p>Publica nuevas oportunidades de prácticas para estudiantes.</p>
+            </div>
 
-                <div class="card" onclick="location.href='/editar-practica'">
-                    <h3>Editar práctica</h3>
-                    <p>Modifica detalles de prácticas que ya has publicado.</p>
-                </div>
+            <div class="card" onclick="location.href='/editar-practica'">
+                <h3>Editar práctica</h3>
+                <p>Modifica detalles de prácticas que ya has publicado.</p>
+            </div>
 
-                <div class="card" onclick="location.href='/postulantes'">
-                    <h3>Ver postulantes</h3>
-                    <p>Revisa los estudiantes que se han postulado a tus prácticas.</p>
-                </div>
+            <div class="card" onclick="location.href='/postulantes'">
+                <h3>Ver postulantes</h3>
+                <p>Revisa los estudiantes que se han postulado a tus prácticas.</p>
+            </div>
 
-                <div class="card" onclick="location.href='/mis-practicas'">
-                    <h3>Mis prácticas</h3>
-                    <p>Consulta el estado de tus prácticas y postulaciones de estudiantes.</p>
-                </div>
+            <div class="card" onclick="location.href='/mis-practicas'">
+                <h3>Mis prácticas</h3>
+                <p>Consulta el estado de tus prácticas y postulaciones de estudiantes.</p>
+            </div>
 
-                <div class="card" onclick="location.href='/perfil-empresa'">
-                    <h3>Perfil</h3>
-                    <p>Administra la información de tu empresa y actualiza tus datos.</p>
-                </div>
+            <div class="card" onclick="location.href='/perfil-empresa'">
+                <h3>Perfil</h3>
+                <p>Administra la información de tu empresa y actualiza tus datos.</p>
+            </div>
 
-            </section>
+        </section>
 
-        </main>
-    </div>
+    </main>
+</div>
 
-    <div class="action-buttons">
-        <button class="btn" data-theme="theme-yellow">🟡</button>
-        <button class="btn" data-theme="theme-purple">🟣</button>
-        <button class="btn" data-theme="theme-cyan-dark">🔵</button>
-        <button class="btn" data-theme="theme-green-dark">🟢</button>
-        <button class="btn" data-theme="theme-blue-light">⚪</button>
-    </div>
+<div class="action-buttons">
+    <button class="btn" data-theme="theme-yellow">🟡</button>
+    <button class="btn" data-theme="theme-purple">🟣</button>
+    <button class="btn" data-theme="theme-cyan-dark">🔵</button>
+    <button class="btn" data-theme="theme-green-dark">🟢</button>
+    <button class="btn" data-theme="theme-blue-light">⚪</button>
+</div>
 
-    <script th:src="@{/Scripts/temas.js}"></script>
+<script th:src="@{/Scripts/temas.js}"></script>
 
-    <script>
-        const buttons = document.querySelectorAll("[data-theme]");
+<script>
+    const buttons = document.querySelectorAll("[data-theme]");
 
-        buttons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const theme = btn.getAttribute("data-theme");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const theme = btn.getAttribute("data-theme");
 
-                document.documentElement.className = "";
-                document.documentElement.classList.add(theme);
+            document.documentElement.className = "";
+            document.documentElement.classList.add(theme);
 
-                localStorage.setItem("theme", theme);
-            });
+            localStorage.setItem("theme", theme);
         });
-    </script>
+    });
+</script>
 
 </body>
 </html>
