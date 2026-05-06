@@ -8,58 +8,114 @@
 
 :root {
     --bg: #1C1C1C;
-    --bg-sidebar: #111;
-    --bg-container: rgba(0,0,0,0.45);
-    --bg-card: rgba(28,28,28,0.9);
+    --bg2: #1C1C1C;
+    --bg3: #1C1C1C;
+
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
 
     --primary: #FFC107;
     --primary-hover: #e0a800;
+
+    --accent: #FFC107;
+    --accent-hover: #e0a800;
 
     --text: #F5F5F5;
     --text-muted: #CCCCCC;
     --text-inverse: #1C1C1C;
 
-    --nav: #F5F5F5;
     --focus: #FFC107;
+    --hover: #e0a800;
 
     --border: rgba(255,255,255,0.1);
 
-    --bg-image: url("../images/fondo.jpg");
-    --overlay1: rgba(6,9,10,0.7);
-    --overlay2: rgba(6,9,10,0.9);
+    --table-bg: rgba(28,28,28,0.9);
+    --table-row-hover: rgba(255,255,255,0.1);
+
+    --input-bg: rgba(0,0,0,0.3);
+    --input-text: #F5F5F5;
+
+    --modal-bg: #1C1C1C;
+
+    --icon: #FFC107;
+
+    --danger: #DC3545;
+    --danger-hover: #C82333;
+    --success: #28A745;
+    --info: #17A2B8;
+    --warning: #FFC107;
+    --secondary: #6C757D;
+
 }
 
-/* ======================= THEMES ======================= */
-
-/* YELLOW DEFAULT */
 .theme-yellow {
     --bg: #1C1C1C;
     --bg2: #1C1C1C;
     --bg3: #1C1C1C;
 
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
+
     --primary: #FFC107;
     --primary-hover: #e0a800;
 
+    --accent: #FFC107;
+    --accent-hover: #e0a800;
+    --card: #F5F5F5;
+    --nav: #F5F5F5;
     --text: #F5F5F5;
     --text-muted: #CCCCCC;
     --text-inverse: #1C1C1C;
 
+    --focus: #FFC107;
+    --hover: #e0a800;
+
     --border: rgba(255,255,255,0.1);
+
+    --table-bg: rgba(28,28,28,0.9);
+    --table-row-hover: rgba(255,255,255,0.1);
+
+    --input-bg: rgba(0,0,0,0.3);
+    --input-text: #F5F5F5;
+
+    --modal-bg: #1C1C1C;
+
+    --icon: #FFC107;
+
+    --danger: #DC3545;
+    --danger-hover: #C82333;
+    --success: #28A745;
+    --info: #17A2B8;
+    --warning: #FFC107;
+    --secondary: #6C757D;
 }
+
 
 .theme-purple {
     --bg: #EAEFF0;
     --bg2: #ECEEF3;
     --bg3: #FFFFFF;
 
+
     --primary: #7453B2;
     --primary-hover: #5e43a0;
-
-    --text: #0C1825;
+    --card: #0C1825;
+    --nav: #0C1825;
+    --text: #EAEFF0;
     --text-muted: #6B7280;
     --text-inverse: #FFFFFF;
 
+    --focus: #5e43a0;
+    --hover: #D8B4C2;
+
     --border: #D9DCE3;
+
+    --input-bg: #F4F6FB;
+    --input-text: #0C1825;
+
+    --modal-bg: #ECEEF3;
+
+    --icon: #9D76C1;
 }
 
 .theme-cyan-dark {
@@ -69,12 +125,24 @@
 
     --primary: #16A2C5;
     --primary-hover: #1389A7;
-
+    --nav: #EAEFF0;
+    --card: #EAEFF0;
     --text: #EAEFF0;
     --text-muted: #A0B3B8;
     --text-inverse: #000000;
 
+    --focus: #293537;
+    --hover: #1E3A40;
+
     --border: #1F2A2D;
+
+    --input-bg: #0E1112;
+    --input-text: #EAEFF0;
+
+    --modal-bg: #0E1112;
+
+    --icon: #42B5D1;
+
 }
 
 .theme-green-dark {
@@ -82,14 +150,26 @@
     --bg2: #111710;
     --bg3: #111710;
 
+
     --primary: #99D991;
     --primary-hover: #7FCF75;
-
+    --nav: #E8EDE8;
+    --card: #E8EDE8;
     --text: #E8EDE8;
     --text-muted: #A5B0A5;
     --text-inverse: #000000;
 
+    --focus: #162D12;
+    --hover: #1F3D18;
+
     --border: #1E2A1C;
+
+    --input-bg: #111710;
+    --input-text: #E8EDE8;
+
+    --modal-bg: #111710;
+
+    --icon: #4EEF3A;
 }
 
 .theme-blue-light {
@@ -97,38 +177,37 @@
     --bg2: #FFFFFF;
     --bg3: #FFFFFF;
 
-    --primary: #366DDD;
-    --primary-hover: #1969DD;
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
 
-    --text: #18181B;
+    --primary: #52525B;
+    --primary-hover: #3F3F46;
+    --nav: #18181B;
+    --card: #18181B;
+    --text: #F5F5F5;
     --text-muted: #6B7280;
     --text-inverse: #FFFFFF;
 
+    --focus: #366DDD;
+    --hover: #D4D4D8;
+
     --border: #E4E4E7;
+
+    --input-bg: #FFFFFF;
+    --input-text: #18181B;
+
+    --modal-bg: #FFFFFF;
+
+    --icon: #1969DD;
 }
+
 
 body {
     min-height: 100vh;
-    background: var(--bg);
+    background-color: var(--bg);
     color: var(--text);
     position: relative;
-    overflow-x: hidden;
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: var(--bg-image) center/cover no-repeat;
-    z-index: -3;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(var(--overlay1), var(--overlay2));
-    z-index: -2;
+    overflow: auto;
 }
 
 #bgvideo {
@@ -141,105 +220,133 @@ body::before {
     display: none;
 }
 
-body.video-bg #bgvideo {
-    display: block;
-}
-
-body.video-bg::after {
-    display: none;
-}
-
-.dashboard {
-    display: flex;
-    min-height: 100vh;
-    position: relative;
-    z-index: 1;
-}
-
-.sidebar {
-    width: 230px;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-sidebar);
-    border-right: 1px solid var(--border);
-    padding: 30px 0;
-}
-
-.sidebar .logo {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
 #logo {
     width: 120px;
     height: auto;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #logo:hover {
     transform: scale(1.05);
 }
 
+body.video-bg #bgvideo {
+    display: block;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    z-index: -3;
+}
+
+body.video-bg::after {
+    display: none;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(var(--overlay1), var(--overlay2));
+    z-index: -2;
+}
+
+body.image-bg {
+    background:
+        linear-gradient(var(--overlay1), var(--overlay2)),
+        var(--bg-image);
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+/* Contenedor principal que organiza el sidebar y el contenido central */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    animation: pageLoad 0.8s ease-in-out;
+}
+
+/* ========================== Sidebar: Menú de navegación fijo ========================== */
+.sidebar {
+    width: 200px;
+    background: var(--bg);
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 145vh;
+}
+
+.sidebar i {
+    transition: all 0.6s ease;
+}
+
+.sidebar a:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Contenedor del nombre de la marca/plataforma o imagen del logo */
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+/* Menú de navegación principal: Estilos de lista */
 .sidebar nav ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 .sidebar nav ul li {
     margin-bottom: 10px;
 }
 
+/* Enlaces de navegación: Estilos, iconos y transiciones */
 .sidebar nav ul li a {
     display: flex;
     align-items: center;
     padding: 12px 25px;
-    margin: 0 10px;
     text-decoration: none;
     font-size: 1rem;
     color: var(--nav);
     border-radius: 8px;
+    transition: all 0.6s ease;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s ease;
 }
 
 .sidebar nav ul li a i {
     margin-right: 12px;
     font-size: 1.1rem;
-    color: var(--text);
-    transition: transform 0.4s ease, color 0.4s ease;
 }
 
-/* HOVER */
-.sidebar nav ul li a:hover {
+/* Interacción: Clase 'active' y efecto hover para resaltar la página actual */
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active{
+    padding-left: 35px;
     background: var(--focus);
+    transition: 0.6s;
     color: var(--text-inverse);
-    padding-left: 35px;
     font-weight: bold;
-    transform: translateX(5px);
-}
-
-/* ICONO EN HOVER = BLANCO */
-.sidebar nav ul li a:hover i {
-    color: var(--text-inverse);
-    transform: scale(1.2) rotate(5deg);
-}
-
-.sidebar nav ul li a.active {
-    background: var(--primary);
-    color: var(--text-inverse);
-    padding-left: 35px;
-    font-weight: bold;
-    transform: translateX(5px);
-}
-
-.sidebar nav ul li a.active i {
-    color: var(--text-inverse);
 }
 
 .sidebar nav ul li a::before {
@@ -249,39 +356,76 @@ body.video-bg::after {
     top: 0;
     width: 0;
     height: 100%;
-    background: var(--primary);
+    color: var(--primary);;
     z-index: -1;
-    transition: width 0.4s ease;
 }
 
-.sidebar nav ul li a:hover::before,
-.sidebar nav ul li a.active::before {
+.sidebar nav ul li a:hover::before {
     width: 100%;
 }
 
+.sidebar nav ul li a:hover i,
+.sidebar nav ul li a.active i {
+    color: var(--text-inverse);
+    transition: 0.6s;
+}
+/* =================Area central de trabajo donde se muestra la información dinámica ================= */
 .main-content {
     flex: 1;
     padding: 30px;
+    animation: fadeInUp 0.8s ease-in-out;
+    position: relative; 
 }
 
+/* Cabecera del panel: Título y botón de salida */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    margin-bottom: 35px;
-    padding-bottom: 15px;
-
-    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
 }
 
 .header h1 {
     color: var(--primary);
-    font-size: 2rem;
-    margin-bottom: 5px;
 }
 
+/* Botón de cierre de sesión que redirige al inicio del sitio */
+.logout-btn {
+    background: var(--primary);
+    color: var(--text-inverse);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-family: inherit;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
+.logout-btn i {
+    margin-right: 6px;
+    transition: transform 0.5s ease;
+}
+
+.logout-btn:hover {
+    transform: translateX(5px);
+    background: var(--danger);
+    font-size: clamp(1.3rem, 1.3vw, 1.3rem);
+    transition: .6s;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.logout-btn:hover i {
+    transform: translateX(4px);
+    transition: transform 0.5s ease;
+}
+
+.logout-btn:active {
+    background: var(--danger-hover);
+    transform: scale(0.95);
+}
 
 /* ========================== Botones de acciones rápidas ========================== */
 .actions {
@@ -289,12 +433,10 @@ body.video-bg::after {
 }
 
 .action-buttons {
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+    gap: 8px;
 }
 
 .actions .btn {
@@ -327,92 +469,21 @@ body.video-bg::after {
 }
 
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 6px;
-
+    display: inline-block;
     background: var(--primary);
     color: var(--text-inverse);
-
     padding: 10px 18px;
-
     border-radius: 6px;
-    border: none;
-
     font-weight: bold;
-
     cursor: pointer;
-
-    transition: all 0.4s ease;
+    border: none;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .btn:hover {
     background: var(--primary-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-}
-
-.container {
-    margin-top: 10px;
-    padding: 25px;
-
-    background: var(--bg-container);
-    border-radius: 12px;
-
-    border: 1px solid var(--border);
-
-    backdrop-filter: blur(8px);
-}
-
-.actions .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    background: var(--primary);
-    color: var(--text-inverse);
-    transition: all 0.4s ease;
-    margin-bottom: 25px;
-}
-
-.btn:hover,
-.actions .btn:hover {
-    background: var(--primary-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-}
-
-.logout-btn {
-    background: var(--primary);
-    color: var(--text-inverse);
-
-    border: none;
-    padding: 10px 18px;
-
-    border-radius: 6px;
-
-    font-weight: bold;
-
-    display: flex;
-    align-items: center;
-    gap: 6px;
-
-    cursor: pointer;
-
-    transition: all 0.4s ease;
-}
-
-.logout-btn:hover {
-    transform: translateY(-3px);
-    background: var(--primary-hover);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+    transform: translateY(5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
 }
 
 /* ========================== Visualización de datos en formato de tabla ========================== */
@@ -423,21 +494,36 @@ body.video-bg::after {
 .table {
     width: 100%;
     border-collapse: collapse;
+    background: var(--table-bg);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .table th,
 .table td {
-    padding: 12px;
+    padding: 12px 15px;
     text-align: center;
-    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table th:first-child,
+.table td:first-child {
+    text-align: left;
 }
 
 .table th {
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
 }
 
+.table tbody tr {
+    transition: all 0.6s ease;
+}
+
+/* Interacción de filas para mejorar la lectura */
 .table tbody tr:hover {
-    background: rgba(255,255,255,0.05);
+    background: var(--table-row-hover);
+    transition: 0.6s;
 }
 
 /* ========================== Botones de acción dentro de la tabla ========================== */
@@ -574,6 +660,7 @@ body.video-bg::after {
 }
 
 
+/* ========================== Rejilla de tarjetas (Cards) estadísticas ========================== */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -581,70 +668,50 @@ body.video-bg::after {
     margin-bottom: 30px;
 }
 
-.card {
-    background: var(--bg-card, var(--bg2));
-    color: var(--text);
-
-    padding: 25px;
-    border-radius: 12px;
-
-    border: 1px solid var(--border);
-
-    text-align: center;
-    cursor: pointer;
-
-    transition: all 0.4s ease;
-
-    backdrop-filter: blur(6px);
-}
-
-.card h3 {
-    color: var(--text);
-    margin-bottom: 8px;
-}
-
-.card p {
-    color: var(--text-muted);
-}
-
-.card i {
-    color: var(--primary);
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    transition: all 0.4s ease;
-}
-
-/* HOVER UNIFICADO */
-.card:hover {
-    background: var(--primary);
-    color: var(--text-inverse);
-
-    transform: translateY(-8px) scale(1.03);
-
-    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-}
-
-/* TEXTO EN HOVER */
-.card:hover h3,
-.card:hover p {
-    color: var(--text-inverse);
-}
-
-/* ICONO EN HOVER */
-.card:hover i {
-    color: var(--text-inverse);
-    transform: rotate(10deg) scale(1.2);
-}
-
-/* ANIMACIÓN DE ENTRADA */
 .cards .card {
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
 }
 
-.cards .card:nth-child(1) { animation-delay: 0.2s; }
-.cards .card:nth-child(2) { animation-delay: 0.4s; }
-.cards .card:nth-child(3) { animation-delay: 0.6s; }
+.card {
+    background: var(--bg2);
+    color: var(--card);
+    padding: 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card i {
+    transition: transform 0.5s ease, color 0.5s ease;
+}
+
+.card:hover i {
+    transform: rotate(10deg) scale(1.3);
+    color: var(--text-inverse);
+}
+
+/* Interacción de la tarjeta: Animación y cambio de colores */
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    background: var(--primary);
+    color: var(--text-inverse);
+}
+
+.cards .card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.cards .card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.cards .card:nth-child(3) {
+    animation-delay: 0.6s;
+}
 
 .modal {
     display: none;
@@ -902,6 +969,7 @@ body.video-bg::after {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -911,9 +979,12 @@ body.video-bg::after {
 @keyframes pageLoad {
     from {
         opacity: 0;
+        transform: translateY(15px);
     }
+
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -992,31 +1063,33 @@ body.video-bg::after {
 
 /* ========================== PANTALLA DE CARGA ========================== */
 #loading-screen {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;                    /* Por encima de TODO */
-    background: #000;                 /* Fondo negro de respaldo */
-    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 9999;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s ease-in-out;
+    overflow: hidden;
 }
 
 #loading-video {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
     background: #000;
 }
 
-/* Clase que se agrega para ocultar la pantalla de carga */
+/* Clase para ocultar la pantalla de carga */
 #loading-screen.fade-out {
     opacity: 0;
-    pointer-events: none;            /* Permite interactuar con el contenido debajo */
+    transition: opacity 0.5s ease;
+    pointer-events: none;
 }
