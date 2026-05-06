@@ -1,50 +1,53 @@
 :root {
     --bg: #1C1C1C;
-    --bg-sidebar: #111;
+    --bg-sidebar: #1C1C1C;
     --bg-container: rgba(0,0,0,0.45);
     --bg-card: rgba(28,28,28,0.9);
-
     --primary: #FFC107;
-    --primary-hover: #ffb300;
-
+    --primary-hover: #e0a800;
     --text: #F5F5F5;
-    --text-muted: #ddd;
+    --text-muted: #CCCCCC;
     --text-inverse: #1C1C1C;
-
-    --border: rgba(255,255,255,0.08);
-
+    --border: rgba(255,255,255,0.1);
     --overlay1: rgba(6,9,10,0.7);
     --overlay2: rgba(6,9,10,0.9);
-
     --bg-image: url("../images/fondo.jpg");
-
     --nav: #F5F5F5;
     --focus: #FFC107;
 }
 
-/* ========================= THEMES ========================= */
+.theme-yellow {
+    --bg: #1C1C1C;
+    --bg-sidebar: #1C1C1C;
+    --bg-container: rgba(0,0,0,0.45);
+    --bg-card: rgba(28,28,28,0.9);
+    --primary: #FFC107;
+    --primary-hover: #e0a800;
+    --text: #F5F5F5;
+    --text-muted: #CCCCCC;
+    --text-inverse: #1C1C1C;
+    --border: rgba(255,255,255,0.1);
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
+    --bg-image: url("../images/fondo.jpg");
+    --nav: #F5F5F5;
+    --focus: #FFC107;
+}
+
 .theme-purple {
     --bg: #EAEFF0;
     --bg-sidebar: #0C1825;
-    --bg-container: rgba(255,255,255,0.7);
+    --bg-container: rgba(236,238,243,0.8);
     --bg-card: #FFFFFF;
-
     --primary: #7453B2;
     --primary-hover: #5e43a0;
-
     --text: #0C1825;
     --text-muted: #6B7280;
     --text-inverse: #FFFFFF;
-
     --border: #D9DCE3;
-
-    --overlay1: rgba(234,239,240,0.85);
-    --overlay2: rgba(234,239,240,0.95);
-
     --bg-image: url("../images/fondo-purple.jpg");
-
-    --nav: #EAEFF0;
-    --focus: #7453B2;
+    --nav: #0C1825;
+    --focus: #5e43a0;
 }
 
 .theme-cyan-dark {
@@ -52,23 +55,17 @@
     --bg-sidebar: #0E1112;
     --bg-container: rgba(14,17,18,0.8);
     --bg-card: #0E1112;
-
     --primary: #16A2C5;
     --primary-hover: #1389A7;
-
     --text: #EAEFF0;
     --text-muted: #A0B3B8;
     --text-inverse: #000000;
-
     --border: #1F2A2D;
-
-    --overlay1: rgba(6,9,10,0.9);
+    --overlay1: rgba(6,9,10,0.8);
     --overlay2: rgba(6,9,10,0.95);
-
     --bg-image: url("../images/fondo-cyan.jpg");
-
     --nav: #EAEFF0;
-    --focus: #16A2C5;
+    --focus: #293537;
 }
 
 .theme-green-dark {
@@ -76,50 +73,38 @@
     --bg-sidebar: #111710;
     --bg-container: rgba(17,23,16,0.8);
     --bg-card: #111710;
-
     --primary: #99D991;
     --primary-hover: #7FCF75;
-
     --text: #E8EDE8;
     --text-muted: #A5B0A5;
     --text-inverse: #000000;
-
     --border: #1E2A1C;
-
-    --overlay1: rgba(9,15,8,0.9);
+    --overlay1: rgba(9,15,8,0.8);
     --overlay2: rgba(9,15,8,0.95);
-
     --bg-image: url("../images/fondo-green.jpg");
-
     --nav: #E8EDE8;
     --focus: #162D12;
 }
 
 .theme-blue-light {
     --bg: #F4F4F5;
-    --bg-sidebar: #FFFFFF;
-    --bg-container: rgba(255,255,255,0.8);
+    --bg-sidebar: #18181B;
+    --bg-container: rgba(255,255,255,0.7);
     --bg-card: #FFFFFF;
-
-    --primary: #366DDD;
-    --primary-hover: #1969DD;
-
+    --primary: #52525B;
+    --primary-hover: #3F3F46;
     --text: #18181B;
     --text-muted: #6B7280;
     --text-inverse: #FFFFFF;
-
     --border: #E4E4E7;
-
-    --overlay1: rgba(244,244,245,0.85);
-    --overlay2: rgba(244,244,245,0.95);
-
+    --overlay1: rgba(6,9,10,0.7);
+    --overlay2: rgba(6,9,10,0.9);
     --bg-image: url("../images/fondo-blue.jpg");
-
     --nav: #18181B;
     --focus: #366DDD;
 }
 
-/* ========================= RESET ========================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -127,7 +112,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ========================= BODY ========================= */
 body {
     min-height: 100vh;
     background: var(--bg);
@@ -136,7 +120,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ========================= BACKGROUND ========================= */
 body::before {
     content: "";
     position: fixed;
@@ -155,7 +138,6 @@ body::after {
     z-index: -3;
 }
 
-/* VIDEO BACKGROUND */
 #bgvideo {
     position: fixed;
     inset: 0;
@@ -166,6 +148,17 @@ body::after {
     display: none;
 }
 
+#logo {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#logo:hover {
+    transform: scale(1.05);
+}
+
 body.video-bg #bgvideo {
     display: block;
 }
@@ -174,50 +167,65 @@ body.video-bg::after {
     display: none;
 }
 
-/* ========================= DASHBOARD ========================= */
+body.image-bg {
+    background:
+        linear-gradient(var(--overlay1), var(--overlay2)),
+        var(--bg-image);
+    background-size: cover;
+    background-position: center;
+}
+
 .dashboard {
     display: flex;
     min-height: 100vh;
 }
 
-/* ========================= SIDEBAR ========================= */
 .sidebar {
-    width: 230px;
-    background: var(--bg-sidebar);
+    width: 200px;
+    background: var(--bg);
     padding: 30px 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    border-right: 1px solid var(--border);
+    justify-content: flex-start;
+    height: 145vh;
 }
 
+.sidebar i {
+    transition: all 0.6s ease;
+}
+
+.sidebar a:hover i {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Contenedor del nombre de la marca/plataforma o imagen del logo */
 .sidebar .logo {
     text-align: center;
     margin-bottom: 40px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary);
 }
 
-#logo {
+.logo img {
     width: 120px;
     height: auto;
+    display: block;
+    margin: 0 auto;
     object-fit: contain;
-    transition: transform 0.3s ease;
 }
 
-#logo:hover {
-    transform: scale(1.05);
-}
-
-/* NAV */
+/* Menú de navegación principal: Estilos de lista */
 .sidebar nav ul {
     list-style: none;
+    padding: 0;
 }
 
 .sidebar nav ul li {
     margin-bottom: 10px;
 }
 
+/* Enlaces de navegación: Estilos, iconos y transiciones */
 .sidebar nav ul li a {
     display: flex;
     align-items: center;
@@ -226,21 +234,22 @@ body.video-bg::after {
     font-size: 1rem;
     color: var(--nav);
     border-radius: 8px;
+    transition: all 0.6s ease;
     position: relative;
     overflow: hidden;
-    transition: 0.6s ease;
 }
 
 .sidebar nav ul li a i {
     margin-right: 12px;
     font-size: 1.1rem;
-    transition: 0.6;
 }
 
+/* Interacción: Clase 'active' y efecto hover para resaltar la página actual */
 .sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
+.sidebar nav ul li a.active{
     padding-left: 35px;
     background: var(--focus);
+    transition: 0.6s;
     color: var(--text-inverse);
     font-weight: bold;
 }
@@ -252,29 +261,26 @@ body.video-bg::after {
     top: 0;
     width: 0;
     height: 100%;
-    background: var(--primary);
+    color: var(--primary);;
     z-index: -1;
-    transition: 0.6s;
 }
 
-.sidebar nav ul li a:hover::before,
-.sidebar nav ul li a.active::before {
+.sidebar nav ul li a:hover::before {
     width: 100%;
 }
 
 .sidebar nav ul li a:hover i,
 .sidebar nav ul li a.active i {
-    transform: scale(1.2) rotate(5deg);
     color: var(--text-inverse);
+    transition: 0.6s;
 }
 
-/* ========================= MAIN ========================= */
+
 .main-content {
     flex: 1;
     padding: 35px;
 }
 
-/* HEADER */
 .header {
     display: flex;
     justify-content: space-between;
@@ -287,7 +293,6 @@ body.video-bg::after {
     font-size: 2rem;
 }
 
-/* LOGOUT */
 .logout-btn {
     background: var(--primary);
     color: var(--text-inverse);
@@ -306,7 +311,6 @@ body.video-bg::after {
     opacity: 0.9;
 }
 
-/* ========================= CONTAINER ========================= */
 .container {
     background: var(--bg-container);
     padding: 25px;
@@ -315,7 +319,6 @@ body.video-bg::after {
     border: 1px solid var(--border);
 }
 
-/* ========================= CARDS ========================= */
 .postulaciones {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -376,7 +379,6 @@ body.video-bg::after {
     border-color: rgba(168, 85, 247, 0.35);
 }
 
-/* ========================= ANIMATIONS ========================= */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
