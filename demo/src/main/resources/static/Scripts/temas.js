@@ -54,12 +54,28 @@ const themebackgrounds = {
     "theme-blue-light": { type: "video", value: "/Images/fondoceleste.mp4" }
 }
 
+const configuracionIcons = {
+    "theme-yellow": "/Images/ConfiguracionIconAmarillo.png",
+    "theme-purple": "/Images/ConfiguracionIconMorado.png",
+    "theme-cyan-dark": "/Images/ConfiguracionIconCyan.png",
+    "theme-green-dark": "/Images/ConfiguracionIconVerde.png",
+    "theme-blue-light": "/Images/ConfiguracionIconAzulClaro.png"
+}
+
+function applyfavicon(theme) {
+    const favicon = document.getElementById("favicon");
+    if (!favicon) return;
+
+    favicon.href = configuracionIcons[theme] || "/Images/ConfiguracionIconAmarillo.png";
+}
+
 function applytheme(theme) {
     document.documentElement.classList.remove(...themes)
     document.documentElement.classList.add(theme)
     applybackground(theme)
     applylogo(theme)
     applyLoader(theme)
+    applyfavicon(theme);
 }
 
 function applybackground(theme) {
