@@ -84,9 +84,7 @@
             <header class="header">
                 <h1>Dashboard Estudiante</h1>
                 <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='index.html'">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-                </button>
+                    <a th:href="@{/login/index}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
             </header>
 
             <!-- Sección de accesos rápidos mediante tarjetas (Cards) -->
