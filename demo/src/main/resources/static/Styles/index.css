@@ -22,13 +22,41 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--bg-image) center/cover no-repeat;
+    z-index: -3;
+}
+
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background: radial-gradient(circle at top, rgba(255,193,7,0.12), transparent 60%);
+  backdrop-filter: blur(15px);
   z-index: -1;
 }
+
+#bgvideo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -4;
+    display: none;
+}
+
+body.video-bg #bgvideo {
+    display: block;
+}
+
+body.video-bg::after {
+    display: none;
+}
+
 
 /* Cabecera del panel: Contiene el logo y el menú de acceso */
 .header {
@@ -130,14 +158,20 @@ body::before {
 
 .btn-login {
   color: #FFC107;
-  border: 1px solid #FFC107;
+  border: 2px solid #FFC107;
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(255,193,7,0.4);
+  transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .btn-login:hover {
+  background: #FFC107;
+  color: #1C1C1C;
   transform: translateY(-3px);
+  transition: .6s;
   box-shadow: 0 10px 25px rgba(255,193,7,0.4);
 }
 
@@ -149,12 +183,13 @@ body::before {
   border-radius: 10px;
   font-weight: bold;
   box-shadow: 0 4px 12px rgba(255,193,7,0.4);
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   text-decoration: none;
 }
 
 .btn-register:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  transition: .6s;
   box-shadow: 0 10px 25px rgba(255,193,7,0.4);
 }
 
@@ -166,23 +201,23 @@ body::before {
 
 /* Sección principal (Hero) */
 .hero {
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
   text-align: center;
-  padding: 80 20px;
+  padding: 80px 20px;
   margin-bottom: 180px;
 }
 
 .hero-content {
-  max-width: 750px;
+  max-width: 900px;
  animation: fadeUp 1s ease-out;
 }
 
 .hero h1 {
-  font-size: 44px;
+  font-size: 64px;
   font-weight: bold;
   line-height: 1.2;
 
@@ -195,7 +230,7 @@ body::before {
 .hero p {
   margin-top: 20px;
   color: #ccc;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
 }
 
@@ -233,11 +268,12 @@ html {
   display: flex;
   gap: 12px;
   align-items: center;
+  transition: all 0.5s ease;
 }
 
 /* Botón secundario */
 .btn-secondary {
-  border: 1px solid #FFC107;
+  border: 2px solid #FFC107;
   color: #FFC107;
   border-radius: 10px;
   text-decoration: none;
@@ -250,6 +286,7 @@ html {
 .btn-secondary:hover {
   background: #FFC107;
   color: #1C1C1C;
+  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
   transform: translateY(-3px);
 }
 
@@ -268,33 +305,36 @@ html {
 
 /* Tarjetas */
 .card {
-  width: 280px;
+  width: 480px;
+  height: 480px;
   padding: 35px;
-  border-radius: 18px;
+  border-radius: 30px;
 
-  background: rgba(17,17,17,0.75);
+  background-color: rgba(17,17,17,0.8);
   backdrop-filter: blur(10px);
+  text-weight: bold;
 
-  border: 1px solid rgba(255,255,255,0.05);
-  text-align: center;
-
-  transition: 0.3s ease;
+  transition: 0.5s ease;
 }
 
 .card:hover {
   transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-  border-color: #FFC107;
+  border: 2px solid #FFC107;
+  transition: all 0.5s ease;
+  box-shadow: 0 10px 25px rgba(255,193,7,0.6);
 }
 
 .card h2 {
   color: #FFC107;
+  text-align: left;
+  font-size: 35px;
   margin-bottom: 10px;
 }
 
 .card p {
   color: #aaa;
-  font-size: 14px;
+  text-align: left;
+  font-size: 35px;
 }
 
 /* Sección CTA */
@@ -323,9 +363,11 @@ html {
   min-height: 10vh;
   text-align: center;
   padding: 80px 20px;
-  background: #0f0f0f;
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(10px);
   color: #777;
   font-size: 20px;
+  z-index: 1000;
 }
 
 @keyframes fadeUp {
