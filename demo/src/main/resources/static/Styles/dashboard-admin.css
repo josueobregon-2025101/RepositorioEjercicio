@@ -266,8 +266,6 @@ body.image-bg {
     background-position: center;
 }
 
-
-
 /* Contenedor principal que organiza el sidebar y el contenido central */
 .dashboard {
     display: flex;
@@ -370,6 +368,7 @@ body.image-bg {
     color: var(--text-inverse);
     transition: 0.6s;
 }
+
 /* =================Area central de trabajo donde se muestra la información dinámica ================= */
 .main-content {
     flex: 1;
