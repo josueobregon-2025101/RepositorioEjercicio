@@ -27,6 +27,13 @@
     --bg-image: url("../images/fondo.jpg");
     --overlay1: rgba(6,9,10,0.7);
     --overlay2: rgba(6,9,10,0.9);
+
+    --danger: #DC3545;
+    --danger-hover: #C82333;
+    --success: #28A745;
+    --info: #17A2B8;
+    --warning: #FFC107;
+    --secondary: #6C757D;
 }
 
 /* ======================= THEMES ======================= */
@@ -124,11 +131,12 @@ body::after {
 }
 
 body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(var(--overlay1), var(--overlay2));
-    z-index: -2;
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,193,7,0.12), transparent 60%);
+  backdrop-filter: blur(15px);
+  z-index: -1;
 }
 
 #bgvideo {
@@ -152,6 +160,7 @@ body.video-bg::after {
 .dashboard {
     display: flex;
     min-height: 100vh;
+    animation: pageLoad 0.8s ease-in-out;
     position: relative;
     z-index: 1;
 }
@@ -163,9 +172,10 @@ body.video-bg::after {
     top: 0;
     display: flex;
     flex-direction: column;
-    background: var(--bg-sidebar);
+    background: transparent;
     border-right: 1px solid var(--border);
     padding: 30px 0;
+    backdrop-filter: blur(25px);
 }
 
 .sidebar .logo {
@@ -262,6 +272,8 @@ body.video-bg::after {
 .main-content {
     flex: 1;
     padding: 30px;
+    animation: fadeInUp 0.8s ease-in-out;
+    backdrop-filter: blur(5px);
 }
 
 .header {
@@ -389,32 +401,43 @@ body.video-bg::after {
     box-shadow: 0 8px 18px rgba(0,0,0,0.2);
 }
 
+/* Botón de cierre de sesión que redirige al inicio del sitio */
 .logout-btn {
     background: var(--primary);
     color: var(--text-inverse);
-
     border: none;
     padding: 10px 18px;
-
     border-radius: 6px;
-
     font-weight: bold;
-
     display: flex;
     align-items: center;
-    gap: 6px;
+    text-decoration: none;
+    font-family: inherit;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-    cursor: pointer;
-
-    transition: all 0.4s ease;
+.logout-btn i {
+    margin-right: 6px;
+    transition: transform 0.5s ease;
 }
 
 .logout-btn:hover {
-    transform: translateY(-3px);
-    background: var(--primary-hover);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+    transform: translateX(5px);
+    background: var(--danger);
+    font-size: clamp(1.3rem, 1.3vw, 1.3rem);
+    transition: .6s;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
 }
 
+.logout-btn:hover i {
+    transform: translateX(4px);
+    transition: transform 0.5s ease;
+}
+
+.logout-btn:active {
+    background: var(--danger-hover);
+    transform: scale(0.95);
+}
 /* ========================== Visualización de datos en formato de tabla ========================== */
 .table-container {
     overflow-x: auto;
@@ -575,76 +598,38 @@ body.video-bg::after {
 
 
 .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.card {
-    background: var(--bg-card, var(--bg2));
-    color: var(--text);
-
-    padding: 25px;
-    border-radius: 12px;
-
-    border: 1px solid var(--border);
-
-    text-align: center;
-    cursor: pointer;
-
-    transition: all 0.4s ease;
-
-    backdrop-filter: blur(6px);
-}
-
-.card h3 {
-    color: var(--text);
-    margin-bottom: 8px;
-}
-
-.card p {
-    color: var(--text-muted);
-}
-
-.card i {
-    color: var(--primary);
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    transition: all 0.4s ease;
-}
-
-/* HOVER UNIFICADO */
-.card:hover {
-    background: var(--primary);
-    color: var(--text-inverse);
-
-    transform: translateY(-8px) scale(1.03);
-
-    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
-}
-
-/* TEXTO EN HOVER */
-.card:hover h3,
-.card:hover p {
-    color: var(--text-inverse);
-}
-
-/* ICONO EN HOVER */
-.card:hover i {
-    color: var(--text-inverse);
-    transform: rotate(10deg) scale(1.2);
-}
-
-/* ANIMACIÓN DE ENTRADA */
-.cards .card {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease forwards;
+	opacity: 0;
+	animation: fadeInUp 0.8s ease forwards;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+	margin-bottom: 30px;
 }
 
 .cards .card:nth-child(1) { animation-delay: 0.2s; }
 .cards .card:nth-child(2) { animation-delay: 0.4s; }
 .cards .card:nth-child(3) { animation-delay: 0.6s; }
+
+.card {
+	background: var(--bg2);
+	color: var(--text);
+	padding: 25px;
+	border-radius: 12px;
+	text-align: center;
+	font-weight: bold;
+	border: 1px solid var(--bg);
+	transition: all 0.5s ease;
+}
+
+.card:hover {
+	transform: translateY(-8px) scale(1.03);
+	transition: all 0.5s ease;
+	background: var(--primary);
+	color: var(--text-inverse);
+	border: none;
+	box-shadow: 0 15px 30px var(--shadow);
+	z-index: 10;
+}
 
 .modal {
     display: none;
