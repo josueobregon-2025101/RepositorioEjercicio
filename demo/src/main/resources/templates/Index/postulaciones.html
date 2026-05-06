@@ -8,6 +8,8 @@
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/postulaciones.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
     <script>
     (function() {
@@ -94,10 +96,13 @@
                         <h3 th:text="${post.titulo}"></h3>
                         <p th:text="${post.descripcion}"></p>
                         <p>Fecha: <span th:text="${post.fechaPost}"></span></p>
-                        <span th:text="${post.estado}" 
-                            th:classappend="${post.estado == 'Enviado' ? 'enviado' : 'pendiente'}" 
-                            class="estado">
-                            Estado
+                        <span class="estado-postulacion"
+                            th:classappend="
+                                ${post.estado == 'Enviado' ? ' estado-enviado' :
+                                post.estado == 'En revisión' ? ' estado-revision' :
+                                post.estado == 'Aceptado' ? ' estado-aceptado' :
+                                post.estado == 'Rechazado' ? ' estado-rechazado' : ''}"
+                            th:text="${post.estado}">
                         </span>
                     </div>
                 </div>
