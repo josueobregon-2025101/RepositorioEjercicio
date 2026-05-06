@@ -48,4 +48,12 @@ public class EmpresaDashboardController {
         model.addAttribute("rolUsuario", "Empresa");
         return "Index/perfil-admin";
     }
+
+    @GetMapping("/configuracion")
+    public String configuracionEmpresa(HttpSession session, Model model) {
+        Login usuario = verificarEmpresa(session);
+        if (usuario == null) return "redirect:/login/login";
+        model.addAttribute("rolUsuario", "Empresa");
+        return "Index/configuracion";
+    }
 }
