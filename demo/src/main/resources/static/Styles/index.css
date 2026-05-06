@@ -312,7 +312,7 @@ html {
 
   background-color: rgba(17,17,17,0.8);
   backdrop-filter: blur(10px);
-  text-weight: bold;
+  font-weight: bold;
 
   transition: 0.5s ease;
 }
