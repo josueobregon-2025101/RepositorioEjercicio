@@ -4,7 +4,6 @@ import com.inprax.demo.Entity.Estudiantes;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EstudiantesService;
 import com.inprax.demo.Service.InstitucionService;
-import com.inprax.demo.Service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +23,6 @@ public class EstudiantesController {
     @Autowired
     private InstitucionService institucionService;
 
-    @Autowired
-    private LoginService loginService;
-
     private Login verificarEstudiante(HttpSession session) {
         Login usuario = (Login) session.getAttribute("usuarioLogueado");
         if (usuario == null || !usuario.getRoles().equals("Estudiante")) return null;
@@ -45,7 +41,10 @@ public class EstudiantesController {
     }
 
     @GetMapping("/estudiantes/dashboard")
-    public String dashboardEstudianteString(Model model) {
+    public String dashboardEstudianteString(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Estudiante";
+        model.addAttribute("rolUsuario", rol);
         return "Index/dashboard-estudiante";
     }
 
@@ -53,14 +52,8 @@ public class EstudiantesController {
     public String perfilEstudiante(HttpSession session, Model model) {
         Login usuario = verificarEstudiante(session);
         if (usuario == null) return "redirect:/login/login";
-        Long userId = (Long) session.getAttribute("usuarioId");
-        Estudiantes  estudiante = service.validarLogin(userId);
-        Usuario usuario = (Usuario) session.getAttribute("usuarioDatos");
-
-        // 3. Pasamos el objeto al modelo para el formulario
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("rolUsuario", "Estudiante");
-        return "Index/perfil-estudiante";
+        model.addAttribute("rolUsuario", "Empresa");
+        return "Index/perfil-admin";
     }
 
 
@@ -93,6 +86,11 @@ public class EstudiantesController {
 
     @GetMapping("/configuracion")
     public String configestudiante() {
-       return "Index/configuracion-estudiante";
+        return "Index/configuracion-estudiante";
+    }
+
+    @GetMapping("/perfil")
+    public String perfilEstudiante() {
+        return "Index/perfil-estudiante";
     }
 }

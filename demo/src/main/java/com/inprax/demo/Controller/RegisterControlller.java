@@ -3,13 +3,10 @@ package com.inprax.demo.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.LoginService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -24,16 +21,27 @@ public class RegisterControlller {
         model.addAttribute("login", new Login());
         return "Index/register";
     }
-    
+
 
     @PostMapping("/registro")
-    public String guardarUsuario(@RequestParam String usuarioLogin, @RequestParam String  contrasenaLogin, @RequestParam String correoLogin, 
-        @RequestParam String roles, Model model) {
-        Login l = loginService.registrarLogin(usuarioLogin, contrasenaLogin, correoLogin, roles);
+    public String guardarUsuario(@ModelAttribute("login") Login login,
+                                 @RequestParam("rol") String rol,
+                                 Model model) {
+
+        String rolAsignado = rol.equalsIgnoreCase("Estudiante") ? "Estudiante" : "Empresa";
+
+        Login l = loginService.registrarLogin(
+                login.getUsuarioLogin(),
+                login.getContrasenaLogin(),
+                login.getCorreoLogin(),
+                rolAsignado
+        );
+
         if (l == null) {
             model.addAttribute("error", "El usuario ya existe");
             return "Index/register";
         }
+
         return "redirect:/login/login";
     }
     
