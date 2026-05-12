@@ -46,7 +46,7 @@ public class EstudiantesController {
     }
 
     @GetMapping("/estudiantes/perfil")
-    public String perfilEmpresa(HttpSession session, Model model) {
+    public String perfilEstudiante(HttpSession session, Model model) {
         Login usuario = verificarEstudiante(session);
         if (usuario == null) return "redirect:/login/login";
         model.addAttribute("rolUsuario", "Empresa");
