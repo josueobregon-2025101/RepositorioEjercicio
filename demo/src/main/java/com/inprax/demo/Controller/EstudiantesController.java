@@ -23,6 +23,12 @@ public class EstudiantesController {
     @Autowired
     private InstitucionService institucionService;
 
+    private Login verificarEstudiante(HttpSession session) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        if (usuario == null || !usuario.getRoles().equals("Estudiante")) return null;
+        return usuario;
+    }
+
 
     @GetMapping("/estudiantes")
     public String listarEstudiantes(HttpSession session, Model model) {
@@ -37,6 +43,14 @@ public class EstudiantesController {
     @GetMapping("/estudiantes/dashboard")
     public String dashboardEstudianteString(Model model) {
         return "Index/dashboard-estudiante";
+    }
+
+    @GetMapping("/estudiantes/perfil")
+    public String perfilEmpresa(HttpSession session, Model model) {
+        Login usuario = verificarEstudiante(session);
+        if (usuario == null) return "redirect:/login/login";
+        model.addAttribute("rolUsuario", "Empresa");
+        return "Index/perfil-admin";
     }
 
 
