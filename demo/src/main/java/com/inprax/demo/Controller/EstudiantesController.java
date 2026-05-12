@@ -41,7 +41,10 @@ public class EstudiantesController {
     }
 
     @GetMapping("/estudiantes/dashboard")
-    public String dashboardEstudianteString(Model model) {
+    public String dashboardEstudianteString(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Estudiante";
+        model.addAttribute("rolUsuario", rol);
         return "Index/dashboard-estudiante";
     }
 
@@ -49,8 +52,8 @@ public class EstudiantesController {
     public String perfilEstudiante(HttpSession session, Model model) {
         Login usuario = verificarEstudiante(session);
         if (usuario == null) return "redirect:/login/login";
-        model.addAttribute("rolUsuario", "Estudiante");
-        return "Index/perfil-estudiante";
+        model.addAttribute("rolUsuario", "Empresa");
+        return "Index/perfil-admin";
     }
 
 
@@ -83,6 +86,11 @@ public class EstudiantesController {
 
     @GetMapping("/configuracion")
     public String configestudiante() {
-       return "Index/configuracion-estudiante";
+        return "Index/configuracion-estudiante";
+    }
+
+    @GetMapping("/perfil")
+    public String perfilEstudiante() {
+        return "Index/perfil-estudiante";
     }
 }
