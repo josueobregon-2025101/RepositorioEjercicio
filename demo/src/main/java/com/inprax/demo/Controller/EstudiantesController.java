@@ -4,6 +4,7 @@ import com.inprax.demo.Entity.Estudiantes;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EstudiantesService;
 import com.inprax.demo.Service.InstitucionService;
+import com.inprax.demo.Service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class EstudiantesController {
 
     @Autowired
     private InstitucionService institucionService;
+
+    @Autowired
+    private LoginService loginService;
 
     private Login verificarEstudiante(HttpSession session) {
         Login usuario = (Login) session.getAttribute("usuarioLogueado");
@@ -49,6 +53,12 @@ public class EstudiantesController {
     public String perfilEstudiante(HttpSession session, Model model) {
         Login usuario = verificarEstudiante(session);
         if (usuario == null) return "redirect:/login/login";
+        Long userId = (Long) session.getAttribute("usuarioId");
+        Estudiantes  estudiante = service.validarLogin(userId);
+        Usuario usuario = (Usuario) session.getAttribute("usuarioDatos");
+
+        // 3. Pasamos el objeto al modelo para el formulario
+        model.addAttribute("usuario", usuario);
         model.addAttribute("rolUsuario", "Estudiante");
         return "Index/perfil-estudiante";
     }
