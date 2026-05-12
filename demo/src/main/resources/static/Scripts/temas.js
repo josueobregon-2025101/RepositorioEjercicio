@@ -62,11 +62,57 @@ const configuracionIcons = {
     "theme-blue-light": "/Images/ConfiguracionIconAzulClaro.png"
 }
 
+const practicasIcons = {
+    "theme-yellow": "/Images/PracticasIconAmarillo.png",
+    "theme-purple": "/Images/PracticasIconMorado.png",
+    "theme-cyan-dark": "/Images/PracticasIconCyan.png",
+    "theme-green-dark": "/Images/PracticasIconVerde.png",
+    "theme-blue-light": "/Images/PracticasIconAzulClaro.png"
+}
+
+const empresasIcons = {
+    "theme-yellow": "/Images/EmpresasIconAmarillo.png",
+    "theme-purple": "/Images/EmpresasIconMorado.png",
+    "theme-cyan-dark": "/Images/EmpresasIconCyan.png",
+    "theme-green-dark": "/Images/EmpresasIconVerde.png",
+    "theme-blue-light": "/Images/EmpresasIconAzulClaro.png"
+}
+
+const estudiantesIcons = {
+    "theme-yellow": "/Images/EstudiantesIconAmarillo.png",
+    "theme-purple": "/Images/EstudiantesIconMorado.png",
+    "theme-cyan-dark": "/Images/EstudiantesIconCyan.png",
+    "theme-green-dark": "/Images/EstudiantesIconVerde.png",
+    "theme-blue-light": "/Images/EstudiantesIconAzulClaro.png"
+}
+
+const perfilIcons = {
+    "theme-yellow": "/Images/PerfilIconAmarillo.png",
+    "theme-purple": "/Images/PerfilIconMorado.png",
+    "theme-cyan-dark": "/Images/PerfilIconCyan.png",
+    "theme-green-dark": "/Images/PerfilIconVerde.png",
+    "theme-blue-light": "/Images/PerfilIconAzulClaro.png"
+}
+
 function applyfavicon(theme) {
     const favicon = document.getElementById("favicon");
     if (!favicon) return;
 
-    favicon.href = configuracionIcons[theme] || "/Images/ConfiguracionIconAmarillo.png";
+    const pathname = window.location.pathname;
+
+    if (pathname.includes("configuracion")) {
+        favicon.href = configuracionIcons[theme] || "/Images/ConfiguracionIconAmarillo.png";
+    } else if (pathname.includes("practicas")) {
+        favicon.href = practicasIcons[theme] || "/Images/PracticasIconAmarillo.png";
+    } else if (pathname.includes("empresas")) {
+        favicon.href = empresasIcons[theme] || "/Images/EmpresasIconAmarillo.png";
+    } else if (pathname.includes("estudiantes")) {
+        favicon.href = estudiantesIcons[theme] || "/Images/EstudiantesIconAmarillo.png";
+    } else if (pathname.includes("perfil")) {
+        favicon.href = perfilIcons[theme] || "/Images/PerfilIconAmarillo.png";
+    } else {
+        favicon.href = configuracionIcons[theme] || "/Images/ConfiguracionIconAmarillo.png";
+    }
 }
 
 function applytheme(theme) {
