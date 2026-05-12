@@ -22,21 +22,21 @@
                 <p th:text="${error}"></p>
             </div>
 
-            <form th:action="@{/register/registro}" method="post">
+            <form th:action="@{/register/registro}" th:object="${login}" method="post">
 
-                <input type="email" name="correoLogin" placeholder="Correo electrónico" required>
+                <input type="email" id="correoLogin" th:field="*{correoLogin}" placeholder="Ingrese su correo electrónico" required>
 
-                <input type="text" name="usuarioLogin" placeholder="Nombre de usuario" required>
+                <input type="text" id="usuarioLogin" th:field="*{usuarioLogin}" placeholder="Ingrese su Usuario" required>
 
-                <input type="password" name="contrasenaLogin" placeholder="Contraseña" required>
+                <input type="password" id="contrasenaLogin" th:field="*{contrasenaLogin}" placeholder="Ingrese su Contraseña" required>
 
-                <select name="rolLogin" required>
-                    <option value="" disabled selected>Selecciona un rol</option>
+                <select name="rol" id="roles" required>
+                    <option value="">Selecciona un rol</option>
                     <option value="ESTUDIANTE">Estudiante</option>
                     <option value="EMPRESA">Empresa</option>
                 </select>
 
-                <button type="submit">Crear Cuenta</button>
+                <button type="submit"><i class="fas fa-save"></i>Crear Cuenta</button>
             </form>
 
             <p class="login-link">
