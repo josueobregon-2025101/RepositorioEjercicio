@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
     <!-- Enlace a la biblioteca de iconos Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link id="favicon" rel="icon" href="/Images/DashboardIconAmarillo.png" type="image/png">
 
     <script>
         (function() {
@@ -23,6 +24,10 @@
 
 <video id="bgvideo" autoplay muted loop playsinline></video>
 
+<div id="loading-screen">
+    <video autoplay muted playsinline id="loading-video">
+    </video>
+</div>
 <!-- Contenedor principal que organiza el sidebar y el contenido central -->
 <div class="dashboard">
 
@@ -108,6 +113,6 @@
 </div>
 
 <script th:src="@{/Scripts/temas.js}"></script>
-
+<script th:src="@{/Scripts/dashboard.js}"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" th:href="@{/Styles/dashboard-empresa.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link id="favicon" rel="icon" href="/Images/DashboardIconAmarillo.png" type="image/png">
 
     <script>
         (function() {
@@ -21,6 +22,10 @@
 <video id="bgvideo" autoplay muted loop playsinline>
     <source src="/video/fondo.mp4" type="video/mp4">
 </video>
+<div id="loading-screen">
+    <video autoplay muted playsinline id="loading-video">
+    </video>
+</div>
 
 <div class="dashboard">
 
@@ -127,6 +132,7 @@
 </div>
 
 <script th:src="@{/Scripts/temas.js}"></script>
+<script th:src="@{/Scripts/dashboard.js}"></script>
 
 <script>
     const buttons = document.querySelectorAll("[data-theme]");
