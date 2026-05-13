@@ -1,6 +1,7 @@
 package com.inprax.demo.Exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,9 +18,18 @@ public class GlobalException {
 
     // Error 500
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGlobalException(Exception ex, WebRequest request) {
-        String mensajePersonalizado = "Ocurrió un error inesperado en el servidor. Por favor, contacte al administrador.";
-        return crearRespuesta(mensajePersonalizado, request, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Map<String, Object>> handleGlobalException(Exception ex, WebRequest request) {
+
+        Map<String, Object> error = new HashMap<>();
+        error.put("estado", 500);
+        error.put("error", "Internal Server Error");
+        error.put("mensaje", ex.getMessage());
+        error.put("ruta", request.getDescription(false));
+
+        return ResponseEntity
+                .status(500)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(error);
     }
 
     //Error 404
@@ -72,5 +82,7 @@ public class GlobalException {
 
         return new ResponseEntity<>(body, status);
     }
+
+    
 
 }
