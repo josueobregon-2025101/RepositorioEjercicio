@@ -9,10 +9,10 @@
     <link id="favicon" rel="icon" href="/Images/ConfiguracionIconAmarillo.png" type="image/png">
 
     <script>
-    (function() {
-        const theme = localStorage.getItem("theme") || "theme-yellow"
-        document.documentElement.classList.add(theme)
-    })();
+        (function () {
+            const theme = localStorage.getItem("theme") || "theme-yellow";
+            document.documentElement.classList.add(theme);
+        })();
     </script>
 </head>
 
@@ -29,42 +29,14 @@
 
         <nav>
             <ul>
-                    <li>
-                        <a th:href="@{/estudiantes/estudiantes/dashboard}">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                    </li> 
-                    
-                    <li>
-                        <a th:href="@{/practicas/practicas}">
-                            <i class="fas fa-briefcase"></i> Prácticas disponibles
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a th:href="@{/api/postulaciones/postulaciones}">
-                            <i class="fas fa-file"></i> Mis postulaciones
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a th:href="@{/documentos/documentos}">
-                            <i class="fas fa-folder"></i> Mis documentos
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a th:href="@{/perfil/perfil}">
-                            <i class="fas fa-user"></i> Perfil
-                        </a>
-                    </li>
-                    <li>
-                    <a th:href="@{/estudiantes/configuracion}" class="active">
-                        <i class="fas fa-cog"></i> Configuración
-                    </a>
-                    </li>
-                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
-                </ul>
+                <li><a th:href="@{/estudiantes/estudiantes/dashboard}"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas disponibles</a></li>
+                <li><a th:href="@{/api/postulaciones/postulaciones}"><i class="fas fa-file"></i> Mis postulaciones</a></li>
+                <li><a th:href="@{/documentos}"><i class="fas fa-folder"></i> Mis documentos</a></li>
+                <li><a th:href="@{/perfil/perfil}"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a th:href="@{/estudiantes/configuracion}" class="active"><i class="fas fa-cog"></i> Configuración</a></li>
+                <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+            </ul>
         </nav>
     </aside>
 
@@ -88,8 +60,6 @@
                 </div>
             </div>
 
-
-
             <div class="card">
                 <h3><i class="fas fa-rotate-left"></i> Restablecer</h3>
 
@@ -97,6 +67,7 @@
                     <button class="btn" onclick="resetConfig()">Restablecer</button>
                 </div>
             </div>
+
         </div>
     </main>
 </div>
@@ -105,25 +76,29 @@
 
 <script>
 function setBackground(type) {
-    const body = document.body
-    body.classList.remove("video-bg", "image-bg")
+    const body = document.body;
+    body.classList.remove("video-bg", "image-bg");
+
     if (type === "video") {
-        body.classList.add("video-bg")
+        body.classList.add("video-bg");
     } else {
-        body.classList.add("image-bg")
+        body.classList.add("image-bg");
     }
-    localStorage.setItem("bgType", type)
+
+    localStorage.setItem("bgType", type);
 }
 
-(function(){
-    const bg = localStorage.getItem("bgType") || "video"
-    setBackground(bg)
-})()
+(function () {
+    const bg = localStorage.getItem("bgType") || "video";
+    setBackground(bg);
+})();
 
-function resetConfig(){
-    localStorage.clear()
-    location.reload()
+function resetConfig() {
+    localStorage.clear();
+    location.reload();
 }
+
+
 </script>
 
 </body>

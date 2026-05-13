@@ -7,7 +7,7 @@
     <title>Perfil - Inprax</title>
     
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" th:href="@{/Styles/perfil-estudiante.css}">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-estudiante.css}">
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -41,7 +41,7 @@
                     <li><a th:href="@{/estudiantes/estudiantes/dashboard}"><i class="fas fa-home"></i> Inicio</a></li>
                     <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas disponibles</a></li>
                     <li><a th:href="@{/postulaciones/postulaciones}"><i class="fas fa-file"></i> Mis postulaciones</a></li>
-                    <li><a th:href="@{/documentos/documentos}"><i class="fas fa-folder"></i> Mis documentos</a></li>
+                    <li><a th:href="@{/documentos}"><i class="fas fa-folder"></i> Mis documentos</a></li>
                     <li><a th:href="@{/estudiantes/perfil}" class="active"><i class="fas fa-user"></i> Perfil</a></li>
                     <li><a th:href="@{/estudiantes/configuracion}"><i class="fas fa-cog"></i> Configuración</a></li>
                     <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
@@ -96,16 +96,22 @@
                             <label>Carrera</label>
                             <input type="text" value="Desarrollo de Software">
                         </div>
+
+                        <div class="profile-actions">
+                    <button type="button" class="btn-edit" id="btnEdit">
+                        Editar
+                    </button>
+
+                    <button type="submit" class="btn-save" id="btnSave">
+                        Guardar
+                    </button>
+                </div>
                     </form>
 
 
                 </div>
 
                 <!-- Botones de acción para gestionar la edición de datos -->
-                <div class="profile-actions">
-                    <button class="btn-edit">Editar</button>
-                    <button class="btn-save">Guardar</button>
-                </div>
             </section>
             <div class="theme-switcher">
                 <button data-theme="theme-yellow">🟡</button>
