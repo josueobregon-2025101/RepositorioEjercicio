@@ -29,6 +29,9 @@ public class PracticasController {
         model.addAttribute("rolUsuario", rol);
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
+        if ("Empresa".equals(rol)) {
+            return "Index/practicas";
+        }
         return "Index/practicas-admin";
     }
     @GetMapping("/estudiantes/practicas")
@@ -60,7 +63,7 @@ public class PracticasController {
 
     @PostMapping("/guardar")
     public String guardarPractica(@Valid @ModelAttribute Practicas practicas,
-            RedirectAttributes redirectAttributes) {
+                                  RedirectAttributes redirectAttributes) {
         try {
             practicasService.savePracticas(practicas);
             redirectAttributes.addFlashAttribute("message", "¡Práctica agregada exitosamente!");
@@ -74,7 +77,7 @@ public class PracticasController {
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Integer id, Model model,
-            RedirectAttributes redirectAttributes) {
+                                          RedirectAttributes redirectAttributes) {
         try {
             Practicas practica = practicasService.getIdPracticas(id);
             model.addAttribute("practica", practica);
@@ -88,8 +91,8 @@ public class PracticasController {
 
     @PostMapping("/actualizar/{id}")
     public String actualizarPractica(@PathVariable Integer id,
-            @Valid @ModelAttribute Practicas practicas,
-            RedirectAttributes redirectAttributes) {
+                                     @Valid @ModelAttribute Practicas practicas,
+                                     RedirectAttributes redirectAttributes) {
         try {
             practicasService.updatePracticas(practicas, id);
             redirectAttributes.addFlashAttribute("message", "¡Práctica actualizada exitosamente!");
