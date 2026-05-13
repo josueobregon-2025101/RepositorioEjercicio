@@ -22,9 +22,7 @@
 
 <video id="bgvideo" autoplay muted loop playsinline></video>
 
-<div id="loading-screen">
-    <video autoplay muted playsinline id="loading-video"></video>
-</div>
+
     <!-- Contenedor principal que organiza el sidebar y el contenido central -->
     <div class="dashboard">
 
@@ -39,7 +37,7 @@
             <nav>
                 <ul>
                     <li><a th:href="@{/estudiantes/estudiantes/dashboard}"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas disponibles</a></li>
+                    <li><a th:href="@{/practicas/estudiantes/practicas}"><i class="fas fa-briefcase"></i> Prácticas disponibles</a></li>
                     <li><a th:href="@{/postulaciones/postulaciones}"><i class="fas fa-file"></i> Mis postulaciones</a></li>
                     <li><a th:href="@{/documentos}"><i class="fas fa-folder"></i> Mis documentos</a></li>
                     <li><a th:href="@{/estudiantes/perfil}" class="active"><i class="fas fa-user"></i> Perfil</a></li>
@@ -59,39 +57,28 @@
                 <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
                 <a th:href="@{/login/index}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>            </header>
 
-            <!-- Contenedor específico para la gestión de información del usuario -->
             <section class="profile-container">
 
-                <!-- Formulario de datos personales -->
-                <div class="profile-card">
-                    <h2>Información Personal</h2>
-                    <!-- Campos de entrada de datos para el usuario -->
-                    <form class="profile-form">
-                        <div class="form-group">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" id="nombre" value="Juan">
-                        </div>
+                <!-- CONTENEDOR DE LOS DOS FORMULARIOS -->
+                <div class="profile-grid" style="display:flex">
 
-                        <div class="form-group">
-                            <label>Apellido</label>
-                            <input type="text" value="Pérez">
-                        </div>
+                    <!-- Formulario de datos personales -->
+                    <div class="profile-card">
+                        <h2>Información Usuario</h2>
 
-                        <div class="form-group">
-                            <label>Correo</label>
-                            <input type="email" value="juan@email.com">
-                        </div>
+                        <form class="profile-form">
 
-                        <div class="form-group">
-                            <label>Teléfono</label>
-                            <input type="text" value="5555-5555">
-                        </div>
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" id="nombre" value="Juan">
+                            </div>
 
-                        <div class="form-group">
-                            <label>Institución</label>
-                            <input type="text" value="Instituto Técnico">
-                        </div>
+                            <div class="form-group">
+                                <label>Apellido</label>
+                                <input type="text" value="Pérez">
+                            </div>
 
+<<<<<<< HEAD
                         <div class="form-group">
                             <label>Carrera</label>
                             <input type="text" value="Desarrollo de Software">
@@ -107,12 +94,85 @@
                     </button>
                 </div>
                     </form>
+=======
+                            <div class="form-group">
+                                <label>Correo</label>
+                                <input type="email" value="juan@email.com">
+                            </div>
+>>>>>>> 48e3c83b8dc996caa77d33fe97630156c7c91236
 
+                            <div class="form-group">
+                                <label>Teléfono</label>
+                                <input type="text" value="5555-5555">
+                            </div>
 
-                </div>
+                            <div class="form-group">
+                                <label>Institución</label>
+                                <input type="text" value="Instituto Técnico">
+                            </div>
 
+<<<<<<< HEAD
                 <!-- Botones de acción para gestionar la edición de datos -->
+=======
+                            <div class="form-group">
+                                <label>Carrera</label>
+                                <input type="text" value="Desarrollo de Software">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- NUEVO FORMULARIO DE DATOS DEL ESTUDIANTE -->
+                    <div class="profile-card">
+                        <h2>Datos del Estudiante</h2>
+
+                        <form class="profile-form">
+
+                            <div class="form-group">
+                                <label>Carnet</label>
+                                <input type="text" value="20250001">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Grado</label>
+                                <input type="text" value="5to Perito">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sección</label>
+                                <input type="text" value="IN5CM">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Promedio</label>
+                                <input type="text" value="85">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Estado</label>
+                                <input type="text" value="Activo">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Horas de práctica</label>
+                                <input type="text" value="120">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+>>>>>>> 48e3c83b8dc996caa77d33fe97630156c7c91236
             </section>
+            <div style="display:block">
+                <!-- boton para cancelar editar-->
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" th:onclick="@{/estudiantes/estudiantes/dashboard}"><i
+                            class="fas fa-close"></i> Cancelar</button>
+                </div>
+                <!-- Botones de acción para gestionar la creación del editar -->
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="actualizarEstudiante()"><i class="fas fa-save"></i>
+                        Editar</button>
+                </div>
+            </div>
             <div class="theme-switcher">
                 <button data-theme="theme-yellow">🟡</button>
                 <button data-theme="theme-purple">🟣</button>

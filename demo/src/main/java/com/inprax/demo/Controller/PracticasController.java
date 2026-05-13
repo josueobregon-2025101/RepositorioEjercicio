@@ -29,7 +29,20 @@ public class PracticasController {
         model.addAttribute("rolUsuario", rol);
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
+        if ("Empresa".equals(rol)) {
+            return "Index/practicas";
+        }
         return "Index/practicas-admin";
+    }
+
+    @GetMapping("/estudiantes/practicas")
+    public String practicasEstudiante(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Estudiante";
+        model.addAttribute("rolUsuario", rol);
+        List<Practicas> practicas = practicasService.getAllPracticas();
+        model.addAttribute("practicas", practicas);
+        return "Index/practicas";
     }
 
     @GetMapping("/misPracticas")
