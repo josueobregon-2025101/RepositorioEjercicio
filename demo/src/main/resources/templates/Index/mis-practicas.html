@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Prácticas - Inprax</title>
 
     <!-- Hoja de estilos -->
-    <link rel="stylesheet" th:href="@{/Styles/mis-practicas.css}">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
 </head>
-    <script>
-    (function() {
+<script>
+    (function () {
         const theme = localStorage.getItem("theme") || "theme-yellow"
         document.documentElement.classList.add(theme)
     })();
-    </script>
+</script>
 </head>
+
 <body class="image-bg">
 
     <video id="bgvideo" autoplay muted loop playsinline></video>
-<div class="dashboard">
+    <div class="dashboard">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">
-            <img id="logo" th:src="@{/Images/INPRAX.png}">
-        </div>
-        <ul>
-            <li><a th:href="@{/dashboard-empresa}">Inicio</a></li>
-            <li><a th:href="@{/crear-practica}">Crear práctica</a></li>
-            <li><a th:href="@{/editar-practica}">Editar práctica</a></li>
-            <li><a th:href="@{/postulantes}">Postulantes</a></li>
-            <li class="active">Mis prácticas</li>
-            <li><a th:href="@{/perfil-empresa}">Perfil</a></li>
-        </ul>
-    </aside>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img id="logo" th:src="@{/Images/INPRAX.png}">
+            </div>
+            <ul>
+                <li><a th:href="@{/dashboard-empresa}">Inicio</a></li>
+                <li><a th:href="@{/crear-practica}">Crear práctica</a></li>
+                <li><a th:href="@{/editar-practica}">Editar práctica</a></li>
+                <li><a th:href="@{/postulantes}">Postulantes</a></li>
+                <li class="active">Mis prácticas</li>
+                <li><a th:href="@{/perfil-empresa}">Perfil</a></li>
+            </ul>
+        </aside>
 
-    <!-- Contenido principal -->
-    <main class="main-content">
-        <header class="header">
-            <h1>Mis Prácticas Publicadas</h1>
-            <button class="logout-btn" th:onclick="'location.href=\'' + @{/logout} + '\'"'>Cerrar sesión</button>
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Mis Prácticas Publicadas</h1>
+                <button class="logout-btn" th:onclick="'location.href=\'' + @{/logout} + '\'"'>Cerrar sesión</button>
         </header>
 
         <section class="practicas-container">
@@ -52,8 +54,10 @@
                     <p><strong>Modalidad:</strong> <span th:text="${practica.modalidad}">Modalidad</span></p>
                 </div>
                 <div class="practica-actions">
-                    <button class="btn-ver" th:onclick="'location.href=\'' + @{/practicas/editar/{id}(id=${practica.id})} + '\'"'>Editar</button>
-                    <button class="btn-ver" th:onclick="'location.href=\'' + @{/practicas/postulantes/{id}(id=${practica.id})} + '\'"'>Ver postulantes</button>
+                    <button class="btn-ver" th:onclick="' location.href=\'' +
+                    @{/practicas/editar/{id}(id=${practica.id})} + '\'"'>Editar</button>
+                    <button class=" btn-ver"
+                    th:onclick="'location.href=\'' + @{/practicas/postulantes/{id}(id=${practica.id})} + '\'"'>Ver postulantes</button>
                     <form th:action="@{/practicas/eliminar/{id}(id=${practica.id})}" method="post" style="display:inline;">
                         <button type="submit" class="btn-rechazar">Eliminar</button>
                     </form>

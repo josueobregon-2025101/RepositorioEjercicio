@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis documentos - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/documentos.css}">
 
@@ -13,13 +14,14 @@
 
     <link id="favicon" rel="icon" href="/Images/DocumentosIconAmarillo.png">
 </head>
-    <script>
-    (function() {
+<script>
+    (function () {
         const theme = localStorage.getItem("theme") || "theme-yellow"
         document.documentElement.classList.add(theme)
     })();
-    </script>
+</script>
 </head>
+
 <body class="image-bg">
 
     <video id="bgvideo" autoplay muted loop playsinline></video>
@@ -40,35 +42,35 @@
                         <a th:href="@{/estudiantes/estudiantes/dashboard}">
                             <i class="fas fa-home"></i> Inicio
                         </a>
-                    </li> 
-                    
+                    </li>
+
                     <li>
                         <a th:href="@{/practicas/estudiantes/practicas}">
                             <i class="fas fa-briefcase"></i> Prácticas disponibles
                         </a>
                     </li>
-                    
+
                     <li>
                         <a th:href="@{/api/postulaciones/postulaciones}">
                             <i class="fas fa-file"></i> Mis postulaciones
                         </a>
                     </li>
-                    
+
                     <li>
                         <a th:href="@{/documentos/documentos }" class="active">
                             <i class="fas fa-folder"></i> Mis documentos
                         </a>
                     </li>
-                    
+
                     <li>
                         <a th:href="@{/estudiantes/estudiantes/perfil}">
                             <i class="fas fa-user"></i> Perfil
                         </a>
                     </li>
                     <li>
-                    <a th:href="@{/estudiantes/configuracion}">
-                        <i class="fas fa-cog"></i> Configuración
-                    </a>
+                        <a th:href="@{/estudiantes/configuracion}">
+                            <i class="fas fa-cog"></i> Configuración
+                        </a>
                     </li>
                     <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
                 </ul>
@@ -82,7 +84,7 @@
             <header class="header">
                 <h1>Mis documentos</h1>
                 <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <a th:href="@{/index/index}"><button class="logout-btn" >Cerrar sesión</button></a>
+                <a th:href="@{/index/index}"><button class="logout-btn">Cerrar sesión</button></a>
             </header>
 
             <!-- Contenedor específico para la gestión de archivos -->
@@ -137,4 +139,5 @@
 
     <script th:src="@{/Scripts/temas.js}"></script>
 </body>
+
 </html>
