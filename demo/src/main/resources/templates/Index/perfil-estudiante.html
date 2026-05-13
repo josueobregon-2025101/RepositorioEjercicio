@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/perfil-estudiante.css}">
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <script>
-        (function() {
+        (function () {
             const theme = localStorage.getItem("theme") || "theme-yellow"
             document.documentElement.classList.add(theme)
         })();
     </script>
 </head>
+
 <body class="image-bg">
 
-<video id="bgvideo" autoplay muted loop playsinline></video>
+    <video id="bgvideo" autoplay muted loop playsinline></video>
 
-<div id="loading-screen">
-    <video autoplay muted playsinline id="loading-video"></video>
-</div>
+    <div id="loading-screen">
+        <video autoplay muted playsinline id="loading-video"></video>
+    </div>
     <!-- Contenedor principal que organiza el sidebar y el contenido central -->
     <div class="dashboard">
 
@@ -39,8 +41,10 @@
             <nav>
                 <ul>
                     <li><a th:href="@{/estudiantes/estudiantes/dashboard}"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas disponibles</a></li>
-                    <li><a th:href="@{/postulaciones/postulaciones}"><i class="fas fa-file"></i> Mis postulaciones</a></li>
+                    <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas disponibles</a>
+                    </li>
+                    <li><a th:href="@{/postulaciones/postulaciones}"><i class="fas fa-file"></i> Mis postulaciones</a>
+                    </li>
                     <li><a th:href="@{/documentos/documentos}"><i class="fas fa-folder"></i> Mis documentos</a></li>
                     <li><a th:href="@{/estudiantes/perfil}" class="active"><i class="fas fa-user"></i> Perfil</a></li>
                     <li><a th:href="@{/estudiantes/configuracion}"><i class="fas fa-cog"></i> Configuración</a></li>
@@ -57,7 +61,8 @@
             <header class="header">
                 <h1>Perfil del Estudiante</h1>
                 <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <a th:href="@{/login/index}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>            </header>
+                <a th:href="@{/login/index}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            </header>
 
             <!-- Contenedor específico para la gestión de información del usuario -->
             <section class="profile-container">
@@ -97,14 +102,11 @@
                             <input type="text" value="Desarrollo de Software">
                         </div>
                     </form>
-
-
-                </div>
-
-                <!-- Botones de acción para gestionar la edición de datos -->
-                <div class="profile-actions">
-                    <button class="btn-edit">Editar</button>
-                    <button class="btn-save">Guardar</button>
+                    <!-- Botones de acción para gestionar la edición de datos -->
+                    <div class="form-actions">
+                        <button class="btn-edit">Editar</button>
+                        <button class="btn-save">Guardar</button>
+                    </div>
                 </div>
             </section>
             <div class="theme-switcher">
@@ -116,7 +118,8 @@
             </div>
         </main>
     </div>
-<script th:src="@{/Scripts/temas.js}"></script>
-<script th:src="@{/Scripts/perfil.js}"></script>
+    <script th:src="@{/Scripts/temas.js}"></script>
+    <script th:src="@{/Scripts/perfil.js}"></script>
 </body>
+
 </html>
