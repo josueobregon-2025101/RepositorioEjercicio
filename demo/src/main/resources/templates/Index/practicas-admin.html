@@ -56,7 +56,19 @@
         <div class="table-container">
             <table class="table">
                 <thead>
-               <tr th:each="practica : ${practicas}">
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>ID Empresa</th>
+                    <th>Tipo</th>
+                    <th>Carrera</th>
+                    <th>Estado</th>
+                    <th>Disponibilidad</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="practica : ${practicas}">
                     <td th:text="${practica.idPractica}"></td>
                     <td th:text="${practica.titulo}"></td>
                     <td th:text="${practica.idEmpresa}"></td>
