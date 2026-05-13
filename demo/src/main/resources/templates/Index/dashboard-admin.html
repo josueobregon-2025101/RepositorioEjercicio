@@ -80,19 +80,19 @@
             </header>
 
             <!-- Sección de tarjetas (Cards) para mostrar estadísticas generales -->
-            <section class="cards">
+            <section class="cards" th:if="${rolUsuario != 'Empresa'}">
                 <!-- Tarjeta informativa con métricas del sistema -->
-                <div class="card">
-                    <h3 th:text="${totalEstudiantes}">0</h3>
-                    <p>Estudiantes</p>
+                <div class="card" th:if="${rolUsuario != 'Empresa'}">
+                    <h3 th:text="${totalEstudiantes}" th:if="${rolUsuario != 'Empresa'}">0</h3>
+                    <p th:if="${rolUsuario != 'Empresa'}">Estudiantes</p>
                 </div>
-                <div class="card">
-                    <h3 th:text="${totalEmpresas}">0</h3>
-                    <p>Empresas</p>
+                <div class="card" th:if="${rolUsuario != 'Empresa'}">
+                    <h3 th:text="${totalEmpresas}" th:if="${rolUsuario != 'Empresa'}">0</h3>
+                    <p th:if="${rolUsuario != 'Empresa'}">Empresas</p>
                 </div>
-                <div class="card">
-                    <h3 th:text="${totalPracticas}">0</h3>
-                    <p>Prácticas activas</p>
+                <div class="card" th:if="${rolUsuario != 'Empresa'}">
+                    <h3 th:text="${totalPracticas}" th:if="${rolUsuario != 'Empresa'}">0</h3>
+                    <p th:if="${rolUsuario != 'Empresa'}">Prácticas activas</p>
                 </div>
             </section>
 
