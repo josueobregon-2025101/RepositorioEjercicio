@@ -30,7 +30,7 @@ public class PracticasController {
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
         if ("Empresa".equals(rol)) {
-            return "Index/practicas";
+            return "Index/practicas-admin";
         }
         return "Index/practicas-admin";
     }
@@ -72,7 +72,7 @@ public class PracticasController {
             redirectAttributes.addFlashAttribute("message", "Error al guardar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
-        return "redirect:/practicas/practicas";
+        return "redirect:/practicas/practicas-admin";
     }
 
     @GetMapping("/editar/{id}")
@@ -85,7 +85,7 @@ public class PracticasController {
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("message", "Práctica no encontrada");
             redirectAttributes.addFlashAttribute("messageType", "error");
-            return "redirect:/practicas/practicas";
+            return "redirect:/practicas/practicas-admin";
         }
     }
 
@@ -101,7 +101,7 @@ public class PracticasController {
             redirectAttributes.addFlashAttribute("message", "Error al actualizar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
-        return "redirect:/practicas/practicas";
+        return "redirect:/practicas/practicas-admin";
     }
 
     @PostMapping("/aprobar/{id}")
@@ -116,7 +116,7 @@ public class PracticasController {
             redirectAttributes.addFlashAttribute("message", "Error al aprobar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
-        return "redirect:/practicas/practicas";
+        return "redirect:/practicas/practica-admin";
     }
 
     @PostMapping("/rechazar/{id}")
@@ -131,7 +131,7 @@ public class PracticasController {
             redirectAttributes.addFlashAttribute("message", "Error al rechazar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
-        return "redirect:/practicas/practicas";
+        return "redirect:/practicas/practicas-admin";
     }
 
     @PostMapping("/eliminar/{id}")
@@ -144,6 +144,6 @@ public class PracticasController {
             redirectAttributes.addFlashAttribute("message", "Error al eliminar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
-        return "redirect:/practicas/practicas";
+        return "redirect:/practicas/practicas-admin";
     }
 }
