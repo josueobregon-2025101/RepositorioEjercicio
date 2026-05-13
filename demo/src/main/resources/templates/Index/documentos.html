@@ -17,7 +17,6 @@
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<<<<<<< HEAD
     <link id="favicon" rel="icon" href="/Images/DashboardIconAmarillo.png" type="image/png">
     <!-- Tema -->
     <script>
@@ -26,16 +25,6 @@
             document.documentElement.classList.add(theme);
         })();
     </script>
-=======
-    <link id="favicon" rel="icon" href="/Images/DocumentosIconAmarillo.png">
-</head>
-<script>
-    (function () {
-        const theme = localStorage.getItem("theme") || "theme-yellow"
-        document.documentElement.classList.add(theme)
-    })();
-</script>
->>>>>>> 48e3c83b8dc996caa77d33fe97630156c7c91236
 </head>
 
 <body class="image-bg">
@@ -75,19 +64,9 @@
                             <i class="fas fa-file"></i> Mis postulaciones
                         </a>
                     </li>
-<<<<<<< HEAD
                     
                     <li><a th:href="@{/documentos}" class="active"><i class="fas fa-folder"></i>Mis documentos</a></li>
                     
-=======
-
-                    <li>
-                        <a th:href="@{/documentos/documentos }" class="active">
-                            <i class="fas fa-folder"></i> Mis documentos
-                        </a>
-                    </li>
-
->>>>>>> 48e3c83b8dc996caa77d33fe97630156c7c91236
                     <li>
                         <a th:href="@{/estudiantes/estudiantes/perfil}">
                             <i class="fas fa-user"></i> Perfil
@@ -108,16 +87,7 @@
             <h1>Mis documentos</h1>
         </header>
 
-<<<<<<< HEAD
         <div class="container">
-=======
-            <!-- Cabecera del panel: Título y botón de salida -->
-            <header class="header">
-                <h1>Mis documentos</h1>
-                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <a th:href="@{/index/index}"><button class="logout-btn">Cerrar sesión</button></a>
-            </header>
->>>>>>> 48e3c83b8dc996caa77d33fe97630156c7c91236
 
     <form class="upload-form"
           th:action="@{/documentos/subir}"
