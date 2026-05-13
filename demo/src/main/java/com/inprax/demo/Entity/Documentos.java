@@ -3,46 +3,38 @@ package com.inprax.demo.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Documentos")
 public class Documentos {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_documento")
     private int idDocumento;
 
-    @NotNull(message = "El cammpo id de Estudiante no puede estar vacio")
-    @Positive(message = "El id no puede ser negativo")
+    @NotNull
     @Column(name = "id_estudiante")
-    private int idEstudiante;
+    private Integer idEstudiante;
 
-    @NotNull(message = "El cammpo id de Empresa no puede estar vacio")
-    @Positive(message = "El id no puede ser negativo")
     @Column(name = "id_empresa")
-    private int idEmpresa;
+    private Integer idEmpresa;
 
-    @NotBlank(message = "El tipo de documento no puede estar vacio ")
+    @NotBlank
     @Column(name = "tipo_doc")
     private String tipoDoc;
 
-    @NotBlank(message = "El nombre del archivo no puede estar vacio")
+    @NotBlank
     @Column(name = "nombre_archivo")
     private String nombreArchivo;
 
-    @NotBlank(message = "La url del archivo no puede estar vacio")
+    @NotBlank
     @Column(name = "url_archivo")
     private String urlArchivo;
 
-    @NotBlank(message = "La fecha de subida no puede estar vacia")
     @Column(name = "fecha_subida")
-        private String fechaSubida;
-
-    //Getters y Setters
+    private LocalDateTime fechaSubida = LocalDateTime.now();
 
     public int getIdDocumento() {
         return idDocumento;
@@ -52,20 +44,20 @@ public class Documentos {
         this.idDocumento = idDocumento;
     }
 
-    public int getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(int idEmpresa) {
-        this.idEmpresa = idEmpresa;
-    }
-
-    public int getIdEstudiante() {
+    public Integer getIdEstudiante() {
         return idEstudiante;
     }
 
-    public void setIdEstudiante(int idEstudiante) {
+    public void setIdEstudiante(Integer idEstudiante) {
         this.idEstudiante = idEstudiante;
+    }
+
+    public Integer getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
 
     public String getTipoDoc() {
@@ -92,11 +84,13 @@ public class Documentos {
         this.urlArchivo = urlArchivo;
     }
 
-    public String getFechaSubida() {
+    public LocalDateTime getFechaSubida() {
         return fechaSubida;
     }
 
-    public void setFechaSubida(String fechaSubida) {
+    public void setFechaSubida(LocalDateTime fechaSubida) {
         this.fechaSubida = fechaSubida;
     }
+
+    
 }
