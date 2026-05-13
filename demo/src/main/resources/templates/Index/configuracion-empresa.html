@@ -18,7 +18,10 @@
 <body class="video-bg">
 
 <video id="bgvideo" autoplay muted loop playsinline></video>
-
+<div id="loading-screen">
+    <video autoplay muted playsinline id="loading-video">
+    </video>
+</div>
 <div class="dashboard">
 
     <aside class="sidebar">
@@ -92,6 +95,7 @@
 </div>
 
 <script th:src="@{/Scripts/temas.js}"></script>
+<script th:src="@{/Scripts/configuracion.js}"></script>
 
 <script>
     function setBackground(type) {
