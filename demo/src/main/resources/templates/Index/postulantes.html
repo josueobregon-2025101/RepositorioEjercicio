@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle del Postulante - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" th:href="@{/Styles/postulantes.css}">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
 </head>
-    <script>
-    (function() {
+<script>
+    (function () {
         const theme = localStorage.getItem("theme") || "theme-yellow"
         document.documentElement.classList.add(theme)
     })();
-    </script>
+</script>
 </head>
+
 <body class="image-bg">
 
     <video id="bgvideo" autoplay muted loop playsinline></video>
@@ -24,48 +26,48 @@
 
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
-        <div class="logo">
-            <img id="logo" th:src="@{/Images/INPRAX.png}">
-        </div>
-            
+            <div class="logo">
+                <img id="logo" th:src="@{/Images/INPRAX.png}">
+            </div>
+
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <ul>
-                    <li>
-                        <a th:href="@{/estudiantes/estudiantes/dashboard}">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                    </li> 
-                    
-                    <li>
-                        <a th:href="@{/practicas/practicas}">
-                            <i class="fas fa-briefcase"></i> Prácticas disponibles
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a th:href="@{/postulaciones/postulaciones}">
-                            <i class="fas fa-file"></i> Mis postulaciones
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a th:href="@{/documentos/documentos}">
-                            <i class="fas fa-folder"></i> Mis documentos
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a th:href="@{/estudiantes/estudiantes/perfil}">
-                            <i class="fas fa-user"></i> Perfil
-                        </a>
-                    </li>
-                    <li>
+                <li>
+                    <a th:href="@{/estudiantes/estudiantes/dashboard}">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+
+                <li>
+                    <a th:href="@{/practicas/practicas}">
+                        <i class="fas fa-briefcase"></i> Prácticas disponibles
+                    </a>
+                </li>
+
+                <li>
+                    <a th:href="@{/postulaciones/postulaciones}">
+                        <i class="fas fa-file"></i> Mis postulaciones
+                    </a>
+                </li>
+
+                <li>
+                    <a th:href="@{/documentos/documentos}">
+                        <i class="fas fa-folder"></i> Mis documentos
+                    </a>
+                </li>
+
+                <li>
+                    <a th:href="@{/perfil/perfil}">
+                        <i class="fas fa-user"></i> Perfil
+                    </a>
+                </li>
+                <li>
                     <a th:href="@{/estudiantes/configuracion}" class="active">
                         <i class="fas fa-cog"></i> Configuración
                     </a>
-                    </li>
-                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
-                </ul>
+                </li>
+                <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+            </ul>
         </aside>
 
         <!-- Área de contenido principal: Donde se muestra la información dinámica -->
@@ -130,7 +132,7 @@
             </section>
 
             <!-- DETALLES DE CADA POSTULANTE: Vistas detalladas mediante IDs -->
-            
+
             <!-- Sección de detalle específica -->
             <section id="juan" class="postulante-detail">
                 <h1>Juan Pérez</h1>
@@ -141,7 +143,8 @@
                     <p><strong>Carrera:</strong> Desarrollo de Software</p>
                     <p><strong>Semestre:</strong> 5to</p>
                     <p><strong>Promedio:</strong> 85</p>
-                    <p>Estudiante apasionado por el desarrollo web, con conocimientos en HTML, CSS, JavaScript y bases de datos. Interesado en adquirir experiencia profesional.</p>
+                    <p>Estudiante apasionado por el desarrollo web, con conocimientos en HTML, CSS, JavaScript y bases
+                        de datos. Interesado en adquirir experiencia profesional.</p>
                 </div>
                 <!-- Botones de acción para gestionar la decisión final -->
                 <div class="acciones-postulante">
@@ -160,7 +163,8 @@
                     <p><strong>Carrera:</strong> Marketing Digital</p>
                     <p><strong>Semestre:</strong> 6to</p>
                     <p><strong>Promedio:</strong> 92</p>
-                    <p>Apasionada por las estrategias de marketing digital y redes sociales, con experiencia en campañas pequeñas y deseo de crecer profesionalmente.</p>
+                    <p>Apasionada por las estrategias de marketing digital y redes sociales, con experiencia en campañas
+                        pequeñas y deseo de crecer profesionalmente.</p>
                 </div>
                 <div class="acciones-postulante">
                     <button class="btn-aceptar">Aceptar postulante</button>
@@ -178,7 +182,8 @@
                     <p><strong>Carrera:</strong> Diseño Gráfico</p>
                     <p><strong>Semestre:</strong> 4to</p>
                     <p><strong>Promedio:</strong> 88</p>
-                    <p>Creativo y detallista, con habilidades en diseño gráfico, edición y branding. Busca experiencia profesional en diseño digital.</p>
+                    <p>Creativo y detallista, con habilidades en diseño gráfico, edición y branding. Busca experiencia
+                        profesional en diseño digital.</p>
                 </div>
                 <div class="acciones-postulante">
                     <button class="btn-aceptar">Aceptar postulante</button>
@@ -191,4 +196,5 @@
     </div>
 
 </body>
+
 </html>

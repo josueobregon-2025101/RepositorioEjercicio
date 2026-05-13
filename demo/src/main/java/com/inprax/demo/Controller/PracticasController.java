@@ -23,13 +23,36 @@ public class PracticasController {
     }
 
     @GetMapping("/practicas")
-    public String verPracticas(HttpSession session, Model model){
+    public String verPracticas(HttpSession session, Model model) {
         Login usuario = (Login) session.getAttribute("usuarioLogueado");
         String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
         model.addAttribute("rolUsuario", rol);
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
+        if ("Empresa".equals(rol)) {
+            return "Index/practicas";
+        }
+        return "Index/practicas-admin";
+    }
+
+    @GetMapping("/estudiantes/practicas")
+    public String practicasEstudiante(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Estudiante";
+        model.addAttribute("rolUsuario", rol);
+        List<Practicas> practicas = practicasService.getAllPracticas();
+        model.addAttribute("practicas", practicas);
         return "Index/practicas";
+    }
+
+    @GetMapping("/misPracticas")
+    public String verMisPracticas(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
+        model.addAttribute("rolUsuario", rol);
+        List<Practicas> empresa = practicasService.getAllPracticas();
+        model.addAttribute("practicas", empresa);
+        return "Index/mis-practicas";
     }
 
     @GetMapping("/agregar")
@@ -40,7 +63,7 @@ public class PracticasController {
 
     @PostMapping("/guardar")
     public String guardarPractica(@Valid @ModelAttribute Practicas practicas,
-                                  RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) {
         try {
             practicasService.savePracticas(practicas);
             redirectAttributes.addFlashAttribute("message", "¡Práctica agregada exitosamente!");
@@ -54,7 +77,7 @@ public class PracticasController {
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Integer id, Model model,
-                                          RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) {
         try {
             Practicas practica = practicasService.getIdPracticas(id);
             model.addAttribute("practica", practica);
@@ -68,8 +91,8 @@ public class PracticasController {
 
     @PostMapping("/actualizar/{id}")
     public String actualizarPractica(@PathVariable Integer id,
-                                     @Valid @ModelAttribute Practicas practicas,
-                                     RedirectAttributes redirectAttributes) {
+            @Valid @ModelAttribute Practicas practicas,
+            RedirectAttributes redirectAttributes) {
         try {
             practicasService.updatePracticas(practicas, id);
             redirectAttributes.addFlashAttribute("message", "¡Práctica actualizada exitosamente!");

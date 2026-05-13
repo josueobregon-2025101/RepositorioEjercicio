@@ -38,6 +38,14 @@ const perfilLoaders = {
     "theme-blue-light": "/videos/PerfilLoaderAzulClaro.mp4"
 }
 
+const dashboardLoaders = {
+    "theme-yellow": "/videos/DashboardLoaderAmarillo.mp4",
+    "theme-purple": "/videos/DashboardLoaderMorado.mp4",
+    "theme-cyan-dark": "/videos/DashboardLoaderCyan.mp4",
+    "theme-green-dark": "/videos/DashboardLoaderVerde.mp4",
+    "theme-blue-light": "/videos/DashboardLoaderAzulClaro.mp4"
+}
+
 const estudiantesLoaders = {
     "theme-yellow": "/videos/EstudiantesLoaderAmarillo.mp4",
     "theme-purple": "/videos/EstudiantesLoaderMorado.mp4",
@@ -94,6 +102,29 @@ const perfilIcons = {
     "theme-blue-light": "/Images/PerfilIconAzulClaro.png"
 }
 
+const dashboardIcons = {
+    "theme-yellow": "/Images/DashboardIconAmarillo.png",
+    "theme-purple": "/Images/DashboardIconMorado.png",
+    "theme-cyan-dark": "/Images/DashboardIconCyan.png",
+    "theme-green-dark": "/Images/DashboardIconVerde.png",
+    "theme-blue-light": "/Images/DashboardIconAzulClaro.png"
+}
+
+const postulacionesIcons = {
+    "theme-yellow": "/Images/PostulacionesIconAmarillo.png",
+    "theme-purple": "/Images/PostulacionesIconMorado.png",
+    "theme-cyan-dark": "/Images/PostulacionesIconCyan.png",
+    "theme-green-dark": "/Images/PostulacionesIconVerde.png",
+    "theme-blue-light": "/Images/PostulacionesIconAzulClaro.png"
+}
+
+const documentosIcons = {
+    "theme-yellow": "/Images/DocumentosIconAmarillo.png",
+    "theme-purple": "/Images/DocumentosIconMorado.png",
+    "theme-cyan-dark": "/Images/DocumentosIconCyan.png",
+    "theme-green-dark": "/Images/DocumentosIconVerde.png",
+    "theme-blue-light": "/Images/DocumentosIconAzulClaro.png"
+}
 function applyfavicon(theme) {
     const favicon = document.getElementById("favicon");
     if (!favicon) return;
@@ -102,16 +133,32 @@ function applyfavicon(theme) {
 
     if (pathname.includes("configuracion")) {
         favicon.href = configuracionIcons[theme] || "/Images/ConfiguracionIconAmarillo.png";
+
     } else if (pathname.includes("practicas")) {
         favicon.href = practicasIcons[theme] || "/Images/PracticasIconAmarillo.png";
+
     } else if (pathname.includes("empresas")) {
         favicon.href = empresasIcons[theme] || "/Images/EmpresasIconAmarillo.png";
-    } else if (pathname.includes("estudiantes")) {
-        favicon.href = estudiantesIcons[theme] || "/Images/EstudiantesIconAmarillo.png";
+
+    } else if (pathname.includes("dashboard")) {
+        favicon.href = dashboardIcons[theme] || "/Images/DashboardIconAmarillo.png";
+
     } else if (pathname.includes("perfil")) {
         favicon.href = perfilIcons[theme] || "/Images/PerfilIconAmarillo.png";
-    } else {
-        favicon.href = configuracionIcons[theme] || "/Images/ConfiguracionIconAmarillo.png";
+
+    } else if (pathname.includes("estudiantes")) {
+        favicon.href = estudiantesIcons[theme] || "/Images/EstudiantesIconAmarillo.png";
+
+    } else if (pathname.includes("/api/administradores/admin")) {
+        favicon.href = dashboardIcons[theme] || "/Images/DashboardIconAmarillo.png";
+    } else if (pathname.includes("postulaciones")) {
+              favicon.href = postulacionesIcons[theme] || "/Images/PostulacionesIconAmarillo.png";
+
+    } else if (pathname.includes("documentos")) {
+              favicon.href = documentosIcons[theme] || "/Images/DocumentosIconAmarillo.png";
+
+    } else if (pathname.includes("/login/index") || pathname.includes("/login/login") || pathname === "/login/" || pathname.endsWith("/login")) {
+              favicon.href = "/Images/INPRAX.png";
     }
 }
 
@@ -211,34 +258,55 @@ function applyLoader(theme) {
     const loaderVideo = document.getElementById("loading-video");
     const loadingScreen = document.getElementById("loading-screen");
 
-    // Si el elemento no existe en el HTML actual, salimos
     if (!loaderVideo) return;
 
     const pathname = window.location.pathname;
     let loaderSrc = null;
 
-    // Determinar qué loader usar según la página
     if (pathname.includes("configuracion")) {
+
         loaderSrc = configuracionLoaders[theme] || "/videos/ConfiguracionLoaderAmarillo.mp4";
+
+    } else if (pathname.includes("dashboard")) {
+
+        loaderSrc = dashboardLoaders[theme] || "/videos/DashboardLoaderAmarillo.mp4";
+
     } else if (pathname.includes("practicas")) {
+
         loaderSrc = practicasLoaders[theme] || "/videos/PracticasLoaderAmarillo.mp4";
+
     } else if (pathname.includes("empresas")) {
+
         loaderSrc = empresasLoaders[theme] || "/videos/EmpresasLoaderAmarillo.mp4";
+
     } else if (pathname.includes("perfil")) {
+
         loaderSrc = perfilLoaders[theme] || "/videos/PerfilLoaderAmarillo.mp4";
+
     } else if (pathname.includes("estudiantes")) {
+
         loaderSrc = estudiantesLoaders[theme] || "/videos/EstudiantesLoaderAmarillo.mp4";
+
+    } else if (pathname.includes("/api/administradores/admin")) {
+
+        loaderSrc = dashboardLoaders[theme] || "/videos/DashboardLoaderAmarillo.mp4";
     }
 
-    // Si encontramos un loader para esta página, lo mostramos
     if (loaderSrc) {
+
         loaderVideo.src = loaderSrc;
         loaderVideo.load();
 
-        if (loadingScreen) loadingScreen.style.display = "flex";
+        if (loadingScreen) {
+            loadingScreen.style.display = "flex";
+        }
+
     } else {
-        // Si no hay loader definido para esta página, ocultamos
-        if (loadingScreen) loadingScreen.style.display = "none";
+
+        if (loadingScreen) {
+            loadingScreen.style.display = "none";
+        }
+
         loaderVideo.pause();
     }
 }

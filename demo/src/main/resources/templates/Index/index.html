@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://thymeleaf.org">
+
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma de Prácticas</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/index.css}">
+    <link id="favicon" rel="icon" href="/Images/INPRAX.png">
 </head>
+
 <body>
 
 
-<div id="loading-screen">
-    <video autoplay muted playsinline id="loading-video">
-        <source th:src="@{/videos/Index.mp4}" type="video/mp4">
-    </video>
-</div>
 
     <!-- Cabecera del panel: Contiene el logo y el menú de acceso -->
     <header class="header">
         <div class="logo">
-            <img th:src="@{/Images/INPRAX.png}">
+            <object type="image/svg+xml" th:data="@{/Images/INPRAXINDEX.svg}" class="logo-svg">
+                Tu navegador no soporta SVG.
+            </object>
         </div>
 
         <nav class="nav">
-        <a href="#hero" class="active">Inicio</a>
-        <a href="#features">Características</a>
-        <a href="#about">Nosotros</a>
-        <a href="#contact">Contacto</a>
+            <a href="#hero" class="active">Inicio</a>
+            <a href="#features">Características</a>
+            <a href="#about">Nosotros</a>
+            <a href="#contact">Contacto</a>
         </nav>
-        
+
         <div class="auth-buttons">
-        <a th:href="@{/login/login}" class="btn-login">Iniciar sesión</a>
-        <a th:href="@{/register/register}" class="btn-register">Crear cuenta</a>
-    </div>
+            <a th:href="@{/login/login}" class="btn-login">Iniciar sesión</a>
+            <a th:href="@{/register/register}" class="btn-register">Crear cuenta</a>
+        </div>
     </header>
 
 
@@ -47,12 +47,15 @@
                 <h1>Encuentra tu pre-práctica o práctica profesional</h1>
 
                 <p>
-                    INPRAX es una plataforma que facilita la conexión entre estudiantes, empresas e instituciones educativas,
-                    permitiendo gestionar procesos de pre-prácticas y prácticas profesionales de forma eficiente, organizada y segura.
+                    INPRAX es una plataforma que facilita la conexión entre estudiantes, empresas e instituciones
+                    educativas,
+                    permitiendo gestionar procesos de pre-prácticas y prácticas profesionales de forma eficiente,
+                    organizada y segura.
                 </p>
 
                 <p>
-                    Optimiza la búsqueda de oportunidades, mejora la empleabilidad y digitaliza el proceso de colocación en el mundo laboral.
+                    Optimiza la búsqueda de oportunidades, mejora la empleabilidad y digitaliza el proceso de colocación
+                    en el mundo laboral.
                 </p>
 
                 <div class="hero-buttons">
@@ -96,7 +99,8 @@
             <h2>¿Qué es INPRAX?</h2>
 
             <p>
-                INPRAX es una plataforma digital desarrollada para centralizar y optimizar el proceso de prácticas profesionales,
+                INPRAX es una plataforma digital desarrollada para centralizar y optimizar el proceso de prácticas
+                profesionales,
                 facilitando la conexión entre el sector educativo y el sector empresarial.
             </p>
 
@@ -119,7 +123,8 @@
             <p>© 2026 INPRAX - Plataforma de prácticas profesionales</p>
 
             <p>
-                Conectando estudiantes, empresas e instituciones en un mismo ecosistema digital para el desarrollo profesional.
+                Conectando estudiantes, empresas e instituciones en un mismo ecosistema digital para el desarrollo
+                profesional.
             </p>
 
             <p>
@@ -142,7 +147,7 @@
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 const isAtBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50;
-                
+
                 if (entry.isIntersecting && !isAtBottom) {
                     const id = entry.target.getAttribute("id");
                     const activeLink = document.querySelector(`.nav a[href="#${id}"]`);
@@ -172,7 +177,20 @@
             }
         });
 
+        window.addEventListener("scroll", () => {
+
+            const header = document.querySelector(".header");
+
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+
+        });
+
     </script>
-<script th:src="@{/Scripts/practicas.js}"></script>
+    <script th:src="@{/Scripts/practicas.js}"></script>
 </body>
+
 </html>

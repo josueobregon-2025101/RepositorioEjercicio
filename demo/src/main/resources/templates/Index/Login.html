@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/Styles/login.css}">
+    <link id="favicon" rel="icon" href="/Images/INPRAX.png">
 </head>
+
 <body>
-<div class="background"></div>
-<div class="container">
-    <div class="login-box">
-        <form th:action="@{/login/validar}" method="post" class="form">
-            <div class="logouser">
-                <img th:src="@{/Images/login.png}" alt="Logo INPRAX">
-            </div>
-            <div class="header">Iniciar sesión</div>
+    <div class="background"></div>
+    <div class="container">
+        <div class="login-box">
+            <form th:action="@{/login/validar}" method="post" class="form">
+                <div class="logouser">
+                    <img th:src="@{/Images/login.png}" alt="Logo INPRAX">
+                </div>
+                <div class="header">Iniciar sesión</div>
 
-            <p th:if="${error}" th:text="${error}" style="color:red; text-align:center;"></p>
+                <p th:if="${error}" th:text="${error}" style="color:red; text-align:center;"></p>
 
-            <input type="text"
-                   id="identificador"
-                   name="identificador"
-                   class="input"
-                   placeholder="Correo o usuario"
-                   required>
+                <input type="text" id="identificador" name="identificador" class="input" placeholder="Correo o usuario"
+                    required>
 
-            <input type="password"
-                   id="password"
-                   name="contrasenaLogin"
-                   class="input"
-                   placeholder="Contraseña"
-                   required>
+                <input type="password" id="password" name="contrasenaLogin" class="input" placeholder="Contraseña"
+                    required>
 
-            <button type="submit" class="button sign-in">Iniciar sesión</button>
+                <button type="submit" class="button sign-in">Iniciar sesión</button>
 
-            <div class="footer">
-                ¿No tienes cuenta?
-                <a th:href="@{/register/register}" class="link">Crear cuenta</a>
-            </div>
-        </form>
+                <div class="footer">
+                    ¿No tienes cuenta?
+                    <a th:href="@{/register/register}" class="link">Crear cuenta</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<script th:src="@{/Scripts/login.js}"></script>
+    <script th:src="@{/Scripts/login.js}"></script>
 </body>
+
 </html>

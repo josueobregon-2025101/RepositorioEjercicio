@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://thymeleaf.org">
+
 <head>
     <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis postulaciones - Inprax</title>
-    
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" th:href="@{/Styles/postulaciones.css}">
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-estudiante.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link id="favicon" rel="icon" href="/Images/PostulacionesIconAmarillo.png">
 
 </head>
-    <script>
-    (function() {
+<script>
+    (function () {
         const theme = localStorage.getItem("theme") || "theme-yellow"
         document.documentElement.classList.add(theme)
     })();
-    </script>
+</script>
 </head>
+
 <body class="image-bg">
 
     <video id="bgvideo" autoplay muted loop playsinline></video>
@@ -27,9 +30,9 @@
 
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
-        <div class="logo">
-            <img id="logo" th:src="@{/Images/INPRAX.png}">
-        </div>
+            <div class="logo">
+                <img id="logo" th:src="@{/Images/INPRAX.png}">
+            </div>
 
             <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
             <nav>
@@ -38,35 +41,35 @@
                         <a th:href="@{/estudiantes/estudiantes/dashboard}">
                             <i class="fas fa-home"></i> Inicio
                         </a>
-                    </li> 
-                    
+                    </li>
+
                     <li>
-                        <a th:href="@{/practicas/practicas}">
+                        <a th:href="@{/practicas/estudiantes/practicas}">
                             <i class="fas fa-briefcase"></i> Prácticas disponibles
                         </a>
                     </li>
-                    
+
                     <li>
                         <a th:href="@{/api/postulaciones/postulaciones}" class="active">
                             <i class="fas fa-file"></i> Mis postulaciones
                         </a>
                     </li>
-                    
+
                     <li>
-                        <a th:href="@{/documentos/documentos}">
+                        <a th:href="@{/documentos}">
                             <i class="fas fa-folder"></i> Mis documentos
                         </a>
                     </li>
-                    
+
                     <li>
-                        <a th:href="@{/perfil/perfil}">
+                        <a th:href="@{/estudiantes/estudiantes/perfil}">
                             <i class="fas fa-user"></i> Perfil
                         </a>
                     </li>
                     <li>
-                    <a th:href="@{/estudiantes/configuracion}">
-                        <i class="fas fa-cog"></i> Configuración
-                    </a>
+                        <a th:href="@{/estudiantes/configuracion}">
+                            <i class="fas fa-cog"></i> Configuración
+                        </a>
                     </li>
                     <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
                 </ul>
@@ -96,13 +99,11 @@
                         <h3 th:text="${post.titulo}"></h3>
                         <p th:text="${post.descripcion}"></p>
                         <p>Fecha: <span th:text="${post.fechaPost}"></span></p>
-                        <span class="estado-postulacion"
-                            th:classappend="
+                        <span class="estado-postulacion" th:classappend="
                                 ${post.estado == 'Enviado' ? ' estado-enviado' :
                                 post.estado == 'En revisión' ? ' estado-revision' :
                                 post.estado == 'Aceptado' ? ' estado-aceptado' :
-                                post.estado == 'Rechazado' ? ' estado-rechazado' : ''}"
-                            th:text="${post.estado}">
+                                post.estado == 'Rechazado' ? ' estado-rechazado' : ''}" th:text="${post.estado}">
                         </span>
                     </div>
                 </div>
@@ -110,6 +111,7 @@
         </main>
     </div>
 
-<script th:src="@{/Scripts/temas.js}"></script>
+    <script th:src="@{/Scripts/temas.js}"></script>
 </body>
+
 </html>

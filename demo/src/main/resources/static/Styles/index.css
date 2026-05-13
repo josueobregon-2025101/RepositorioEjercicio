@@ -6,73 +6,107 @@
 }
 
 /* Configuración básica del documento: Fondo y colores base */
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+body{
+    margin: 0;
+    padding-top: 110px;
+    min-height: 100vh;
+    background:
+    radial-gradient(circle at top left,
+    rgba(255,193,7,.12),
+    transparent 25%),
+    radial-gradient(circle at bottom right,
+    rgba(0,191,255,.12),
+    transparent 25%),
+    linear-gradient(
+        rgba(0,0,0,.75),
+        rgba(0,0,0,.88)
+    ),
     url("../images/fondo.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #F5F5F5;
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, Helvetica, sans-serif;
-  justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #F5F5F5;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
 
 /* Cabecera del panel: Contiene el logo y el menú de acceso */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 40px;
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 70px;
+    background: rgba(15,15,15,.78);
+    backdrop-filter: blur(20px);
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+    box-shadow:
+    0 10px 35px rgba(0,0,0,.25);
+    z-index: 1000;
+    transition: all .45s ease;
+    animation: fadeUp .5s ease;
+}
 
-  padding: 14px 40px;
+.header::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.03),
+        transparent
+    );
+    pointer-events:none;
+}
 
-  background: rgba(20, 20, 20, 0.75);
-  backdrop-filter: blur(10px);
-
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.header.scrolled{
+    padding: 6px 40px;
+    background: rgba(0,0,0,.85);
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.35);
 }
 
 /* Contenedor del nombre de la marca/plataforma */
-.logo {
-  padding: 0;
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Imagen del logo de la plataforma */
-.logo img {
-  width: 85px;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  transition: 0.3s;
-}
-
-.logo img:hover {
-  transform: scale(1.08);
+.logo-svg{
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: contain;
+    pointer-events: none;
 }
 
 /* Menú de navegación principal */
 .nav {
   display: flex;
-  gap: 18px;
+  gap: 10px;
   align-items: center;
   flex: 1;
 }
 
 /* Enlaces de navegación */
-.nav a {
-  position: relative;
-  padding: 6px 12px;
-  text-decoration: none;
-  color: #fff;
-  transition: 0.3s;
+.nav a{
+    position: relative;
+    font-size: 16px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #f5f5f5;
+    font-weight: 500;
+    transition: .3s ease;
 }
 
 .nav a.active {
@@ -124,7 +158,8 @@ body {
 .btn-login {
   color: #FFC107;
   border: 2px solid #FFC107;
-  padding: 8px 14px;
+  padding: 12px 18px;
+  font-size: 15px;
   border-radius: 10px;
   font-weight: bold;
   box-shadow: 0 4px 12px rgba(255,193,7,0.4);
@@ -144,7 +179,8 @@ body {
 .btn-register {
   background: #FFC107;
   color: #1C1C1C;
-  padding: 8px 16px;
+  padding: 12px 18px;
+  font-size: 15px;
   border-radius: 10px;
   font-weight: bold;
   box-shadow: 0 4px 12px rgba(255,193,7,0.4);
@@ -170,26 +206,50 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  position: relative;
   text-align: center;
-  padding: 80px 20px;
+  padding: 120px 8%;
   margin-bottom: 180px;
 }
 
-.hero-content {
-  max-width: 900px;
- animation: fadeUp 1s ease-out;
+.hero::before{
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,193,7,.12),
+        transparent 70%
+    );
+    filter: blur(80px);
+    z-index: -1;
 }
 
-.hero h1 {
-  font-size: 64px;
-  font-weight: bold;
-  line-height: 1.2;
+.hero-content{
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
 
-  background: linear-gradient(90deg, #ffffff, #FFC107);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.hero h1{
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 1000;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff 20%,
+        #FFC107 70%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero p {
@@ -212,20 +272,29 @@ html {
 }
 
 /* Botón principal */
-.btn-main {
-  background: #FFC107;
-  color: #1C1C1C;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  will-change: transform;
-  padding: 12px 24px;
-  transition: 0.3s ease;
+.btn-main{
+    background:
+    linear-gradient(
+        135deg,
+        #FFC107,
+        #ff9800
+    );
+    color: #111;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 15px 30px;
+    transition: .35s ease;
+    box-shadow:
+    0 10px 30px rgba(255,193,7,.35);
 }
 
-.btn-main:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
+.btn-main:hover{
+    transform:
+    translateY(-5px)
+    scale(1.03);
+    box-shadow:
+    0 18px 40px rgba(255,193,7,.45);
 }
 
 .auth-buttons {
@@ -261,7 +330,7 @@ html {
   justify-content: center;
   gap: 50px;
 
-  padding: 140px 50px;
+  padding: 120px 8%;
   flex-wrap: wrap;
   scroll-margin-top: 120px;
   margin-bottom: 165px;
@@ -269,43 +338,62 @@ html {
 
 
 /* Tarjetas */
-.card {
-  width: 480px;
-  height: 480px;
-  padding: 35px;
-  border-radius: 30px;
-
-  background-color: rgba(17,17,17,0.8);
-  backdrop-filter: blur(10px);
-  font-weight: bold;
-
-  transition: 0.5s ease;
+.card{
+    width: 360px;
+    min-height: 340px;
+    padding: 40px 30px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+    transition: all .45s ease;
+    animation: fadeUp .8s ease;
 }
 
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-  border: 2px solid #FFC107;
-  transition: all 0.5s ease;
-  box-shadow: 0 10px 25px rgba(255,193,7,0.6);
+.card:hover{
+    transform: translateY(-14px);
+    border-color: rgba(255,193,7,.5);
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.45),
+    0 0 30px rgba(255,193,7,.15);
 }
 
-.card h2 {
-  color: #FFC107;
-  text-align: left;
-  font-size: 35px;
-  margin-bottom: 10px;
+.card::before{
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(
+        circle,
+        rgba(255,193,7,.18),
+        transparent 70%
+    );
+    top: -120px;
+    right: -120px;
+    transition: .5s;
 }
 
-.card p {
-  color: #aaa;
-  text-align: left;
-  font-size: 35px;
+.card h2{
+    color: #FFC107;
+    font-size: 28px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.card p{
+    color: #b8b8b8;
+    font-size: 17px;
+    line-height: 1.8;
+    font-weight: 400;
 }
 
 /* Sección CTA */
 .cta {
   text-align: center;
-  padding: 140px 30px;
+  padding: 120px 8%;
   scroll-margin-top: 180px;
   margin-bottom: 450px;
 }
@@ -327,7 +415,7 @@ html {
 .footer {
   min-height: 10vh;
   text-align: center;
-  padding: 80px 20px;
+  padding: 120px 8%;
   background: rgba(20, 20, 20, 0.75);
   backdrop-filter: blur(10px);
   color: #777;
@@ -353,6 +441,23 @@ html {
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform: translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+::selection{
+    background: #FFC107;
+    color: #111;
 }
 
 /* Responsivo */

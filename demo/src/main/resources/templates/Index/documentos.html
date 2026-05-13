@@ -1,30 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis documentos - Inprax</title>
-    
+<<<<<<< HEAD
+=======
+
     <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/documentos.css}">
+>>>>>>> 48e3c83b8dc996caa77d33fe97630156c7c91236
 
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-estudiante.css}">
+
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-</head>
+    <link id="favicon" rel="icon" href="/Images/DashboardIconAmarillo.png" type="image/png">
+    <!-- Tema -->
     <script>
-    (function() {
-        const theme = localStorage.getItem("theme") || "theme-yellow"
-        document.documentElement.classList.add(theme)
-    })();
+        (function () {
+            const theme = localStorage.getItem("theme") || "theme-yellow";
+            document.documentElement.classList.add(theme);
+        })();
     </script>
 </head>
+
 <body class="image-bg">
 
+    <!-- Video de fondo -->
     <video id="bgvideo" autoplay muted loop playsinline></video>
 
-    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
-    <div class="dashboard">
+    <div id="loading-screen">
+        <video autoplay muted playsinline id="loading-video">
+        </video>
+    </div>
+
+<div class="dashboard">
 
         <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
         <aside class="sidebar">
@@ -32,32 +45,27 @@
                 <img id="logo" th:src="@{/Images/INPRAX.png}">
             </div>
 
-            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <nav>
+        <nav>
                 <ul>
                     <li>
                         <a th:href="@{/estudiantes/estudiantes/dashboard}">
                             <i class="fas fa-home"></i> Inicio
                         </a>
-                    </li> 
-                    
+                    </li>
+
                     <li>
-                        <a th:href="@{/practicas/practicas}">
+                        <a th:href="@{/practicas/estudiantes/practicas}">
                             <i class="fas fa-briefcase"></i> Prácticas disponibles
                         </a>
                     </li>
-                    
+
                     <li>
                         <a th:href="@{/api/postulaciones/postulaciones}">
                             <i class="fas fa-file"></i> Mis postulaciones
                         </a>
                     </li>
                     
-                    <li>
-                        <a th:href="@{/documentos/documentos }" class="active">
-                            <i class="fas fa-folder"></i> Mis documentos
-                        </a>
-                    </li>
+                    <li><a th:href="@{/documentos}" class="active"><i class="fas fa-folder"></i>Mis documentos</a></li>
                     
                     <li>
                         <a th:href="@{/estudiantes/estudiantes/perfil}">
@@ -65,75 +73,82 @@
                         </a>
                     </li>
                     <li>
-                    <a th:href="@{/estudiantes/configuracion}">
-                        <i class="fas fa-cog"></i> Configuración
-                    </a>
+                        <a th:href="@{/estudiantes/configuracion}">
+                            <i class="fas fa-cog"></i> Configuración
+                        </a>
                     </li>
                     <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
                 </ul>
             </nav>
         </aside>
+    <main class="main-content">
 
-        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
-        <main class="main-content">
+        <header class="header">
+            <h1>Mis documentos</h1>
+        </header>
 
-            <!-- Cabecera del panel: Título y botón de salida -->
-            <header class="header">
-                <h1>Mis documentos</h1>
-                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <a th:href="@{/index/index}"><button class="logout-btn" >Cerrar sesión</button></a>
-            </header>
+        <div class="container">
 
-            <!-- Contenedor específico para la gestión de archivos -->
-            <div class="container">
+    <form class="upload-form"
+          th:action="@{/documentos/subir}"
+          method="post"
+          enctype="multipart/form-data">
 
-                <!-- Rejilla de tarjetas (Cards) para documentos -->
-                <div class="documentos">
+        <input type="hidden" name="idEstudiante" value="1">
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Currículum Vitae</h3>
-                        <p>Archivo principal para postular a prácticas.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
-                    </div>
+        <select name="tipoDoc" required>
+            <option value="">Tipo de documento</option>
+            <option value="CV">CV</option>
+            <option value="Carta">Carta</option>
+            <option value="Portafolio">Portafolio</option>
+            <option value="Certificados">Certificados</option>
+        </select>
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Carta de presentación</h3>
-                        <p>Documento para presentarte ante las empresas.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
-                    </div>
+        <input type="file" name="file" required>
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Portafolio</h3>
-                        <p>Muestra tus proyectos y trabajos realizados.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
-                    </div>
+        <button type="submit" class="btn btn-subir">Subir</button>
 
-                    <!-- Tarjeta de documento individual -->
-                    <div class="cardDocumento">
-                        <h3>Certificados</h3>
-                        <p>Diplomas o constancias académicas.</p>
-                        <div class="acciones">
-                            <a href="#" class="btnVer">Ver documento</a>
-                            <button class="btnSubir">Subir nuevo</button>
-                        </div>
-                    </div>
-                </div>
+    </form>
+
+    <div class="documentos">
+
+        <div class="cardDocumento" th:each="doc : ${documentos}">
+
+            <div class="cardHeader">
+                <h3 th:text="${doc.nombreArchivo}"></h3>
+                <span th:text="${doc.fechaSubida}"></span>
             </div>
-        </main>
+
+            <p th:text="${doc.tipoDoc}"></p>
+
+            <div class="acciones">
+
+                <span class="btn btn-ver">
+                    <i class="fas fa-eye"></i> Ver
+                </span>
+
+                <span class="btn btn-descargar">
+                    <i class="fas fa-download"></i> Descargar
+                </span>
+
+                <span class="btn btn-reemplazar">
+                    <i class="fas fa-sync"></i> Reemplazar
+                </span>
+
+            </div>
+
+        </div>
+
     </div>
 
+</div>
+
+    </main>
+</div>
+
     <script th:src="@{/Scripts/temas.js}"></script>
+    <script th:src="@{/Scripts/dashboard.js}"></script>
+
 </body>
+
 </html>
