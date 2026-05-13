@@ -26,14 +26,16 @@ public class EmpresaDashboardController {
 
     private Login verificarEmpresa(HttpSession session) {
         Login usuario = (Login) session.getAttribute("usuarioLogueado");
-        if (usuario == null || !usuario.getRoles().equals("Empresa")) return null;
+        if (usuario == null || !usuario.getRoles().equals("Empresa"))
+            return null;
         return usuario;
     }
 
     @GetMapping("/dashboard")
     public String dashboardEmpresa(HttpSession session, Model model) {
         Login usuario = verificarEmpresa(session);
-        if (usuario == null) return "redirect:/login/login";
+        if (usuario == null)
+            return "redirect:/login/login";
         model.addAttribute("totalEstudiantes", estudiantesRepo.count());
         model.addAttribute("totalEmpresas", empresasRepo.count());
         model.addAttribute("totalPracticas", practicasRepo.count());
@@ -44,7 +46,8 @@ public class EmpresaDashboardController {
     @GetMapping("/perfil")
     public String perfilEmpresa(HttpSession session, Model model) {
         Login usuario = verificarEmpresa(session);
-        if (usuario == null) return "redirect:/login/login";
+        if (usuario == null)
+            return "redirect:/login/login";
         model.addAttribute("rolUsuario", "Empresa");
         return "Index/perfil-admin";
     }
@@ -52,7 +55,8 @@ public class EmpresaDashboardController {
     @GetMapping("/configuracion")
     public String configuracionEmpresa(HttpSession session, Model model) {
         Login usuario = verificarEmpresa(session);
-        if (usuario == null) return "redirect:/login/login";
+        if (usuario == null)
+            return "redirect:/login/login";
         model.addAttribute("rolUsuario", "Empresa");
         return "Index/configuracion";
     }
