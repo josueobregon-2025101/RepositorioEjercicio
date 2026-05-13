@@ -53,6 +53,9 @@ public class EstudiantesController {
         Login usuario = verificarEstudiante(session);
         if (usuario == null) return "redirect:/login/login";
         model.addAttribute("rolUsuario", "Estudiante");
+        Estudiantes estudiante = service.getEstudianteByLogin(usuario.getIdLogin());
+        model.addAttribute("EstudianteEdit",estudiante);
+        model.addAttribute("Usuario",usuario);
         return "Index/perfil-estudiante";
     }
 

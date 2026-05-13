@@ -11,4 +11,5 @@ public interface EstudiantesService {
     Estudiantes getEstudianteById(Integer id);
     void saveEstudiantes (Estudiantes estudiantes) throws RuntimeException;
     void deleteEstudiantes (Integer id);
+    Estudiantes getEstudianteByLogin(Integer idlogin);
 }

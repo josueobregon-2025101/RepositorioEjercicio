@@ -37,4 +37,9 @@ public class EstudiantesServiceImplements implements EstudiantesService {
         estudiantesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El usuario no existe"));
         estudiantesRepository.deleteById(id);
     }
+
+    @Override
+    public Estudiantes getEstudianteByLogin(Integer idlogin) {
+        return estudiantesRepository.findByIdLogin(idlogin);
+    }
 }
