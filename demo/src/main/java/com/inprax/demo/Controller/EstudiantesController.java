@@ -52,8 +52,8 @@ public class EstudiantesController {
     public String perfilEstudiante(HttpSession session, Model model) {
         Login usuario = verificarEstudiante(session);
         if (usuario == null) return "redirect:/login/login";
-        model.addAttribute("rolUsuario", "Empresa");
-        return "Index/perfil-admin";
+        model.addAttribute("rolUsuario", "Estudiante");
+        return "Index/perfil-estudiante";
     }
 
 
@@ -89,8 +89,4 @@ public class EstudiantesController {
         return "Index/configuracion-estudiante";
     }
 
-    @GetMapping("/perfil")
-    public String perfilEstudiante() {
-        return "Index/perfil-estudiante";
-    }
 }
