@@ -29,7 +29,7 @@ public class PracticasController {
         model.addAttribute("rolUsuario", rol);
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
-        return "Index/practicas";
+        return "Index/practicas-admin";
     }
 
     @GetMapping("/misPracticas")
