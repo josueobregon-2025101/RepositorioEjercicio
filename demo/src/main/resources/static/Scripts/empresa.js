@@ -21,6 +21,50 @@ function editarActive(id){
         editar.classList.add("editarActivo");
     });
 }
+function actualizarEstudiante(){
+    //obtenemos el id en una casilla no editable de el formulario
+     let id = document.getElementById("id").value;
+     console.log(id);
+    //llenamos el objeto empresa "C0N TODOS LOS DATOS"
+    let empresa = {
+        nombreEmpresa: document.getElementById("nombre").value,
+        correoEmpresa: document.getElementById("correo").value,
+        telefonoEmpresa: document.getElementById("telefono").value,
+        tipoEmpresa: document.getElementById("sector").value,
+        tamanoEmpresa: document.getElementById("tamanio").value,
+        direccionEmpresa: document.getElementById("direction").value,
+        horarioEmpresa: document.getElementById("horario").value,
+        descripcion: document.getElementById("descripcion").value,
+        //id no visible pero para funcionamiento de editar y no dejar vacio
+        idLogin: document.getElementById("idLogin").value
+
+    };
+    //fecth con url(empresas/editar/id)
+    fetch("/empresas/empresas/editar/" + id,{
+        //metodo put
+        method:"PUT",
+        //advierte que es un JSON
+        headers:{
+            "Content-Type":"application/json"
+        },
+        //lo pasamos el objeto JSON nuevo
+        body: JSON.stringify(empresa)
+    })
+    //validaciones de errores posibles
+    .then(response => {
+        console.log("Código:", response.status);
+
+        if(response.ok){
+            alert("Empresa actualizada");
+            location.reload();
+        }else{
+            alert("Error al actualizar: " + response.status);
+        }
+    })
+    .catch(error =>{
+        console.log(error);
+    });
+}
 function actualizarEmpresa(){
     //obtenemos el id en una casilla no editable de el formulario
      let id = document.getElementById("id").value;
