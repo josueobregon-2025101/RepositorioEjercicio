@@ -957,10 +957,6 @@ call sp_AgregarAdministrador('Sofia','Hernandez','Activo',1);
  
 call sp_Estudiantes_create(1,4,'Juan','Perez',44441111,'5to Bach','Informática','juan@gmail.com','Instituto Tecnológico Central',33331111,18);
 call sp_Estudiantes_create(2,5,'Laura','Diaz',44442222,'6to Bach','Computación','laura@gmail.com','Colegio San José',33332222,19);
-call sp_Estudiantes_create(3,4,'Miguel','Lopez',44443333,'5to Bach','Sistemas','miguel@gmail.com','Universidad Nacional',33333333,20);
-call sp_Estudiantes_create(4,5,'Andrea','Ruiz',44444444,'6to Bach','Redes','andrea@gmail.com','Instituto Técnico Industrial',33334444,21);
-call sp_Estudiantes_create(5,4,'Pedro','Castro',44445555,'5to Bach','Programación','pedro@gmail.com','Colegio Mixto Moderno',33335555,18);
-call sp_Estudiantes_create(6,5,'Lucia','Morales',44446666,'6to Bach','Software','lucia@gmail.com','Universidad del Valle',33336666,22);
  
  
 -- =========================
@@ -1004,10 +1000,10 @@ call sp_RepresentanteEmpresa_create(6,'Sofia','Hernandez','Lider Proyectos',5551
  
 call sp_representantesInstitucion_create('Luis','Morales','22220001','luis@itc.com',1,1);
 call sp_representantesInstitucion_create('Ana','Castro','22220002','ana@csj.com',2,2);
-call sp_representantesInstitucion_create('Miguel','Perez','22220003','miguel@un.com',3,3);
-call sp_representantesInstitucion_create('Laura','Diaz','22220004','laura@iti.com',4,4);
-call sp_representantesInstitucion_create('Jorge','Lopez','22220005','jorge@cmm.com',5,5);
-call sp_representantesInstitucion_create('Maria','Ramirez','22220006','maria@uv.com',6,6);
+call sp_representantesInstitucion_create('Miguel','Perez','22220003','miguel@un.com',3,1);
+call sp_representantesInstitucion_create('Laura','Diaz','22220004','laura@iti.com',4,1);
+call sp_representantesInstitucion_create('Jorge','Lopez','22220005','jorge@cmm.com',5,1);
+call sp_representantesInstitucion_create('Maria','Ramirez','22220006','maria@uv.com',6,1);
  
  
 -- =========================================
@@ -1016,10 +1012,10 @@ call sp_representantesInstitucion_create('Maria','Ramirez','22220006','maria@uv.
  
 call sp_AgregarDocumentos(1,1,'Curriculum Vitae (CV)','cv_juan.pdf','/docs/cv_juan.pdf','2026-01-10 08:00:00');
 call sp_AgregarDocumentos(2,2,'Constancia de Estudios','constancia_laura.pdf','/docs/constancia_laura.pdf','2026-01-11 08:00:00');
-call sp_AgregarDocumentos(3,3,'Fotocopia de DPI o CUI','dpi_miguel.pdf','/docs/dpi_miguel.pdf','2026-01-12 08:00:00');
-call sp_AgregarDocumentos(4,4,'Carta de Solicitud de Práctica','carta_andrea.pdf','/docs/carta_andrea.pdf','2026-01-13 08:00:00');
-call sp_AgregarDocumentos(5,5,'Certificación de Notas','notas_pedro.pdf','/docs/notas_pedro.pdf','2026-01-14 08:00:00');
-call sp_AgregarDocumentos(6,6,'Pensum de la Carrera','pensum_lucia.pdf','/docs/pensum_lucia.pdf','2026-01-15 08:00:00');
+call sp_AgregarDocumentos(1,3,'Fotocopia de DPI o CUI','dpi_miguel.pdf','/docs/dpi_miguel.pdf','2026-01-12 08:00:00');
+call sp_AgregarDocumentos(2,4,'Carta de Solicitud de Práctica','carta_andrea.pdf','/docs/carta_andrea.pdf','2026-01-13 08:00:00');
+call sp_AgregarDocumentos(2,5,'Certificación de Notas','notas_pedro.pdf','/docs/notas_pedro.pdf','2026-01-14 08:00:00');
+call sp_AgregarDocumentos(1,6,'Pensum de la Carrera','pensum_lucia.pdf','/docs/pensum_lucia.pdf','2026-01-15 08:00:00');
  
  
 -- =========================================
@@ -1028,7 +1024,7 @@ call sp_AgregarDocumentos(6,6,'Pensum de la Carrera','pensum_lucia.pdf','/docs/p
  
 call sp_AgregarContrato(1,1,1,1,'2026-02-01','2026-06-01','Apoyo en desarrollo de software');
 call sp_AgregarContrato(2,2,2,2,'2026-02-02','2026-06-02','Análisis de bases de datos');
-call sp_AgregarContrato(3,3,3,3,'2026-02-03','2026-06-03','Soporte técnico empresarial');
-call sp_AgregarContrato(4,4,4,4,'2026-02-04','2026-06-04','Desarrollo web institucional');
-call sp_AgregarContrato(5,5,5,5,'2026-02-05','2026-06-05','Pruebas y control de calidad');
-call sp_AgregarContrato(6,6,6,6,'2026-02-06','2026-06-06','Administración de redes');
+call sp_AgregarContrato(3,3,1,3,'2026-02-03','2026-06-03','Soporte técnico empresarial');
+call sp_AgregarContrato(4,4,1,4,'2026-02-04','2026-06-04','Desarrollo web institucional');
+call sp_AgregarContrato(5,5,1,5,'2026-02-05','2026-06-05','Pruebas y control de calidad');
+call sp_AgregarContrato(6,6,1,6,'2026-02-06','2026-06-06','Administración de redes');

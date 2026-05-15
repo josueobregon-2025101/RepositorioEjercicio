@@ -76,7 +76,7 @@
 
                             <div class="form-group">
                                 <label>Sección</label>
-                                <input type="password" id="contrasenaLogin" th:field="*{contrasenaLogin}">
+                                <input type="text" id="contrasenaLogin" th:field="*{contrasenaLogin}">
                             </div>
                         </form>
         </div>
@@ -86,6 +86,10 @@
         <h2>Datos del Estudiante</h2>
 
         <form class="profile-form" th:object="${EstudianteEdit}">
+                <input type="hidden" id="id" th:field="*{idestudiante}" >
+                <input type="hidden" id="idLogin" th:field="*{idlogin}" >
+                <input type="hidden" id="idInstitucion" th:field="*{institucion.idInstitucion}" >
+
 
             <div class="form-group">
                 <label>Institucion</label>
@@ -132,8 +136,8 @@
             <div style="display:block">
                 <!-- boton para cancelar editar-->
                 <div class="form-actions">
-                    <button type="button" class="btn-cancel" th:onclick="@{/estudiantes/estudiantes/dashboard}"><i
-                            class="fas fa-close"></i> Cancelar</button>
+                    <a th:href="@{/estudiantes/estudiantes/perfil}"class="btn-cancel">
+                        <i class="fas fa-close"></i> Cancelar</a>
                 </div>
                 <!-- Botones de acción para gestionar la creación del editar -->
                 <div class="form-actions">
@@ -152,5 +156,6 @@
     </div>
 <script th:src="@{/Scripts/temas.js}"></script>
 <script th:src="@{/Scripts/perfil.js}"></script>
+<script th:src="@{/Scripts/empresa.js}"></script>
 </body>
 </html>

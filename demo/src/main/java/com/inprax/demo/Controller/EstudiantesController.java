@@ -1,11 +1,13 @@
 package com.inprax.demo.Controller;
 
+import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Entity.Estudiantes;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EstudiantesService;
 import com.inprax.demo.Service.InstitucionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +56,7 @@ public class EstudiantesController {
         if (usuario == null) return "redirect:/login/login";
         model.addAttribute("rolUsuario", "Estudiante");
         Estudiantes estudiante = service.getEstudianteByLogin(usuario.getIdLogin());
+        System.out.println(estudiante);
         model.addAttribute("EstudianteEdit",estudiante);
         model.addAttribute("Usuario",usuario);
         return "Index/perfil-estudiante";
@@ -74,11 +77,18 @@ public class EstudiantesController {
     }
 
     @GetMapping("/estudiantes/editar/{id}")
-    public String editarEstudiante(@PathVariable Integer id, Model model) {
-        Estudiantes estudiantes = service.getEstudianteById(id);
-        model.addAttribute("estudiantes", estudiantes);
-        model.addAttribute("institucion", institucionService.getAllInstituciones());
-        return "Index/editar-estudiante";
+    public ResponseEntity<?> editarEstudiante(@PathVariable Integer id, Estudiantes estudiantes ) {
+        try {
+            Estudiantes actualizada = service.updateEstudiante(id, estudiantes);
+            if (actualizada != null) {
+                return ResponseEntity.ok(actualizada);
+            } else {
+                return ResponseEntity.status(404).body("No se encontro la empresa");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 
     @GetMapping("/estudiantes/eliminar/{id}")

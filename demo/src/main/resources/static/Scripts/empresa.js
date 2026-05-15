@@ -26,21 +26,23 @@ function actualizarEstudiante(){
      let id = document.getElementById("id").value;
      console.log(id);
     //llenamos el objeto empresa "C0N TODOS LOS DATOS"
-    let empresa = {
-        nombreEmpresa: document.getElementById("nombre").value,
-        correoEmpresa: document.getElementById("correo").value,
-        telefonoEmpresa: document.getElementById("telefono").value,
-        tipoEmpresa: document.getElementById("sector").value,
-        tamanoEmpresa: document.getElementById("tamanio").value,
-        direccionEmpresa: document.getElementById("direction").value,
-        horarioEmpresa: document.getElementById("horario").value,
-        descripcion: document.getElementById("descripcion").value,
+    let estudiante = {
+        nombreInstitucion: document.getElementById("nombreInstitucion").value,
+        nombre: document.getElementById("nombre").value,
+        apellido: document.getElementById("apellido").value,
+        telefono: document.getElementById("telefono").value,
+        grado: document.getElementById("grado").value,
+        carrera: document.getElementById("carrera").value,
+        correo: document.getElementById("correo").value,
+        edad: document.getElementById("edad").value,
+        tutortel: document.getElementById("tutortel").value,
         //id no visible pero para funcionamiento de editar y no dejar vacio
         idLogin: document.getElementById("idLogin").value
+        institucion: document.getElementById("institucion").value
 
     };
     //fecth con url(empresas/editar/id)
-    fetch("/empresas/empresas/editar/" + id,{
+    fetch("/estudiantes/estudiantes/editar/" + id,{
         //metodo put
         method:"PUT",
         //advierte que es un JSON
@@ -48,7 +50,7 @@ function actualizarEstudiante(){
             "Content-Type":"application/json"
         },
         //lo pasamos el objeto JSON nuevo
-        body: JSON.stringify(empresa)
+        body: JSON.stringify(estudiante)
     })
     //validaciones de errores posibles
     .then(response => {
