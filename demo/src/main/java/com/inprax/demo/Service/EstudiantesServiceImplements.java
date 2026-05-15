@@ -40,6 +40,6 @@ public class EstudiantesServiceImplements implements EstudiantesService {
 
     @Override
     public Estudiantes getEstudianteByLogin(Integer idlogin) {
-        return estudiantesRepository.findByIdLogin(idlogin);
+        return estudiantesRepository.findByIdlogin(idlogin);
     }
 }
