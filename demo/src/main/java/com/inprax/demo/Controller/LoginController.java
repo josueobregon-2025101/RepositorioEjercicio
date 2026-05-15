@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 
     private final LoginService loginService;
@@ -16,18 +17,17 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @GetMapping("/")
-    public String index() { return "redirect:/login"; }
-
-    @GetMapping("/login")
-    public String loginForm() { return "Index/Login"; }
-
     @GetMapping("/index")
-    public String mostrarIndex() {
+    public String index() {
         return "Index/index";
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
+    public String loginForm() {
+        return "Index/Login";
+    }
+
+    @PostMapping("/validar")
     public String validarLogin(@RequestParam String identificador,
                                @RequestParam String contrasenaLogin,
                                HttpSession session,
@@ -37,10 +37,10 @@ public class LoginController {
             if (resultado != null) {
                 session.setAttribute("usuarioLogueado", resultado);
                 return switch (resultado.getRoles()) {
-                    case "Administrador" -> "redirect:/admin/dashboard";
+                    case "Administrador" -> "redirect:/api/administradores/admin";
                     case "Empresa"       -> "redirect:/empresa/dashboard";
-                    case "Estudiante"    -> "redirect:/estudiante/dashboard";
-                    default              -> "redirect:/login";
+                    case "Estudiante"    -> "redirect:/estudiantes/estudiantes/dashboard";
+                    default              -> "redirect:/login/login";
                 };
             } else {
                 model.addAttribute("error", "Credenciales inválidas");
@@ -55,27 +55,6 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/index";
+        return "redirect:/login/login";
     }
-
-    @GetMapping("/admin/logout")
-    public String logoutAdmin(HttpSession session) {
-        session.invalidate();
-        return "redirect:/index";
-    }
-
-    @GetMapping("/register")
-    public String registerForm() { return "Index/register"; }
-
-    // redirects
-    @GetMapping("/dashboard-admin.html")
-    public String r1() { return "redirect:/admin/dashboard"; }
-    @GetMapping("/Index/dashboard-admin.html")
-    public String r2() { return "redirect:/admin/dashboard"; }
-    @GetMapping("/perfil-admin.html")
-    public String r3() { return "redirect:/admin/perfil"; }
-    @GetMapping("/practicas-admin.html")
-    public String r4() { return "redirect:/admin/practicas"; }
-    @GetMapping("/login.html")
-    public String r5() { return "redirect:/login"; }
 }

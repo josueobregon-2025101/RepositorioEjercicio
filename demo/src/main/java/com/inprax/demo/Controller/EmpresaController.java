@@ -4,13 +4,15 @@ import com.inprax.demo.DTO.EmpresaDTO;
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EmpresaService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 @RequestMapping("/empresas")
@@ -22,62 +24,6 @@ public class EmpresaController {
         this.empresaService = empresaService;
     }
 
-    //vistas
-
-    @GetMapping("/lista")
-    public String listarEmpresas(Model model) {
-        model.addAttribute("empresas", empresaService.getAllEmpresas());
-        return "Index/empresas";
-    }
-
-    @GetMapping("/nuevo")
-    public String formularioNueva(Model model) {
-        model.addAttribute("empresaDTO", new EmpresaDTO());
-        return "Index/agregar-empresa";
-    }
-
-    @PostMapping("/guardar")
-    public String guardarEmpresa(@ModelAttribute EmpresaDTO dto, Model model) {
-        Empresa empresa = new Empresa();
-        empresa.setNombreEmpresa(dto.getNombreEmpresa());
-        empresa.setTipoEmpresa(dto.getTipoEmpresa());
-        empresa.setTelefonoEmpresa(dto.getTelefonoEmpresa());
-        empresa.setCorreoEmpresa(dto.getCorreoEmpresa());
-
-        Login login = new Login();
-        login.setUsuarioLogin(dto.getUsuarioLogin());
-        login.setContrasenaLogin(dto.getContrasenaLogin());
-        login.setCorreoLogin(dto.getCorreoLogin());
-
-        Empresa guardada = empresaService.saveEmpresa(empresa, login);
-        if (guardada == null) {
-            model.addAttribute("error", "El usuario ya existe");
-            return "Index/agregar-empresa";
-        }
-        return "redirect:/admin/empresas";
-    }
-
-    @GetMapping("/editar/{id}")
-    public String formularioEditar(@PathVariable Integer id, Model model) {
-        Empresa empresa = empresaService.getEmpresaById(id);
-        model.addAttribute("empresa", empresa);
-        return "Index/editar-empresa";
-    }
-
-    @PostMapping("/editar/{id}")
-    public String actualizarEmpresa(@PathVariable Integer id, @ModelAttribute Empresa empresa) {
-        empresaService.updateEmpresa(id, empresa);
-        return "redirect:/admin/empresas";
-    }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminarEmpresa(@PathVariable Integer id) {
-        empresaService.deleteEmpresa(id);
-        return "redirect:/admin/empresas";
-    }
-
-    // APIs
-
     @GetMapping
     @ResponseBody
     public List<Empresa> getAllEmpresas() {
@@ -88,16 +34,93 @@ public class EmpresaController {
     @ResponseBody
     public ResponseEntity<?> getEmpresaById(@PathVariable @Valid Integer id) {
         Empresa empresa = empresaService.getEmpresaById(id);
-        return empresa != null ? ResponseEntity.ok(empresa)
-                : ResponseEntity.status(404).body("No se encontró la empresa");
+        if (empresa != null) {
+            return ResponseEntity.ok(empresa);
+        } else {
+            return ResponseEntity.status(404).body("No se encontro la empresa");
+        }
     }
 
-    @PutMapping("/editar/{id}/api")
-    @ResponseBody
-    public ResponseEntity<?> updateEmpresaApi(@PathVariable Integer id,
-                                              @RequestBody @Valid Empresa empresa) {
-        Empresa actualizada = empresaService.updateEmpresa(id, empresa);
-        return actualizada != null ? ResponseEntity.ok(actualizada)
-                : ResponseEntity.status(404).body("No se encontró la empresa");
+    @GetMapping("/empresas")
+    public String empresas(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        if (usuario != null && usuario.getRoles().equals("Empresa")) {
+            return "redirect:/empresa/dashboard";
+        }
+        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
+        model.addAttribute("rolUsuario", rol);
+        List<Empresa> empresas= empresaService.getAllEmpresas();
+        model.addAttribute("empresas", empresas);
+        model.addAttribute("empresa", new Empresa());
+        return "Index/empresas";
     }
+
+    @GetMapping("/empresas/nuevo")
+    public String agregarEmpresa(Model model){
+        model.addAttribute("empresaDTO", new EmpresaDTO());
+        return "Index/agregar-empresa";
+    }
+
+    @PostMapping("/guardar")
+    public String nuevaEmpresa(@ModelAttribute EmpresaDTO dto, Model model) {
+        Empresa empresa = new Empresa();
+        empresa.setNombreEmpresa( dto.getNombreEmpresa());
+        empresa.setTelefonoEmpresa( dto.getTelefonoEmpresa());
+        empresa.setTipoEmpresa( dto.getTipoEmpresa());
+        empresa.setCorreoEmpresa(dto.getCorreoEmpresa());
+
+        Login login = new Login();
+        login.setUsuarioLogin(dto.getUsuarioLogin());
+        login.setContrasenaLogin(dto.getContrasenaLogin());
+        login.setCorreoLogin(dto.getCorreoLogin());
+
+        Empresa e = empresaService.saveEmpresa(empresa,login);
+
+        if (e == null) {
+            model.addAttribute("error", "La empresa ya existe");
+            return "Index/agregar-empresa";
+        }
+        System.out.println("Empresa agregado correctamente");
+        return "redirect:/empresas/empresas";
+    }
+    /*
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<?> saveEmpresa(@Valid @RequestBody Empresa empresa) {
+        try {
+            Empresa nuevaEmpresa = empresaService.saveEmpresa(empresa);
+            if (nuevaEmpresa != null) {
+                return ResponseEntity.ok(nuevaEmpresa);
+            } else {
+                return ResponseEntity.status(402).body("No se creo la empresa");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Error al crear la empresa");
+        }
+    }
+
+     */
+
+    @PutMapping("/empresas/editar/{id}")
+    @ResponseBody
+    public ResponseEntity<?> updateEmpresa(@PathVariable Integer id, @RequestBody @Valid Empresa empresa) {
+        try {
+            Empresa actualizada = empresaService.updateEmpresa(id, empresa);
+            if (actualizada != null) {
+                return ResponseEntity.ok(actualizada);
+            } else {
+                return ResponseEntity.status(404).body("No se encontro la empresa");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/empresas/eliminar/{id}")
+    public String eliminarEmpresa(@PathVariable Integer id) {
+        empresaService.deleteEmpresa(id);
+        return "redirect:/empresas/empresas";
+    }
+
+
 }

@@ -15,11 +15,11 @@ public class Login {
 
     @NotBlank(message = "El correo es obligatorio")
     @Email(message = "El correo no tiene el formato correcto")
-    @Column(name = "correo_login")
+    @Column(name = "correo_login", unique = true)
     private String correoLogin;
 
     @NotBlank(message = "El usuario es obligatorio")
-    @Column(name = "usuario_login")
+    @Column(name = "usuario_login", unique = true)
     private String usuarioLogin;
 
     @NotBlank(message = "La contrasena es obligatoria")

@@ -14,20 +14,26 @@ public class Empresa {
     @Column(name = "id_empresa")
     private Integer idEmpresa;
 
+    @NotBlank(message = "El nombre de la empresa es obligatorio")
     @Column(name = "nombre_empresa")
     private String nombreEmpresa;
+
 
     @Column(name = "tipo_empresa")
     private String tipoEmpresa;
 
+
     @Column(name = "tamano_empresa")
     private String tamanoEmpresa;
+
 
     @Column(name = "telefono_empresa")
     private String telefonoEmpresa;
 
+
     @Column(name = "correo_empresa")
     private String correoEmpresa;
+
 
     @Column(name = "direccion_empresa")
     private String direccionEmpresa;
@@ -38,6 +44,8 @@ public class Empresa {
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
 
+    // VERIFICAR PORQUE APARECE LOGIN SI SE DEBE CREAR ANTES UNA EMPRESA @NotNull(message = "El ID de login es obligatorio")
+    @Positive(message = "El ID de login debe ser un numero positivo")
     @Column(name = "id_login")
     private Integer idLogin;
 

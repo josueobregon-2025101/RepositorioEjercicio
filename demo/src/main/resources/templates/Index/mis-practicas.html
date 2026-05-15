@@ -1,95 +1,66 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Prácticas - Inprax</title>
 
-    <!-- Enlace a la hoja de estilos externa para el diseño visual -->
-    <link rel="stylesheet" href="../Styles/mis-practicas.css">
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
 </head>
-<body>
+<script>
+    (function () {
+        const theme = localStorage.getItem("theme") || "theme-yellow"
+        document.documentElement.classList.add(theme)
+    })();
+</script>
+</head>
 
-<!-- Contenedor principal que organiza el sidebar y el contenido central -->
-<div class="dashboard">
+<body class="image-bg">
 
-    <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
-    <aside class="sidebar">
-        <!-- Contenedor del nombre de la marca/plataforma -->
-        <div class="logo">
-            <img src="../Images/INPRAX.png">
-        </div>
+    <video id="bgvideo" autoplay muted loop playsinline></video>
+    <div class="dashboard">
 
-        <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-        <ul>
-            <li onclick="location.href='/empresa/dashboard'">Inicio</li>
-            <li onclick="location.href='crear-practica.html'">Crear práctica</li>
-            <li onclick="location.href='editar-practica.html'">Editar práctica</li>
-            <li onclick="location.href='postulantes.html'">Postulantes</li>
-            <li class="active">Mis prácticas</li> <!-- Clase 'active' para resaltar la página actual -->
-            <li onclick="location.href='perfil-empresa.html'">Perfil</li>
-        </ul>
-    </aside>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img id="logo" th:src="@{/Images/INPRAX.png}">
+            </div>
+            <ul>
+                <li><a th:href="@{/dashboard-empresa}">Inicio</a></li>
+                <li><a th:href="@{/crear-practica}">Crear práctica</a></li>
+                <li><a th:href="@{/editar-practica}">Editar práctica</a></li>
+                <li><a th:href="@{/postulantes}">Postulantes</a></li>
+                <li class="active">Mis prácticas</li>
+                <li><a th:href="@{/perfil-empresa}">Perfil</a></li>
+            </ul>
+        </aside>
 
-    <!-- Área de contenido principal: Donde se muestra la información dinámica -->
-    <main class="main-content">
-
-        <!-- Cabecera del panel: Título y botón de salida -->
-        <header class="header">
-            <h1>Mis Prácticas Publicadas</h1>
-            <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-            <button class="logout-btn" onclick="location.href='index.html'">Cerrar sesión</button>
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Mis Prácticas Publicadas</h1>
+                <button class="logout-btn" th:onclick="'location.href=\'' + @{/logout} + '\'"'>Cerrar sesión</button>
         </header>
 
-        <!-- Contenedor específico para la gestión de información del usuario -->
         <section class="practicas-container">
-
-            <!-- Tarjeta de acceso rápido para una práctica publicada -->
-            <div class="practica-card">
+            <!-- Iteración dinámica con Thymeleaf -->
+            <div class="practica-card" th:each="practica : ${practicas}">
                 <div class="practica-info">
-                    <h3>Desarrollo Web</h3>
-                    <p><strong>Área:</strong> Tecnología</p>
-                    <p><strong>Duración:</strong> 6 meses</p>
-                    <p><strong>Modalidad:</strong> Presencial</p>
+                    <h3 th:text="${practica.titulo}">Título</h3>
+                    <p><strong>Área:</strong> <span th:text="${practica.area}">Área</span></p>
+                    <p><strong>Duración:</strong> <span th:text="${practica.duracion}">Duración</span></p>
+                    <p><strong>Modalidad:</strong> <span th:text="${practica.modalidad}">Modalidad</span></p>
                 </div>
-                <!-- Botones de acción para gestionar la edición o moderación de la práctica -->
                 <div class="practica-actions">
-                    <button class="btn-ver" onclick="location.href='editar-practica-form.html'">Editar</button>
-                    <button class="btn-ver" onclick="location.href='postulantes.html'">Ver postulantes</button>
-                    <button class="btn-rechazar">Eliminar</button>
-                </div>
-            </div>
-
-            <!-- Tarjeta de acceso rápido para una práctica publicada -->
-            <div class="practica-card">
-                <div class="practica-info">
-                    <h3>Marketing Digital</h3>
-                    <p><strong>Área:</strong> Marketing</p>
-                    <p><strong>Duración:</strong> 3 meses</p>
-                    <p><strong>Modalidad:</strong> Remoto</p>
-                </div>
-                <!-- Botones de acción para gestionar la edición o moderación de la práctica -->
-                <div class="practica-actions">
-                    <button class="btn-ver" onclick="location.href='editar-practica-form.html'">Editar</button>
-                    <button class="btn-ver" onclick="location.href='postulantes.html'">Ver postulantes</button>
-                    <button class="btn-rechazar">Eliminar</button>
-                </div>
-            </div>
-
-            <!-- Tarjeta de acceso rápido para una práctica publicada -->
-            <div class="practica-card">
-                <div class="practica-info">
-                    <h3>Diseño Gráfico</h3>
-                    <p><strong>Área:</strong> Creatividad</p>
-                    <p><strong>Duración:</strong> 4 meses</p>
-                    <p><strong>Modalidad:</strong> Híbrido</p>
-                </div>
-                <!-- Botones de acción para gestionar la edición o moderación de la práctica -->
-                <div class="practica-actions">
-                    <button class="btn-ver" onclick="location.href='editar-practica-form.html'">Editar</button>
-                    <button class="btn-ver" onclick="location.href='postulantes.html'">Ver postulantes</button>
-                    <button class="btn-rechazar">Eliminar</button>
+                    <button class="btn-ver" th:onclick="' location.href=\'' +
+                    @{/practicas/editar/{id}(id=${practica.id})} + '\'"'>Editar</button>
+                    <button class=" btn-ver"
+                    th:onclick="'location.href=\'' + @{/practicas/postulantes/{id}(id=${practica.id})} + '\'"'>Ver postulantes</button>
+                    <form th:action="@{/practicas/eliminar/{id}(id=${practica.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn-rechazar">Eliminar</button>
+                    </form>
                 </div>
             </div>
         </section>

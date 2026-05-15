@@ -29,10 +29,9 @@ public class Estudiantes {
     @Column(name = "apellido")
     private String apellido;
 
-    @NotNull(message = "El numero de telefono es un campo obligatorio")
-    @Positive(message = "El numero de telefono debe ser positivo")
+    @NotBlank(message = "El numero de telefono es un campo obligatorio")
     @Column(name = "telefono")
-    private Integer telefono;
+    private String telefono;
 
     @NotBlank(message = "El grado es un campo obligatorio")
     @Column(name = "grado")
@@ -50,10 +49,9 @@ public class Estudiantes {
     @Column(name = "nombreinstitucion")
     private String nombreInstitucion;
 
-    @NotNull(message = "El numero de telefono del tutor es un campo obligatorio")
-    @Positive(message = "El numero de telefono del tutor debe ser positivo")
+    @NotBlank(message = "El numero de telefono del tutor es un campo obligatorio")
     @Column(name = "tutortel")
-    private Integer tutortel;
+    private String tutortel;
 
     @NotNull(message = "La edad es un campo obligatorio")
     @Positive(message = "La edad debe ser positiva")
@@ -100,11 +98,11 @@ public class Estudiantes {
         this.apellido = apellido;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -140,11 +138,11 @@ public class Estudiantes {
         this.nombreInstitucion = nombreInstitucion;
     }
 
-    public Integer getTutortel() {
+    public String getTutortel() {
         return tutortel;
     }
 
-    public void setTutortel(Integer tutortel) {
+    public void setTutortel(String tutortel) {
         this.tutortel = tutortel;
     }
 

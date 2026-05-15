@@ -15,7 +15,6 @@ body {
     url("../images/fondo.jpg");
   background-size: cover;
   background-position: center;
-  /* Fuente estándar de sistema aplicada globalmente */
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -29,32 +28,69 @@ body {
   padding: 20px;
 }
 
+/* Wrapper con efecto de borde giratorio amarillo (igual que el login) */
+.register-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #1C1C1C;
+  padding: 4px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow:
+    0 0 15px rgba(255, 193, 7, 0.1),
+    0 0 35px rgba(255, 193, 7, 0.05);
+}
+
+/* Efecto visual de borde giratorio mediante pseudo-elemento */
+.register-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -50px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 60%,
+    #FFC107 80%,
+    transparent 100%
+  );
+  animation: spin 3s linear infinite;
+  z-index: 0;
+}
+
+/* Animación de rotación para el efecto de borde */
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Caja de registro: Estilos visuales y profundidad */
 .register-box {
-  background: rgba(28,28,28,0.9);
+  background: #1C1C1C;
   padding: 40px 30px;
-  border-radius: 12px;
+  border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   color: #F5F5F5;
   text-align: center;
   width: 100%;
-  max-width: 450px;
+  position: relative;
+  z-index: 10;
 }
 
 /* Contenedor del nombre de la marca/plataforma */
 .register-box .logo {
   text-align: center;
-	margin-bottom: 30px;
-	padding: 10px;
+  margin-bottom: 30px;
+  padding: 10px;
 }
 
 /* Imagen del logo de la plataforma */
 .register-box .logo img {
-	width: 120px;
-	height: auto;
-	display: block;
-	margin: 0 auto;
-	object-fit: contain;
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
 }
 
 /* Cabecera del panel: Título del formulario */
@@ -82,7 +118,8 @@ body {
 /* Interacción: Foco en los campos del formulario */
 .register-box input:focus,
 .register-box select:focus {
-  border-color: #FFC107;
+  transform: scale(1.02);
+  box-shadow: 0 0 0 2px #FFC107, 0 0 10px rgba(255, 193, 7, 0.5);
 }
 
 /* Botón de acción principal: Estilo y efectos */
@@ -91,19 +128,21 @@ body {
   padding: 12px;
   margin-top: 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 26px;
   background: #FFC107;
   color: #1c1c1c;
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: 0 5px 14px rgba(255, 193, 7, 0.3);
   font-family: inherit;
 }
 
 /* Interacción del botón de registro */
 .register-box button:hover {
-  background: #e0a800;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.5);
 }
 
 /* Pie de página del formulario: Enlace para usuarios que ya tienen cuenta */

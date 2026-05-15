@@ -9,7 +9,7 @@ import java.util.List;
 public interface EstudiantesService {
     List<Estudiantes> getAllEstudiantes();
     Estudiantes getEstudianteById(Integer id);
-    Estudiantes saveEstudiantes (Estudiantes estudiantes) throws RuntimeException;
-    Estudiantes updateEstudiantes (Integer id, Estudiantes estudiantes);
+    void saveEstudiantes (Estudiantes estudiantes) throws RuntimeException;
     void deleteEstudiantes (Integer id);
+    Estudiantes getEstudianteByLogin(Integer idlogin);
 }

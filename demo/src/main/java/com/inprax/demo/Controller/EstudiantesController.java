@@ -1,62 +1,95 @@
 package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Estudiantes;
+import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EstudiantesService;
 import com.inprax.demo.Service.InstitucionService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/estudiantes")
 public class EstudiantesController {
 
-    private final EstudiantesService service;
-    private final InstitucionService institucionService;
+    @Autowired
+    private EstudiantesService service;
 
-    public EstudiantesController(EstudiantesService service, InstitucionService institucionService) {
-        this.service = service;
-        this.institucionService = institucionService;
+    @Autowired
+    private InstitucionService institucionService;
+
+    private Login verificarEstudiante(HttpSession session) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        if (usuario == null || !usuario.getRoles().equals("Estudiante")) return null;
+        return usuario;
     }
 
-    @GetMapping("/lista")
-    public String listarEstudiantes(Model model) {
-        model.addAttribute("estudiantes", service.getAllEstudiantes());
+
+    @GetMapping("/estudiantes")
+    public String listarEstudiantes(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
+        model.addAttribute("rolUsuario", rol);
+        List<Estudiantes> estudiantes = service.getAllEstudiantes();
+        model.addAttribute("estudiantes", estudiantes);
         return "Index/estudiantes";
     }
 
-    @GetMapping("/nuevo")
-    public String formularioNuevo(Model model) {
+    @GetMapping("/estudiantes/dashboard")
+    public String dashboardEstudianteString(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Estudiante";
+        model.addAttribute("rolUsuario", rol);
+        return "Index/dashboard-estudiante";
+    }
+
+    @GetMapping("/estudiantes/perfil")
+    public String perfilEstudiante(HttpSession session, Model model) {
+        Login usuario = verificarEstudiante(session);
+        if (usuario == null) return "redirect:/login/login";
+        model.addAttribute("rolUsuario", "Estudiante");
+        Estudiantes estudiante = service.getEstudianteByLogin(usuario.getIdLogin());
+        model.addAttribute("EstudianteEdit",estudiante);
+        model.addAttribute("Usuario",usuario);
+        return "Index/perfil-estudiante";
+    }
+
+
+    @GetMapping("/estudiantes/nuevos")
+    public String estudianteNuevo(Model model) {
         model.addAttribute("estudiantes", new Estudiantes());
         model.addAttribute("institucion", institucionService.getAllInstituciones());
         return "Index/agregar-estudiante";
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/estudiantes/guardar")
     public String guardarEstudiante(@ModelAttribute Estudiantes estudiantes) {
         service.saveEstudiantes(estudiantes);
-        return "redirect:/admin/estudiantes";
+        return "redirect:/estudiantes/estudiantes";
     }
 
-    @GetMapping("/editar/{id}")
-    public String formularioEditar(@PathVariable Integer id, Model model) {
-        model.addAttribute("estudiantes", service.getEstudianteById(id));
+    @GetMapping("/estudiantes/editar/{id}")
+    public String editarEstudiante(@PathVariable Integer id, Model model) {
+        Estudiantes estudiantes = service.getEstudianteById(id);
+        model.addAttribute("estudiantes", estudiantes);
         model.addAttribute("institucion", institucionService.getAllInstituciones());
         return "Index/editar-estudiante";
     }
 
-    @PostMapping("/editar/{id}")
-    public String actualizarEstudiante(@PathVariable Integer id,
-                                       @ModelAttribute Estudiantes estudiantes) {
-        service.saveEstudiantes(estudiantes);
-        return "redirect:/admin/estudiantes";
-    }
-
-    @GetMapping("/eliminar/{id}")
+    @GetMapping("/estudiantes/eliminar/{id}")
     public String eliminarEstudiante(@PathVariable Integer id) {
         service.deleteEstudiantes(id);
-        return "redirect:/admin/estudiantes";
+        return "redirect:/estudiantes/estudiantes";
     }
+
+    @GetMapping("/configuracion")
+    public String configestudiante() {
+        return "Index/configuracion-estudiante";
+    }
+
 }

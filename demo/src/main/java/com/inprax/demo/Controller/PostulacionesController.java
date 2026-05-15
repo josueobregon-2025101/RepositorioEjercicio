@@ -5,11 +5,13 @@ import com.inprax.demo.Service.PostulacionesService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/postulaciones")
 public class PostulacionesController {
     private final PostulacionesService postulacionesService;
@@ -18,9 +20,11 @@ public class PostulacionesController {
         this.postulacionesService = postulacionesService;
     }
 
-    @GetMapping
-    public List<Postulaciones> getAllPostulaciones(){
-        return postulacionesService.getAllPostulaciones();
+    @GetMapping("/postulaciones")
+    public String listarPostulaciones(Model model) {
+        List<Postulaciones> postulaciones = postulacionesService.getAllPostulaciones();
+        model.addAttribute("postulaciones", postulaciones);
+        return "Index/postulaciones";
     }
 
     @GetMapping("/{id}")
@@ -32,6 +36,8 @@ public class PostulacionesController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Postulación no encontrada con ID: " + id);
         }
     }
+
+    
 
     @PostMapping
     public ResponseEntity<Object> createPostulaciones(@Valid @RequestBody Postulaciones postulaciones){

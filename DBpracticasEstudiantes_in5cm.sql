@@ -1,7 +1,7 @@
 drop database if exists DBpracticasEstudiantes_in5cm;
 create database DBpracticasEstudiantes_in5cm;
 use DBpracticasEstudiantes_in5cm;
-
+ 
 create table Login(
 	id_login int auto_increment not null,
     correo_login varchar(50) not null,
@@ -10,7 +10,6 @@ create table Login(
     roles varchar(45) not null,
     primary key (id_login)
 );
- 
 create table Empresa(
 	id_empresa int auto_increment not null,
     nombre_empresa varchar(45),
@@ -26,7 +25,6 @@ create table Empresa(
     constraint FK_empresa_login foreign key (id_login)
 	references Login(id_login) on delete cascade
 );
- 
 create table Administradores(
 	id_administradores int auto_increment not null,
     nombre_administradores varchar(45) not null,
@@ -37,8 +35,8 @@ create table Administradores(
     constraint FK_admin_login foreign key (id_login) 
     references Login(id_login) on delete cascade
 );
-
-
+ 
+ 
 create table RepresentanteEmpresa (
 	id_representantempresa int auto_increment not null,
     id_empresa int,
@@ -62,7 +60,7 @@ create table Instituciones(
     numero_telefono varchar(20),
     primary key (id_institucion)
 );
-
+ 
 create table Estudiantes (
 	id_estudiante int auto_increment not null,
     id_institucion int,
@@ -82,7 +80,7 @@ create table Estudiantes (
     constraint fk_login foreign key (id_login) 
     references Login(id_login) on delete cascade
 );
-
+ 
 create table RepresentanteInstitucion(
 	id_representante_institucion int auto_increment not null,
     nombre_representante_institucion varchar(50),
@@ -97,7 +95,7 @@ create table RepresentanteInstitucion(
     constraint fk_estudiante foreign key (id_estudiante)
 	references Estudiantes(id_estudiante) on delete cascade
 );
-
+ 
 create table Practicas(
 	id_practica int auto_increment not null,
     id_empresa int,
@@ -112,7 +110,6 @@ create table Practicas(
     constraint FK_Practicas_empresa foreign key(id_empresa)
     references Empresa(id_empresa) on delete cascade
 );
- 
 create table Postulaciones(
 	id_postulacion int auto_increment not null,
     id_practica int,
@@ -124,7 +121,7 @@ create table Postulaciones(
     constraint FK_Postulaciones_practica foreign key (id_practica)
     references Practicas(id_practica) on delete cascade
 );
-
+ 
 Create table Documentos(
 	id_documento int not null auto_increment,
     id_estudiante int,
@@ -137,7 +134,7 @@ Create table Documentos(
     foreign key(id_estudiante) references Estudiantes(id_estudiante) on delete cascade,
     foreign key(id_empresa) references Empresa(id_empresa) on delete cascade
 );
-
+ 
 Create table Contrato(
 	id_contrato int not null auto_increment,
     id_postulacion int,
@@ -154,9 +151,9 @@ Create table Contrato(
     foreign key(id_documento)references Documentos(id_documento) on delete cascade
 );
 -- ////////////////////////----Procedimientos Almacenados----///////////////////////
-
+ 
 -- ////////////////////////----Login----///////////////////////
-
+ 
 delimiter $$
 	create procedure sp_ValidarLogin(in p_correoLogin varchar(50), 
 									 in p_usuario varchar(30), 
@@ -172,23 +169,18 @@ delimiter $$
 	  limit 1;
 	end $$
 delimiter ;
- 
 -- ////////////////////////----empresa----///////////////////////
- 
 -- Listar Empresa --
 delimiter $$
- 
 create procedure sp_ListarEmpresa()
 begin
 	select *
     from Empresa
     order by id_empresa;
 end $$
- 
 delimiter ;
-
--- Agregar Empresa --
  
+-- Agregar Empresa --
 delimiter $$
 create procedure sp_AgregarEmpresa(
     in p_nombreEmpresa varchar(45),
@@ -201,17 +193,12 @@ create procedure sp_AgregarEmpresa(
     in p_descripcion text,
     in p_idLogin int
 )
- 
 begin
     insert into Empresa(nombre_empresa, tipo_empresa, tamano_empresa, telefono_empresa, correo_empresa, direccion_empresa, horario_empresa, descripcion, id_login)
     values(p_nombreEmpresa, p_tipoEmpresa, p_tamanoEmpresa, p_telefonoEmpresa, p_correoEmpresa, p_direccionEmpresa, p_horarioEmpresa, p_descripcion, p_idLogin);
-	select last_insert_id() as id_empresa;
 end$$
- 
 delimiter ;
- 
 -- Actualizar Empresa --
- 
 delimiter $$
 create procedure sp_ActualizarEmpresa(
     in p_idEmpresa int,
@@ -226,7 +213,6 @@ create procedure sp_ActualizarEmpresa(
     in p_idLogin int
 )
 begin
- 
     update Empresa
     set nombre_empresa    = p_nombreEmpresa,
         tipo_empresa      = p_tipoEmpresa,
@@ -239,65 +225,46 @@ begin
         id_login          = p_idLogin
     where id_empresa = p_idEmpresa;
 end$$
- 
 delimiter ;
- 
 -- Eliminar Empresa --
- 
 delimiter $$
- 
 create procedure sp_EliminarEmpresa(in p_idEmpresa int)
 begin
     delete from Empresa where id_empresa = p_idEmpresa;
 end$$
- 
 delimiter ;
- 
 -- Buscar Empresa por ID--
- 
 delimiter $$
- 
 create procedure sp_BuscarEmpresaPorId(in p_idEmpresa int)
 begin
     select * from Empresa where id_empresa = p_idEmpresa;
 end$$
- 
 delimiter ;
- 
- 
- -- ////////////////////////----Administradores----///////////////////////
+
+-- ////////////////////////----Administradores----///////////////////////
 -- Agregar Administrador --
- 
 delimiter $$
- 
 create procedure sp_ListarAdministradores()
 begin
     select * from Administradores order by id_administradores;
 end$$
- 
 delimiter ;
-
+ 
 -- Agregar Administrador --
 delimiter $$
- 
 create procedure sp_AgregarAdministrador(
     in p_nombre varchar(45),
     in p_apellido varchar(45),
     in p_estado varchar(45),
     in p_idLogin int
 )
- 
 begin
     insert into Administradores(nombre_administradores, apellido_administradores, estado_administradores, id_login)
     values(p_nombre, p_apellido, p_estado, p_idLogin);
 end$$
- 
 delimiter ;
- 
 -- Actualizar Administrador --
- 
 delimiter $$
- 
 create procedure sp_ActualizarAdministrador(
     in p_idAdministradores int,
     in p_nombre varchar(45),
@@ -305,7 +272,6 @@ create procedure sp_ActualizarAdministrador(
     in p_estado varchar(45),
     in p_idLogin int
 )
- 
 begin
     update Administradores
     set nombre_administradores   = p_nombre,
@@ -314,33 +280,24 @@ begin
         id_login  = p_idLogin
     where id_administradores = p_idAdministradores;
 end$$
- 
 delimiter ;
- 
 -- Eliminar Administrador --
- 
 delimiter $$
- 
 create procedure sp_EliminarAdministrador(in p_idAdministradores int)
 begin
     delete from Administradores where id_administradores = p_idAdministradores;
 end$$
- 
 delimiter ;
- 
 -- Buscar Administrador por ID
- 
 delimiter $$
- 
 create procedure sp_BuscarAdministradorPorId(in p_idAdministradores int)
 begin
     select * from Administradores where id_administradores = p_idAdministradores;
 end$$
- 
 delimiter ;
-
+ 
 -- /////////////////-----REPRESENTATE DE LA EMPRESA--------///////////////
-
+ 
 delimiter $$
 create procedure sp_RepresentanteEmpresa_create(
     in p_id_empresa int,
@@ -356,17 +313,16 @@ create procedure sp_RepresentanteEmpresa_create(
 begin
     insert into RepresentanteEmpresa(id_empresa, nombres, apellidos, cargo, telefono, extension, estado, fecha_registro, correo)
 	values (p_id_empresa, p_nombres, p_apellidos, p_cargo, p_telefono, p_extension, p_estado, p_fecha_registro, p_correo);
-	select last_insert_id() as id_representantempresa; 
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_RepresentanteEmpresa_read_all()
 begin
     select * from RepresentanteEmpresa;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_RepresentanteEmpresa_read_by_id(
 	in p_id_representanteempresa int
@@ -377,7 +333,7 @@ begin
     where id_representantempresa = p_id_representanteempresa;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_RepresentanteEmpresa_update(
     in p_id_representanteempresa int,
@@ -403,11 +359,11 @@ begin
         fecha_registro = p_fecha_registro,
         correo = p_correo
     where id_representantempresa = p_id_representanteempresa;
-
+ 
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_RepresentanteEmpresa_delete(
 	in p_id_representanteempresa int
@@ -415,13 +371,13 @@ create procedure sp_RepresentanteEmpresa_delete(
 begin
     delete from RepresentanteEmpresa 
     where id_representantempresa = p_id_representanteempresa;
-
+ 
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
-
+ 
 -- /////////////////-------Estudiante--------////////////////////
-
+ 
 delimiter $$
 create procedure sp_Estudiantes_create(
     in p_id_institucion int,
@@ -439,17 +395,16 @@ create procedure sp_Estudiantes_create(
 begin
     insert into Estudiantes(id_institucion, id_login, nombre, apellido, telefono, grado, carrera, correo, nombreinstitucion, tutortel, edad)
     values (p_id_institucion, p_id_login, p_nombre, p_apellido, p_telefono, p_grado, p_carrera, p_correo, p_nombreinstitucion, p_tutortel, p_edad);
-	select last_insert_id() as id_estudiante;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_Estudiante_read_all()
 begin
     select * from Estudiantes;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_Estudiantes_read_by_id(
 	in p_id_estudiante int
@@ -460,7 +415,7 @@ begin
     where id_estudiante = p_id_estudiante;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_Estudiantes_update(
     in p_id_estudiante int,
@@ -490,11 +445,11 @@ begin
         tutortel = p_tutortel,
         edad = p_edad
     where id_estudiante = p_id_estudiante;
-
+ 
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_Estudiantes_delete(
 	in p_id_estudiante int
@@ -502,12 +457,12 @@ create procedure sp_Estudiantes_delete(
 begin
     delete from Estudiantes 
     where id_estudiante = p_id_estudiante;
-
+ 
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
 -- //////////////////////////------Instituciones--------////////////////////
-
+ 
 delimiter $$
 create procedure sp_instituciones_create(
 	in p_nombre varchar(50),
@@ -518,24 +473,23 @@ create procedure sp_instituciones_create(
 begin
 	insert into Instituciones(nombre_institucion, correo_institucion, direccion_institucion, numero_telefono)
 	values (p_nombre, p_correo, p_direccion, p_numeroTelefono);
-    select last_insert_id() as id_institucion;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_instituciones_read_all()
 begin
 	select * from Instituciones order by id_institucion;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_instituciones_read_by_id(p_id int)
 begin
 	select * from Instituciones where id_institucion = p_id;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_instituciones_update(
 	in p_id int,
@@ -551,23 +505,21 @@ begin
     direccion_institucion = p_direccionIntitucion,
     numero_telefono = p_numeroTelefono
     where id_institucion = p_id;
-    
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_instituciones_delete(p_id int)
 begin
 	delete from Instituciones where id_institucion = p_id;
-    
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
-
-
+ 
+ 
 -- /////////////////////////--------REPRESENTANTE DE LA INSTITUCION----------------////////////////////////
-
+ 
 delimiter $$
 create procedure sp_representantesInstitucion_create(
     in p_nombreRepresentanteInstitucion varchar(50),
@@ -580,17 +532,16 @@ create procedure sp_representantesInstitucion_create(
 begin
     insert into RepresentanteInstitucion(nombre_representante_institucion, apellido_representante_institucion, numero_telefono, correo_representante_institucion, id_institucion, id_estudiante )
     values (p_nombreRepresentanteInstitucion, p_apellidoRepresentanteInstitucion, p_numeroTelefono, p_correoRepresentanteInstitucion, p_idInstitucion, p_idEstudiante);
-	select last_insert_id() as id_representante_institucion;
-end$$
+    end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_representantesInstitucion_read_all()
 begin
     select * from RepresentanteInstitucion order by id_representante_institucion;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_representantesInstitucion_read_by_id(p_id int)
 begin
@@ -599,7 +550,7 @@ begin
     where id_representante_institucion = p_id;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_representantesInstitucion_update(
     in p_id int,
@@ -619,21 +570,21 @@ begin
         id_institucion = p_idInstitucion,
         id_estudiante = p_idEstudiante
     where id_representante_institucion = p_id;
-
+ 
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
-
+ 
 delimiter $$
 create procedure sp_representantesInstitucion_delete(p_id int)
 begin
     delete from RepresentanteInstitucion 
     where id_representante_institucion = p_id;
-
+ 
     select row_count() as filas_afectadas;
 end$$
 delimiter ;
-
+ 
 -- /////////////////////////////////------ Practicas----------//////////////////////////////
 -- Insertar práctica
 delimiter $$
@@ -651,11 +602,9 @@ begin
 			p_tiempo_practica, p_tipo_practica, 
 			p_carrera_practica, p_vigencia, 
 			p_disponibilidad, p_horario);
-    
-    select last_insert_id() as id_practica;
 end $$
 delimiter ;
-
+ 
 -- Actualizar práctica
 delimiter $$
 create procedure sp_actualizar_practica(in p_id_practica int,in p_id_empresa int,
@@ -674,11 +623,10 @@ begin
         disponibilidad = p_disponibilidad,
         horario = p_horario
     where id_practica = p_id_practica;
-    
     select row_count() as filas_afectadas;
 end $$
 delimiter ;
-
+ 
 -- Eliminar práctica
 delimiter $$
 create procedure sp_eliminar_practica(
@@ -689,7 +637,7 @@ begin
     select row_count() as filas_afectadas;
 end $$
 delimiter ;
-
+ 
 -- Obtener todas las prácticas
 delimiter $$
 create procedure sp_obtener_practicas()
@@ -697,7 +645,7 @@ begin
     select * from Practicas order by id_practica;
 end $$
 delimiter ;
-
+ 
 -- Obtener práctica por ID
 delimiter $$
 create procedure sp_obtener_practica_por_id(
@@ -707,7 +655,7 @@ begin
     select * from Practicas where id_practica = p_id_practica;
 end $$
 delimiter ;
-
+ 
 -- Obtener prácticas por empresa
 delimiter $$
 create procedure sp_obtener_practicas_por_empresa(
@@ -717,10 +665,10 @@ begin
     select * from Practicas where id_empresa = p_id_empresa;
 end $$
 delimiter ;
-
-
+ 
+ 
 -- //////////////////////////////----------Postulaciones------------////////////////////////////
-
+ 
 -- Insertar postulación
 delimiter $$
 create procedure sp_insertar_postulacion(in p_id_practica int,in p_titulo varchar(60),
@@ -732,11 +680,10 @@ begin
 	values (p_id_practica,p_titulo, 
         p_descripcion, p_fecha_post,
         p_estado);
-
-    select last_insert_id() as id_postulacion;
+ 
 end $$
 delimiter ;
-
+ 
 -- Actualizar postulación
 delimiter $$
 create procedure sp_actualizar_postulacion(
@@ -755,11 +702,10 @@ begin
         fecha_post = p_fecha_post,
         estado = p_estado
     where id_postulacion = p_id_postulacion;
-    
     select row_count() as filas_afectadas;
 end $$
 delimiter ;
-
+ 
 -- Eliminar postulación
 delimiter $$
 create procedure sp_eliminar_postulacion(
@@ -770,7 +716,7 @@ begin
     select row_count() as filas_afectadas;
 end $$
 delimiter ;
-
+ 
 -- Obtener todas las postulaciones
 delimiter $$
 create procedure sp_obtener_postulaciones()
@@ -778,7 +724,7 @@ begin
     select * from Postulaciones order by id_postulacion;
 end $$
 delimiter ;
-
+ 
 -- Obtener postulación por ID
 delimiter $$
 create procedure sp_obtener_postulacion_por_id(
@@ -788,7 +734,7 @@ begin
     select * from Postulaciones where id_postulacion = p_id_postulacion;
 end $$
 delimiter ;
-
+ 
 -- Obtener postulaciones por práctica
 delimiter $$
 create procedure sp_obtener_postulaciones_por_practica(
@@ -798,7 +744,7 @@ begin
     select * from Postulaciones where id_practica = p_id_practica;
 end $$
 delimiter ;
-
+ 
 -- Obtener postulaciones con detalles de práctica
 delimiter $$
 create procedure sp_obtener_postulaciones_con_practica()
@@ -808,7 +754,7 @@ begin
     inner join Practicas pr on p.id_practica = pr.id_practica;
 end $$
 delimiter ;
-
+ 
 -- Actualizar estado de postulación
 delimiter $$
 create procedure sp_actualizar_estado_postulacion(
@@ -819,26 +765,20 @@ begin
     update Postulaciones 
     set estado = p_estado
     where id_postulacion = p_id_postulacion;
-    
     select row_count() as filas_afectadas;
 end $$
 delimiter ;
 -- /////////////////////////// ----Documentos--------//////////////////////////
- 
 -- Listar Documentos --
 delimiter $$
- 
 create procedure sp_ListarDocumentos()
 begin
 	select *
     from Documentos
     order by id_documento;
 end $$
- 
 delimiter ;
- 
 -- Agregar Documento --
- 
 delimiter $$
 create procedure sp_AgregarDocumentos(
     in d_id_estudiante int,
@@ -848,17 +788,13 @@ create procedure sp_AgregarDocumentos(
     in d_urlArchivo varchar(2048),
     in d_fechaSubida datetime
 )
- 
 begin
     insert into Documentos(id_estudiante, id_empresa, tipo_doc, nombre_archivo, url_archivo,fecha_subida)
     values(d_id_estudiante, d_id_empresa, d_tipoDoc, d_nombreArchivo, d_urlArchivo, d_fechaSubida);
-    select last_insert_id() as id_documento;
 end$$
- 
 delimiter ;
- 
 -- Actualizar Documentos --
-
+ 
 delimiter $$
 create procedure sp_ActualizarDocumentos(
     in d_id_documento int,
@@ -873,7 +809,6 @@ create procedure sp_ActualizarDocumentos(
     in d_fechaSubida datetime
 )
 begin
- 
     update Documentos
     set id_estudiante    = d_id_estudiante,
         id_empresa      = d_id_empresa,
@@ -883,46 +818,32 @@ begin
         fecha_subida = d_fechaSubida
     where id_documento = d_id_documento;
 end$$
- 
 delimiter ;
- 
 -- Eliminar Documentos --
- 
 delimiter $$
- 
 create procedure sp_EliminarDocumentos(in d_id_documento int)
 begin
     delete from Documentos where id_documento = d_id_documento;
 end$$
- 
 delimiter ;
- 
 -- Buscar Documento por ID--
- 
 delimiter $$
- 
 create procedure sp_BuscarDocumentoPorId(in d_id_documento int)
 begin
     select * from Documentos where id_documento = d_id_documento;
 end$$
- 
 delimiter ;
- 
   -- /////////////////////////// ----Contrato--------//////////////////////////
 -- Listar Contrato --
 delimiter $$
- 
 create procedure sp_ListarContrato()
 begin
 	select *
     from Contrato
     order by id_contrato;
 end $$
- 
 delimiter ;
- 
 -- Agregar Contrato --
- 
 delimiter $$
 create procedure sp_AgregarContrato(
     in c_id_postulacion int,
@@ -933,17 +854,12 @@ create procedure sp_AgregarContrato(
     in c_fechaFin date,
     in c_objetivos varchar(80)
 )
- 
 begin
     insert into Contrato(id_postulacion , id_empresa, id_estudiante, id_documento, fecha_inicio,fecha_fin,objetivos)
     values(c_id_postulacion, c_id_empresa, c_id_estudiante, c_id_documento, c_fechaInicio , c_fechaFin,c_objetivos);
-    select last_insert_id() as id_contrato;
 end$$
- 
 delimiter ;
- 
 -- Actualizar Contrato --
- 
 delimiter $$
 create procedure sp_ActualizarContrato(
     in c_id_contrato int,
@@ -956,7 +872,6 @@ create procedure sp_ActualizarContrato(
     in c_objetivos varchar(80)
 )
 begin
- 
     update Contrato
     set id_postulacion    = c_id_postulacion,
         id_empresa      = c_id_empresa,
@@ -967,159 +882,150 @@ begin
         objetivos = c_objetivos
     where id_contrato = c_id_contrato;
 end$$
- 
 delimiter ;
- 
 -- Eliminar Contrato --
- 
 delimiter $$
- 
 create procedure sp_EliminarContrato(in c_id_contrato int)
 begin
     delete from Contrato where id_contrato = c_id_contrato;
 end$$
- 
 delimiter ;
- 
 -- Buscar Contrato por ID--
- 
 delimiter $$
- 
 create procedure sp_BuscarContratoPorId(in c_id_contrato int)
 begin
     select * from Contrato where id_contrato = c_id_contrato;
 end$$
+delimiter ;
  
-delimiter ; 
-
 -- ================================
 -- PRUEBAS CREATE / INSERT
 -- DBpracticasEstudiantes_in5cm
 -- ================================
-
+ 
 -- =========================
 -- LOGIN (5 USUARIOS)
 -- =========================
-
+ 
 insert into Login (correo_login, usuario_login, contrasena_login, roles) values
 ('admin1@gmail.com','admin1','12345','Administrador'),
 ('empresa1@gmail.com','empresa1','12345','Empresa'),
 ('empresa2@gmail.com','empresa2','12345','Empresa'),
 ('estudiante1@gmail.com','estudiante1','12345','Estudiante'),
 ('estudiante2@gmail.com','estudiante2','12345','Estudiante');
-
-
+ 
+ 
 -- =========================
 -- INSTITUCIONES (6 REGISTROS)
 -- =========================
-
+ 
 call sp_instituciones_create('Instituto Tecnológico Central','itc@gmail.com','Zona 1','22223333');
 call sp_instituciones_create('Colegio San José','csj@gmail.com','Zona 2','22224444');
 call sp_instituciones_create('Universidad Nacional','un@gmail.com','Zona 3','22225555');
 call sp_instituciones_create('Instituto Técnico Industrial','iti@gmail.com','Zona 4','22226666');
 call sp_instituciones_create('Colegio Mixto Moderno','cmm@gmail.com','Zona 5','22227777');
 call sp_instituciones_create('Universidad del Valle','uv@gmail.com','Zona 6','22228888');
-
-
+ 
+ 
 -- =========================
 -- EMPRESAS (6 REGISTROS)
 -- =========================
-
+ 
 call sp_AgregarEmpresa('Tech Solutions','Tecnología','Grande','55511111','tech@gmail.com','Zona 10','8AM-5PM','Empresa de software',2);
 call sp_AgregarEmpresa('InnovaSoft','Tecnología','Mediana','55522222','innova@gmail.com','Zona 11','8AM-5PM','Desarrollo web',3);
 call sp_AgregarEmpresa('DataCorp','Análisis de Datos','Grande','55533333','data@gmail.com','Zona 12','9AM-6PM','Big Data',2);
 call sp_AgregarEmpresa('RedNetworks','Redes','Pequeña','55544444','red@gmail.com','Zona 13','8AM-4PM','Infraestructura de red',3);
 call sp_AgregarEmpresa('CyberSecurity GT','Seguridad','Mediana','55555555','cyber@gmail.com','Zona 14','9AM-5PM','Seguridad informática',2);
 call sp_AgregarEmpresa('SmartApps','Desarrollo','Pequeña','55566666','apps@gmail.com','Zona 15','8AM-3PM','Apps móviles',3);
-
-
+ 
+ 
 -- =========================
 -- ADMINISTRADORES (6 REGISTROS)
 -- =========================
-
+ 
 call sp_AgregarAdministrador('Carlos','Lopez','Activo',1);
 call sp_AgregarAdministrador('Ana','Martinez','Activo',1);
 call sp_AgregarAdministrador('Luis','Gomez','Inactivo',1);
 call sp_AgregarAdministrador('Maria','Perez','Activo',1);
 call sp_AgregarAdministrador('Jorge','Ramirez','Activo',1);
 call sp_AgregarAdministrador('Sofia','Hernandez','Activo',1);
-
-
+ 
+ 
 -- =========================
 -- ESTUDIANTES (6 REGISTROS)
 -- =========================
-
+ 
 call sp_Estudiantes_create(1,4,'Juan','Perez',44441111,'5to Bach','Informática','juan@gmail.com','Instituto Tecnológico Central',33331111,18);
 call sp_Estudiantes_create(2,5,'Laura','Diaz',44442222,'6to Bach','Computación','laura@gmail.com','Colegio San José',33332222,19);
 call sp_Estudiantes_create(3,4,'Miguel','Lopez',44443333,'5to Bach','Sistemas','miguel@gmail.com','Universidad Nacional',33333333,20);
 call sp_Estudiantes_create(4,5,'Andrea','Ruiz',44444444,'6to Bach','Redes','andrea@gmail.com','Instituto Técnico Industrial',33334444,21);
 call sp_Estudiantes_create(5,4,'Pedro','Castro',44445555,'5to Bach','Programación','pedro@gmail.com','Colegio Mixto Moderno',33335555,18);
 call sp_Estudiantes_create(6,5,'Lucia','Morales',44446666,'6to Bach','Software','lucia@gmail.com','Universidad del Valle',33336666,22);
-
-
+ 
+ 
 -- =========================
 -- PRACTICAS (6 REGISTROS)
 -- =========================
-
+ 
 call sp_insertar_practica(1,'Desarrollador Junior','2026-01-01 08:00:00','Presencial','Informática','Vigente','2 plazas','2026-01-01 08:00:00');
 call sp_insertar_practica(2,'Analista de Datos','2026-01-02 08:00:00','Híbrida','Sistemas','Vigente','1 plaza','2026-01-02 08:00:00');
 call sp_insertar_practica(3,'Soporte Técnico','2026-01-03 08:00:00','Presencial','Redes','Vigente','3 plazas','2026-01-03 08:00:00');
 call sp_insertar_practica(4,'Programador Web','2026-01-04 08:00:00','Remota','Computación','Vigente','2 plazas','2026-01-04 08:00:00');
 call sp_insertar_practica(5,'Tester QA','2026-01-05 08:00:00','Presencial','Software','Vigente','1 plaza','2026-01-05 08:00:00');
 call sp_insertar_practica(6,'Administrador de Redes','2026-01-06 08:00:00','Presencial','Redes','Vigente','2 plazas','2026-01-06 08:00:00');
-
-
+ 
+ 
 -- =========================
 -- POSTULACIONES (6 REGISTROS)
 -- =========================
-
+ 
 call sp_insertar_postulacion(1,'Postulación Dev','Interesado en desarrollo','01/01/2026','Pendiente');
 call sp_insertar_postulacion(2,'Postulación Data','Experiencia en datos','02/01/2026','Pendiente');
 call sp_insertar_postulacion(3,'Postulación Soporte','Conocimientos básicos','03/01/2026','Aceptado');
 call sp_insertar_postulacion(4,'Postulación Web','HTML y CSS','04/01/2026','Pendiente');
 call sp_insertar_postulacion(5,'Postulación QA','Pruebas manuales','05/01/2026','Rechazado');
 call sp_insertar_postulacion(6,'Postulación Redes','Configuración básica','06/01/2026','Pendiente');
-
+ 
 -- =========================================
 -- REPRESENTANTE EMPRESA (6 REGISTROS)
 -- =========================================
-
+ 
 call sp_RepresentanteEmpresa_create(1,'Mario','Lopez','Gerente TI',55510001,'101','Activo','2026-01-01','mario@tech.com');
 call sp_RepresentanteEmpresa_create(2,'Andrea','Gomez','Jefe Desarrollo',55510002,'102','Activo','2026-01-02','andrea@innova.com');
 call sp_RepresentanteEmpresa_create(3,'Carlos','Ruiz','Analista Senior',55510003,'103','Activo','2026-01-03','carlos@data.com');
 call sp_RepresentanteEmpresa_create(4,'Lucia','Martinez','Supervisor Redes',55510004,'104','Activo','2026-01-04','lucia@red.com');
 call sp_RepresentanteEmpresa_create(5,'Pedro','Ramirez','Encargado Seguridad',55510005,'105','Activo','2026-01-05','pedro@cyber.com');
 call sp_RepresentanteEmpresa_create(6,'Sofia','Hernandez','Lider Proyectos',55510006,'106','Activo','2026-01-06','sofia@apps.com');
-
-
+ 
+ 
 -- =========================================
 -- REPRESENTANTE INSTITUCION (6 REGISTROS)
 -- =========================================
-
+ 
 call sp_representantesInstitucion_create('Luis','Morales','22220001','luis@itc.com',1,1);
 call sp_representantesInstitucion_create('Ana','Castro','22220002','ana@csj.com',2,2);
 call sp_representantesInstitucion_create('Miguel','Perez','22220003','miguel@un.com',3,3);
 call sp_representantesInstitucion_create('Laura','Diaz','22220004','laura@iti.com',4,4);
 call sp_representantesInstitucion_create('Jorge','Lopez','22220005','jorge@cmm.com',5,5);
 call sp_representantesInstitucion_create('Maria','Ramirez','22220006','maria@uv.com',6,6);
-
-
+ 
+ 
 -- =========================================
 -- DOCUMENTOS (6 REGISTROS)
 -- =========================================
-
+ 
 call sp_AgregarDocumentos(1,1,'Curriculum Vitae (CV)','cv_juan.pdf','/docs/cv_juan.pdf','2026-01-10 08:00:00');
 call sp_AgregarDocumentos(2,2,'Constancia de Estudios','constancia_laura.pdf','/docs/constancia_laura.pdf','2026-01-11 08:00:00');
 call sp_AgregarDocumentos(3,3,'Fotocopia de DPI o CUI','dpi_miguel.pdf','/docs/dpi_miguel.pdf','2026-01-12 08:00:00');
 call sp_AgregarDocumentos(4,4,'Carta de Solicitud de Práctica','carta_andrea.pdf','/docs/carta_andrea.pdf','2026-01-13 08:00:00');
 call sp_AgregarDocumentos(5,5,'Certificación de Notas','notas_pedro.pdf','/docs/notas_pedro.pdf','2026-01-14 08:00:00');
 call sp_AgregarDocumentos(6,6,'Pensum de la Carrera','pensum_lucia.pdf','/docs/pensum_lucia.pdf','2026-01-15 08:00:00');
-
-
+ 
+ 
 -- =========================================
 -- CONTRATO (6 REGISTROS)
 -- =========================================
-
+ 
 call sp_AgregarContrato(1,1,1,1,'2026-02-01','2026-06-01','Apoyo en desarrollo de software');
 call sp_AgregarContrato(2,2,2,2,'2026-02-02','2026-06-02','Análisis de bases de datos');
 call sp_AgregarContrato(3,3,3,3,'2026-02-03','2026-06-03','Soporte técnico empresarial');

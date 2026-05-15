@@ -6,70 +6,113 @@
 }
 
 /* Configuración básica del documento: Fondo y colores base */
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: 
-    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+body{
+    margin: 0;
+    padding-top: 110px;
+    min-height: 100vh;
+    background:
+    radial-gradient(circle at top left,
+    rgba(255,193,7,.12),
+    transparent 25%),
+    radial-gradient(circle at bottom right,
+    rgba(0,191,255,.12),
+    transparent 25%),
+    linear-gradient(
+        rgba(0,0,0,.75),
+        rgba(0,0,0,.88)
+    ),
     url("../images/fondo.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #F5F5F5;
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, Helvetica, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #F5F5F5;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
+
 /* Cabecera del panel: Contiene el logo y el menú de acceso */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 40px;
-  background: linear-gradient(90deg, #1C1C1C, #222);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: background 0.3s ease, padding 0.3s ease;
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 70px;
+    background: rgba(15,15,15,.78);
+    backdrop-filter: blur(20px);
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+    box-shadow:
+    0 10px 35px rgba(0,0,0,.25);
+    z-index: 1000;
+    transition: all .45s ease;
+    animation: fadeUp .5s ease;
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.03),
+        transparent
+    );
+    pointer-events:none;
+}
+
+.header.scrolled{
+    padding: 6px 40px;
+    background: rgba(0,0,0,.85);
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.35);
 }
 
 /* Contenedor del nombre de la marca/plataforma */
-.logo {
-  padding: 0;
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Imagen del logo de la plataforma */
-.logo img {
-  width: 85px;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  transition: 0.3s;
-}
-
-.logo img:hover {
-  transform: scale(1.08);
+.logo-svg{
+    width: 100px;
+    height: 100px;
+    display: block;
+    object-fit: contain;
+    pointer-events: none;
 }
 
 /* Menú de navegación principal */
 .nav {
   display: flex;
-  gap: 18px;
+  gap: 10px;
   align-items: center;
+  flex: 1;
 }
 
 /* Enlaces de navegación */
-.nav a {
-  text-decoration: none;
-  color: #F5F5F5;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+.nav a{
+    position: relative;
+    font-size: 16px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #f5f5f5;
+    font-weight: 500;
+    transition: .3s ease;
+}
+
+.nav a.active {
+  color: #FFC107;
+  font-weight: bold;
+  position: relative;
 }
 
 .nav a:hover {
@@ -78,20 +121,77 @@ body {
   transform: translateY(-2px);
 }
 
-/* Botón de registro */
-.btn-register {
+.nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 2px;
   background: #FFC107;
-  color: #1C1C1C;
-  padding: 8px 16px;
+  transition: 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav a:hover::after {
+  width: 80%;
+}
+
+.nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: #FFC107;
+  border-radius: 10px;
+}
+
+.nav-left {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.btn-login {
+  color: #FFC107;
+  border: 2px solid #FFC107;
+  padding: 12px 18px;
+  font-size: 15px;
   border-radius: 10px;
   font-weight: bold;
   box-shadow: 0 4px 12px rgba(255,193,7,0.4);
   transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-login:hover {
+  background: #FFC107;
+  color: #1C1C1C;
+  transform: translateY(-3px);
+  transition: .6s;
+  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
+}
+
+/* Botón de registro */
+.btn-register {
+  background: #FFC107;
+  color: #1C1C1C;
+  padding: 12px 18px;
+  font-size: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(255,193,7,0.4);
+  transition: all 0.5s ease;
+  text-decoration: none;
 }
 
 .btn-register:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255,193,7,0.6);
+  transform: translateY(-5px);
+  transition: .6s;
+  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
 }
 
 /* Header cuando se hace scroll */
@@ -102,124 +202,262 @@ body {
 
 /* Sección principal (Hero) */
 .hero {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   text-align: center;
-  padding: 100px 20px;
+  padding: 120px 8%;
+  margin-bottom: 180px;
 }
 
-.hero-content {
-  max-width: 650px;
+.hero::before{
+    content: "";
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,193,7,.12),
+        transparent 70%
+    );
+    filter: blur(80px);
+    z-index: -1;
 }
 
-.hero h1 {
-  font-size: 38px;
-  margin-bottom: 20px;
+.hero-content{
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.hero h1{
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 1000;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff 20%,
+        #FFC107 70%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero p {
-  color: #bbb;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  color: #ccc;
+  font-size: 18px;
   line-height: 1.6;
 }
 
 /* Botones del hero */
 .hero-buttons {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Botón principal */
-.btn-main {
-  background: #FFC107;
-  color: #1C1C1C;
-  padding: 12px 26px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.2s ease;
+.btn-main{
+    background:
+    linear-gradient(
+        135deg,
+        #FFC107,
+        #ff9800
+    );
+    color: #111;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 15px 30px;
+    transition: .35s ease;
+    box-shadow:
+    0 10px 30px rgba(255,193,7,.35);
 }
 
-.btn-main:hover {
-  transform: translateY(-2px);
+.btn-main:hover{
+    transform:
+    translateY(-5px)
+    scale(1.03);
+    box-shadow:
+    0 18px 40px rgba(255,193,7,.45);
+}
+
+.auth-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: all 0.5s ease;
 }
 
 /* Botón secundario */
 .btn-secondary {
-  border: 1px solid #FFC107;
+  border: 2px solid #FFC107;
   color: #FFC107;
-  padding: 12px 26px;
   border-radius: 10px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  will-change: transform;
+  padding: 12px 24px;
+  font-weight: bold;
+  transition: 0.3s ease;
 }
 
 .btn-secondary:hover {
   background: #FFC107;
   color: #1C1C1C;
+  box-shadow: 0 10px 25px rgba(255,193,7,0.4);
+  transform: translateY(-3px);
 }
 
 /* Sección de características */
 .features {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  padding: 60px 40px;
+  gap: 50px;
+
+  padding: 120px 8%;
   flex-wrap: wrap;
+  scroll-margin-top: 120px;
+  margin-bottom: 165px;
 }
+
 
 /* Tarjetas */
-.card {
-  background: #111;
-  padding: 28px;
-  border-radius: 16px;
-  width: 250px;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.card{
+    width: 360px;
+    min-height: 340px;
+    padding: 40px 30px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+    transition: all .45s ease;
+    animation: fadeUp .8s ease;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #FFC107;
+.card:hover{
+    transform: translateY(-14px);
+    border-color: rgba(255,193,7,.5);
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.45),
+    0 0 30px rgba(255,193,7,.15);
 }
 
-.card h2 {
-  color: #FFC107;
-  margin-bottom: 10px;
+.card::before{
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(
+        circle,
+        rgba(255,193,7,.18),
+        transparent 70%
+    );
+    top: -120px;
+    right: -120px;
+    transition: .5s;
 }
 
-.card p {
-  color: #aaa;
-  font-size: 14px;
+.card h2{
+    color: #FFC107;
+    font-size: 28px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.card p{
+    color: #b8b8b8;
+    font-size: 17px;
+    line-height: 1.8;
+    font-weight: 400;
 }
 
 /* Sección CTA */
 .cta {
   text-align: center;
-  padding: 70px 20px;
+  padding: 120px 8%;
+  scroll-margin-top: 180px;
+  margin-bottom: 450px;
 }
 
 .cta h2 {
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #FFC107;
 }
 
 .cta p {
-  color: #bbb;
-  margin-bottom: 25px;
+  max-width: 750px;
+  margin: 0 auto 25px auto;
+  color: #ccc;
+  line-height: 1.6;
 }
 
 /* Footer */
 .footer {
+  min-height: 10vh;
   text-align: center;
-  padding: 20px;
-  background: #111;
+  padding: 120px 8%;
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(10px);
   color: #777;
-  font-size: 13px;
-  margin-top: auto;
+  font-size: 20px;
+  z-index: 1000;
+}
+
+#loading-screen {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform: translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+::selection{
+    background: #FFC107;
+    color: #111;
 }
 
 /* Responsivo */
