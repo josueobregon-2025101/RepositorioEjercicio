@@ -21,10 +21,56 @@ function editarActive(id){
         editar.classList.add("editarActivo");
     });
 }
-function actualizarEstudiante(){
+async function validarContrasena(){
+    const contrasena = document.getElementById("contrasenaLogin").value;
+
+    const response = await fetch("/login/login/validar", {
+        method:"POST",
+        headers:{
+            "Content-Type":
+            "application/x-www-form-urlencoded"
+        },
+        body:
+            "contrasena=" +
+            encodeURIComponent(contrasena)
+    });
+
+    if(response.ok){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+async function actualizarUsuario(){
+    //obtenemos el id en una casilla no editable de el formulario
+     let id = document.getElementById("idlogin").value;
+    //llenamos el objeto empresa "C0N TODOS LOS DATOS"
+    let usuario = {
+        usuarioLogin: document.getElementById("usuarioLogin").value,
+        correoLogin: document.getElementById("correoLogin").value,
+        contrasenaLogin: document.getElementById("newContrasenaLogin").value,
+        roles: "Estudiante"
+    };
+    //fecth con url(empresas/editar/id)
+    const response = await fetch("/login/login/edit/" + id,{
+        //metodo put
+        method:"PUT",
+        //advierte que es un JSON
+        headers:{
+            "Content-Type":"application/json"
+        },
+        //lo pasamos el objeto JSON nuevo
+        body: JSON.stringify(usuario)
+    })
+    //validaciones de errores posibles
+    .catch(error =>{
+        console.log(error);
+    });
+}
+async function actualizarEstudiante(){
     //obtenemos el id en una casilla no editable de el formulario
      let id = document.getElementById("id").value;
-     console.log(id);
     //llenamos el objeto empresa "C0N TODOS LOS DATOS"
     let estudiante = {
         nombreInstitucion: document.getElementById("nombreInstitucion").value,
@@ -37,12 +83,11 @@ function actualizarEstudiante(){
         edad: document.getElementById("edad").value,
         tutortel: document.getElementById("tutortel").value,
         //id no visible pero para funcionamiento de editar y no dejar vacio
-        idLogin: document.getElementById("idLogin").value
-        institucion: document.getElementById("institucion").value
+        idlogin: document.getElementById("idlogin").value
 
     };
     //fecth con url(empresas/editar/id)
-    fetch("/estudiantes/estudiantes/editar/" + id,{
+    const response = await fetch("/estudiantes/estudiantes/editar/" + id,{
         //metodo put
         method:"PUT",
         //advierte que es un JSON
@@ -54,13 +99,8 @@ function actualizarEstudiante(){
     })
     //validaciones de errores posibles
     .then(response => {
-        console.log("Código:", response.status);
-
-        if(response.ok){
-            alert("Empresa actualizada");
-            location.reload();
-        }else{
-            alert("Error al actualizar: " + response.status);
+        if(!response.ok){
+        alert("Error al actualizar: " + response.status);
         }
     })
     .catch(error =>{
@@ -82,7 +122,7 @@ function actualizarEmpresa(){
         horarioEmpresa: document.getElementById("horario").value,
         descripcion: document.getElementById("descripcion").value,
         //id no visible pero para funcionamiento de editar y no dejar vacio
-        idLogin: document.getElementById("idLogin").value
+        idLogin: document.getElementById("idlogin").value
 
     };
     //fecth con url(empresas/editar/id)
@@ -111,6 +151,21 @@ function actualizarEmpresa(){
         console.log(error);
     });
 }
+
+ async function actualizarDatosEstudiante() {
+
+     const valida = await validarContrasena();
+
+     if(!valida){
+         alert("Contraseña incorrecta");
+         location.reload();
+         return;
+     }
+     await actualizarUsuario();
+     await actualizarEstudiante();
+     alert("Datos actualizados");
+     location.reload();
+ }
 
 function editarInactive(){
     let editar = document.getElementById("editarContainer");
