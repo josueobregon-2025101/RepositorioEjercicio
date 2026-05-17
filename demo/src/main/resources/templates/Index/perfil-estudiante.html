@@ -75,62 +75,66 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Sección</label>
-                                <input type="text" id="contrasenaLogin" th:field="*{contrasenaLogin}">
+                                <label>Para editar ingrese su contraseña</label>
+                                <input type="text" id="contrasenaLogin">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ingrese la contraseña nueva</label>
+                                <input type="text" id="newContrasenaLogin">
                             </div>
                         </form>
-        </div>
+                    </div>
 
-    <!-- NUEVO FORMULARIO DE DATOS DEL ESTUDIANTE -->
-    <div class="profile-card">
-        <h2>Datos del Estudiante</h2>
+                <!-- NUEVO FORMULARIO DE DATOS DEL ESTUDIANTE -->
+                <div class="profile-card">
+                    <h2>Datos del Estudiante</h2>
 
-        <form class="profile-form" th:object="${EstudianteEdit}">
-                <input type="hidden" id="id" th:field="*{idestudiante}" >
-                <input type="hidden" id="idLogin" th:field="*{idlogin}" >
-                <input type="hidden" id="idInstitucion" th:field="*{institucion.idInstitucion}" >
+                    <form class="profile-form" th:object="${EstudianteEdit}">
+                            <input type="hidden" id="id" th:field="*{idestudiante}" >
+                            <input type="hidden" id="idlogin" th:field="*{idlogin}" >
 
 
-            <div class="form-group">
-                <label>Institucion</label>
-                <input type="text" id="nombreInstitucion" th:field="*{nombreInstitucion}">
-            </div>
+                        <div class="form-group">
+                            <label>Institucion</label>
+                            <input type="text" id="nombreInstitucion" th:field="*{nombreInstitucion}">
+                        </div>
 
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" id="nombre" th:field="*{nombre}">
-            </div>
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="nombre" th:field="*{nombre}">
+                        </div>
 
-            <div class="form-group">
-                <label>Apellido</label>
-                <input type="text" id="apellido" th:field="*{apellido}">
-            </div>
-            <div class="form-group">
-                <label>Telefono</label>
-                <input type="text" id="telefono" th:field="*{telefono}">
-            </div>
-            <div class="form-group">
-                <label>Grado</label>
-                <input type="text" id="grado" th:field="*{grado}">
-            </div>
-            <div class="form-group">
-                <label>Carrera</label>
-                <input type="text" id="carrera" th:field="*{carrera}">
-            </div>
-            <div class="form-group">
-                <label>Correo</label>
-                <input type="text" id="correo" th:field="*{correo}">
-            </div>
-            <div class="form-group">
-                <label>Edad</label>
-                <input type="text" id="edad" th:field="*{edad}">
-            </div>
-            <div class="form-group">
-                <label>Telefono de Tutor</label>
-                <input type="text" id="tutortel" th:field="*{tutortel}">
-            </div>
-        </form>
-    </div>
+                        <div class="form-group">
+                            <label>Apellido</label>
+                            <input type="text" id="apellido" th:field="*{apellido}">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefono</label>
+                            <input type="text" id="telefono" th:field="*{telefono}">
+                        </div>
+                        <div class="form-group">
+                            <label>Grado</label>
+                            <input type="text" id="grado" th:field="*{grado}">
+                        </div>
+                         <div class="form-group">
+                            <label>Carrera</label>
+                            <input type="text" id="carrera" th:field="*{carrera}">
+                        </div>
+                     <div class="form-group">
+                            <label>Correo</label>
+                            <input type="text" id="correo" th:field="*{correo}">
+                        </div>
+                        <div class="form-group">
+                            <label>Edad</label>
+                            <input type="text" id="edad" th:field="*{edad}">
+                     </div>
+                        <div class="form-group">
+                            <label>Telefono de Tutor</label>
+                            <input type="text" id="tutortel" th:field="*{tutortel}">
+                        </div>
+                    </form>
+                </div>
             </section>
             <!-- Botones de acción para gestionar la edición de datos -->
             <div style="display:block">
@@ -141,7 +145,7 @@
                 </div>
                 <!-- Botones de acción para gestionar la creación del editar -->
                 <div class="form-actions">
-                    <button type="button" class="btn" onclick="actualizarEstudiante()"><i class="fas fa-save"></i>
+                    <button type="button" class="btn" onclick="actualizarDatosEstudiante()"><i class="fas fa-save"></i>
                         Editar</button>
                 </div>
             </div>
