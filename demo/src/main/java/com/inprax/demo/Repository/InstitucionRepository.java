@@ -13,5 +13,7 @@ public interface InstitucionRepository extends JpaRepository<Institucion, Intege
             String direccion,
             String telefono
     );
+
+    Institucion findByNombre(String nombre);
 }
 
