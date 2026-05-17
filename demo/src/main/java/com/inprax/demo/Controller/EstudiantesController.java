@@ -2,6 +2,7 @@ package com.inprax.demo.Controller;
 
 import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Entity.Estudiantes;
+import com.inprax.demo.Entity.Institucion;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.EstudiantesService;
 import com.inprax.demo.Service.InstitucionService;
@@ -56,7 +57,9 @@ public class EstudiantesController {
         if (usuario == null) return "redirect:/login/login";
         model.addAttribute("rolUsuario", "Estudiante");
         Estudiantes estudiante = service.getEstudianteByLogin(usuario.getIdLogin());
-        System.out.println(estudiante);
+        if(estudiante == null){
+            estudiante = new Estudiantes();
+        }
         model.addAttribute("EstudianteEdit",estudiante);
         model.addAttribute("Usuario",usuario);
         return "Index/perfil-estudiante";
@@ -76,9 +79,11 @@ public class EstudiantesController {
         return "redirect:/estudiantes/estudiantes";
     }
 
-    @GetMapping("/estudiantes/editar/{id}")
-    public ResponseEntity<?> editarEstudiante(@PathVariable Integer id, Estudiantes estudiantes ) {
+    @PutMapping("/estudiantes/editar/{id}")
+    public ResponseEntity<?> editarEstudiante(@PathVariable Integer id, @RequestBody Estudiantes estudiantes ) {
         try {
+            Institucion institucion = institucionService.findByName(estudiantes.getNombreInstitucion());
+            estudiantes.setInstitucion(institucion);
             Estudiantes actualizada = service.updateEstudiante(id, estudiantes);
             if (actualizada != null) {
                 return ResponseEntity.ok(actualizada);
