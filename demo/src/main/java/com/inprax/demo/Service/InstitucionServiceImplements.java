@@ -73,4 +73,9 @@ public class InstitucionServiceImplements implements InstitucionService {
         }
         repository.deleteById(id);
     }
+
+    @Override
+    public Institucion findByName(String nombre) {
+        return repository.findByNombre(nombre);
+    }
 }

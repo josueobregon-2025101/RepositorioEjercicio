@@ -12,4 +12,5 @@ public interface InstitucionService {
     Institucion saveInstitucion(Institucion institucion) throws RuntimeException;
     Institucion updateInstitucion(Integer id, Institucion institucion);
     void deleteInstitucion(Integer id);
+    Institucion findByName(String nombre);
 }
