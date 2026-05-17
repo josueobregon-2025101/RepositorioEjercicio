@@ -1,8 +1,12 @@
 package com.inprax.demo.Controller;
 
+import com.inprax.demo.Entity.Estudiantes;
+import com.inprax.demo.Entity.Institucion;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Service.LoginService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,5 +60,42 @@ public class LoginController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login/login";
+    }
+
+    @PostMapping("/login/validar")
+    @ResponseBody
+    public ResponseEntity<?> contrasenaValid(@RequestParam String contrasena, HttpSession session) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        if (usuario == null){
+            return ResponseEntity.status(401).body("No autorizado");
+        }
+        if(usuario.getContrasenaLogin().equals(contrasena)){
+
+            return ResponseEntity.ok(true);
+
+        }else{
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(false);
+        }
+    }
+
+    @PutMapping("/login/edit/{id}")
+    public ResponseEntity<?> editarUsuario(@PathVariable Integer id, @RequestBody Login login ,HttpSession session) {
+        try {
+            Login actualizada = loginService.actualizarLogin(id, login);
+            if (actualizada != null) {
+                session.setAttribute("usuarioLogueado", actualizada);
+                return ResponseEntity.ok(actualizada);
+
+
+            } else {
+                return ResponseEntity.status(404).body("No se encontro el usuario");
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 }
