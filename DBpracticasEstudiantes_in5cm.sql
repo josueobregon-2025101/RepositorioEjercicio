@@ -911,7 +911,7 @@ insert into Login (correo_login, usuario_login, contrasena_login, roles) values
 ('admin1@gmail.com','admin1','12345','Administrador'),
 ('empresa1@gmail.com','empresa1','12345','Empresa'),
 ('empresa2@gmail.com','empresa2','12345','Empresa'),
-('estudiante1@gmail.com','estudiante1','12345','Estudiante'),
+('estudiante1@gmail.com','estudiante1','123456','Estudiante'),
 ('estudiante2@gmail.com','estudiante2','12345','Estudiante');
  
  
@@ -933,9 +933,9 @@ call sp_instituciones_create('Universidad del Valle','uv@gmail.com','Zona 6','22
  
 call sp_AgregarEmpresa('Tech Solutions','Tecnología','Grande','55511111','tech@gmail.com','Zona 10','8AM-5PM','Empresa de software',2);
 call sp_AgregarEmpresa('InnovaSoft','Tecnología','Mediana','55522222','innova@gmail.com','Zona 11','8AM-5PM','Desarrollo web',3);
-call sp_AgregarEmpresa('DataCorp','Análisis de Datos','Grande','55533333','data@gmail.com','Zona 12','9AM-6PM','Big Data',2);
+call sp_AgregarEmpresa('DataCorp','Análisis de Datos','Grande','55533333','data@gmail.com','Zona 12','9AM-6PM','Big Data',3);
 call sp_AgregarEmpresa('RedNetworks','Redes','Pequeña','55544444','red@gmail.com','Zona 13','8AM-4PM','Infraestructura de red',3);
-call sp_AgregarEmpresa('CyberSecurity GT','Seguridad','Mediana','55555555','cyber@gmail.com','Zona 14','9AM-5PM','Seguridad informática',2);
+call sp_AgregarEmpresa('CyberSecurity GT','Seguridad','Mediana','55555555','cyber@gmail.com','Zona 14','9AM-5PM','Seguridad informática',3);
 call sp_AgregarEmpresa('SmartApps','Desarrollo','Pequeña','55566666','apps@gmail.com','Zona 15','8AM-3PM','Apps móviles',3);
  
  
@@ -964,10 +964,10 @@ call sp_Estudiantes_create(2,5,'Laura','Diaz',44442222,'6to Bach','Computación'
 -- =========================
  
 call sp_insertar_practica(1,'Desarrollador Junior','2026-01-01 08:00:00','Presencial','Informática','Vigente','2 plazas','2026-01-01 08:00:00');
-call sp_insertar_practica(2,'Analista de Datos','2026-01-02 08:00:00','Híbrida','Sistemas','Vigente','1 plaza','2026-01-02 08:00:00');
-call sp_insertar_practica(3,'Soporte Técnico','2026-01-03 08:00:00','Presencial','Redes','Vigente','3 plazas','2026-01-03 08:00:00');
-call sp_insertar_practica(4,'Programador Web','2026-01-04 08:00:00','Remota','Computación','Vigente','2 plazas','2026-01-04 08:00:00');
-call sp_insertar_practica(5,'Tester QA','2026-01-05 08:00:00','Presencial','Software','Vigente','1 plaza','2026-01-05 08:00:00');
+call sp_insertar_practica(1,'Analista de Datos','2026-01-02 08:00:00','Híbrida','Sistemas','Vigente','1 plaza','2026-01-02 08:00:00');
+call sp_insertar_practica(1,'Soporte Técnico','2026-01-03 08:00:00','Presencial','Redes','Vigente','3 plazas','2026-01-03 08:00:00');
+call sp_insertar_practica(1,'Programador Web','2026-01-04 08:00:00','Remota','Computación','Vigente','2 plazas','2026-01-04 08:00:00');
+call sp_insertar_practica(1,'Tester QA','2026-01-05 08:00:00','Presencial','Software','Vigente','1 plaza','2026-01-05 08:00:00');
 call sp_insertar_practica(6,'Administrador de Redes','2026-01-06 08:00:00','Presencial','Redes','Vigente','2 plazas','2026-01-06 08:00:00');
  
  
