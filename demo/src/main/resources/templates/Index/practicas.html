@@ -90,7 +90,7 @@
                 th:text="${message}">
             </div>
 
-            <div class="actions" th:if="${rolUsuario != 'Empresa'}">
+            <div class="actions" th:if="${rolUsuario == 'Empresa'}">
                 <a th:href="@{/practicas/agregar}" class="btn">
                     <i class="fas fa-plus"></i> Agregar Práctica
                 </a>
