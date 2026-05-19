@@ -1,10 +1,13 @@
 package com.inprax.demo.Controller;
 
+import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Entity.Practicas;
+import com.inprax.demo.Service.EmpresaService;
 import com.inprax.demo.Service.PracticasService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +19,11 @@ import java.util.List;
 @RequestMapping("/practicas")
 public class PracticasController {
 
-    private final PracticasService practicasService;
+    @Autowired
+    private  PracticasService practicasService;
+    @Autowired
+    private  EmpresaService empresaService;
 
-    public PracticasController(PracticasService practicasService) {
-        this.practicasService = practicasService;
-    }
 
     @GetMapping("/practicas")
     public String verPracticas(HttpSession session, Model model) {
@@ -30,7 +33,11 @@ public class PracticasController {
         List<Practicas> practicas = practicasService.getAllPracticas();
         model.addAttribute("practicas", practicas);
         if ("Empresa".equals(rol)) {
-            return "Index/practicas-admin";
+            Empresa empresa = empresaService.getEmpresaByIdLogin(usuario.getIdLogin());
+            Integer idEmpresa = empresa.getIdEmpresa();
+            List<Practicas> practicasEmpresa = practicasService.getPracticasByEmpresaId(idEmpresa);
+            model.addAttribute("practicas", practicasEmpresa);
+            return "Index/practicas";
         }
         return "Index/practicas-admin";
     }
@@ -56,7 +63,12 @@ public class PracticasController {
     }
 
     @GetMapping("/agregar")
-    public String mostrarFormularioAgregar(Model model) {
+    public String mostrarFormularioAgregar(Model model,HttpSession session) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
+        model.addAttribute("rolUsuario", rol);
+        Empresa empresa = empresaService.getEmpresaByIdLogin(usuario.getIdLogin());
+        model.addAttribute("idEmpresa", empresa.getIdEmpresa());
         model.addAttribute("practica", new Practicas());
         return "Index/agregar-practica";
     }
@@ -72,7 +84,7 @@ public class PracticasController {
             redirectAttributes.addFlashAttribute("message", "Error al guardar: " + e.getMessage());
             redirectAttributes.addFlashAttribute("messageType", "error");
         }
-        return "redirect:/practicas/practicas-admin";
+        return "redirect:/practicas/practicas";
     }
 
     @GetMapping("/editar/{id}")
