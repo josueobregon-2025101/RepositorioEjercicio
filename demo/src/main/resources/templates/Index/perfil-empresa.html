@@ -2,117 +2,127 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <!-- Configuración básica del documento -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Empresa - Inprax</title>
-
-    <!-- Enlace a la hoja de estilos externa para el diseño visual -->
     <link rel="stylesheet" th:href="@{/Styles/dashboard-admin.css}">
-</head>
-<script>
-    (function () {
-        const theme = localStorage.getItem("theme") || "theme-yellow"
-        document.documentElement.classList.add(theme)
-    })();
-</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link id="favicon" rel="icon" href="/Images/PerfilIconAmarillo.png">
+    <script>
+        (function () {
+            const theme = localStorage.getItem("theme") || "theme-yellow";
+            document.documentElement.classList.add(theme);
+        })();
+    </script>
 </head>
 
 <body class="image-bg">
 
-    <video id="bgvideo" autoplay muted loop playsinline></video>
+<video id="bgvideo" autoplay muted loop playsinline></video>
 
-    <!-- Contenedor principal que organiza el sidebar y el contenido central -->
-    <div class="dashboard">
+<div class="dashboard">
 
-        <!-- Panel lateral (Sidebar): Menú de navegación fijo -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img id="logo" th:src="@{/Images/INPRAX.png}">
+    <aside class="sidebar">
+        <div class="logo">
+            <img id="logo" th:src="@{/Images/INPRAX.png}">
+        </div>
+        <nav>
+            <ul>
+                <li><a th:href="@{/empresa/dashboard}"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a th:href="@{/estudiantes/estudiantes}"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                <li><a th:href="@{/practicas/practicas}"><i class="fas fa-briefcase"></i> Prácticas</a></li>
+                <li><a th:href="@{/empresa/perfil}" class="active"><i class="fas fa-building"></i> Perfil</a></li>
+                <li><a th:href="@{/empresa/configuracion}"><i class="fas fa-cog"></i> Configuración</a></li>
+                <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="header">
+            <h1>Perfil de la Empresa</h1>
+            <a th:href="@{/login/index}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+        </header>
+
+        <!-- Mensaje de éxito o error -->
+        <div th:if="${mensaje}" class="alert success" th:text="${mensaje}"></div>
+        <div th:if="${error}"   class="alert error"   th:text="${error}"></div>
+
+        <div class="profile-container">
+            <div class="profile-card">
+                <h2>Información de la Empresa</h2>
+
+                <form th:action="@{/empresa/perfil/guardar}" method="post" class="profile-form">
+
+                    <div class="form-group">
+                        <label for="nombreEmpresa">Nombre de la empresa</label>
+                        <input type="text" id="nombreEmpresa" name="nombreEmpresa"
+                               th:value="${empresa != null ? empresa.nombreEmpresa : ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correoEmpresa">Correo empresarial</label>
+                        <input type="email" id="correoEmpresa" name="correoEmpresa"
+                               th:value="${empresa != null ? empresa.correoEmpresa : ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefonoEmpresa">Teléfono</label>
+                        <input type="text" id="telefonoEmpresa" name="telefonoEmpresa"
+                               th:value="${empresa != null ? empresa.telefonoEmpresa : ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccionEmpresa">Dirección</label>
+                        <input type="text" id="direccionEmpresa" name="direccionEmpresa"
+                               th:value="${empresa != null ? empresa.direccionEmpresa : ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipoEmpresa">Tipo de empresa</label>
+                        <input type="text" id="tipoEmpresa" name="tipoEmpresa"
+                               th:value="${empresa != null ? empresa.tipoEmpresa : ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tamanoEmpresa">Tamaño</label>
+                        <input type="text" id="tamanoEmpresa" name="tamanoEmpresa"
+                               th:value="${empresa != null ? empresa.tamanoEmpresa : ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="horarioEmpresa">Horario</label>
+                        <input type="text" id="horarioEmpresa" name="horarioEmpresa"
+                               th:value="${empresa != null ? empresa.horarioEmpresa : ''}">
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="descripcion">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" rows="4"
+                                  th:text="${empresa != null ? empresa.descripcion : ''}"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn"><i class="fas fa-save"></i> Guardar Cambios</button>
+                    </div>
+
+                </form>
             </div>
+        </div>
 
-            <!-- Lista de navegación: Redirigen a las diferentes secciones del sistema -->
-            <nav>
-                <ul>
-                    <li><a th:href="@{/empresa/dashboard}"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a th:href="@{/crear-practica}"><i class="fas fa-plus-circle"></i> Crear práctica</a></li>
-                    <li><a th:href="@{/editar-practica}"><i class="fas fa-edit"></i> Editar práctica</a></li>
-                    <li><a th:href="@{/postulantes}"><i class="fas fa-users"></i> Postulantes</a></li>
-                    <li><a th:href="@{/mis-practicas}"><i class="fas fa-list-alt"></i> Mis prácticas</a></li>
-                    <li class="active"><a th:href="@{/empresa/perfil}"><i class="fas fa-building"></i> Perfil</a></li>
-                    <li><a th:href="@{/empresa/configuracion}"><i class="fas fa-cog"></i> Configuración</a></li>
-                    <li><a th:href="@{/login/index}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
-                </ul>
-            </nav>
-        </aside>
+        <div class="theme-switcher">
+            <button data-theme="theme-yellow">🟡</button>
+            <button data-theme="theme-purple">🟣</button>
+            <button data-theme="theme-cyan-dark">🔵</button>
+            <button data-theme="theme-green-dark">🟢</button>
+            <button data-theme="theme-blue-light">⚪</button>
+        </div>
 
-        <!-- Área de contenido principal: Donde se muestra la información dinámica -->
-        <main class="main-content">
+    </main>
+</div>
 
-            <!-- Cabecera del panel: Título y botón de salida -->
-            <header class="header">
-                <h1>Perfil de la Empresa</h1>
-                <!-- Botón que redirige al login o página principal (Cierra la sesión) -->
-                <button class="logout-btn" onclick="location.href='/logout'">Cerrar sesión</button>
-            </header>
+<script th:src="@{/Scripts/temas.js}"></script>
 
-            <!-- Contenedor específico para la gestión de información del usuario -->
-            <section class="profile-container">
-
-                <!-- Sección para la imagen de perfil o logo corporativo -->
-                <div class="profile-logo">
-                    <img th:src="@{/Images/perfil.png}">
-                </div>
-
-                <!-- Formulario de datos personales/corporativos -->
-                <div class="profile-form">
-
-                    <!-- Campos de entrada de datos para el usuario -->
-                    <div class="input-group">
-                        <label>Nombre de la empresa</label>
-                        <input type="text" value="Empresa Tech">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Correo empresarial</label>
-                        <input type="email" value="empresa@email.com">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Teléfono</label>
-                        <input type="text" value="5555-1234">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Dirección</label>
-                        <input type="text" value="Ciudad, País">
-                    </div>
-
-                    <!-- Campo de área de texto para información extendida -->
-                    <div class="input-group full">
-                        <label>Descripción de la empresa</label>
-                        <textarea>Empresa dedicada al desarrollo de software y tecnología.</textarea>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Sitio web</label>
-                        <input type="text" value="www.empresa.com">
-                    </div>
-
-                    <div class="input-group">
-                        <label>Sector</label>
-                        <input type="text" value="Tecnología">
-                    </div>
-                </div>
-
-                <!-- Botones de acción para gestionar la edición de datos -->
-                <div class="profile-actions">
-                    <button class="btn-edit">Editar</button>
-                    <button class="btn-save">Guardar cambios</button>
-                </div>
-            </section>
-        </main>
-    </div>
 </body>
-
 </html>
