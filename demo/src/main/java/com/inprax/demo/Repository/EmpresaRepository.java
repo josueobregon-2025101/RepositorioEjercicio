@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
     Empresa findEmpresaByIdLogin(Integer idLogin);
+    Empresa findFirstByIdLogin(Integer idLogin);
 }
+
+
+
