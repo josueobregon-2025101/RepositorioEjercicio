@@ -1,5 +1,6 @@
 package com.inprax.demo.Service;
 
+import com.inprax.demo.Entity.Empresa;
 import com.inprax.demo.Entity.Estudiantes;
 import com.inprax.demo.Exception.ResourceNotFoundException;
 import com.inprax.demo.Repository.EstudiantesRepository;
@@ -41,5 +42,28 @@ public class EstudiantesServiceImplements implements EstudiantesService {
     @Override
     public Estudiantes getEstudianteByLogin(Integer idlogin) {
         return estudiantesRepository.findByIdlogin(idlogin);
+    }
+
+    @Override
+    public Estudiantes updateEstudiante(Integer id, Estudiantes estudiantes) {
+        Estudiantes estudianteExistente = estudiantesRepository.findById(id).orElse(null);
+
+        if (estudianteExistente == null) {
+            return null;
+        }
+
+        estudianteExistente.setNombreInstitucion(estudiantes.getNombreInstitucion());
+        estudianteExistente.setIdlogin(estudiantes.getIdlogin());
+        estudianteExistente.setNombre(estudiantes.getNombre());
+        estudianteExistente.setApellido(estudiantes.getApellido());
+        estudianteExistente.setCarrera(estudiantes.getCarrera());
+        estudianteExistente.setEdad(estudiantes.getEdad());
+        estudianteExistente.setGrado(estudiantes.getGrado());
+        estudianteExistente.setTelefono(estudiantes.getTelefono());
+        estudianteExistente.setCorreo(estudiantes.getCorreo());
+        estudianteExistente.setTutortel(estudiantes.getTutortel());
+        estudianteExistente.setInstitucion(estudiantes.getInstitucion());
+
+        return estudiantesRepository.save(estudianteExistente);
     }
 }

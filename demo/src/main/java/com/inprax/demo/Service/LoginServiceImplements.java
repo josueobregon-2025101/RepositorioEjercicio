@@ -1,5 +1,6 @@
 package com.inprax.demo.Service;
 
+import com.inprax.demo.Entity.Institucion;
 import com.inprax.demo.Entity.Login;
 import com.inprax.demo.Repository.LoginRepository;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,17 @@ public class LoginServiceImplements implements LoginService {
         l.setCorreoLogin(correoLogin);
         l.setRoles(roles);
         return loginRepository.save(l);
+    }
+
+    @Override
+    public Login actualizarLogin(Integer idLogin, Login login) {
+        Login existente = loginRepository.findByidLogin(idLogin);
+
+        existente.setRoles(login.getRoles());
+        existente.setCorreoLogin(login.getCorreoLogin());
+        existente.setUsuarioLogin(login.getUsuarioLogin());
+        existente.setContrasenaLogin(login.getContrasenaLogin());
+
+        return loginRepository.save(existente);
     }
 }

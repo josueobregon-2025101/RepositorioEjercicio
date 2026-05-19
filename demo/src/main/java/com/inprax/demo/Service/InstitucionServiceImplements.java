@@ -29,8 +29,8 @@ public class InstitucionServiceImplements implements InstitucionService {
 
     @Override
     public Institucion saveInstitucion(Institucion institucion) throws RuntimeException {
-        if (institucion.getCorreo() != null && !institucion.getCorreo().contains("@gmail.com") 
-            && !institucion.getCorreo().contains("@outlook.com") && !institucion.getCorreo().contains("@icloud.com") && !institucion.getCorreo().contains("yahoo.com")) {
+        if (institucion.getCorreo() != null && !institucion.getCorreo().contains("@gmail.com")
+                && !institucion.getCorreo().contains("@outlook.com") && !institucion.getCorreo().contains("@icloud.com") && !institucion.getCorreo().contains("yahoo.com")) {
             throw new RuntimeException("El dominio del correo debe ser @gmail.com o @outlook.com");
         }
 
@@ -52,8 +52,8 @@ public class InstitucionServiceImplements implements InstitucionService {
     public Institucion updateInstitucion(Integer id, Institucion institucion) {
         Institucion existente = getInstitucionById(id);
 
-        if (institucion.getCorreo() != null && !institucion.getCorreo().contains("@gmail.com") 
-            && !institucion.getCorreo().contains("@outlook.com") && !institucion.getCorreo().contains("@icloud.com") && !institucion.getCorreo().contains("yahoo.com")) {
+        if (institucion.getCorreo() != null && !institucion.getCorreo().contains("@gmail.com")
+                && !institucion.getCorreo().contains("@outlook.com") && !institucion.getCorreo().contains("@icloud.com") && !institucion.getCorreo().contains("yahoo.com")) {
             throw new RuntimeException("El nuevo correo no tiene un dominio permitido.");
         }
 
@@ -72,5 +72,10 @@ public class InstitucionServiceImplements implements InstitucionService {
             throw new RuntimeException("No se puede eliminar: la institución con ID " + id + " no existe.");
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    public Institucion findByName(String nombre) {
+        return repository.findByNombre(nombre);
     }
 }

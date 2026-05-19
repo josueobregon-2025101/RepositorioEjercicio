@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface LoginService {
     Login validarLogin(String identificador, String contrasenaLogin);
     Login registrarLogin(String usuarioLogin, String contrasenaLogin, String correoLogin, String roles);
+    Login actualizarLogin(Integer idLogin, Login login);
 }
