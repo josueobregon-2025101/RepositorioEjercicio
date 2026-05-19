@@ -44,19 +44,19 @@ public class EmpresaController {
     @GetMapping("/empresas")
     public String empresas(HttpSession session, Model model) {
         Login usuario = (Login) session.getAttribute("usuarioLogueado");
-        if (usuario != null && usuario.getRoles().equals("Empresa")) {
-            return "redirect:/empresa/dashboard";
-        }
-        String rol = (usuario != null) ? usuario.getRoles() : "Administrador";
-        model.addAttribute("rolUsuario", rol);
-        List<Empresa> empresas= empresaService.getAllEmpresas();
+        if (usuario == null) return "redirect:/login/login";
+        if (usuario.getRoles().equals("Empresa")) return "redirect:/empresa/dashboard";
+        model.addAttribute("rolUsuario", usuario.getRoles());
+        List<Empresa> empresas = empresaService.getAllEmpresas();
         model.addAttribute("empresas", empresas);
         model.addAttribute("empresa", new Empresa());
         return "Index/empresas";
     }
 
     @GetMapping("/empresas/nuevo")
-    public String agregarEmpresa(Model model){
+    public String agregarEmpresa(HttpSession session, Model model) {
+        Login usuario = (Login) session.getAttribute("usuarioLogueado");
+        if (usuario == null) return "redirect:/login/login";
         model.addAttribute("empresaDTO", new EmpresaDTO());
         return "Index/agregar-empresa";
     }
