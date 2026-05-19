@@ -12,6 +12,7 @@ public interface EmpresaService {
     List<Empresa> getAllEmpresas();
 
     Empresa getEmpresaById(Integer id);
+    Empresa getEmpresaByIdLogin(Integer id);
 
     Empresa saveEmpresa(Empresa empresa, Login login);
 

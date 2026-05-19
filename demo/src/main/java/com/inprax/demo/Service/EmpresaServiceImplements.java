@@ -33,6 +33,11 @@ public class EmpresaServiceImplements implements EmpresaService {
     }
 
     @Override
+    public Empresa getEmpresaByIdLogin(Integer idLogin) {
+        return empresaRepository.findEmpresaByIdLogin(idLogin);
+    }
+
+    @Override
     public Empresa saveEmpresa(Empresa empresa, Login login) {
         //METODO PARA GUARDAR LA EMPRESA
 
