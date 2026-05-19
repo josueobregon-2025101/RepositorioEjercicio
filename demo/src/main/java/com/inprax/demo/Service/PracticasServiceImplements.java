@@ -22,6 +22,11 @@ public class PracticasServiceImplements implements PracticasService {
     }
 
     @Override
+    public List<Practicas> getPracticasByEmpresaId(Integer idEmpresa) {
+        return practicasRepository.getPracticasByidEmpresa(idEmpresa);
+    }
+
+    @Override
     public Practicas getIdPracticas(Integer id) throws RuntimeException {
         Optional<Practicas> practica = practicasRepository.findById(id);
         if (practica.isPresent()) {
